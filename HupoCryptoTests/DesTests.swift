@@ -137,4 +137,20 @@ class DesTests: XCTestCase {
         let subkeys = self.des.keySchedule(key: hexToBytes(hex: key))
         XCTAssertEqual(self.des.encryptBlock(data: hexToBytes(hex: plain), subkeys: subkeys), hexToBytes(hex: cipher))
     }
+    
+    func testDecryptBlock() {
+        let key = "123456789ABCDEF0"
+        let plain = "0000000000000000"
+        let cipher = "948A43F98A834F7E"
+        
+        let plainBytes = hexToBytes(hex: plain)
+        
+        let subkeys = self.des.keySchedule(key: hexToBytes(hex: key))
+        let encrypted = self.des.encryptBlock(data: plainBytes, subkeys: subkeys)
+        XCTAssertEqual(encrypted, hexToBytes(hex: cipher))
+
+        let reversedSubkeys: [[Byte]] = subkeys.reversed()
+        let decrypted = self.des.encryptBlock(data: encrypted, subkeys: reversedSubkeys)
+        XCTAssertEqual(decrypted, plainBytes)
+    }
 }

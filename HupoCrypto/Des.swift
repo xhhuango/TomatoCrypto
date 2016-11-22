@@ -127,6 +127,36 @@ public class Des {
 }
 
 extension Des {
+    func encryptBlock(data: [Byte], subkeys: [[Byte]]) -> [Byte] {
+        precondition(data.count == 8)
+        precondition(subkeys.count == 16)
+        
+        let ipData = self.permute(bytes: data, table: self.ip)
+        var (l, r) = self.split(data: ipData)
+        for i in 0..<subkeys.count {
+            let tmp = r
+            r = self.round(left: l, right: r, key: subkeys[i])
+            l = tmp
+        }
+        let joint = self.join(left: r, right: l)
+        return self.permute(bytes: joint, table: self.iip)
+    }
+    
+    private func split(data: [Byte]) -> ([Byte], [Byte]) {
+        assert(data.count == 8)
+        return ([data[0], data[1], data[2], data[3]],
+                [data[4], data[5], data[6], data[7]])
+    }
+    
+    private func join(left: [Byte], right: [Byte]) -> [Byte] {
+        assert(left.count == 4)
+        assert(right.count == 4)
+        return [left[0], left[1], left[2], left[3],
+                right[0], right[1], right[2], right[3]]
+    }
+}
+
+extension Des {
     func getBit(bytes: [Byte], index: Int) -> Bool {
         let byteIndex = index / self.byteSize
         assert(byteIndex < bytes.count)
@@ -308,35 +338,5 @@ extension Des {
         output[3] |= self.sboxes[7][row][column] & self.smallHexMask
         
         return output
-    }
-}
-
-extension Des {
-    func encryptBlock(data: [Byte], subkeys: [[Byte]]) -> [Byte] {
-        precondition(data.count == 8)
-        precondition(subkeys.count == 16)
-        
-        let ipData = self.permute(bytes: data, table: self.ip)
-        var (l, r) = self.split(data: ipData)
-        for i in 0..<subkeys.count {
-            let tmp = r
-            r = self.round(left: l, right: r, key: subkeys[i])
-            l = tmp
-        }
-        let joint = self.join(left: r, right: l)
-        return self.permute(bytes: joint, table: self.iip)
-    }
-    
-    private func split(data: [Byte]) -> ([Byte], [Byte]) {
-        assert(data.count == 8)
-        return ([data[0], data[1], data[2], data[3]],
-                [data[4], data[5], data[6], data[7]])
-    }
-    
-    private func join(left: [Byte], right: [Byte]) -> [Byte] {
-        assert(left.count == 4)
-        assert(right.count == 4)
-        return [left[0], left[1], left[2], left[3],
-                right[0], right[1], right[2], right[3]]
     }
 }

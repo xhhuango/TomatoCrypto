@@ -1,6 +1,6 @@
 import Foundation
 
-func bytesToHex(bytes: [UInt8]) -> String {
+func bytesToHex(bytes: [Byte]) -> String {
     let table = [Character]("0123456789ABCDEF".characters)
     var string = String()
     for byte in bytes {
@@ -12,22 +12,22 @@ func bytesToHex(bytes: [UInt8]) -> String {
     return string
 }
 
-func hexToBytes(hex: String) -> [UInt8] {
-    let unicodes = hex.unicodeScalars
-    var bytes = [UInt8](repeating: 0, count: (unicodes.count - 1) / 2 + 1)
+func hexToBytes(hex: String) -> [Byte] {
+    let hexBytes = stringToBytes(string: hex)
+    var bytes = [Byte](repeating: 0, count: (hexBytes.count - 1) / 2 + 1)
     
     var index = 0
-    for unicode in unicodes {
-        var value = UInt8(unicode.value & 0xFF)
-        switch value {
+    for byte in hexBytes {
+        let value: Byte
+        switch byte {
         case 0x30...0x39:
-            value -= 0x30
+            value = byte - 0x30
         case 0x41...0x46:
-            value = value - 0x41 + 0x0A
+            value = byte - 0x41 + 0x0A
         case 0x61...0x66:
-            value = value - 0x61 + 0x0A
+            value = byte - 0x61 + 0x0A
         default:
-            preconditionFailure("\(value) is not hex")
+            preconditionFailure("\(byte) is not hex")
         }
         
         let indexBytes = index / 2
@@ -41,4 +41,8 @@ func hexToBytes(hex: String) -> [UInt8] {
     }
     
     return bytes
+}
+
+func stringToBytes(string: String) -> [Byte] {
+    return [Byte](string.utf8)
 }
