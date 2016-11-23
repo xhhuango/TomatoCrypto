@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:HupoCrypto.xcodeproj">
+      location = "self:TomatoCrypto.xcodeproj">
    </FileRef>
 </Workspace>

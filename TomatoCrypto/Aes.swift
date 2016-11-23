@@ -1,9 +1,9 @@
 import Foundation
 
 public class Aes {
-    let wordSize = 4
-    let blockSize = 16      // 128-bit
-    let blockWordCount = 4  // 128-bit / wordSize
+    fileprivate let wordSize = 4
+    fileprivate let blockSize = 16      // 128-bit
+    fileprivate let blockWordCount = 4  // 128-bit / wordSize
     
     enum KeySize: Int {
         case key128 = 16
@@ -220,11 +220,6 @@ extension Aes {
 }
 
 extension Aes {
-    func printState(prefix: String, state: [[Byte]]) {
-        debugPrint("\(prefix): s0=\(bytesToHex(bytes: state[0])), s1=\(bytesToHex(bytes: state[1]))," +
-            " s2=\(bytesToHex(bytes: state[2])), s3=\(bytesToHex(bytes: state[3]))")
-    }
-    
     func decryptBlock(data: [Byte], subkeys: [[Byte]]) -> [Byte] {
         var state = self.toState(input: data)
         let lastRound = self.countLastRound(subkeyCount: subkeys.count)
