@@ -23,6 +23,9 @@
 		B02D6A291DE7515D00878809 /* CbcMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A281DE7515D00878809 /* CbcMode.swift */; };
 		B02D6A2B1DE76CD100878809 /* CbcModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A2A1DE76CD100878809 /* CbcModeTests.swift */; };
 		B02D6A2E1DE76EB600878809 /* SecretKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A2D1DE76EB600878809 /* SecretKey.swift */; };
+		B02D6A301DE7889400878809 /* OfbMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A2F1DE7889400878809 /* OfbMode.swift */; };
+		B02D6A321DE7898300878809 /* Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A311DE7898300878809 /* Bytes.swift */; };
+		B02D6A341DE78B6A00878809 /* OfbModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A331DE78B6A00878809 /* OfbModeTests.swift */; };
 		B09192171DE598A600B5A760 /* TomatoCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B091920D1DE598A500B5A760 /* TomatoCrypto.framework */; };
 		B091921E1DE598A600B5A760 /* TomatoCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = B09192101DE598A500B5A760 /* TomatoCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B091922E1DE599B500B5A760 /* AesEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B091922D1DE599B500B5A760 /* AesEngine.swift */; };
@@ -59,6 +62,9 @@
 		B02D6A281DE7515D00878809 /* CbcMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CbcMode.swift; sourceTree = "<group>"; };
 		B02D6A2A1DE76CD100878809 /* CbcModeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CbcModeTests.swift; sourceTree = "<group>"; };
 		B02D6A2D1DE76EB600878809 /* SecretKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecretKey.swift; sourceTree = "<group>"; };
+		B02D6A2F1DE7889400878809 /* OfbMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfbMode.swift; sourceTree = "<group>"; };
+		B02D6A311DE7898300878809 /* Bytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bytes.swift; sourceTree = "<group>"; };
+		B02D6A331DE78B6A00878809 /* OfbModeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfbModeTests.swift; sourceTree = "<group>"; };
 		B091920D1DE598A500B5A760 /* TomatoCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TomatoCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B09192101DE598A500B5A760 /* TomatoCrypto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TomatoCrypto.h; sourceTree = "<group>"; };
 		B09192111DE598A500B5A760 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -119,6 +125,7 @@
 				B02D6A0D1DE6FC2300878809 /* BlockCipherMode.swift */,
 				B02D6A0B1DE6F7F400878809 /* EcbMode.swift */,
 				B02D6A281DE7515D00878809 /* CbcMode.swift */,
+				B02D6A2F1DE7889400878809 /* OfbMode.swift */,
 			);
 			name = Modes;
 			sourceTree = "<group>";
@@ -128,6 +135,7 @@
 			children = (
 				B02D6A121DE7203B00878809 /* EcbModeTests.swift */,
 				B02D6A2A1DE76CD100878809 /* CbcModeTests.swift */,
+				B02D6A331DE78B6A00878809 /* OfbModeTests.swift */,
 			);
 			name = Modes;
 			sourceTree = "<group>";
@@ -222,6 +230,7 @@
 				B09192391DE59C1100B5A760 /* Type.swift */,
 				B09192311DE599C800B5A760 /* String.swift */,
 				B02D6A101DE6FFE500878809 /* CryptoError.swift */,
+				B02D6A311DE7898300878809 /* Bytes.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -349,11 +358,13 @@
 				B02D6A2E1DE76EB600878809 /* SecretKey.swift in Sources */,
 				B02D6A251DE7501A00878809 /* BlockCipherParameter.swift in Sources */,
 				B02D6A151DE72AC900878809 /* BlockCipher.swift in Sources */,
+				B02D6A301DE7889400878809 /* OfbMode.swift in Sources */,
 				B02D6A1C1DE72DD900878809 /* BlockCipherPadding.swift in Sources */,
 				B02D6A1E1DE72FC700878809 /* NoPadding.swift in Sources */,
 				B02D6A111DE6FFE500878809 /* CryptoError.swift in Sources */,
 				B09192321DE599C800B5A760 /* String.swift in Sources */,
 				B02D6A291DE7515D00878809 /* CbcMode.swift in Sources */,
+				B02D6A321DE7898300878809 /* Bytes.swift in Sources */,
 				B02D6A0E1DE6FC2300878809 /* BlockCipherMode.swift in Sources */,
 				B02D6A081DE6F6F300878809 /* BlockCipherEngine.swift in Sources */,
 				B091923A1DE59C1100B5A760 /* Type.swift in Sources */,
@@ -373,6 +384,7 @@
 				B02D6A2B1DE76CD100878809 /* CbcModeTests.swift in Sources */,
 				B02D6A1A1DE72C5F00878809 /* BlockCipherTests.swift in Sources */,
 				B02D6A131DE7203B00878809 /* EcbModeTests.swift in Sources */,
+				B02D6A341DE78B6A00878809 /* OfbModeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

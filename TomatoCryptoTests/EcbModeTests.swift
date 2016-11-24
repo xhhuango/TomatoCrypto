@@ -19,16 +19,14 @@ class EcbModeTests: XCTestCase {
         
         do {
             let aes = AesEngine()
-            let ebc = EcbMode()
+            let mode = EcbMode()
             
-            try aes.initialize(processMode: .encryption, key: key)
-            try ebc.initialize(processMode: .encryption, engine: aes, parameters: [])
-            let encrypted = try ebc.process(input: plaintext)
+            try mode.initialize(processMode: .encryption, engine: aes, key: key, parameters: [])
+            let encrypted = try mode.process(input: plaintext)
             XCTAssertEqual(encrypted, ciphertext)
             
-            try aes.initialize(processMode: .decryption, key: key)
-            try ebc.initialize(processMode: .decryption, engine: aes, parameters: [])
-            let decrypted = try ebc.process(input: encrypted)
+            try mode.initialize(processMode: .decryption, engine: aes, key: key, parameters: [])
+            let decrypted = try mode.process(input: encrypted)
             XCTAssertEqual(decrypted, plaintext)
         } catch let error {
             XCTFail("\(error)")
@@ -44,16 +42,15 @@ class EcbModeTests: XCTestCase {
         
         do {
             let aes = AesEngine()
-            let ebc = EcbMode()
+            let mode = EcbMode()
             
-            try aes.initialize(processMode: .encryption, key: key)
-            try ebc.initialize(processMode: .encryption, engine: aes, parameters: [])
-            let encrypted = try ebc.process(input: plaintext)
+            try mode.initialize(processMode: .encryption, engine: aes, key: key, parameters: [])
+            let encrypted = try mode.process(input: plaintext)
             XCTAssertEqual(encrypted, ciphertext)
             
             try aes.initialize(processMode: .decryption, key: key)
-            try ebc.initialize(processMode: .decryption, engine: aes, parameters: [])
-            let decrypted = try ebc.process(input: encrypted)
+            try mode.initialize(processMode: .decryption, engine: aes, key: key, parameters: [])
+            let decrypted = try mode.process(input: encrypted)
             XCTAssertEqual(decrypted, plaintext)
         } catch let error {
             XCTFail("\(error)")
@@ -69,16 +66,14 @@ class EcbModeTests: XCTestCase {
         
         do {
             let aes = AesEngine()
-            let ebc = EcbMode()
+            let mode = EcbMode()
             
-            try aes.initialize(processMode: .encryption, key: key)
-            try ebc.initialize(processMode: .encryption, engine: aes, parameters: [])
-            let encrypted = try ebc.process(input: plaintext)
+            try mode.initialize(processMode: .encryption, engine: aes, key: key, parameters: [])
+            let encrypted = try mode.process(input: plaintext)
             XCTAssertEqual(encrypted, ciphertext)
             
-            try aes.initialize(processMode: .decryption, key: key)
-            try ebc.initialize(processMode: .decryption, engine: aes, parameters: [])
-            let decrypted = try ebc.process(input: encrypted)
+            try mode.initialize(processMode: .decryption, engine: aes, key: key, parameters: [])
+            let decrypted = try mode.process(input: encrypted)
             XCTAssertEqual(decrypted, plaintext)
         } catch let error {
             XCTFail("\(error)")

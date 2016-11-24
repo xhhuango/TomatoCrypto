@@ -3,7 +3,11 @@ import Foundation
 public class EcbMode: BlockCipherMode {
     private var engine: BlockCipherEngine!
     
-    public func initialize(processMode: BlockCipher.ProcessMode, engine: BlockCipherEngine, parameters: [BlockCipherParameter]) throws {
+    public func initialize(processMode: BlockCipher.ProcessMode,
+                           engine: BlockCipherEngine,
+                           key: SecretKey,
+                           parameters: [BlockCipherParameter]) throws {
+        try engine.initialize(processMode: processMode, key: key)
         self.engine = engine
     }
     

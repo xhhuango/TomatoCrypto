@@ -20,8 +20,10 @@ public class BlockCipher {
     
     public func initialize(processMode: ProcessMode, key: SecretKey, parameters: [BlockCipherParameter] = []) throws {
         self.processMode = processMode
-        try self.engine.initialize(processMode: processMode, key: key)
-        try self.mode.initialize(processMode: processMode, engine: self.engine, parameters: parameters)
+        try self.mode.initialize(processMode: processMode,
+                                 engine: self.engine,
+                                 key: key,
+                                 parameters: parameters)
     }
     
     public func process(input: [Byte]) throws -> [Byte] {

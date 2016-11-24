@@ -1,6 +1,6 @@
 import Foundation
 
-public class CbcMode: BlockCipherMode {
+public class OfbMode: BlockCipherMode {
     private var processMode: BlockCipher.ProcessMode!
     private var engine: BlockCipherEngine!
     private var iv: [Byte]!
@@ -25,53 +25,29 @@ public class CbcMode: BlockCipherMode {
             throw CryptoError.invalidParameter("IV must be \(engine.blockSize)-byte")
         }
         
-        try engine.initialize(processMode: processMode, key: key)
+        try engine.initialize(processMode: .encryption, key: key)
         self.engine = engine
     }
     
     public func process(input: [Byte]) throws -> [Byte] {
-        guard let engine = self.engine, let processMode = self.processMode else {
+        guard let engine = self.engine else {
             throw CryptoError.cipherNotInitialize("\(#file) is not initialized")
         }
         guard input.count % engine.blockSize == 0 else {
             throw CryptoError.illegalBlockSize("Input length must be multiple of \(engine.blockSize) bytes")
         }
         
-        switch processMode {
-        case .encryption:
-            return try self.encrypt(input: input, iv: self.iv)
-        case .decryption:
-            return try self.decrypt(input: input, iv: self.iv)
-        }
-    }
-    
-    private func encrypt(input: [Byte], iv: [Byte]) throws -> [Byte] {
         let blockSize = self.engine.blockSize
-        var lastEncrypted = iv
+        var lastStream = self.iv!
         var output: [Byte] = []
         
         for i in 0..<(input.count / blockSize) {
+            lastStream = try self.engine.processBlock(input: lastStream)
+            
             let from = blockSize * i
             let to = from + blockSize
             let block = [Byte](input[from..<to])
-            lastEncrypted = try self.engine.processBlock(input: xorBytes(bytes1: block, bytes2: lastEncrypted))
-            output += lastEncrypted
-        }
-        
-        return output
-    }
-    
-    private func decrypt(input: [Byte], iv: [Byte]) throws -> [Byte] {
-        let blockSize = self.engine.blockSize
-        var lastBlock = iv
-        var output: [Byte] = []
-        
-        for i in 0..<(input.count / blockSize) {
-            let from = blockSize * i
-            let to = from + blockSize
-            let block = [Byte](input[from..<to])
-            output += xorBytes(bytes1: try self.engine.processBlock(input: block), bytes2: lastBlock)
-            lastBlock = block
+            output += xorBytes(bytes1: lastStream, bytes2: block)
         }
         
         return output
