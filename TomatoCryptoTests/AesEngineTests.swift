@@ -1,9 +1,7 @@
 import XCTest
 @testable import TomatoCrypto
 
-class AesTests: XCTestCase {
-    private let aes = Aes()
-    
+class AesEngineTests: XCTestCase {
     override func setUp() {
         super.setUp()
     }
@@ -26,12 +24,16 @@ class AesTests: XCTestCase {
             "2104DAF8", "6BE55EA6", "A2983A26", "FA05F897",
             "514552D5", "3AA00C73", "98383655", "623DCEC2",
             "40CE777F", "7A6E7B0C", "E2564D59", "806B839B",
-        ]
+            ]
         
-        let aesSubkeys = self.aes.keySchedule(key: stringToBytes(string: key), size: .key128)
-        XCTAssertEqual(aesSubkeys.count, subkeys.count)
-        for (subkey, aesSubkey) in zip(subkeys, aesSubkeys) {
-            XCTAssertEqual(hexToBytes(hex: subkey), aesSubkey)
+        do {
+            let aes = AesEngine()
+            try aes.initialize(processMode: .encryption, key: stringToBytes(string: key))
+            for (subkey, aesSubkey) in zip(subkeys, aes.subkeys) {
+                XCTAssertEqual(hexToBytes(hex: subkey), aesSubkey)
+            }
+        } catch let error {
+            XCTFail("\(error)")
         }
     }
     
@@ -53,10 +55,14 @@ class AesTests: XCTestCase {
             "D50E7A08", "392E1D2F", "519BC220", "A816E5DC"
         ]
         
-        let aesSubkeys = self.aes.keySchedule(key: stringToBytes(string: key), size: .key192)
-        XCTAssertEqual(aesSubkeys.count, subkeys.count)
-        for (subkey, aesSubkey) in zip(subkeys, aesSubkeys) {
-            XCTAssertEqual(hexToBytes(hex: subkey), aesSubkey)
+        do {
+            let aes = AesEngine()
+            try aes.initialize(processMode: .encryption, key: stringToBytes(string: key))
+            for (subkey, aesSubkey) in zip(subkeys, aes.subkeys) {
+                XCTAssertEqual(hexToBytes(hex: subkey), aesSubkey)
+            }
+        } catch let error {
+            XCTFail("\(error)")
         }
     }
     
@@ -80,10 +86,14 @@ class AesTests: XCTestCase {
             "27F0FFC5", "CE000E1A", "83DDE44D", "082A4F21"
         ]
         
-        let aesSubkeys = self.aes.keySchedule(key: stringToBytes(string: key), size: .key256)
-        XCTAssertEqual(aesSubkeys.count, subkeys.count)
-        for (subkey, aesSubkey) in zip(subkeys, aesSubkeys) {
-            XCTAssertEqual(hexToBytes(hex: subkey), aesSubkey)
+        do {
+            let aes = AesEngine()
+            try aes.initialize(processMode: .encryption, key: stringToBytes(string: key))
+            for (subkey, aesSubkey) in zip(subkeys, aes.subkeys) {
+                XCTAssertEqual(hexToBytes(hex: subkey), aesSubkey)
+            }
+        } catch let error {
+            XCTFail("\(error)")
         }
     }
     
@@ -92,9 +102,14 @@ class AesTests: XCTestCase {
         let plaintext = "4865792C2048656C6C6F20776F726C64"
         let ciphertext = "7832E84682951FB5B02548F2FEB9BB9E"
         
-        let subkeys = self.aes.keySchedule(key: stringToBytes(string: key), size: .key128)
-        let encrypted = self.aes.encryptBlock(data: hexToBytes(hex: plaintext), subkeys: subkeys)
-        XCTAssertEqual(encrypted, hexToBytes(hex: ciphertext))
+        do {
+            let aes = AesEngine()
+            try aes.initialize(processMode: .encryption, key: stringToBytes(string: key))
+            let encrypted = try aes.processBlock(input: hexToBytes(hex: plaintext))
+            XCTAssertEqual(encrypted, hexToBytes(hex: ciphertext))
+        } catch let error {
+            XCTFail("\(error)")
+        }
     }
     
     func testEncryptBlock192() {
@@ -102,9 +117,14 @@ class AesTests: XCTestCase {
         let plaintext = "4865792C2048656C6C6F20776F726C64"
         let ciphertext = "8630A1C12C8FDE8247678E42E1DA9B49"
         
-        let subkeys = self.aes.keySchedule(key: stringToBytes(string: key), size: .key192)
-        let encrypted = self.aes.encryptBlock(data: hexToBytes(hex: plaintext), subkeys: subkeys)
-        XCTAssertEqual(encrypted, hexToBytes(hex: ciphertext))
+        do {
+            let aes = AesEngine()
+            try aes.initialize(processMode: .encryption, key: stringToBytes(string: key))
+            let encrypted = try aes.processBlock(input: hexToBytes(hex: plaintext))
+            XCTAssertEqual(encrypted, hexToBytes(hex: ciphertext))
+        } catch let error {
+            XCTFail("\(error)")
+        }
     }
     
     func testEncryptBlock256() {
@@ -112,9 +132,14 @@ class AesTests: XCTestCase {
         let plaintext = "4865792C2048656C6C6F20776F726C64"
         let ciphertext = "559B77F2C20209502A1F77CE7CEC0611"
         
-        let subkeys = self.aes.keySchedule(key: stringToBytes(string: key), size: .key256)
-        let encrypted = self.aes.encryptBlock(data: hexToBytes(hex: plaintext), subkeys: subkeys)
-        XCTAssertEqual(encrypted, hexToBytes(hex: ciphertext))
+        do {
+            let aes = AesEngine()
+            try aes.initialize(processMode: .encryption, key: stringToBytes(string: key))
+            let encrypted = try aes.processBlock(input: hexToBytes(hex: plaintext))
+            XCTAssertEqual(encrypted, hexToBytes(hex: ciphertext))
+        } catch let error {
+            XCTFail("\(error)")
+        }
     }
     
     func testDecryptBlock128() {
@@ -123,10 +148,18 @@ class AesTests: XCTestCase {
         
         let plaintextBytes = stringToBytes(string: plaintext)
         
-        let subkeys = self.aes.keySchedule(key: stringToBytes(string: key), size: .key128)
-        let encrypted = self.aes.encryptBlock(data: plaintextBytes, subkeys: subkeys)
-        let decrypted = self.aes.decryptBlock(data: encrypted, subkeys: subkeys)
-        XCTAssertEqual(decrypted, plaintextBytes)
+        do {
+            let aes = AesEngine()
+            
+            try aes.initialize(processMode: .encryption, key: stringToBytes(string: key))
+            let encrypted = try aes.processBlock(input: plaintextBytes)
+            
+            try aes.initialize(processMode: .decryption, key: stringToBytes(string: key))
+            let decrypted = try aes.processBlock(input: encrypted)
+            XCTAssertEqual(decrypted, plaintextBytes)
+        } catch let error {
+            XCTFail("\(error)")
+        }
     }
     
     func testDecryptBlock192() {
@@ -135,10 +168,18 @@ class AesTests: XCTestCase {
         
         let plaintextBytes = stringToBytes(string: plaintext)
         
-        let subkeys = self.aes.keySchedule(key: stringToBytes(string: key), size: .key192)
-        let encrypted = self.aes.encryptBlock(data: plaintextBytes, subkeys: subkeys)
-        let decrypted = self.aes.decryptBlock(data: encrypted, subkeys: subkeys)
-        XCTAssertEqual(decrypted, plaintextBytes)
+        do {
+            let aes = AesEngine()
+            
+            try aes.initialize(processMode: .encryption, key: stringToBytes(string: key))
+            let encrypted = try aes.processBlock(input: plaintextBytes)
+            
+            try aes.initialize(processMode: .decryption, key: stringToBytes(string: key))
+            let decrypted = try aes.processBlock(input: encrypted)
+            XCTAssertEqual(decrypted, plaintextBytes)
+        } catch let error {
+            XCTFail("\(error)")
+        }
     }
     
     func testDecryptBlock256() {
@@ -147,9 +188,17 @@ class AesTests: XCTestCase {
         
         let plaintextBytes = stringToBytes(string: plaintext)
         
-        let subkeys = self.aes.keySchedule(key: stringToBytes(string: key), size: .key256)
-        let encrypted = self.aes.encryptBlock(data: plaintextBytes, subkeys: subkeys)
-        let decrypted = self.aes.decryptBlock(data: encrypted, subkeys: subkeys)
-        XCTAssertEqual(decrypted, plaintextBytes)
+        do {
+            let aes = AesEngine()
+            
+            try aes.initialize(processMode: .encryption, key: stringToBytes(string: key))
+            let encrypted = try aes.processBlock(input: plaintextBytes)
+            
+            try aes.initialize(processMode: .decryption, key: stringToBytes(string: key))
+            let decrypted = try aes.processBlock(input: encrypted)
+            XCTAssertEqual(decrypted, plaintextBytes)
+        } catch let error {
+            XCTFail("\(error)")
+        }
     }
 }

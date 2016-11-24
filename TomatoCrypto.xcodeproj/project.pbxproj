@@ -7,13 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B02D6A081DE6F6F300878809 /* BlockCipherEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A071DE6F6F300878809 /* BlockCipherEngine.swift */; };
+		B02D6A0C1DE6F7F400878809 /* EcbMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A0B1DE6F7F400878809 /* EcbMode.swift */; };
+		B02D6A0E1DE6FC2300878809 /* BlockCipherMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A0D1DE6FC2300878809 /* BlockCipherMode.swift */; };
+		B02D6A111DE6FFE500878809 /* CryptoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A101DE6FFE500878809 /* CryptoError.swift */; };
+		B02D6A131DE7203B00878809 /* EcbModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A121DE7203B00878809 /* EcbModeTests.swift */; };
+		B02D6A151DE72AC900878809 /* BlockCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A141DE72AC900878809 /* BlockCipher.swift */; };
+		B02D6A1A1DE72C5F00878809 /* BlockCipherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A191DE72C5F00878809 /* BlockCipherTests.swift */; };
+		B02D6A1C1DE72DD900878809 /* BlockCipherPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A1B1DE72DD900878809 /* BlockCipherPadding.swift */; };
+		B02D6A1E1DE72FC700878809 /* NoPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A1D1DE72FC700878809 /* NoPadding.swift */; };
+		B02D6A201DE7468C00878809 /* DesEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A1F1DE7468C00878809 /* DesEngine.swift */; };
+		B02D6A221DE7469200878809 /* DesEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A211DE7469200878809 /* DesEngineTests.swift */; };
 		B09192171DE598A600B5A760 /* TomatoCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B091920D1DE598A500B5A760 /* TomatoCrypto.framework */; };
 		B091921E1DE598A600B5A760 /* TomatoCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = B09192101DE598A500B5A760 /* TomatoCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B091922E1DE599B500B5A760 /* Aes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B091922D1DE599B500B5A760 /* Aes.swift */; };
-		B09192301DE599C000B5A760 /* Des.swift in Sources */ = {isa = PBXBuildFile; fileRef = B091922F1DE599C000B5A760 /* Des.swift */; };
+		B091922E1DE599B500B5A760 /* AesEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B091922D1DE599B500B5A760 /* AesEngine.swift */; };
 		B09192321DE599C800B5A760 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09192311DE599C800B5A760 /* String.swift */; };
-		B09192341DE599D700B5A760 /* AesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09192331DE599D700B5A760 /* AesTests.swift */; };
-		B09192361DE599DC00B5A760 /* DesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09192351DE599DC00B5A760 /* DesTests.swift */; };
+		B09192341DE599D700B5A760 /* AesEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09192331DE599D700B5A760 /* AesEngineTests.swift */; };
 		B09192381DE599DF00B5A760 /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09192371DE599DF00B5A760 /* StringTests.swift */; };
 		B091923A1DE59C1100B5A760 /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09192391DE59C1100B5A760 /* Type.swift */; };
 /* End PBXBuildFile section */
@@ -29,16 +38,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B02D6A071DE6F6F300878809 /* BlockCipherEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockCipherEngine.swift; sourceTree = "<group>"; };
+		B02D6A0B1DE6F7F400878809 /* EcbMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EcbMode.swift; sourceTree = "<group>"; };
+		B02D6A0D1DE6FC2300878809 /* BlockCipherMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockCipherMode.swift; sourceTree = "<group>"; };
+		B02D6A101DE6FFE500878809 /* CryptoError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoError.swift; sourceTree = "<group>"; };
+		B02D6A121DE7203B00878809 /* EcbModeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EcbModeTests.swift; sourceTree = "<group>"; };
+		B02D6A141DE72AC900878809 /* BlockCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockCipher.swift; sourceTree = "<group>"; };
+		B02D6A191DE72C5F00878809 /* BlockCipherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockCipherTests.swift; sourceTree = "<group>"; };
+		B02D6A1B1DE72DD900878809 /* BlockCipherPadding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockCipherPadding.swift; sourceTree = "<group>"; };
+		B02D6A1D1DE72FC700878809 /* NoPadding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoPadding.swift; sourceTree = "<group>"; };
+		B02D6A1F1DE7468C00878809 /* DesEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesEngine.swift; sourceTree = "<group>"; };
+		B02D6A211DE7469200878809 /* DesEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesEngineTests.swift; sourceTree = "<group>"; };
 		B091920D1DE598A500B5A760 /* TomatoCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TomatoCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B09192101DE598A500B5A760 /* TomatoCrypto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TomatoCrypto.h; sourceTree = "<group>"; };
 		B09192111DE598A500B5A760 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B09192161DE598A600B5A760 /* TomatoCryptoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TomatoCryptoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B091921D1DE598A600B5A760 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B091922D1DE599B500B5A760 /* Aes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aes.swift; sourceTree = "<group>"; };
-		B091922F1DE599C000B5A760 /* Des.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Des.swift; sourceTree = "<group>"; };
+		B091922D1DE599B500B5A760 /* AesEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AesEngine.swift; sourceTree = "<group>"; };
 		B09192311DE599C800B5A760 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		B09192331DE599D700B5A760 /* AesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AesTests.swift; sourceTree = "<group>"; };
-		B09192351DE599DC00B5A760 /* DesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesTests.swift; sourceTree = "<group>"; };
+		B09192331DE599D700B5A760 /* AesEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AesEngineTests.swift; sourceTree = "<group>"; };
 		B09192371DE599DF00B5A760 /* StringTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
 		B09192391DE59C1100B5A760 /* Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -62,6 +80,53 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B02D6A061DE6F6CC00878809 /* Block Ciphers */ = {
+			isa = PBXGroup;
+			children = (
+				B02D6A141DE72AC900878809 /* BlockCipher.swift */,
+				B02D6A091DE6F73800878809 /* Engines */,
+				B02D6A0A1DE6F79400878809 /* Modes */,
+				B02D6A161DE72B1A00878809 /* Paddings */,
+			);
+			name = "Block Ciphers";
+			sourceTree = "<group>";
+		};
+		B02D6A091DE6F73800878809 /* Engines */ = {
+			isa = PBXGroup;
+			children = (
+				B02D6A071DE6F6F300878809 /* BlockCipherEngine.swift */,
+				B091922D1DE599B500B5A760 /* AesEngine.swift */,
+				B02D6A1F1DE7468C00878809 /* DesEngine.swift */,
+			);
+			name = Engines;
+			sourceTree = "<group>";
+		};
+		B02D6A0A1DE6F79400878809 /* Modes */ = {
+			isa = PBXGroup;
+			children = (
+				B02D6A0D1DE6FC2300878809 /* BlockCipherMode.swift */,
+				B02D6A0B1DE6F7F400878809 /* EcbMode.swift */,
+			);
+			name = Modes;
+			sourceTree = "<group>";
+		};
+		B02D6A0F1DE6FD7800878809 /* Modes */ = {
+			isa = PBXGroup;
+			children = (
+				B02D6A121DE7203B00878809 /* EcbModeTests.swift */,
+			);
+			name = Modes;
+			sourceTree = "<group>";
+		};
+		B02D6A161DE72B1A00878809 /* Paddings */ = {
+			isa = PBXGroup;
+			children = (
+				B02D6A1B1DE72DD900878809 /* BlockCipherPadding.swift */,
+				B02D6A1D1DE72FC700878809 /* NoPadding.swift */,
+			);
+			name = Paddings;
+			sourceTree = "<group>";
+		};
 		B09192031DE598A300B5A760 = {
 			isa = PBXGroup;
 			children = (
@@ -83,9 +148,8 @@
 		B091920F1DE598A500B5A760 /* TomatoCrypto */ = {
 			isa = PBXGroup;
 			children = (
-				B091922B1DE5998C00B5A760 /* Utilities */,
-				B09192281DE5996B00B5A760 /* DES */,
-				B09192271DE5993900B5A760 /* AES */,
+				B091922B1DE5998C00B5A760 /* Common */,
+				B02D6A061DE6F6CC00878809 /* Block Ciphers */,
 				B09192101DE598A500B5A760 /* TomatoCrypto.h */,
 				B09192111DE598A500B5A760 /* Info.plist */,
 			);
@@ -95,61 +159,48 @@
 		B091921A1DE598A600B5A760 /* TomatoCryptoTests */ = {
 			isa = PBXGroup;
 			children = (
-				B091922C1DE5999C00B5A760 /* Utilities */,
-				B091922A1DE5997E00B5A760 /* DES */,
-				B09192291DE5997700B5A760 /* AES */,
+				B091922C1DE5999C00B5A760 /* Common */,
+				B091922A1DE5997E00B5A760 /* BlockCipher */,
 				B091921D1DE598A600B5A760 /* Info.plist */,
 			);
 			path = TomatoCryptoTests;
 			sourceTree = "<group>";
 		};
-		B09192271DE5993900B5A760 /* AES */ = {
+		B09192291DE5997700B5A760 /* Engines */ = {
 			isa = PBXGroup;
 			children = (
-				B091922D1DE599B500B5A760 /* Aes.swift */,
+				B09192331DE599D700B5A760 /* AesEngineTests.swift */,
+				B02D6A211DE7469200878809 /* DesEngineTests.swift */,
 			);
-			name = AES;
+			name = Engines;
 			sourceTree = "<group>";
 		};
-		B09192281DE5996B00B5A760 /* DES */ = {
+		B091922A1DE5997E00B5A760 /* BlockCipher */ = {
 			isa = PBXGroup;
 			children = (
-				B091922F1DE599C000B5A760 /* Des.swift */,
+				B02D6A191DE72C5F00878809 /* BlockCipherTests.swift */,
+				B09192291DE5997700B5A760 /* Engines */,
+				B02D6A0F1DE6FD7800878809 /* Modes */,
 			);
-			name = DES;
+			name = BlockCipher;
 			sourceTree = "<group>";
 		};
-		B09192291DE5997700B5A760 /* AES */ = {
-			isa = PBXGroup;
-			children = (
-				B09192331DE599D700B5A760 /* AesTests.swift */,
-			);
-			name = AES;
-			sourceTree = "<group>";
-		};
-		B091922A1DE5997E00B5A760 /* DES */ = {
-			isa = PBXGroup;
-			children = (
-				B09192351DE599DC00B5A760 /* DesTests.swift */,
-			);
-			name = DES;
-			sourceTree = "<group>";
-		};
-		B091922B1DE5998C00B5A760 /* Utilities */ = {
+		B091922B1DE5998C00B5A760 /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				B09192391DE59C1100B5A760 /* Type.swift */,
 				B09192311DE599C800B5A760 /* String.swift */,
+				B02D6A101DE6FFE500878809 /* CryptoError.swift */,
 			);
-			name = Utilities;
+			name = Common;
 			sourceTree = "<group>";
 		};
-		B091922C1DE5999C00B5A760 /* Utilities */ = {
+		B091922C1DE5999C00B5A760 /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				B09192371DE599DF00B5A760 /* StringTests.swift */,
 			);
-			name = Utilities;
+			name = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,10 +314,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B02D6A151DE72AC900878809 /* BlockCipher.swift in Sources */,
+				B02D6A1C1DE72DD900878809 /* BlockCipherPadding.swift in Sources */,
+				B02D6A1E1DE72FC700878809 /* NoPadding.swift in Sources */,
+				B02D6A111DE6FFE500878809 /* CryptoError.swift in Sources */,
 				B09192321DE599C800B5A760 /* String.swift in Sources */,
-				B09192301DE599C000B5A760 /* Des.swift in Sources */,
+				B02D6A0E1DE6FC2300878809 /* BlockCipherMode.swift in Sources */,
+				B02D6A081DE6F6F300878809 /* BlockCipherEngine.swift in Sources */,
 				B091923A1DE59C1100B5A760 /* Type.swift in Sources */,
-				B091922E1DE599B500B5A760 /* Aes.swift in Sources */,
+				B091922E1DE599B500B5A760 /* AesEngine.swift in Sources */,
+				B02D6A0C1DE6F7F400878809 /* EcbMode.swift in Sources */,
+				B02D6A201DE7468C00878809 /* DesEngine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,9 +332,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B09192341DE599D700B5A760 /* AesTests.swift in Sources */,
+				B09192341DE599D700B5A760 /* AesEngineTests.swift in Sources */,
 				B09192381DE599DF00B5A760 /* StringTests.swift in Sources */,
-				B09192361DE599DC00B5A760 /* DesTests.swift in Sources */,
+				B02D6A221DE7469200878809 /* DesEngineTests.swift in Sources */,
+				B02D6A1A1DE72C5F00878809 /* BlockCipherTests.swift in Sources */,
+				B02D6A131DE7203B00878809 /* EcbModeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,6 +532,7 @@
 				B09192231DE598A600B5A760 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B09192241DE598A600B5A760 /* Build configuration list for PBXNativeTarget "TomatoCryptoTests" */ = {
 			isa = XCConfigurationList;
@@ -480,6 +541,7 @@
 				B09192261DE598A600B5A760 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

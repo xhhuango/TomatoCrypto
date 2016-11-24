@@ -1,11 +1,11 @@
 import Foundation
 
-public class Aes {
+public class AesEngine: BlockCipherEngine {
     fileprivate let wordSize = 4
-    fileprivate let blockSize = 16      // 128-bit
+    fileprivate let blockLength = 16      // 128-bit
     fileprivate let blockWordCount = 4  // 128-bit / wordSize
     
-    enum KeySize: Int {
+    fileprivate enum KeyLength: Int {
         case key128 = 16
         case key192 = 24
         case key256 = 32
@@ -166,11 +166,57 @@ public class Aes {
         0x37, 0x39, 0x2B, 0x25, 0x0F, 0x01, 0x13, 0x1D, 0x47, 0x49, 0x5B, 0x55, 0x7F, 0x71, 0x63, 0x6D,
         0xD7, 0xD9, 0xCB, 0xC5, 0xEF, 0xE1, 0xF3, 0xFD, 0xA7, 0xA9, 0xBB, 0xB5, 0x9F, 0x91, 0x83, 0x8D
     ]
+    
+    fileprivate var processMode: BlockCipher.ProcessMode!
+    fileprivate var keyLength: KeyLength!
+    fileprivate var rounds: Int!
+    var subkeys: [[Byte]]!
+
+    public var blockSize: Int {
+        return self.blockLength
+    }
+    
+    public func initialize(processMode: BlockCipher.ProcessMode, key: [Byte]) throws {
+        guard let keyLength = KeyLength(rawValue: key.count) else {
+            throw CryptoError.illegalKeyLength("Illegal key length. \(#file) only supports 128/192/256-bits key length")
+        }
+        
+        self.processMode = processMode
+        
+        self.keyLength = keyLength
+        
+        switch keyLength {
+        case .key128:
+            self.rounds = 10
+        case .key192:
+            self.rounds = 12
+        case .key256:
+            self.rounds = 14
+        }
+        
+        self.subkeys = self.keySchedule(key: key)
+    }
+    
+    public func processBlock(input: [Byte]) throws -> [Byte] {
+        guard let processMode = self.processMode else {
+            throw CryptoError.cipherNotInitialize("\(#file) is not initailized")
+        }
+        guard input.count == self.blockLength else {
+            throw CryptoError.illegalBlockSize("\(#file) block size must be \(self.blockLength * 8)-bits")
+        }
+        
+        switch processMode {
+        case .encryption:
+            return try self.encryptBlock(input: input, subkeys: self.subkeys)
+        case .decryption:
+            return try self.decryptBlock(input: input, subkeys: self.subkeys)
+        }
+    }
 }
 
-extension Aes {
-    func encryptBlock(data: [Byte], subkeys: [[Byte]]) -> [Byte] {
-        var state = self.toState(input: data)
+extension AesEngine {
+    func encryptBlock(input: [Byte], subkeys: [[Byte]]) throws -> [Byte] {
+        var state = self.toState(input: input)
         let lastRound = self.countLastRound(subkeyCount: subkeys.count)
         
         self.addRoundKey(state: &state, keys: subkeys, round: 0)
@@ -219,9 +265,9 @@ extension Aes {
     }
 }
 
-extension Aes {
-    func decryptBlock(data: [Byte], subkeys: [[Byte]]) -> [Byte] {
-        var state = self.toState(input: data)
+extension AesEngine {
+    func decryptBlock(input: [Byte], subkeys: [[Byte]]) throws -> [Byte] {
+        var state = self.toState(input: input)
         let lastRound = self.countLastRound(subkeyCount: subkeys.count)
         
         self.addRoundKey(state: &state, keys: subkeys, round: lastRound)
@@ -270,9 +316,9 @@ extension Aes {
     }
 }
 
-extension Aes {
+extension AesEngine {
     fileprivate func toState(input: [Byte]) -> [[Byte]] {
-        assert(input.count == self.blockSize)
+        assert(input.count == self.blockLength)
         return [
             [input[0], input[4], input[ 8], input[12]],
             [input[1], input[5], input[ 9], input[13]],
@@ -282,7 +328,7 @@ extension Aes {
     }
     
     fileprivate func fromState(state: [[Byte]]) -> [Byte] {
-        assert(state.count * state[0].count == self.blockSize)
+        assert(state.count * state[0].count == self.blockLength)
         return [
             state[0][0], state[1][0], state[2][0], state[3][0],
             state[0][1], state[1][1], state[2][1], state[3][1],
@@ -307,12 +353,10 @@ extension Aes {
     }
 }
 
-extension Aes {
-    func keySchedule(key: [Byte], size: KeySize) -> [[Byte]] {
-        assert(key.count == size.rawValue)
-        let rounds = self.roundCount(size: size)
+extension AesEngine {
+    func keySchedule(key: [Byte]) -> [[Byte]] {
         let keyWordCount = key.count / self.wordSize
-        var subkeys = [[Byte]](repeating: [Byte](repeating: 0, count: self.wordSize), count: self.blockWordCount * (rounds + 1))
+        var subkeys = [[Byte]](repeating: [Byte](repeating: 0, count: self.wordSize), count: self.blockWordCount * (self.rounds + 1))
         
         for i in 0..<keyWordCount {
             let from = i * self.wordSize
@@ -320,7 +364,7 @@ extension Aes {
             subkeys[i] = [Byte](key[from..<to])
         }
         
-        let key256WordCount = KeySize.key256.rawValue / self.wordSize
+        let key256WordCount = KeyLength.key256.rawValue / self.wordSize
         for i in keyWordCount..<subkeys.count {
             let lastWord: [Byte]
             if i % keyWordCount == 0 {
@@ -334,17 +378,6 @@ extension Aes {
         }
         
         return subkeys
-    }
-    
-    private func roundCount(size: KeySize) -> Int {
-        switch size {
-        case .key128:
-            return 10
-        case .key192:
-            return 12
-        case .key256:
-            return 14
-        }
     }
     
     private func gFunction(word: [Byte], round: Int) -> [Byte] {

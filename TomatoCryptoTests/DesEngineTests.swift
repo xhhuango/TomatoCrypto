@@ -1,8 +1,8 @@
 import XCTest
 @testable import TomatoCrypto
 
-class DesTests: XCTestCase {
-    private let des = Des()
+class DesEngineTests: XCTestCase {
+    private let des = DesEngine()
     
     override func setUp() {
         super.setUp()
@@ -132,8 +132,13 @@ class DesTests: XCTestCase {
         let plain = "0000000000000000"
         let cipher = "948A43F98A834F7E"
         
-        let subkeys = self.des.keySchedule(key: hexToBytes(hex: key))
-        XCTAssertEqual(self.des.encryptBlock(data: hexToBytes(hex: plain), subkeys: subkeys), hexToBytes(hex: cipher))
+        do {
+            let des = DesEngine()
+            try des.initialize(processMode: .encryption, key: hexToBytes(hex: key))
+            XCTAssertEqual(try des.processBlock(input: hexToBytes(hex: plain)), hexToBytes(hex: cipher))
+        } catch let error {
+            XCTFail("\(error)")
+        }
     }
     
     func testDecryptBlock() {
@@ -143,12 +148,18 @@ class DesTests: XCTestCase {
         
         let plainBytes = hexToBytes(hex: plain)
         
-        let subkeys = self.des.keySchedule(key: hexToBytes(hex: key))
-        let encrypted = self.des.encryptBlock(data: plainBytes, subkeys: subkeys)
-        XCTAssertEqual(encrypted, hexToBytes(hex: cipher))
-
-        let reversedSubkeys: [[Byte]] = subkeys.reversed()
-        let decrypted = self.des.encryptBlock(data: encrypted, subkeys: reversedSubkeys)
-        XCTAssertEqual(decrypted, plainBytes)
+        do {
+            let des = DesEngine()
+            
+            try des.initialize(processMode: .encryption, key: hexToBytes(hex: key))
+            let encrypted = try des.processBlock(input: plainBytes)
+            XCTAssertEqual(encrypted, hexToBytes(hex: cipher))
+            
+            try des.initialize(processMode: .decryption, key: hexToBytes(hex: key))
+            let decrypted = try des.processBlock(input: encrypted)
+            XCTAssertEqual(decrypted, plainBytes)
+        } catch let error {
+            XCTFail("\(error)")
+        }
     }
 }

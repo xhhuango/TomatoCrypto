@@ -1,6 +1,14 @@
 import Foundation
 
-public class Des {
+public class DesEngine: BlockCipherEngine {
+    fileprivate let keyLength = 8
+    fileprivate let blockLength = 8
+    
+    fileprivate let smallHexMask: Byte = 0x0F
+    fileprivate let bigHexMask: Byte = 0xF0
+    fileprivate let shiftHex: Byte = 4
+    fileprivate let byteSize = 8
+    
     // PC-1 stands for permutation choice one
     let pc1 = [
         57, 49, 41, 33, 25, 17,  9,  1,
@@ -120,18 +128,43 @@ public class Des {
         ]
     ]
     
-    fileprivate let smallHexMask: Byte = 0x0F
-    fileprivate let bigHexMask: Byte = 0xF0
-    fileprivate let shiftHex: Byte = 4
-    fileprivate let byteSize = 8
+    fileprivate var subkeys: [[Byte]]!
+    fileprivate var processMode: BlockCipher.ProcessMode!
+    
+    public var blockSize: Int {
+        return self.blockLength
+    }
+    
+    public func initialize(processMode: BlockCipher.ProcessMode, key: [Byte]) throws {
+        guard key.count == self.keyLength else {
+            throw CryptoError.illegalKeyLength("Illegal key length. \(#file) only supports 64-bits key length")
+        }
+        
+        self.processMode = processMode
+        
+        switch processMode {
+        case .encryption:
+            self.subkeys = self.keySchedule(key: key)
+        default:
+            self.subkeys = self.keySchedule(key: key).reversed()
+        }
+    }
+    
+    public func processBlock(input: [Byte]) throws -> [Byte] {
+        guard let _ = self.processMode else {
+            throw CryptoError.cipherNotInitialize("\(#file) is not initailized")
+        }
+        guard input.count == self.blockLength else {
+            throw CryptoError.illegalBlockSize("Block size must be \(self.blockLength * 8)-bits")
+        }
+        
+        return try self.encryptBlock(input: input, subkeys: self.subkeys)
+    }
 }
 
-extension Des {
-    func encryptBlock(data: [Byte], subkeys: [[Byte]]) -> [Byte] {
-        precondition(data.count == 8)
-        precondition(subkeys.count == 16)
-        
-        let ipData = self.permute(bytes: data, table: self.ip)
+extension DesEngine {
+    func encryptBlock(input: [Byte], subkeys: [[Byte]]) throws -> [Byte] {
+        let ipData = self.permute(bytes: input, table: self.ip)
         var (l, r) = self.split(data: ipData)
         for i in 0..<subkeys.count {
             let tmp = r
@@ -156,7 +189,7 @@ extension Des {
     }
 }
 
-extension Des {
+extension DesEngine {
     func getBit(bytes: [Byte], index: Int) -> Bool {
         let byteIndex = index / self.byteSize
         assert(byteIndex < bytes.count)
@@ -193,7 +226,7 @@ extension Des {
     }
 }
 
-extension Des {
+extension DesEngine {
     func keySchedule(key: [Byte]) -> [[Byte]] {
         let pc1Key = self.permute(bytes: key, table: self.pc1)
         let pc1KeyHalfCount = self.pc1.count / 2
@@ -264,7 +297,7 @@ extension Des {
     }
 }
 
-extension Des {
+extension DesEngine {
     func round(left: [Byte], right: [Byte], key: [Byte]) -> [Byte] {
         assert(left.count == 4)
         assert(right.count == 4)
