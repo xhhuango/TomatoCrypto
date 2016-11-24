@@ -3,7 +3,7 @@ import Foundation
 public class EcbMode: BlockCipherMode {
     private var engine: BlockCipherEngine!
     
-    public func initialize(processMode: BlockCipher.ProcessMode, engine: BlockCipherEngine) {
+    public func initialize(processMode: BlockCipher.ProcessMode, engine: BlockCipherEngine, parameters: [BlockCipherParameter]) throws {
         self.engine = engine
     }
     

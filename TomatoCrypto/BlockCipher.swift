@@ -18,10 +18,10 @@ public class BlockCipher {
         self.padding = padding
     }
     
-    public func initialize(processMode: ProcessMode, key: [Byte]) throws {
+    public func initialize(processMode: ProcessMode, key: SecretKey, parameters: [BlockCipherParameter] = []) throws {
         self.processMode = processMode
         try self.engine.initialize(processMode: processMode, key: key)
-        self.mode.initialize(processMode: processMode, engine: self.engine)
+        try self.mode.initialize(processMode: processMode, engine: self.engine, parameters: parameters)
     }
     
     public func process(input: [Byte]) throws -> [Byte] {

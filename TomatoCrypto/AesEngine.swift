@@ -176,8 +176,9 @@ public class AesEngine: BlockCipherEngine {
         return self.blockLength
     }
     
-    public func initialize(processMode: BlockCipher.ProcessMode, key: [Byte]) throws {
-        guard let keyLength = KeyLength(rawValue: key.count) else {
+    public func initialize(processMode: BlockCipher.ProcessMode, key: SecretKey) throws {
+        let keyBytes = key.bytes
+        guard let keyLength = KeyLength(rawValue: keyBytes.count) else {
             throw CryptoError.illegalKeyLength("Illegal key length. \(#file) only supports 128/192/256-bits key length")
         }
         
@@ -194,7 +195,7 @@ public class AesEngine: BlockCipherEngine {
             self.rounds = 14
         }
         
-        self.subkeys = self.keySchedule(key: key)
+        self.subkeys = self.keySchedule(key: keyBytes)
     }
     
     public func processBlock(input: [Byte]) throws -> [Byte] {

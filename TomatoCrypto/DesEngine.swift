@@ -135,8 +135,9 @@ public class DesEngine: BlockCipherEngine {
         return self.blockLength
     }
     
-    public func initialize(processMode: BlockCipher.ProcessMode, key: [Byte]) throws {
-        guard key.count == self.keyLength else {
+    public func initialize(processMode: BlockCipher.ProcessMode, key: SecretKey) throws {
+        let keyBytes = key.bytes
+        guard keyBytes.count == self.keyLength else {
             throw CryptoError.illegalKeyLength("Illegal key length. \(#file) only supports 64-bits key length")
         }
         
@@ -144,9 +145,9 @@ public class DesEngine: BlockCipherEngine {
         
         switch processMode {
         case .encryption:
-            self.subkeys = self.keySchedule(key: key)
+            self.subkeys = self.keySchedule(key: keyBytes)
         default:
-            self.subkeys = self.keySchedule(key: key).reversed()
+            self.subkeys = self.keySchedule(key: keyBytes).reversed()
         }
     }
     

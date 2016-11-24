@@ -128,13 +128,13 @@ class DesEngineTests: XCTestCase {
     }
     
     func testEncryptBlock() {
-        let key = "123456789ABCDEF0"
+        let key = SecretKey(bytes: hexToBytes(hex: "123456789ABCDEF0"))
         let plain = "0000000000000000"
         let cipher = "948A43F98A834F7E"
         
         do {
             let des = DesEngine()
-            try des.initialize(processMode: .encryption, key: hexToBytes(hex: key))
+            try des.initialize(processMode: .encryption, key: key)
             XCTAssertEqual(try des.processBlock(input: hexToBytes(hex: plain)), hexToBytes(hex: cipher))
         } catch let error {
             XCTFail("\(error)")
@@ -142,7 +142,7 @@ class DesEngineTests: XCTestCase {
     }
     
     func testDecryptBlock() {
-        let key = "123456789ABCDEF0"
+        let key = SecretKey(bytes: hexToBytes(hex: "123456789ABCDEF0"))
         let plain = "0000000000000000"
         let cipher = "948A43F98A834F7E"
         
@@ -151,11 +151,11 @@ class DesEngineTests: XCTestCase {
         do {
             let des = DesEngine()
             
-            try des.initialize(processMode: .encryption, key: hexToBytes(hex: key))
+            try des.initialize(processMode: .encryption, key: key)
             let encrypted = try des.processBlock(input: plainBytes)
             XCTAssertEqual(encrypted, hexToBytes(hex: cipher))
             
-            try des.initialize(processMode: .decryption, key: hexToBytes(hex: key))
+            try des.initialize(processMode: .decryption, key: key)
             let decrypted = try des.processBlock(input: encrypted)
             XCTAssertEqual(decrypted, plainBytes)
         } catch let error {
