@@ -31,23 +31,26 @@ public class OfbMode: BlockCipherMode {
     
     public func process(input: [Byte]) throws -> [Byte] {
         guard let engine = self.engine else {
-            throw CryptoError.cipherNotInitialize("\(#file) is not initialized")
+            throw CryptoError.cipherNotInitialize("\(self) is not initialized")
         }
         guard input.count % engine.blockSize == 0 else {
             throw CryptoError.illegalBlockSize("Input length must be multiple of \(engine.blockSize) bytes")
         }
         
         let blockSize = self.engine.blockSize
-        var lastStream = self.iv!
-        var output: [Byte] = []
+        let xorWordMode = input.count % blockSize == 0
+        let xorSize = xorWordMode ? input.count / blockSize : blockSize
+        
+        var feedback = self.iv!
+        var output = [Byte](repeating: 0, count: input.count)
         
         for i in 0..<(input.count / blockSize) {
-            lastStream = try self.engine.processBlock(input: lastStream)
-            
+            try self.engine.processBlock(input: feedback, inputOffset: 0, output: &feedback, outputOffset: 0)
             let from = blockSize * i
-            let to = from + blockSize
-            let block = [Byte](input[from..<to])
-            output += xorBytes(bytes1: lastStream, bytes2: block)
+            xor(input1: feedback, offset1: 0,
+                input2: input, offset2: from,
+                output: &output, offset: from,
+                count: xorSize, wordMode: xorWordMode)
         }
         
         return output

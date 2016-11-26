@@ -12,7 +12,9 @@ public class BlockCipher {
     
     private var processMode: ProcessMode!
     
-    public init(engine: BlockCipherEngine, mode: BlockCipherMode, padding: BlockCipherPadding) {
+    public init(engine: BlockCipherEngine,
+                mode: BlockCipherMode = EcbMode(),
+                padding: BlockCipherPadding = NoPadding()) {
         self.engine = engine
         self.mode = mode
         self.padding = padding
@@ -28,7 +30,7 @@ public class BlockCipher {
     
     public func process(input: [Byte]) throws -> [Byte] {
         guard let processMode = self.processMode else {
-            throw CryptoError.cipherNotInitialize("\(#file) is not intailized")
+            throw CryptoError.cipherNotInitialize("\(self) is not intailized")
         }
         
         switch processMode {
@@ -42,4 +44,3 @@ public class BlockCipher {
         }
     }
 }
-

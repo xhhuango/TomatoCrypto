@@ -1,7 +1,7 @@
 import Foundation
 
 public class AesEngine: BlockCipherEngine {
-    fileprivate let wordSize = 4
+    fileprivate let wordSize = MemoryLayout<Word>.size
     fileprivate let blockLength = 16      // 128-bit
     fileprivate let blockWordCount = 4  // 128-bit / wordSize
     
@@ -171,7 +171,7 @@ public class AesEngine: BlockCipherEngine {
     fileprivate var keyLength: KeyLength!
     fileprivate var rounds: Int!
     var subkeys: [[Byte]]!
-
+    
     public var blockSize: Int {
         return self.blockLength
     }
@@ -179,7 +179,7 @@ public class AesEngine: BlockCipherEngine {
     public func initialize(processMode: BlockCipher.ProcessMode, key: SecretKey) throws {
         let keyBytes = key.bytes
         guard let keyLength = KeyLength(rawValue: keyBytes.count) else {
-            throw CryptoError.illegalKeyLength("Illegal key length. \(#file) only supports 128/192/256-bits key length")
+            throw CryptoError.illegalKeyLength("Illegal key length. \(self) only supports 128/192/256-bits key length")
         }
         
         self.processMode = processMode
@@ -198,42 +198,50 @@ public class AesEngine: BlockCipherEngine {
         self.subkeys = self.keySchedule(key: keyBytes)
     }
     
-    public func processBlock(input: [Byte]) throws -> [Byte] {
+    public func processBlock(input: [Byte], inputOffset: Int, output: inout [Byte], outputOffset: Int) throws {
         guard let processMode = self.processMode else {
-            throw CryptoError.cipherNotInitialize("\(#file) is not initailized")
+            throw CryptoError.cipherNotInitialize("\(self) is not initailized")
         }
-        guard input.count == self.blockLength else {
-            throw CryptoError.illegalBlockSize("\(#file) block size must be \(self.blockLength * 8)-bits")
+        guard (input.count - inputOffset) >= self.blockLength else {
+            throw CryptoError.illegalBlockSize("Block size must be \(self.blockLength * 8)-bits")
         }
         
         switch processMode {
         case .encryption:
-            return try self.encryptBlock(input: input, subkeys: self.subkeys)
+            return try self.encryptBlock(subkeys: self.subkeys,
+                                         input: input,
+                                         inputOffset: inputOffset,
+                                         output: &output,
+                                         outputOffset: outputOffset)
         case .decryption:
-            return try self.decryptBlock(input: input, subkeys: self.subkeys)
+            return try self.decryptBlock(subkeys: self.subkeys,
+                                         input: input,
+                                         inputOffset: inputOffset,
+                                         output: &output,
+                                         outputOffset: outputOffset)
         }
     }
 }
 
 extension AesEngine {
-    func encryptBlock(input: [Byte], subkeys: [[Byte]]) throws -> [Byte] {
-        var state = self.toState(input: input)
+    func encryptBlock(subkeys: [[Byte]], input: [Byte], inputOffset: Int, output: inout [Byte], outputOffset: Int) throws {
+        var state = self.toState(input: input, offset: inputOffset)
         let lastRound = self.countLastRound(subkeyCount: subkeys.count)
         
         self.addRoundKey(state: &state, keys: subkeys, round: 0)
         
         for round in 1..<lastRound {
             self.byteSubstitution(state: &state)
-            let tmp = self.shiftRows(state: state)
-            state = self.mixColumn(state: tmp)
+            self.shiftRows(state: &state)
+            self.mixColumn(state: &state)
             self.addRoundKey(state: &state, keys: subkeys, round: round)
         }
         
         self.byteSubstitution(state: &state)
-        state = self.shiftRows(state: state)
+        self.shiftRows(state: &state)
         self.addRoundKey(state: &state, keys: subkeys, round: lastRound)
         
-        return self.fromState(state: state)
+        self.fromState(state: state, output: &output, offset: outputOffset)
     }
     
     private func byteSubstitution(state: inout [[Byte]]) {
@@ -244,56 +252,49 @@ extension AesEngine {
         }
     }
     
-    private func shiftRows(state: [[Byte]]) -> [[Byte]] {
-        return [
-            state[0],
-            [state[1][1], state[1][2], state[1][3], state[1][0]],
-            [state[2][2], state[2][3], state[2][0], state[2][1]],
-            [state[3][3], state[3][0], state[3][1], state[3][2]]
-        ]
+    private func shiftRows(state: inout [[Byte]]) {
+        leftRotateWord(input: &state[1], shiftBits: 8)
+        leftRotateWord(input: &state[2], shiftBits: 16)
+        leftRotateWord(input: &state[3], shiftBits: 24)
     }
     
-    private func mixColumn(state: [[Byte]]) -> [[Byte]] {
-        var mixed = [[Byte]](repeating: [Byte](repeating: 0, count: 4), count: 4)
-        for col in 0..<4 {
-            let value: [Int] = [Int(state[0][col]), Int(state[1][col]), Int(state[2][col]), Int(state[3][col])]
-            mixed[0][col] = self.polymul2[value[0]] ^ self.polymul3[value[1]] ^ state[2][col] ^ state[3][col]
-            mixed[1][col] = state[0][col] ^ self.polymul2[value[1]] ^ self.polymul3[value[2]] ^ state[3][col]
-            mixed[2][col] = state[0][col] ^ state[1][col] ^ self.polymul2[value[2]] ^ self.polymul3[value[3]]
-            mixed[3][col] = self.polymul3[value[0]] ^ state[1][col] ^ state[2][col] ^ self.polymul2[value[3]]
+    private func mixColumn(state: inout [[Byte]]) {
+        for columnIndex in 0..<4 {
+            let col: [Byte] = [state[0][columnIndex], state[1][columnIndex], state[2][columnIndex], state[3][columnIndex]]
+            let value: [Int] = [Int(col[0]), Int(col[1]), Int(col[2]), Int(col[3])]
+            state[0][columnIndex] = self.polymul2[value[0]] ^ self.polymul3[value[1]] ^ col[2] ^ col[3]
+            state[1][columnIndex] = col[0] ^ self.polymul2[value[1]] ^ self.polymul3[value[2]] ^ col[3]
+            state[2][columnIndex] = col[0] ^ col[1] ^ self.polymul2[value[2]] ^ self.polymul3[value[3]]
+            state[3][columnIndex] = self.polymul3[value[0]] ^ col[1] ^ col[2] ^ self.polymul2[value[3]]
         }
-        return mixed
     }
 }
 
 extension AesEngine {
-    func decryptBlock(input: [Byte], subkeys: [[Byte]]) throws -> [Byte] {
-        var state = self.toState(input: input)
+    func decryptBlock(subkeys: [[Byte]], input: [Byte], inputOffset: Int, output: inout [Byte], outputOffset: Int) throws {
+        var state = self.toState(input: input, offset: inputOffset)
         let lastRound = self.countLastRound(subkeyCount: subkeys.count)
         
         self.addRoundKey(state: &state, keys: subkeys, round: lastRound)
-        state = self.inverseShiftRows(state: state)
+        self.inverseShiftRows(state: &state)
         self.inverseByteSubstitution(state: &state)
         
         for round in (1..<lastRound).reversed() {
             self.addRoundKey(state: &state, keys: subkeys, round: round)
-            let tmp = self.inverseMixColumn(state: state)
-            state = self.inverseShiftRows(state: tmp)
+            self.inverseMixColumn(state: &state)
+            self.inverseShiftRows(state: &state)
             self.inverseByteSubstitution(state: &state)
         }
         
         self.addRoundKey(state: &state, keys: subkeys, round: 0)
         
-        return self.fromState(state: state)
+        self.fromState(state: state, output: &output, offset: outputOffset)
     }
     
-    private func inverseShiftRows(state: [[Byte]]) -> [[Byte]] {
-        return [
-            state[0],
-            [state[1][3], state[1][0], state[1][1], state[1][2]],
-            [state[2][2], state[2][3], state[2][0], state[2][1]],
-            [state[3][1], state[3][2], state[3][3], state[3][0]]
-        ]
+    private func inverseShiftRows(state: inout [[Byte]]) {
+        rightRotateWord(input: &state[1], shiftBits: 8)
+        rightRotateWord(input: &state[2], shiftBits: 16)
+        rightRotateWord(input: &state[3], shiftBits: 24)
     }
     
     private func inverseByteSubstitution(state: inout [[Byte]]) {
@@ -304,38 +305,44 @@ extension AesEngine {
         }
     }
     
-    private func inverseMixColumn(state: [[Byte]]) -> [[Byte]] {
-        var mixed = [[Byte]](repeating: [Byte](repeating: 0, count: 4), count: 4)
+    private func inverseMixColumn(state: inout [[Byte]]) {
         for col in 0..<4 {
-            let value: [Int] = [Int(state[0][col]), Int(state[1][col]), Int(state[2][col]), Int(state[3][col])]
-            mixed[0][col] = self.polymulE[value[0]] ^ self.polymulB[value[1]] ^ self.polymulD[value[2]] ^ self.polymul9[value[3]]
-            mixed[1][col] = self.polymul9[value[0]] ^ self.polymulE[value[1]] ^ self.polymulB[value[2]] ^ self.polymulD[value[3]]
-            mixed[2][col] = self.polymulD[value[0]] ^ self.polymul9[value[1]] ^ self.polymulE[value[2]] ^ self.polymulB[value[3]]
-            mixed[3][col] = self.polymulB[value[0]] ^ self.polymulD[value[1]] ^ self.polymul9[value[2]] ^ self.polymulE[value[3]]
+            let value = [Int(state[0][col]), Int(state[1][col]), Int(state[2][col]), Int(state[3][col])]
+            state[0][col] = self.polymulE[value[0]] ^ self.polymulB[value[1]] ^ self.polymulD[value[2]] ^ self.polymul9[value[3]]
+            state[1][col] = self.polymul9[value[0]] ^ self.polymulE[value[1]] ^ self.polymulB[value[2]] ^ self.polymulD[value[3]]
+            state[2][col] = self.polymulD[value[0]] ^ self.polymul9[value[1]] ^ self.polymulE[value[2]] ^ self.polymulB[value[3]]
+            state[3][col] = self.polymulB[value[0]] ^ self.polymulD[value[1]] ^ self.polymul9[value[2]] ^ self.polymulE[value[3]]
         }
-        return mixed
     }
 }
 
 extension AesEngine {
-    fileprivate func toState(input: [Byte]) -> [[Byte]] {
-        assert(input.count == self.blockLength)
+    fileprivate func toState(input: [Byte], offset: Int) -> [[Byte]] {
         return [
-            [input[0], input[4], input[ 8], input[12]],
-            [input[1], input[5], input[ 9], input[13]],
-            [input[2], input[6], input[10], input[14]],
-            [input[3], input[7], input[11], input[15]]
+            [input[offset], input[offset + 4], input[offset + 8], input[offset + 12]],
+            [input[offset + 1], input[offset + 5], input[offset + 9], input[offset + 13]],
+            [input[offset + 2], input[offset + 6], input[offset + 10], input[offset + 14]],
+            [input[offset + 3], input[offset + 7], input[offset + 11], input[offset + 15]]
         ]
     }
     
-    fileprivate func fromState(state: [[Byte]]) -> [Byte] {
-        assert(state.count * state[0].count == self.blockLength)
-        return [
-            state[0][0], state[1][0], state[2][0], state[3][0],
-            state[0][1], state[1][1], state[2][1], state[3][1],
-            state[0][2], state[1][2], state[2][2], state[3][2],
-            state[0][3], state[1][3], state[2][3], state[3][3],
-        ]
+    fileprivate func fromState(state: [[Byte]], output: inout [Byte], offset: Int) {
+        output[offset] = state[0][0]
+        output[offset + 1] = state[1][0]
+        output[offset + 2] = state[2][0]
+        output[offset + 3] = state[3][0]
+        output[offset + 4] = state[0][1]
+        output[offset + 5] = state[1][1]
+        output[offset + 6] = state[2][1]
+        output[offset + 7] = state[3][1]
+        output[offset + 8] = state[0][2]
+        output[offset + 9] = state[1][2]
+        output[offset + 10] = state[2][2]
+        output[offset + 11] = state[3][2]
+        output[offset + 12] = state[0][3]
+        output[offset + 13] = state[1][3]
+        output[offset + 14] = state[2][3]
+        output[offset + 15] = state[3][3]
     }
     
     fileprivate func countLastRound(subkeyCount: Int) -> Int {
@@ -367,44 +374,31 @@ extension AesEngine {
         
         let key256WordCount = KeyLength.key256.rawValue / self.wordSize
         for i in keyWordCount..<subkeys.count {
-            let lastWord: [Byte]
+            var index = i
             if i % keyWordCount == 0 {
-                lastWord = self.gFunction(word: subkeys[i - 1], round: i / keyWordCount)
+                self.gFunction(word: subkeys[i - 1], round: i / keyWordCount, output: &subkeys[i])
             } else if keyWordCount == key256WordCount && i % keyWordCount == 4 {
-                lastWord = self.hFunction(word: subkeys[i - 1])
+                self.hFunction(word: subkeys[i - 1], output: &subkeys[i])
             } else {
-                lastWord = subkeys[i - 1]
+                index = i - 1
             }
-            subkeys[i] = self.xorWord(word1: lastWord, word2: subkeys[i - keyWordCount])
+            xorWord(input1: subkeys[index], input2: subkeys[i - keyWordCount], output: &subkeys[i])
         }
         
         return subkeys
     }
     
-    private func gFunction(word: [Byte], round: Int) -> [Byte] {
-        return [
-            self.sbox[Int(word[1])] ^ self.rcon[round],
-            self.sbox[Int(word[2])],
-            self.sbox[Int(word[3])],
-            self.sbox[Int(word[0])]
-        ]
+    private func gFunction(word: [Byte], round: Int, output: inout [Byte]) {
+        output[0] = self.sbox[Int(word[1])] ^ self.rcon[round]
+        output[1] = self.sbox[Int(word[2])]
+        output[2] = self.sbox[Int(word[3])]
+        output[3] = self.sbox[Int(word[0])]
     }
     
-    private func hFunction(word: [Byte]) -> [Byte] {
-        return [
-            self.sbox[Int(word[0])],
-            self.sbox[Int(word[1])],
-            self.sbox[Int(word[2])],
-            self.sbox[Int(word[3])]
-        ]
-    }
-    
-    private func xorWord(word1: [Byte], word2: [Byte]) -> [Byte] {
-        return [
-            word1[0] ^ word2[0],
-            word1[1] ^ word2[1],
-            word1[2] ^ word2[2],
-            word1[3] ^ word2[3],
-        ]
+    private func hFunction(word: [Byte], output: inout [Byte]) {
+        output[0] = self.sbox[Int(word[0])]
+        output[1] = self.sbox[Int(word[1])]
+        output[2] = self.sbox[Int(word[2])]
+        output[3] = self.sbox[Int(word[3])]
     }
 }

@@ -105,7 +105,8 @@ class AesEngineTests: XCTestCase {
         do {
             let aes = AesEngine()
             try aes.initialize(processMode: .encryption, key: SecretKey(bytes: stringToBytes(string: key)))
-            let encrypted = try aes.processBlock(input: hexToBytes(hex: plaintext))
+            var encrypted = [Byte](repeating: 0, count: aes.blockSize)
+            try aes.processBlock(input: hexToBytes(hex: plaintext), inputOffset: 0, output: &encrypted, outputOffset: 0)
             XCTAssertEqual(encrypted, hexToBytes(hex: ciphertext))
         } catch let error {
             XCTFail("\(error)")
@@ -120,7 +121,8 @@ class AesEngineTests: XCTestCase {
         do {
             let aes = AesEngine()
             try aes.initialize(processMode: .encryption, key: SecretKey(bytes: stringToBytes(string: key)))
-            let encrypted = try aes.processBlock(input: hexToBytes(hex: plaintext))
+            var encrypted = [Byte](repeating: 0, count: aes.blockSize)
+            try aes.processBlock(input: hexToBytes(hex: plaintext), inputOffset: 0, output: &encrypted, outputOffset: 0)
             XCTAssertEqual(encrypted, hexToBytes(hex: ciphertext))
         } catch let error {
             XCTFail("\(error)")
@@ -135,7 +137,8 @@ class AesEngineTests: XCTestCase {
         do {
             let aes = AesEngine()
             try aes.initialize(processMode: .encryption, key: SecretKey(bytes: stringToBytes(string: key)))
-            let encrypted = try aes.processBlock(input: hexToBytes(hex: plaintext))
+            var encrypted = [Byte](repeating: 0, count: aes.blockSize)
+            try aes.processBlock(input: hexToBytes(hex: plaintext), inputOffset: 0, output: &encrypted, outputOffset: 0)
             XCTAssertEqual(encrypted, hexToBytes(hex: ciphertext))
         } catch let error {
             XCTFail("\(error)")
@@ -152,10 +155,12 @@ class AesEngineTests: XCTestCase {
             let aes = AesEngine()
             
             try aes.initialize(processMode: .encryption, key: key)
-            let encrypted = try aes.processBlock(input: plaintextBytes)
+            var encrypted = [Byte](repeating: 0, count: aes.blockSize)
+            try aes.processBlock(input: plaintextBytes, inputOffset: 0, output: &encrypted, outputOffset: 0)
             
             try aes.initialize(processMode: .decryption, key: key)
-            let decrypted = try aes.processBlock(input: encrypted)
+            var decrypted = [Byte](repeating: 0, count: aes.blockSize)
+            try aes.processBlock(input: encrypted, inputOffset: 0, output: &decrypted, outputOffset: 0)
             XCTAssertEqual(decrypted, plaintextBytes)
         } catch let error {
             XCTFail("\(error)")
@@ -172,10 +177,12 @@ class AesEngineTests: XCTestCase {
             let aes = AesEngine()
             
             try aes.initialize(processMode: .encryption, key: key)
-            let encrypted = try aes.processBlock(input: plaintextBytes)
+            var encrypted = [Byte](repeating: 0, count: aes.blockSize)
+            try aes.processBlock(input: plaintextBytes, inputOffset: 0, output: &encrypted, outputOffset: 0)
             
             try aes.initialize(processMode: .decryption, key: key)
-            let decrypted = try aes.processBlock(input: encrypted)
+            var decrypted = [Byte](repeating: 0, count: aes.blockSize)
+            try aes.processBlock(input: encrypted, inputOffset: 0, output: &decrypted, outputOffset: 0)
             XCTAssertEqual(decrypted, plaintextBytes)
         } catch let error {
             XCTFail("\(error)")
@@ -192,13 +199,33 @@ class AesEngineTests: XCTestCase {
             let aes = AesEngine()
             
             try aes.initialize(processMode: .encryption, key: key)
-            let encrypted = try aes.processBlock(input: plaintextBytes)
+            var encrypted = [Byte](repeating: 0, count: aes.blockSize)
+            try aes.processBlock(input: plaintextBytes, inputOffset: 0, output: &encrypted, outputOffset: 0)
             
             try aes.initialize(processMode: .decryption, key: key)
-            let decrypted = try aes.processBlock(input: encrypted)
+            var decrypted = [Byte](repeating: 0, count: aes.blockSize)
+            try aes.processBlock(input: encrypted, inputOffset: 0, output: &decrypted, outputOffset: 0)
             XCTAssertEqual(decrypted, plaintextBytes)
         } catch let error {
             XCTFail("\(error)")
+        }
+    }
+    
+    func testPerformanceEncrypt128() {
+        self.measure {
+            let key = "kWmHe8xIsDpfzK4d"
+            let plaintext = "4865792C2048656C6C6F20776F726C64"
+            let ciphertext = "7832E84682951FB5B02548F2FEB9BB9E"
+            
+            do {
+                let aes = AesEngine()
+                try aes.initialize(processMode: .encryption, key: SecretKey(bytes: stringToBytes(string: key)))
+                var encrypted = [Byte](repeating: 0, count: aes.blockSize)
+                try aes.processBlock(input: hexToBytes(hex: plaintext), inputOffset: 0, output: &encrypted, outputOffset: 0)
+                XCTAssertEqual(encrypted, hexToBytes(hex: ciphertext))
+            } catch let error {
+                XCTFail("\(error)")
+            }
         }
     }
 }

@@ -31,7 +31,7 @@ public class CbcMode: BlockCipherMode {
     
     public func process(input: [Byte]) throws -> [Byte] {
         guard let engine = self.engine, let processMode = self.processMode else {
-            throw CryptoError.cipherNotInitialize("\(#file) is not initialized")
+            throw CryptoError.cipherNotInitialize("\(self) is not initialized")
         }
         guard input.count % engine.blockSize == 0 else {
             throw CryptoError.illegalBlockSize("Input length must be multiple of \(engine.blockSize) bytes")
@@ -47,15 +47,27 @@ public class CbcMode: BlockCipherMode {
     
     private func encrypt(input: [Byte], iv: [Byte]) throws -> [Byte] {
         let blockSize = self.engine.blockSize
-        var lastEncrypted = iv
-        var output: [Byte] = []
+        let xorWordMode = input.count % blockSize == 0
+        let xorSize = xorWordMode ? input.count / blockSize : blockSize
+        var feedbackIndex = -1
+        var output = [Byte](repeating: 0, count: input.count)
         
         for i in 0..<(input.count / blockSize) {
             let from = blockSize * i
-            let to = from + blockSize
-            let block = [Byte](input[from..<to])
-            lastEncrypted = try self.engine.processBlock(input: xorBytes(bytes1: block, bytes2: lastEncrypted))
-            output += lastEncrypted
+            if from != 0 {
+                xor(input1: input, offset1: from,
+                    input2: output, offset2: feedbackIndex,
+                    output: &output, offset: from,
+                    count: xorSize, wordMode: xorWordMode)
+                feedbackIndex = from
+            } else {
+                xor(input1: input, offset1: 0,
+                    input2: iv, offset2: 0,
+                    output: &output, offset: 0,
+                    count: xorSize, wordMode: xorWordMode)
+                feedbackIndex = 0
+            }
+            try self.engine.processBlock(input: output, inputOffset: from, output: &output, outputOffset: from)
         }
         
         return output
@@ -63,15 +75,28 @@ public class CbcMode: BlockCipherMode {
     
     private func decrypt(input: [Byte], iv: [Byte]) throws -> [Byte] {
         let blockSize = self.engine.blockSize
-        var lastBlock = iv
-        var output: [Byte] = []
+        let xorWordMode = input.count % blockSize == 0
+        let xorSize = xorWordMode ? input.count / blockSize : blockSize
+        
+        var feedbackIndex = -1
+        var output = [Byte](repeating: 0, count: input.count)
         
         for i in 0..<(input.count / blockSize) {
             let from = blockSize * i
-            let to = from + blockSize
-            let block = [Byte](input[from..<to])
-            output += xorBytes(bytes1: try self.engine.processBlock(input: block), bytes2: lastBlock)
-            lastBlock = block
+            try self.engine.processBlock(input: input, inputOffset: from, output: &output, outputOffset: from)
+            if from != 0 {
+                xor(input1: output, offset1: from,
+                    input2: input, offset2: feedbackIndex,
+                    output: &output, offset: from,
+                    count: xorSize, wordMode: xorWordMode)
+                feedbackIndex = from
+            } else {
+                xor(input1: output, offset1: 0,
+                    input2: iv, offset2: 0,
+                    output: &output, offset: 0,
+                    count: xorSize, wordMode: xorWordMode)
+                feedbackIndex = 0
+            }
         }
         
         return output

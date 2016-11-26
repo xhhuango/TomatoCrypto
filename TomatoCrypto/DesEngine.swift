@@ -138,7 +138,7 @@ public class DesEngine: BlockCipherEngine {
     public func initialize(processMode: BlockCipher.ProcessMode, key: SecretKey) throws {
         let keyBytes = key.bytes
         guard keyBytes.count == self.keyLength else {
-            throw CryptoError.illegalKeyLength("Illegal key length. \(#file) only supports 64-bits key length")
+            throw CryptoError.illegalKeyLength("Illegal key length. \(self) only supports 64-bits key length")
         }
         
         self.processMode = processMode
@@ -151,21 +151,25 @@ public class DesEngine: BlockCipherEngine {
         }
     }
     
-    public func processBlock(input: [Byte]) throws -> [Byte] {
+    public func processBlock(input: [Byte], inputOffset: Int, output: inout [Byte], outputOffset: Int) throws {
         guard let _ = self.processMode else {
-            throw CryptoError.cipherNotInitialize("\(#file) is not initailized")
+            throw CryptoError.cipherNotInitialize("\(self) is not initailized")
         }
-        guard input.count == self.blockLength else {
+        guard (input.count - inputOffset) >= self.blockLength else {
             throw CryptoError.illegalBlockSize("Block size must be \(self.blockLength * 8)-bits")
         }
         
-        return try self.encryptBlock(input: input, subkeys: self.subkeys)
+        try self.encryptBlock(subkeys: self.subkeys,
+                              input: input,
+                              inputOffset: inputOffset,
+                              output: &output,
+                              outputOffset: outputOffset)
     }
 }
 
 extension DesEngine {
-    func encryptBlock(input: [Byte], subkeys: [[Byte]]) throws -> [Byte] {
-        let ipData = self.permute(bytes: input, table: self.ip)
+    func encryptBlock(subkeys: [[Byte]], input: [Byte], inputOffset: Int, output: inout [Byte], outputOffset: Int) throws {
+        let ipData = self.permute(bytes: [Byte](input[inputOffset..<(inputOffset + self.blockSize)]), table: self.ip)
         var (l, r) = self.split(data: ipData)
         for i in 0..<subkeys.count {
             let tmp = r
@@ -173,7 +177,11 @@ extension DesEngine {
             l = tmp
         }
         let joint = self.join(left: r, right: l)
-        return self.permute(bytes: joint, table: self.iip)
+        let encrypted = self.permute(bytes: joint, table: self.iip)
+        
+        for i in 0..<encrypted.count {
+            output[outputOffset + i] = encrypted[i]
+        }
     }
     
     private func split(data: [Byte]) -> ([Byte], [Byte]) {

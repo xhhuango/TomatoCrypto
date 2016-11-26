@@ -28,27 +28,31 @@ public class CtrMode: BlockCipherMode {
     
     public func process(input: [Byte]) throws -> [Byte] {
         guard let engine = self.engine else {
-            throw CryptoError.cipherNotInitialize("\(#file) is not initialized")
+            throw CryptoError.cipherNotInitialize("\(self) is not initialized")
         }
         guard input.count % engine.blockSize == 0 else {
             throw CryptoError.illegalBlockSize("Input length must be multiple of \(engine.blockSize) bytes")
         }
         
         let blockSize = self.engine.blockSize
+        let xorWordMode = input.count % blockSize == 0
+        let xorSize = xorWordMode ? input.count / blockSize : blockSize
+        
         var iv = self.iv!
         let counterIndex = iv.count - 1
-        var output: [Byte] = []
+        let counterIndexRange = (0...counterIndex).reversed()
+        var output = [Byte](repeating: 0, count: input.count)
         
         for i in 0..<(input.count / blockSize) {
             let from = blockSize * i
-            let to = from + blockSize
-            let block = [Byte](input[from..<to])
-            
-            let encrypted = try self.engine.processBlock(input: iv)
-            output += xorBytes(bytes1: encrypted, bytes2: block)
+            try self.engine.processBlock(input: iv, inputOffset: 0, output: &output, outputOffset: from)
+            xor(input1: output, offset1: from,
+                input2: input, offset2: from,
+                output: &output, offset: from,
+                count: xorSize, wordMode: xorWordMode)
             
             if iv[counterIndex] == 0xFF {
-                for i in (0...counterIndex).reversed() {
+                for i in counterIndexRange {
                     if iv[i] != 0xFF {
                         iv[i] += 1
                         break

@@ -13,7 +13,7 @@ public class EcbMode: BlockCipherMode {
     
     public func process(input: [Byte]) throws -> [Byte] {
         guard let engine = self.engine else {
-            throw CryptoError.cipherNotInitialize("\(#file) is not initialized")
+            throw CryptoError.cipherNotInitialize("\(self) is not initialized")
         }
         
         let blockSize = engine.blockSize
@@ -21,14 +21,11 @@ public class EcbMode: BlockCipherMode {
             throw CryptoError.illegalBlockSize("Input length must be multiple of \(blockSize) bytes")
         }
         
-        var output: [Byte] = []
+        var output = [Byte](repeating: 0, count: input.count)
         for i in 0..<(input.count / blockSize) {
-            let from = blockSize * i
-            let to = from + blockSize
-            let block = [Byte](input[from..<to])
-            output += try self.engine.processBlock(input: block)
+            let offset = blockSize * i
+            try self.engine.processBlock(input: input, inputOffset: offset, output: &output, outputOffset: offset)
         }
-        
         return output
     }
 }

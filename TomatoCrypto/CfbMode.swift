@@ -47,18 +47,20 @@ public class CfbMode: BlockCipherMode {
     
     public func encrypt(input: [Byte], iv: [Byte]) throws -> [Byte] {
         let blockSize = self.engine.blockSize
-        var lastStream = iv
-        var output: [Byte] = []
+        let xorWordMode = input.count % blockSize == 0
+        let xorSize = xorWordMode ? input.count / blockSize : blockSize
+        
+        var feedback = iv
+        var output = [Byte](repeating: 0, count: input.count)
         
         for i in 0..<(input.count / blockSize) {
-            let encrypted = try self.engine.processBlock(input: lastStream)
-            
             let from = blockSize * i
-            let to = from + blockSize
-            let block = [Byte](input[from..<to])
-            
-            lastStream = xorBytes(bytes1: encrypted, bytes2: block)
-            output += lastStream
+            try self.engine.processBlock(input: feedback, inputOffset: 0, output: &output, outputOffset: from)
+            xor(input1: output, offset1: from,
+                input2: input, offset2: from,
+                output: &output, offset: from,
+                count: xorSize, wordMode: xorWordMode)
+            copyBytes(from: output, fromOffset: from, to: &feedback, toOffset: 0, count: blockSize)
         }
         
         return output
@@ -66,17 +68,20 @@ public class CfbMode: BlockCipherMode {
     
     public func decrypt(input: [Byte], iv: [Byte]) throws -> [Byte] {
         let blockSize = self.engine.blockSize
-        var lastStream = iv
-        var output: [Byte] = []
+        let xorWordMode = input.count % blockSize == 0
+        let xorSize = xorWordMode ? input.count / blockSize : blockSize
+        
+        var feedback = iv
+        var output = [Byte](repeating: 0, count: input.count)
         
         for i in 0..<(input.count / blockSize) {
-            let encrypted = try self.engine.processBlock(input: lastStream)
-            
             let from = blockSize * i
-            let to = from + blockSize
-            lastStream = [Byte](input[from..<to])
-            
-            output += xorBytes(bytes1: encrypted, bytes2: lastStream)
+            try self.engine.processBlock(input: feedback, inputOffset: 0, output: &output, outputOffset: from)
+            copyBytes(from: input, fromOffset: from, to: &feedback, toOffset: 0, count: blockSize)
+            xor(input1: output, offset1: from,
+                input2: feedback, offset2: 0,
+                output: &output, offset: from,
+                count: xorSize, wordMode: xorWordMode)
         }
         
         return output

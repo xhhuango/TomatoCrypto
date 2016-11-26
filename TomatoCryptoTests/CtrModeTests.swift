@@ -10,7 +10,7 @@ class CtrModeTests: XCTestCase {
         super.tearDown()
     }
     
-    func testAesCtr128() {
+    func testAes128() {
         let key = SecretKey(bytes: hexToBytes(hex: "2b7e151628aed2a6abf7158809cf4f3c"))
         let iv = IvParameter(bytes: hexToBytes(hex: "f0f1f2f3f4f5f6f7f8f9fafbfcfdfeff"))
         let plaintext = hexToBytes(hex: "6bc1bee22e409f96e93d7e117393172a" + "ae2d8a571e03ac9c9eb76fac45af8e51" +
