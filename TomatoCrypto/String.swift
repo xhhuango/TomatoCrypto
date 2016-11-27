@@ -12,6 +12,18 @@ func bytesToHex(bytes: [Byte]) -> String {
     return string
 }
 
+func bytesToHex(bytes: UnsafePointer<Byte>, count: Int) -> String {
+    let table = [Character]("0123456789ABCDEF".characters)
+    var string = String()
+    for i in 0..<count {
+        let msb = (bytes[i] >> 4) & 0x0F
+        string.append(table[Int(msb)])
+        let lsb = bytes[i] & 0x0F
+        string.append(table[Int(lsb)])
+    }
+    return string
+}
+
 func hexToBytes(hex: String) -> [Byte] {
     let hexBytes = stringToBytes(string: hex)
     var bytes = [Byte](repeating: 0, count: (hexBytes.count - 1) / 2 + 1)

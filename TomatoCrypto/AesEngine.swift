@@ -1,18 +1,15 @@
 import Foundation
 
+/**
+ * An AES implementation ported from BouncyCastle's AESEngine (http://www.bouncycastle.org/)
+ * and Java code (https://github.com/bcgit/bc-java/blob/master/core/src/main/java/org/bouncycastle/crypto/engines/AESEngine.java)
+ * which is based on optimizations from Dr. Brian Gladman's paper.
+ */
 public class AesEngine: BlockCipherEngine {
-    fileprivate let wordSize = MemoryLayout<Word>.size
-    fileprivate let blockLength = 16      // 128-bit
-    fileprivate let blockWordCount = 4  // 128-bit / wordSize
-    
-    fileprivate enum KeyLength: Int {
-        case key128 = 16
-        case key192 = 24
-        case key256 = 32
-    }
+    fileprivate let blockLength = 16
     
     fileprivate let rcon: [Byte] = [
-        0x00, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36
+        0x00, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36,
     ]
     
     fileprivate let sbox: [Byte] = [
@@ -53,149 +50,93 @@ public class AesEngine: BlockCipherEngine {
         0x17, 0x2B, 0x04, 0x7E, 0xBA, 0x77, 0xD6, 0x26, 0xE1, 0x69, 0x14, 0x63, 0x55, 0x21, 0x0C, 0x7D
     ]
     
-    fileprivate let polymul2: [Byte] = [
-        0x00, 0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C, 0x0E, 0x10, 0x12, 0x14, 0x16, 0x18, 0x1A, 0x1C, 0x1E,
-        0x20, 0x22, 0x24, 0x26, 0x28, 0x2A, 0x2C, 0x2E, 0x30, 0x32, 0x34, 0x36, 0x38, 0x3A, 0x3C, 0x3E,
-        0x40, 0x42, 0x44, 0x46, 0x48, 0x4A, 0x4C, 0x4E, 0x50, 0x52, 0x54, 0x56, 0x58, 0x5A, 0x5C, 0x5E,
-        0x60, 0x62, 0x64, 0x66, 0x68, 0x6A, 0x6C, 0x6E, 0x70, 0x72, 0x74, 0x76, 0x78, 0x7A, 0x7C, 0x7E,
-        0x80, 0x82, 0x84, 0x86, 0x88, 0x8A, 0x8C, 0x8E, 0x90, 0x92, 0x94, 0x96, 0x98, 0x9A, 0x9C, 0x9E,
-        0xA0, 0xA2, 0xA4, 0xA6, 0xA8, 0xAA, 0xAC, 0xAE, 0xB0, 0xB2, 0xB4, 0xB6, 0xB8, 0xBA, 0xBC, 0xBE,
-        0xC0, 0xC2, 0xC4, 0xC6, 0xC8, 0xCA, 0xCC, 0xCE, 0xD0, 0xD2, 0xD4, 0xD6, 0xD8, 0xDA, 0xDC, 0xDE,
-        0xE0, 0xE2, 0xE4, 0xE6, 0xE8, 0xEA, 0xEC, 0xEE, 0xF0, 0xF2, 0xF4, 0xF6, 0xF8, 0xFA, 0xFC, 0xFE,
-        0x1B, 0x19, 0x1F, 0x1D, 0x13, 0x11, 0x17, 0x15, 0x0B, 0x09, 0x0F, 0x0D, 0x03, 0x01, 0x07, 0x05,
-        0x3B, 0x39, 0x3F, 0x3D, 0x33, 0x31, 0x37, 0x35, 0x2B, 0x29, 0x2F, 0x2D, 0x23, 0x21, 0x27, 0x25,
-        0x5B, 0x59, 0x5F, 0x5D, 0x53, 0x51, 0x57, 0x55, 0x4B, 0x49, 0x4F, 0x4D, 0x43, 0x41, 0x47, 0x45,
-        0x7B, 0x79, 0x7F, 0x7D, 0x73, 0x71, 0x77, 0x75, 0x6B, 0x69, 0x6F, 0x6D, 0x63, 0x61, 0x67, 0x65,
-        0x9B, 0x99, 0x9F, 0x9D, 0x93, 0x91, 0x97, 0x95, 0x8B, 0x89, 0x8F, 0x8D, 0x83, 0x81, 0x87, 0x85,
-        0xBB, 0xB9, 0xBF, 0xBD, 0xB3, 0xB1, 0xB7, 0xB5, 0xAB, 0xA9, 0xAF, 0xAD, 0xA3, 0xA1, 0xA7, 0xA5,
-        0xDB, 0xD9, 0xDF, 0xDD, 0xD3, 0xD1, 0xD7, 0xD5, 0xCB, 0xC9, 0xCF, 0xCD, 0xC3, 0xC1, 0xC7, 0xC5,
-        0xFB, 0xF9, 0xFF, 0xFD, 0xF3, 0xF1, 0xF7, 0xF5, 0xEB, 0xE9, 0xEF, 0xED, 0xE3, 0xE1, 0xE7, 0xE5
+    fileprivate let t: [Word] = [
+        0xa56363c6, 0x847c7cf8, 0x997777ee, 0x8d7b7bf6, 0x0df2f2ff, 0xbd6b6bd6, 0xb16f6fde, 0x54c5c591,
+        0x50303060, 0x03010102, 0xa96767ce, 0x7d2b2b56, 0x19fefee7, 0x62d7d7b5, 0xe6abab4d, 0x9a7676ec,
+        0x45caca8f, 0x9d82821f, 0x40c9c989, 0x877d7dfa, 0x15fafaef, 0xeb5959b2, 0xc947478e, 0x0bf0f0fb,
+        0xecadad41, 0x67d4d4b3, 0xfda2a25f, 0xeaafaf45, 0xbf9c9c23, 0xf7a4a453, 0x967272e4, 0x5bc0c09b,
+        0xc2b7b775, 0x1cfdfde1, 0xae93933d, 0x6a26264c, 0x5a36366c, 0x413f3f7e, 0x02f7f7f5, 0x4fcccc83,
+        0x5c343468, 0xf4a5a551, 0x34e5e5d1, 0x08f1f1f9, 0x937171e2, 0x73d8d8ab, 0x53313162, 0x3f15152a,
+        0x0c040408, 0x52c7c795, 0x65232346, 0x5ec3c39d, 0x28181830, 0xa1969637, 0x0f05050a, 0xb59a9a2f,
+        0x0907070e, 0x36121224, 0x9b80801b, 0x3de2e2df, 0x26ebebcd, 0x6927274e, 0xcdb2b27f, 0x9f7575ea,
+        0x1b090912, 0x9e83831d, 0x742c2c58, 0x2e1a1a34, 0x2d1b1b36, 0xb26e6edc, 0xee5a5ab4, 0xfba0a05b,
+        0xf65252a4, 0x4d3b3b76, 0x61d6d6b7, 0xceb3b37d, 0x7b292952, 0x3ee3e3dd, 0x712f2f5e, 0x97848413,
+        0xf55353a6, 0x68d1d1b9, 0x00000000, 0x2cededc1, 0x60202040, 0x1ffcfce3, 0xc8b1b179, 0xed5b5bb6,
+        0xbe6a6ad4, 0x46cbcb8d, 0xd9bebe67, 0x4b393972, 0xde4a4a94, 0xd44c4c98, 0xe85858b0, 0x4acfcf85,
+        0x6bd0d0bb, 0x2aefefc5, 0xe5aaaa4f, 0x16fbfbed, 0xc5434386, 0xd74d4d9a, 0x55333366, 0x94858511,
+        0xcf45458a, 0x10f9f9e9, 0x06020204, 0x817f7ffe, 0xf05050a0, 0x443c3c78, 0xba9f9f25, 0xe3a8a84b,
+        0xf35151a2, 0xfea3a35d, 0xc0404080, 0x8a8f8f05, 0xad92923f, 0xbc9d9d21, 0x48383870, 0x04f5f5f1,
+        0xdfbcbc63, 0xc1b6b677, 0x75dadaaf, 0x63212142, 0x30101020, 0x1affffe5, 0x0ef3f3fd, 0x6dd2d2bf,
+        0x4ccdcd81, 0x140c0c18, 0x35131326, 0x2fececc3, 0xe15f5fbe, 0xa2979735, 0xcc444488, 0x3917172e,
+        0x57c4c493, 0xf2a7a755, 0x827e7efc, 0x473d3d7a, 0xac6464c8, 0xe75d5dba, 0x2b191932, 0x957373e6,
+        0xa06060c0, 0x98818119, 0xd14f4f9e, 0x7fdcdca3, 0x66222244, 0x7e2a2a54, 0xab90903b, 0x8388880b,
+        0xca46468c, 0x29eeeec7, 0xd3b8b86b, 0x3c141428, 0x79dedea7, 0xe25e5ebc, 0x1d0b0b16, 0x76dbdbad,
+        0x3be0e0db, 0x56323264, 0x4e3a3a74, 0x1e0a0a14, 0xdb494992, 0x0a06060c, 0x6c242448, 0xe45c5cb8,
+        0x5dc2c29f, 0x6ed3d3bd, 0xefacac43, 0xa66262c4, 0xa8919139, 0xa4959531, 0x37e4e4d3, 0x8b7979f2,
+        0x32e7e7d5, 0x43c8c88b, 0x5937376e, 0xb76d6dda, 0x8c8d8d01, 0x64d5d5b1, 0xd24e4e9c, 0xe0a9a949,
+        0xb46c6cd8, 0xfa5656ac, 0x07f4f4f3, 0x25eaeacf, 0xaf6565ca, 0x8e7a7af4, 0xe9aeae47, 0x18080810,
+        0xd5baba6f, 0x887878f0, 0x6f25254a, 0x722e2e5c, 0x241c1c38, 0xf1a6a657, 0xc7b4b473, 0x51c6c697,
+        0x23e8e8cb, 0x7cdddda1, 0x9c7474e8, 0x211f1f3e, 0xdd4b4b96, 0xdcbdbd61, 0x868b8b0d, 0x858a8a0f,
+        0x907070e0, 0x423e3e7c, 0xc4b5b571, 0xaa6666cc, 0xd8484890, 0x05030306, 0x01f6f6f7, 0x120e0e1c,
+        0xa36161c2, 0x5f35356a, 0xf95757ae, 0xd0b9b969, 0x91868617, 0x58c1c199, 0x271d1d3a, 0xb99e9e27,
+        0x38e1e1d9, 0x13f8f8eb, 0xb398982b, 0x33111122, 0xbb6969d2, 0x70d9d9a9, 0x898e8e07, 0xa7949433,
+        0xb69b9b2d, 0x221e1e3c, 0x92878715, 0x20e9e9c9, 0x49cece87, 0xff5555aa, 0x78282850, 0x7adfdfa5,
+        0x8f8c8c03, 0xf8a1a159, 0x80898909, 0x170d0d1a, 0xdabfbf65, 0x31e6e6d7, 0xc6424284, 0xb86868d0,
+        0xc3414182, 0xb0999929, 0x772d2d5a, 0x110f0f1e, 0xcbb0b07b, 0xfc5454a8, 0xd6bbbb6d, 0x3a16162c
     ]
     
-    fileprivate let polymul3: [Byte] = [
-        0x00, 0x03, 0x06, 0x05, 0x0C, 0x0F, 0x0A, 0x09, 0x18, 0x1B, 0x1E, 0x1D, 0x14, 0x17, 0x12, 0x11,
-        0x30, 0x33, 0x36, 0x35, 0x3C, 0x3F, 0x3A, 0x39, 0x28, 0x2B, 0x2E, 0x2D, 0x24, 0x27, 0x22, 0x21,
-        0x60, 0x63, 0x66, 0x65, 0x6C, 0x6F, 0x6A, 0x69, 0x78, 0x7B, 0x7E, 0x7D, 0x74, 0x77, 0x72, 0x71,
-        0x50, 0x53, 0x56, 0x55, 0x5C, 0x5F, 0x5A, 0x59, 0x48, 0x4B, 0x4E, 0x4D, 0x44, 0x47, 0x42, 0x41,
-        0xC0, 0xC3, 0xC6, 0xC5, 0xCC, 0xCF, 0xCA, 0xC9, 0xD8, 0xDB, 0xDE, 0xDD, 0xD4, 0xD7, 0xD2, 0xD1,
-        0xF0, 0xF3, 0xF6, 0xF5, 0xFC, 0xFF, 0xFA, 0xF9, 0xE8, 0xEB, 0xEE, 0xED, 0xE4, 0xE7, 0xE2, 0xE1,
-        0xA0, 0xA3, 0xA6, 0xA5, 0xAC, 0xAF, 0xAA, 0xA9, 0xB8, 0xBB, 0xBE, 0xBD, 0xB4, 0xB7, 0xB2, 0xB1,
-        0x90, 0x93, 0x96, 0x95, 0x9C, 0x9F, 0x9A, 0x99, 0x88, 0x8B, 0x8E, 0x8D, 0x84, 0x87, 0x82, 0x81,
-        0x9B, 0x98, 0x9D, 0x9E, 0x97, 0x94, 0x91, 0x92, 0x83, 0x80, 0x85, 0x86, 0x8F, 0x8C, 0x89, 0x8A,
-        0xAB, 0xA8, 0xAD, 0xAE, 0xA7, 0xA4, 0xA1, 0xA2, 0xB3, 0xB0, 0xB5, 0xB6, 0xBF, 0xBC, 0xB9, 0xBA,
-        0xFB, 0xF8, 0xFD, 0xFE, 0xF7, 0xF4, 0xF1, 0xF2, 0xE3, 0xE0, 0xE5, 0xE6, 0xEF, 0xEC, 0xE9, 0xEA,
-        0xCB, 0xC8, 0xCD, 0xCE, 0xC7, 0xC4, 0xC1, 0xC2, 0xD3, 0xD0, 0xD5, 0xD6, 0xDF, 0xDC, 0xD9, 0xDA,
-        0x5B, 0x58, 0x5D, 0x5E, 0x57, 0x54, 0x51, 0x52, 0x43, 0x40, 0x45, 0x46, 0x4F, 0x4C, 0x49, 0x4A,
-        0x6B, 0x68, 0x6D, 0x6E, 0x67, 0x64, 0x61, 0x62, 0x73, 0x70, 0x75, 0x76, 0x7F, 0x7C, 0x79, 0x7A,
-        0x3B, 0x38, 0x3D, 0x3E, 0x37, 0x34, 0x31, 0x32, 0x23, 0x20, 0x25, 0x26, 0x2F, 0x2C, 0x29, 0x2A,
-        0x0B, 0x08, 0x0D, 0x0E, 0x07, 0x04, 0x01, 0x02, 0x13, 0x10, 0x15, 0x16, 0x1F, 0x1C, 0x19, 0x1A
+    fileprivate let tinv: [Word] = [
+        0x50a7f451, 0x5365417e, 0xc3a4171a, 0x965e273a, 0xcb6bab3b, 0xf1459d1f, 0xab58faac, 0x9303e34b,
+        0x55fa3020, 0xf66d76ad, 0x9176cc88, 0x254c02f5, 0xfcd7e54f, 0xd7cb2ac5, 0x80443526, 0x8fa362b5,
+        0x495ab1de, 0x671bba25, 0x980eea45, 0xe1c0fe5d, 0x02752fc3, 0x12f04c81, 0xa397468d, 0xc6f9d36b,
+        0xe75f8f03, 0x959c9215, 0xeb7a6dbf, 0xda595295, 0x2d83bed4, 0xd3217458, 0x2969e049, 0x44c8c98e,
+        0x6a89c275, 0x78798ef4, 0x6b3e5899, 0xdd71b927, 0xb64fe1be, 0x17ad88f0, 0x66ac20c9, 0xb43ace7d,
+        0x184adf63, 0x82311ae5, 0x60335197, 0x457f5362, 0xe07764b1, 0x84ae6bbb, 0x1ca081fe, 0x942b08f9,
+        0x58684870, 0x19fd458f, 0x876cde94, 0xb7f87b52, 0x23d373ab, 0xe2024b72, 0x578f1fe3, 0x2aab5566,
+        0x0728ebb2, 0x03c2b52f, 0x9a7bc586, 0xa50837d3, 0xf2872830, 0xb2a5bf23, 0xba6a0302, 0x5c8216ed,
+        0x2b1ccf8a, 0x92b479a7, 0xf0f207f3, 0xa1e2694e, 0xcdf4da65, 0xd5be0506, 0x1f6234d1, 0x8afea6c4,
+        0x9d532e34, 0xa055f3a2, 0x32e18a05, 0x75ebf6a4, 0x39ec830b, 0xaaef6040, 0x069f715e, 0x51106ebd,
+        0xf98a213e, 0x3d06dd96, 0xae053edd, 0x46bde64d, 0xb58d5491, 0x055dc471, 0x6fd40604, 0xff155060,
+        0x24fb9819, 0x97e9bdd6, 0xcc434089, 0x779ed967, 0xbd42e8b0, 0x888b8907, 0x385b19e7, 0xdbeec879,
+        0x470a7ca1, 0xe90f427c, 0xc91e84f8, 0x00000000, 0x83868009, 0x48ed2b32, 0xac70111e, 0x4e725a6c,
+        0xfbff0efd, 0x5638850f, 0x1ed5ae3d, 0x27392d36, 0x64d90f0a, 0x21a65c68, 0xd1545b9b, 0x3a2e3624,
+        0xb1670a0c, 0x0fe75793, 0xd296eeb4, 0x9e919b1b, 0x4fc5c080, 0xa220dc61, 0x694b775a, 0x161a121c,
+        0x0aba93e2, 0xe52aa0c0, 0x43e0223c, 0x1d171b12, 0x0b0d090e, 0xadc78bf2, 0xb9a8b62d, 0xc8a91e14,
+        0x8519f157, 0x4c0775af, 0xbbdd99ee, 0xfd607fa3, 0x9f2601f7, 0xbcf5725c, 0xc53b6644, 0x347efb5b,
+        0x7629438b, 0xdcc623cb, 0x68fcedb6, 0x63f1e4b8, 0xcadc31d7, 0x10856342, 0x40229713, 0x2011c684,
+        0x7d244a85, 0xf83dbbd2, 0x1132f9ae, 0x6da129c7, 0x4b2f9e1d, 0xf330b2dc, 0xec52860d, 0xd0e3c177,
+        0x6c16b32b, 0x99b970a9, 0xfa489411, 0x2264e947, 0xc48cfca8, 0x1a3ff0a0, 0xd82c7d56, 0xef903322,
+        0xc74e4987, 0xc1d138d9, 0xfea2ca8c, 0x360bd498, 0xcf81f5a6, 0x28de7aa5, 0x268eb7da, 0xa4bfad3f,
+        0xe49d3a2c, 0x0d927850, 0x9bcc5f6a, 0x62467e54, 0xc2138df6, 0xe8b8d890, 0x5ef7392e, 0xf5afc382,
+        0xbe805d9f, 0x7c93d069, 0xa92dd56f, 0xb31225cf, 0x3b99acc8, 0xa77d1810, 0x6e639ce8, 0x7bbb3bdb,
+        0x097826cd, 0xf418596e, 0x01b79aec, 0xa89a4f83, 0x656e95e6, 0x7ee6ffaa, 0x08cfbc21, 0xe6e815ef,
+        0xd99be7ba, 0xce366f4a, 0xd4099fea, 0xd67cb029, 0xafb2a431, 0x31233f2a, 0x3094a5c6, 0xc066a235,
+        0x37bc4e74, 0xa6ca82fc, 0xb0d090e0, 0x15d8a733, 0x4a9804f1, 0xf7daec41, 0x0e50cd7f, 0x2ff69117,
+        0x8dd64d76, 0x4db0ef43, 0x544daacc, 0xdf0496e4, 0xe3b5d19e, 0x1b886a4c, 0xb81f2cc1, 0x7f516546,
+        0x04ea5e9d, 0x5d358c01, 0x737487fa, 0x2e410bfb, 0x5a1d67b3, 0x52d2db92, 0x335610e9, 0x1347d66d,
+        0x8c61d79a, 0x7a0ca137, 0x8e14f859, 0x893c13eb, 0xee27a9ce, 0x35c961b7, 0xede51ce1, 0x3cb1477a,
+        0x59dfd29c, 0x3f73f255, 0x79ce1418, 0xbf37c773, 0xeacdf753, 0x5baafd5f, 0x146f3ddf, 0x86db4478,
+        0x81f3afca, 0x3ec468b9, 0x2c342438, 0x5f40a3c2, 0x72c31d16, 0x0c25e2bc, 0x8b493c28, 0x41950dff,
+        0x7101a839, 0xdeb30c08, 0x9ce4b4d8, 0x90c15664, 0x6184cb7b, 0x70b632d5, 0x745c6c48, 0x4257b8d0
     ]
     
-    fileprivate let polymul9: [Byte] = [
-        0x00, 0x09, 0x12, 0x1B, 0x24, 0x2D, 0x36, 0x3F, 0x48, 0x41, 0x5A, 0x53, 0x6C, 0x65, 0x7E, 0x77,
-        0x90, 0x99, 0x82, 0x8B, 0xB4, 0xBD, 0xA6, 0xAF, 0xD8, 0xD1, 0xCA, 0xC3, 0xFC, 0xF5, 0xEE, 0xE7,
-        0x3B, 0x32, 0x29, 0x20, 0x1F, 0x16, 0x0D, 0x04, 0x73, 0x7A, 0x61, 0x68, 0x57, 0x5E, 0x45, 0x4C,
-        0xAB, 0xA2, 0xB9, 0xB0, 0x8F, 0x86, 0x9D, 0x94, 0xE3, 0xEA, 0xF1, 0xF8, 0xC7, 0xCE, 0xD5, 0xDC,
-        0x76, 0x7F, 0x64, 0x6D, 0x52, 0x5B, 0x40, 0x49, 0x3E, 0x37, 0x2C, 0x25, 0x1A, 0x13, 0x08, 0x01,
-        0xE6, 0xEF, 0xF4, 0xFD, 0xC2, 0xCB, 0xD0, 0xD9, 0xAE, 0xA7, 0xBC, 0xB5, 0x8A, 0x83, 0x98, 0x91,
-        0x4D, 0x44, 0x5F, 0x56, 0x69, 0x60, 0x7B, 0x72, 0x05, 0x0C, 0x17, 0x1E, 0x21, 0x28, 0x33, 0x3A,
-        0xDD, 0xD4, 0xCF, 0xC6, 0xF9, 0xF0, 0xEB, 0xE2, 0x95, 0x9C, 0x87, 0x8E, 0xB1, 0xB8, 0xA3, 0xAA,
-        0xEC, 0xE5, 0xFE, 0xF7, 0xC8, 0xC1, 0xDA, 0xD3, 0xA4, 0xAD, 0xB6, 0xBF, 0x80, 0x89, 0x92, 0x9B,
-        0x7C, 0x75, 0x6E, 0x67, 0x58, 0x51, 0x4A, 0x43, 0x34, 0x3D, 0x26, 0x2F, 0x10, 0x19, 0x02, 0x0B,
-        0xD7, 0xDE, 0xC5, 0xCC, 0xF3, 0xFA, 0xE1, 0xE8, 0x9F, 0x96, 0x8D, 0x84, 0xBB, 0xB2, 0xA9, 0xA0,
-        0x47, 0x4E, 0x55, 0x5C, 0x63, 0x6A, 0x71, 0x78, 0x0F, 0x06, 0x1D, 0x14, 0x2B, 0x22, 0x39, 0x30,
-        0x9A, 0x93, 0x88, 0x81, 0xBE, 0xB7, 0xAC, 0xA5, 0xD2, 0xDB, 0xC0, 0xC9, 0xF6, 0xFF, 0xE4, 0xED,
-        0x0A, 0x03, 0x18, 0x11, 0x2E, 0x27, 0x3C, 0x35, 0x42, 0x4B, 0x50, 0x59, 0x66, 0x6F, 0x74, 0x7D,
-        0xA1, 0xA8, 0xB3, 0xBA, 0x85, 0x8C, 0x97, 0x9E, 0xE9, 0xE0, 0xFB, 0xF2, 0xCD, 0xC4, 0xDF, 0xD6,
-        0x31, 0x38, 0x23, 0x2A, 0x15, 0x1C, 0x07, 0x0E, 0x79, 0x70, 0x6B, 0x62, 0x5D, 0x54, 0x4F, 0x46
-    ]
-    
-    fileprivate let polymulB: [Byte] = [
-        0x00, 0x0B, 0x16, 0x1D, 0x2C, 0x27, 0x3A, 0x31, 0x58, 0x53, 0x4E, 0x45, 0x74, 0x7F, 0x62, 0x69,
-        0xB0, 0xBB, 0xA6, 0xAD, 0x9C, 0x97, 0x8A, 0x81, 0xE8, 0xE3, 0xFE, 0xF5, 0xC4, 0xCF, 0xD2, 0xD9,
-        0x7B, 0x70, 0x6D, 0x66, 0x57, 0x5C, 0x41, 0x4A, 0x23, 0x28, 0x35, 0x3E, 0x0F, 0x04, 0x19, 0x12,
-        0xCB, 0xC0, 0xDD, 0xD6, 0xE7, 0xEC, 0xF1, 0xFA, 0x93, 0x98, 0x85, 0x8E, 0xBF, 0xB4, 0xA9, 0xA2,
-        0xF6, 0xFD, 0xE0, 0xEB, 0xDA, 0xD1, 0xCC, 0xC7, 0xAE, 0xA5, 0xB8, 0xB3, 0x82, 0x89, 0x94, 0x9F,
-        0x46, 0x4D, 0x50, 0x5B, 0x6A, 0x61, 0x7C, 0x77, 0x1E, 0x15, 0x08, 0x03, 0x32, 0x39, 0x24, 0x2F,
-        0x8D, 0x86, 0x9B, 0x90, 0xA1, 0xAA, 0xB7, 0xBC, 0xD5, 0xDE, 0xC3, 0xC8, 0xF9, 0xF2, 0xEF, 0xE4,
-        0x3D, 0x36, 0x2B, 0x20, 0x11, 0x1A, 0x07, 0x0C, 0x65, 0x6E, 0x73, 0x78, 0x49, 0x42, 0x5F, 0x54,
-        0xF7, 0xFC, 0xE1, 0xEA, 0xDB, 0xD0, 0xCD, 0xC6, 0xAF, 0xA4, 0xB9, 0xB2, 0x83, 0x88, 0x95, 0x9E,
-        0x47, 0x4C, 0x51, 0x5A, 0x6B, 0x60, 0x7D, 0x76, 0x1F, 0x14, 0x09, 0x02, 0x33, 0x38, 0x25, 0x2E,
-        0x8C, 0x87, 0x9A, 0x91, 0xA0, 0xAB, 0xB6, 0xBD, 0xD4, 0xDF, 0xC2, 0xC9, 0xF8, 0xF3, 0xEE, 0xE5,
-        0x3C, 0x37, 0x2A, 0x21, 0x10, 0x1B, 0x06, 0x0D, 0x64, 0x6F, 0x72, 0x79, 0x48, 0x43, 0x5E, 0x55,
-        0x01, 0x0A, 0x17, 0x1C, 0x2D, 0x26, 0x3B, 0x30, 0x59, 0x52, 0x4F, 0x44, 0x75, 0x7E, 0x63, 0x68,
-        0xB1, 0xBA, 0xA7, 0xAC, 0x9D, 0x96, 0x8B, 0x80, 0xE9, 0xE2, 0xFF, 0xF4, 0xC5, 0xCE, 0xD3, 0xD8,
-        0x7A, 0x71, 0x6C, 0x67, 0x56, 0x5D, 0x40, 0x4B, 0x22, 0x29, 0x34, 0x3F, 0x0E, 0x05, 0x18, 0x13,
-        0xCA, 0xC1, 0xDC, 0xD7, 0xE6, 0xED, 0xF0, 0xFB, 0x92, 0x99, 0x84, 0x8F, 0xBE, 0xB5, 0xA8, 0xA3
-    ]
-    
-    fileprivate let polymulD: [Byte] = [
-        0x00, 0x0D, 0x1A, 0x17, 0x34, 0x39, 0x2E, 0x23, 0x68, 0x65, 0x72, 0x7F, 0x5C, 0x51, 0x46, 0x4B,
-        0xD0, 0xDD, 0xCA, 0xC7, 0xE4, 0xE9, 0xFE, 0xF3, 0xB8, 0xB5, 0xA2, 0xAF, 0x8C, 0x81, 0x96, 0x9B,
-        0xBB, 0xB6, 0xA1, 0xAC, 0x8F, 0x82, 0x95, 0x98, 0xD3, 0xDE, 0xC9, 0xC4, 0xE7, 0xEA, 0xFD, 0xF0,
-        0x6B, 0x66, 0x71, 0x7C, 0x5F, 0x52, 0x45, 0x48, 0x03, 0x0E, 0x19, 0x14, 0x37, 0x3A, 0x2D, 0x20,
-        0x6D, 0x60, 0x77, 0x7A, 0x59, 0x54, 0x43, 0x4E, 0x05, 0x08, 0x1F, 0x12, 0x31, 0x3C, 0x2B, 0x26,
-        0xBD, 0xB0, 0xA7, 0xAA, 0x89, 0x84, 0x93, 0x9E, 0xD5, 0xD8, 0xCF, 0xC2, 0xE1, 0xEC, 0xFB, 0xF6,
-        0xD6, 0xDB, 0xCC, 0xC1, 0xE2, 0xEF, 0xF8, 0xF5, 0xBE, 0xB3, 0xA4, 0xA9, 0x8A, 0x87, 0x90, 0x9D,
-        0x06, 0x0B, 0x1C, 0x11, 0x32, 0x3F, 0x28, 0x25, 0x6E, 0x63, 0x74, 0x79, 0x5A, 0x57, 0x40, 0x4D,
-        0xDA, 0xD7, 0xC0, 0xCD, 0xEE, 0xE3, 0xF4, 0xF9, 0xB2, 0xBF, 0xA8, 0xA5, 0x86, 0x8B, 0x9C, 0x91,
-        0x0A, 0x07, 0x10, 0x1D, 0x3E, 0x33, 0x24, 0x29, 0x62, 0x6F, 0x78, 0x75, 0x56, 0x5B, 0x4C, 0x41,
-        0x61, 0x6C, 0x7B, 0x76, 0x55, 0x58, 0x4F, 0x42, 0x09, 0x04, 0x13, 0x1E, 0x3D, 0x30, 0x27, 0x2A,
-        0xB1, 0xBC, 0xAB, 0xA6, 0x85, 0x88, 0x9F, 0x92, 0xD9, 0xD4, 0xC3, 0xCE, 0xED, 0xE0, 0xF7, 0xFA,
-        0xB7, 0xBA, 0xAD, 0xA0, 0x83, 0x8E, 0x99, 0x94, 0xDF, 0xD2, 0xC5, 0xC8, 0xEB, 0xE6, 0xF1, 0xFC,
-        0x67, 0x6A, 0x7D, 0x70, 0x53, 0x5E, 0x49, 0x44, 0x0F, 0x02, 0x15, 0x18, 0x3B, 0x36, 0x21, 0x2C,
-        0x0C, 0x01, 0x16, 0x1B, 0x38, 0x35, 0x22, 0x2F, 0x64, 0x69, 0x7E, 0x73, 0x50, 0x5D, 0x4A, 0x47,
-        0xDC, 0xD1, 0xC6, 0xCB, 0xE8, 0xE5, 0xF2, 0xFF, 0xB4, 0xB9, 0xAE, 0xA3, 0x80, 0x8D, 0x9A, 0x97
-    ]
-    
-    fileprivate let polymulE: [Byte] = [
-        0x00, 0x0E, 0x1C, 0x12, 0x38, 0x36, 0x24, 0x2A, 0x70, 0x7E, 0x6C, 0x62, 0x48, 0x46, 0x54, 0x5A,
-        0xE0, 0xEE, 0xFC, 0xF2, 0xD8, 0xD6, 0xC4, 0xCA, 0x90, 0x9E, 0x8C, 0x82, 0xA8, 0xA6, 0xB4, 0xBA,
-        0xDB, 0xD5, 0xC7, 0xC9, 0xE3, 0xED, 0xFF, 0xF1, 0xAB, 0xA5, 0xB7, 0xB9, 0x93, 0x9D, 0x8F, 0x81,
-        0x3B, 0x35, 0x27, 0x29, 0x03, 0x0D, 0x1F, 0x11, 0x4B, 0x45, 0x57, 0x59, 0x73, 0x7D, 0x6F, 0x61,
-        0xAD, 0xA3, 0xB1, 0xBF, 0x95, 0x9B, 0x89, 0x87, 0xDD, 0xD3, 0xC1, 0xCF, 0xE5, 0xEB, 0xF9, 0xF7,
-        0x4D, 0x43, 0x51, 0x5F, 0x75, 0x7B, 0x69, 0x67, 0x3D, 0x33, 0x21, 0x2F, 0x05, 0x0B, 0x19, 0x17,
-        0x76, 0x78, 0x6A, 0x64, 0x4E, 0x40, 0x52, 0x5C, 0x06, 0x08, 0x1A, 0x14, 0x3E, 0x30, 0x22, 0x2C,
-        0x96, 0x98, 0x8A, 0x84, 0xAE, 0xA0, 0xB2, 0xBC, 0xE6, 0xE8, 0xFA, 0xF4, 0xDE, 0xD0, 0xC2, 0xCC,
-        0x41, 0x4F, 0x5D, 0x53, 0x79, 0x77, 0x65, 0x6B, 0x31, 0x3F, 0x2D, 0x23, 0x09, 0x07, 0x15, 0x1B,
-        0xA1, 0xAF, 0xBD, 0xB3, 0x99, 0x97, 0x85, 0x8B, 0xD1, 0xDF, 0xCD, 0xC3, 0xE9, 0xE7, 0xF5, 0xFB,
-        0x9A, 0x94, 0x86, 0x88, 0xA2, 0xAC, 0xBE, 0xB0, 0xEA, 0xE4, 0xF6, 0xF8, 0xD2, 0xDC, 0xCE, 0xC0,
-        0x7A, 0x74, 0x66, 0x68, 0x42, 0x4C, 0x5E, 0x50, 0x0A, 0x04, 0x16, 0x18, 0x32, 0x3C, 0x2E, 0x20,
-        0xEC, 0xE2, 0xF0, 0xFE, 0xD4, 0xDA, 0xC8, 0xC6, 0x9C, 0x92, 0x80, 0x8E, 0xA4, 0xAA, 0xB8, 0xB6,
-        0x0C, 0x02, 0x10, 0x1E, 0x34, 0x3A, 0x28, 0x26, 0x7C, 0x72, 0x60, 0x6E, 0x44, 0x4A, 0x58, 0x56,
-        0x37, 0x39, 0x2B, 0x25, 0x0F, 0x01, 0x13, 0x1D, 0x47, 0x49, 0x5B, 0x55, 0x7F, 0x71, 0x63, 0x6D,
-        0xD7, 0xD9, 0xCB, 0xC5, 0xEF, 0xE1, 0xF3, 0xFD, 0xA7, 0xA9, 0xBB, 0xB5, 0x9F, 0x91, 0x83, 0x8D
-    ]
+    fileprivate let m1: Word = 0x80808080
+    fileprivate let m2: Word = 0x7f7f7f7f
+    fileprivate let m3: Word = 0x0000001b
+    fileprivate let m4: Word = 0xC0C0C0C0
+    fileprivate let m5: Word = 0x3f3f3f3f
     
     fileprivate var processMode: BlockCipher.ProcessMode!
-    fileprivate var keyLength: KeyLength!
     fileprivate var rounds: Int!
-    var subkeys: [[Byte]]!
+    var subkeys: [[Word]]!
     
     public var blockSize: Int {
         return self.blockLength
     }
     
     public func initialize(processMode: BlockCipher.ProcessMode, key: SecretKey) throws {
-        let keyBytes = key.bytes
-        guard let keyLength = KeyLength(rawValue: keyBytes.count) else {
-            throw CryptoError.illegalKeyLength("Illegal key length. \(self) only supports 128/192/256-bits key length")
-        }
-        
         self.processMode = processMode
-        
-        self.keyLength = keyLength
-        
-        switch keyLength {
-        case .key128:
-            self.rounds = 10
-        case .key192:
-            self.rounds = 12
-        case .key256:
-            self.rounds = 14
-        }
-        
-        self.subkeys = self.keySchedule(key: keyBytes)
+        self.subkeys = try self.keySchedule(processMode: processMode, key: key.bytes)
     }
     
     public func processBlock(input: [Byte], inputOffset: Int, output: inout [Byte], outputOffset: Int) throws {
@@ -224,181 +165,426 @@ public class AesEngine: BlockCipherEngine {
 }
 
 extension AesEngine {
-    func encryptBlock(subkeys: [[Byte]], input: [Byte], inputOffset: Int, output: inout [Byte], outputOffset: Int) throws {
-        var state = self.toState(input: input, offset: inputOffset)
-        let lastRound = self.countLastRound(subkeyCount: subkeys.count)
+    func encryptBlock(subkeys: [[Word]], input: [Byte], inputOffset: Int, output: inout [Byte], outputOffset: Int) throws {
+        let inputWords = input.withUnsafeBytes({ $0 }).baseAddress!.advanced(by: inputOffset).assumingMemoryBound(to: Word.self)
+        var t0 = inputWords[0] ^ subkeys[0][0]
+        var t1 = inputWords[1] ^ subkeys[0][1]
+        var t2 = inputWords[2] ^ subkeys[0][2]
+        var r0: Word = 0
+        var r1: Word = 0
+        var r2: Word = 0
+        var r3 = inputWords[3] ^ subkeys[0][3]
         
-        self.addRoundKey(state: &state, keys: subkeys, round: 0)
-        
-        for round in 1..<lastRound {
-            self.byteSubstitution(state: &state)
-            self.shiftRows(state: &state)
-            self.mixColumn(state: &state)
-            self.addRoundKey(state: &state, keys: subkeys, round: round)
+        var round = 1
+        let rounds = self.rounds - 1
+        while round < rounds {
+            r0 = self.t[Int(t0 & 0xff)] ^
+                self.rightRotate(word: self.t[Int((t1 >> 8) & 0xff)], shift: 24) ^
+                self.rightRotate(word: self.t[Int((t2 >> 16) & 0xff)], shift: 16) ^
+                self.rightRotate(word: self.t[Int((r3 >> 24) & 0xff)], shift: 8) ^
+                subkeys[round][0]
+            r1 = self.t[Int(t1 & 0xff)] ^
+                self.rightRotate(word: self.t[Int((t2 >> 8) & 0xff)], shift: 24) ^
+                self.rightRotate(word: self.t[Int((r3 >> 16) & 0xff)], shift: 16) ^
+                self.rightRotate(word: self.t[Int((t0 >> 24) & 0xff)], shift: 8) ^
+                subkeys[round][1]
+            r2 = self.t[Int(t2 & 0xff)] ^
+                self.rightRotate(word: self.t[Int((r3 >> 8) & 0xff)], shift: 24) ^
+                self.rightRotate(word: self.t[Int((t0 >> 16) & 0xff)], shift: 16) ^
+                self.rightRotate(word: self.t[Int((t1 >> 24) & 0xff)], shift: 8) ^
+                subkeys[round][2]
+            r3 = self.t[Int(r3 & 0xff)] ^
+                self.rightRotate(word: self.t[Int((t0 >> 8) & 0xff)], shift: 24) ^
+                self.rightRotate(word: self.t[Int((t1 >> 16) & 0xff)], shift: 16) ^
+                self.rightRotate(word: self.t[Int((t2 >> 24) & 0xff)], shift: 8) ^
+                subkeys[round][3]
+            round += 1
+            t0 = self.t[Int(r0 & 0xff)] ^
+                self.rightRotate(word: self.t[Int((r1 >> 8) & 0xff)], shift: 24) ^
+                self.rightRotate(word: self.t[Int((r2 >> 16) & 0xff)], shift: 16) ^
+                self.rightRotate(word: self.t[Int((r3 >> 24) & 0xff)], shift: 8) ^
+                subkeys[round][0]
+            t1 = self.t[Int(r1 & 0xff)] ^
+                self.rightRotate(word: self.t[Int((r2 >> 8) & 0xff)], shift: 24) ^
+                self.rightRotate(word: self.t[Int((r3 >> 16) & 0xff)], shift: 16) ^
+                self.rightRotate(word: self.t[Int((r0 >> 24) & 0xff)], shift: 8) ^
+                subkeys[round][1]
+            t2 = self.t[Int(r2 & 0xff)] ^
+                self.rightRotate(word: self.t[Int((r3 >> 8) & 0xff)], shift: 24) ^
+                self.rightRotate(word: self.t[Int((r0 >> 16) & 0xff)], shift: 16) ^
+                self.rightRotate(word: self.t[Int((r1 >> 24) & 0xff)], shift: 8) ^
+                subkeys[round][2]
+            r3 = self.t[Int(r3 & 0xff)] ^
+                self.rightRotate(word: self.t[Int((r0 >> 8) & 0xff)], shift: 24) ^
+                self.rightRotate(word: self.t[Int((r1 >> 16) & 0xff)], shift: 16) ^
+                self.rightRotate(word: self.t[Int((r2 >> 24) & 0xff)], shift: 8) ^
+                subkeys[round][3]
+            round += 1
         }
         
-        self.byteSubstitution(state: &state)
-        self.shiftRows(state: &state)
-        self.addRoundKey(state: &state, keys: subkeys, round: lastRound)
+        r0 = self.t[Int(t0 & 0xff)] ^
+            self.rightRotate(word: self.t[Int((t1 >> 8) & 0xff)], shift: 24) ^
+            self.rightRotate(word: self.t[Int((t2 >> 16) & 0xff)], shift: 16) ^
+            self.rightRotate(word: self.t[Int((r3 >> 24) & 0xff)], shift: 8) ^
+            subkeys[round][0]
+        r1 = self.t[Int(t1 & 0xff)] ^
+            self.rightRotate(word: self.t[Int((t2 >> 8) & 0xff)], shift: 24) ^
+            self.rightRotate(word: self.t[Int((r3 >> 16) & 0xff)], shift: 16) ^
+            self.rightRotate(word: self.t[Int((t0 >> 24) & 0xff)], shift: 8) ^
+            subkeys[round][1]
+        r2 = self.t[Int(t2 & 0xff)] ^
+            self.rightRotate(word: self.t[Int((r3 >> 8) & 0xff)], shift: 24) ^
+            self.rightRotate(word: self.t[Int((t0 >> 16) & 0xff)], shift: 16) ^
+            self.rightRotate(word: self.t[Int((t1 >> 24) & 0xff)], shift: 8) ^
+            subkeys[round][2]
+        r3 = self.t[Int(r3 & 0xff)] ^
+            self.rightRotate(word: self.t[Int((t0 >> 8) & 0xff)], shift: 24) ^
+            self.rightRotate(word: self.t[Int((t1 >> 16) & 0xff)], shift: 16) ^
+            self.rightRotate(word: self.t[Int((t2 >> 24) & 0xff)], shift: 8) ^
+            subkeys[round][3]
+        round += 1
         
-        self.fromState(state: state, output: &output, offset: outputOffset)
-    }
-    
-    private func byteSubstitution(state: inout [[Byte]]) {
-        for row in 0..<4 {
-            for col in 0..<4 {
-                state[row][col] = self.sbox[Int(state[row][col])]
-            }
-        }
-    }
-    
-    private func shiftRows(state: inout [[Byte]]) {
-        leftRotateWord(input: &state[1], shiftBits: 8)
-        leftRotateWord(input: &state[2], shiftBits: 16)
-        leftRotateWord(input: &state[3], shiftBits: 24)
-    }
-    
-    private func mixColumn(state: inout [[Byte]]) {
-        for columnIndex in 0..<4 {
-            let col: [Byte] = [state[0][columnIndex], state[1][columnIndex], state[2][columnIndex], state[3][columnIndex]]
-            let value: [Int] = [Int(col[0]), Int(col[1]), Int(col[2]), Int(col[3])]
-            state[0][columnIndex] = self.polymul2[value[0]] ^ self.polymul3[value[1]] ^ col[2] ^ col[3]
-            state[1][columnIndex] = col[0] ^ self.polymul2[value[1]] ^ self.polymul3[value[2]] ^ col[3]
-            state[2][columnIndex] = col[0] ^ col[1] ^ self.polymul2[value[2]] ^ self.polymul3[value[3]]
-            state[3][columnIndex] = self.polymul3[value[0]] ^ col[1] ^ col[2] ^ self.polymul2[value[3]]
-        }
+        let outputWords = output.withUnsafeMutableBytes({ $0 }).baseAddress!.advanced(by: outputOffset).assumingMemoryBound(to: Word.self)
+        
+        outputWords[0] = Word(self.sbox[Int(r0 & 0xff)]) ^ (Word(self.sbox[Int((r1 >> 8) & 0xff)]) << 8) ^
+            (Word(self.sbox[Int((r2 >> 16) & 0xff)]) << 16) ^ (Word(self.sbox[Int((r3 >> 24) & 0xff)]) << 24) ^
+            subkeys[round][0]
+        outputWords[1] = Word(self.sbox[Int(r1 & 0xff)]) ^ (Word(self.sbox[Int((r2 >> 8) & 0xff)]) << 8) ^
+            (Word(self.sbox[Int((r3 >> 16) & 0xff)]) << 16) ^ (Word(self.sbox[Int((r0 >> 24) & 0xff)]) << 24) ^
+            subkeys[round][1]
+        outputWords[2] = Word(self.sbox[Int(r2 & 0xff)]) ^ (Word(self.sbox[Int((r3 >> 8) & 0xff)]) << 8) ^
+            (Word(self.sbox[Int((r0 >> 16) & 0xff)]) << 16) ^ (Word(self.sbox[Int((r1 >> 24) & 0xff)]) << 24) ^
+            subkeys[round][2]
+        outputWords[3] = Word(self.sbox[Int(r3 & 0xff)]) ^ (Word(self.sbox[Int((r0 >> 8) & 0xff)]) << 8) ^
+            (Word(self.sbox[Int((r1 >> 16) & 0xff)]) << 16) ^ (Word(self.sbox[Int((r2 >> 24) & 0xff)]) << 24) ^
+            subkeys[round][3]
     }
 }
 
 extension AesEngine {
-    func decryptBlock(subkeys: [[Byte]], input: [Byte], inputOffset: Int, output: inout [Byte], outputOffset: Int) throws {
-        var state = self.toState(input: input, offset: inputOffset)
-        let lastRound = self.countLastRound(subkeyCount: subkeys.count)
+    func decryptBlock(subkeys: [[Word]], input: [Byte], inputOffset: Int, output: inout [Byte], outputOffset: Int) throws {
+        let inputWords = input.withUnsafeBytes({ $0 }).baseAddress!.advanced(by: inputOffset).assumingMemoryBound(to: Word.self)
+        var round = self.rounds!
+        var t0 = inputWords[0] ^ subkeys[round][0]
+        var t1 = inputWords[1] ^ subkeys[round][1]
+        var t2 = inputWords[2] ^ subkeys[round][2]
+        var r0: Word = 0
+        var r1: Word = 0
+        var r2: Word = 0
+        var r3 = inputWords[3] ^ subkeys[round][3]
         
-        self.addRoundKey(state: &state, keys: subkeys, round: lastRound)
-        self.inverseShiftRows(state: &state)
-        self.inverseByteSubstitution(state: &state)
-        
-        for round in (1..<lastRound).reversed() {
-            self.addRoundKey(state: &state, keys: subkeys, round: round)
-            self.inverseMixColumn(state: &state)
-            self.inverseShiftRows(state: &state)
-            self.inverseByteSubstitution(state: &state)
+        round -= 1
+        while round > 1 {
+            r0 = self.tinv[Int(t0 & 0xff)] ^
+                self.rightRotate(word: self.tinv[Int((r3 >> 8) & 0xff)], shift: 24) ^
+                self.rightRotate(word: self.tinv[Int((t2 >> 16) & 0xff)], shift: 16) ^
+                self.rightRotate(word: self.tinv[Int((t1 >> 24) & 0xff)], shift: 8) ^
+                subkeys[round][0]
+            r1 = self.tinv[Int(t1 & 0xff)] ^
+                self.rightRotate(word: self.tinv[Int((t0 >> 8) & 0xff)], shift: 24) ^
+                self.rightRotate(word: self.tinv[Int((r3 >> 16) & 0xff)], shift: 16) ^
+                self.rightRotate(word: self.tinv[Int((t2 >> 24) & 0xff)], shift: 8) ^
+                subkeys[round][1]
+            r2 = self.tinv[Int(t2 & 0xff)] ^
+                self.rightRotate(word: self.tinv[Int((t1 >> 8) & 0xff)], shift: 24) ^
+                self.rightRotate(word: self.tinv[Int((t0 >> 16) & 0xff)], shift: 16) ^
+                self.rightRotate(word: self.tinv[Int((r3 >> 24) & 0xff)], shift: 8) ^
+                subkeys[round][2]
+            r3 = self.tinv[Int(r3 & 0xff)] ^
+                self.rightRotate(word: self.tinv[Int((t2 >> 8) & 0xff)], shift: 24) ^
+                self.rightRotate(word: self.tinv[Int((t1 >> 16) & 0xff)], shift: 16) ^
+                self.rightRotate(word: self.tinv[Int((t0 >> 24) & 0xff)], shift: 8) ^
+                subkeys[round][3]
+            round -= 1
+            t0 = self.tinv[Int(r0 & 0xff)] ^
+                self.rightRotate(word: self.tinv[Int((r3 >> 8) & 0xff)], shift: 24) ^
+                self.rightRotate(word: self.tinv[Int((r2 >> 16) & 0xff)], shift: 16) ^
+                self.rightRotate(word: self.tinv[Int((r1 >> 24) & 0xff)], shift: 8) ^
+                subkeys[round][0]
+            t1 = self.tinv[Int(r1 & 0xff)] ^
+                self.rightRotate(word: self.tinv[Int((r0 >> 8) & 0xff)], shift: 24) ^
+                self.rightRotate(word: self.tinv[Int((r3 >> 16) & 0xff)], shift: 16) ^
+                self.rightRotate(word: self.tinv[Int((r2 >> 24) & 0xff)], shift: 8) ^
+                subkeys[round][1]
+            t2 = self.tinv[Int(r2 & 0xff)] ^
+                self.rightRotate(word: self.tinv[Int((r1 >> 8) & 0xff)], shift: 24) ^
+                self.rightRotate(word: self.tinv[Int((r0 >> 16) & 0xff)], shift: 16) ^
+                self.rightRotate(word: self.tinv[Int((r3 >> 24) & 0xff)], shift: 8) ^
+                subkeys[round][2]
+            r3 = self.tinv[Int(r3 & 0xff)] ^
+                self.rightRotate(word: self.tinv[Int((r2 >> 8) & 0xff)], shift: 24) ^
+                self.rightRotate(word: self.tinv[Int((r1 >> 16) & 0xff)], shift: 16) ^
+                self.rightRotate(word: self.tinv[Int((r0 >> 24) & 0xff)], shift: 8) ^
+                subkeys[round][3]
+            round -= 1
         }
         
-        self.addRoundKey(state: &state, keys: subkeys, round: 0)
+        r0 = self.tinv[Int(t0 & 0xff)] ^
+            self.rightRotate(word: self.tinv[Int((r3 >> 8) & 0xff)], shift: 24) ^
+            self.rightRotate(word: self.tinv[Int((t2 >> 16) & 0xff)], shift: 16) ^
+            self.rightRotate(word: self.tinv[Int((t1 >> 24) & 0xff)], shift: 8) ^
+            subkeys[1][0]
+        r1 = self.tinv[Int(t1 & 0xff)] ^
+            self.rightRotate(word: self.tinv[Int((t0 >> 8) & 0xff)], shift: 24) ^
+            self.rightRotate(word: self.tinv[Int((r3 >> 16) & 0xff)], shift: 16) ^
+            self.rightRotate(word: self.tinv[Int((t2 >> 24) & 0xff)], shift: 8) ^
+            subkeys[1][1]
+        r2 = self.tinv[Int(t2 & 0xff)] ^
+            self.rightRotate(word: self.tinv[Int((t1 >> 8) & 0xff)], shift: 24) ^
+            self.rightRotate(word: self.tinv[Int((t0 >> 16) & 0xff)], shift: 16) ^
+            self.rightRotate(word: self.tinv[Int((r3 >> 24) & 0xff)], shift: 8) ^
+            subkeys[1][2]
+        r3 = self.tinv[Int(r3 & 0xff)] ^
+            self.rightRotate(word: self.tinv[Int((t2 >> 8) & 0xff)], shift: 24) ^
+            self.rightRotate(word: self.tinv[Int((t1 >> 16) & 0xff)], shift: 16) ^
+            self.rightRotate(word: self.tinv[Int((t0 >> 24) & 0xff)], shift: 8) ^
+            subkeys[1][3]
         
-        self.fromState(state: state, output: &output, offset: outputOffset)
-    }
-    
-    private func inverseShiftRows(state: inout [[Byte]]) {
-        rightRotateWord(input: &state[1], shiftBits: 8)
-        rightRotateWord(input: &state[2], shiftBits: 16)
-        rightRotateWord(input: &state[3], shiftBits: 24)
-    }
-    
-    private func inverseByteSubstitution(state: inout [[Byte]]) {
-        for row in 0..<4 {
-            for col in 0..<4 {
-                state[row][col] = self.invSbox[Int(state[row][col])]
-            }
-        }
-    }
-    
-    private func inverseMixColumn(state: inout [[Byte]]) {
-        for col in 0..<4 {
-            let value = [Int(state[0][col]), Int(state[1][col]), Int(state[2][col]), Int(state[3][col])]
-            state[0][col] = self.polymulE[value[0]] ^ self.polymulB[value[1]] ^ self.polymulD[value[2]] ^ self.polymul9[value[3]]
-            state[1][col] = self.polymul9[value[0]] ^ self.polymulE[value[1]] ^ self.polymulB[value[2]] ^ self.polymulD[value[3]]
-            state[2][col] = self.polymulD[value[0]] ^ self.polymul9[value[1]] ^ self.polymulE[value[2]] ^ self.polymulB[value[3]]
-            state[3][col] = self.polymulB[value[0]] ^ self.polymulD[value[1]] ^ self.polymul9[value[2]] ^ self.polymulE[value[3]]
-        }
+        let outputWords = output.withUnsafeMutableBytes({ $0 }).baseAddress!.advanced(by: outputOffset).assumingMemoryBound(to: Word.self)
+        
+        outputWords[0] = Word(self.invSbox[Int(r0 & 0xff)]) ^ (Word(self.invSbox[Int((r3 >> 8) & 0xff)]) << 8) ^
+            (Word(self.invSbox[Int((r2 >> 16) & 0xff)]) << 16) ^ (Word(self.invSbox[Int((r1 >> 24) & 0xff)]) << 24) ^
+            subkeys[0][0]
+        outputWords[1] = Word(self.invSbox[Int(r1 & 0xff)]) ^ (Word(self.invSbox[Int((r0 >> 8) & 0xff)]) << 8) ^
+            (Word(self.invSbox[Int((r3 >> 16) & 0xff)]) << 16) ^ (Word(self.invSbox[Int((r2 >> 24) & 0xff)]) << 24) ^
+            subkeys[0][1]
+        outputWords[2] = Word(self.invSbox[Int(r2 & 0xff)]) ^ (Word(self.invSbox[Int((r1 >> 8) & 0xff)]) << 8) ^
+            (Word(self.invSbox[Int((r0 >> 16) & 0xff)]) << 16) ^ (Word(self.invSbox[Int((r3 >> 24) & 0xff)]) << 24) ^
+            subkeys[0][2]
+        outputWords[3] = Word(self.invSbox[Int(r3 & 0xff)]) ^ (Word(self.invSbox[Int((r2 >> 8) & 0xff)]) << 8) ^
+            (Word(self.invSbox[Int((r1 >> 16) & 0xff)]) << 16) ^ (Word(self.invSbox[Int((r0 >> 24) & 0xff)]) << 24) ^
+            subkeys[0][3]
     }
 }
 
 extension AesEngine {
-    fileprivate func toState(input: [Byte], offset: Int) -> [[Byte]] {
-        return [
-            [input[offset], input[offset + 4], input[offset + 8], input[offset + 12]],
-            [input[offset + 1], input[offset + 5], input[offset + 9], input[offset + 13]],
-            [input[offset + 2], input[offset + 6], input[offset + 10], input[offset + 14]],
-            [input[offset + 3], input[offset + 7], input[offset + 11], input[offset + 15]]
-        ]
-    }
-    
-    fileprivate func fromState(state: [[Byte]], output: inout [Byte], offset: Int) {
-        output[offset] = state[0][0]
-        output[offset + 1] = state[1][0]
-        output[offset + 2] = state[2][0]
-        output[offset + 3] = state[3][0]
-        output[offset + 4] = state[0][1]
-        output[offset + 5] = state[1][1]
-        output[offset + 6] = state[2][1]
-        output[offset + 7] = state[3][1]
-        output[offset + 8] = state[0][2]
-        output[offset + 9] = state[1][2]
-        output[offset + 10] = state[2][2]
-        output[offset + 11] = state[3][2]
-        output[offset + 12] = state[0][3]
-        output[offset + 13] = state[1][3]
-        output[offset + 14] = state[2][3]
-        output[offset + 15] = state[3][3]
-    }
-    
-    fileprivate func countLastRound(subkeyCount: Int) -> Int {
-        return subkeyCount / self.blockWordCount - 1
-    }
-    
-    fileprivate func addRoundKey(state: inout [[Byte]], keys: [[Byte]], round: Int) {
-        var keyIndex = round * self.blockWordCount
-        for stateColumn in 0..<4 {
-            state[0][stateColumn] ^= keys[keyIndex][0]
-            state[1][stateColumn] ^= keys[keyIndex][1]
-            state[2][stateColumn] ^= keys[keyIndex][2]
-            state[3][stateColumn] ^= keys[keyIndex][3]
-            keyIndex += 1
-        }
-    }
-}
-
-extension AesEngine {
-    func keySchedule(key: [Byte]) -> [[Byte]] {
-        let keyWordCount = key.count / self.wordSize
-        var subkeys = [[Byte]](repeating: [Byte](repeating: 0, count: self.wordSize), count: self.blockWordCount * (self.rounds + 1))
+    func keySchedule(processMode: BlockCipher.ProcessMode, key: [Byte]) throws -> [[Word]] {
+        let keyWordCount = key.count >> 2
+        self.rounds = keyWordCount + 6
+        var subkeys: [[Word]]
         
-        for i in 0..<keyWordCount {
-            let from = i * self.wordSize
-            let to = from + self.wordSize
-            subkeys[i] = [Byte](key[from..<to])
+        switch keyWordCount {
+        case 4:
+            subkeys = self.keySchedule128(key: key)
+        case 6:
+            subkeys = self.keySchedule192(key: key)
+        case 8:
+            subkeys = self.keySchedule256(key: key)
+        default:
+            throw CryptoError.illegalKeyLength("Illegal key length. \(self) only supports 128/192/256-bits key length")
         }
         
-        let key256WordCount = KeyLength.key256.rawValue / self.wordSize
-        for i in keyWordCount..<subkeys.count {
-            var index = i
-            if i % keyWordCount == 0 {
-                self.gFunction(word: subkeys[i - 1], round: i / keyWordCount, output: &subkeys[i])
-            } else if keyWordCount == key256WordCount && i % keyWordCount == 4 {
-                self.hFunction(word: subkeys[i - 1], output: &subkeys[i])
-            } else {
-                index = i - 1
+        if processMode == .decryption {
+            for i in 1..<self.rounds {
+                for j in 0..<4 {
+                    subkeys[i][j] = self.invMixColumn(x: subkeys[i][j])
+                }
             }
-            xorWord(input1: subkeys[index], input2: subkeys[i - keyWordCount], output: &subkeys[i])
         }
         
         return subkeys
     }
     
-    private func gFunction(word: [Byte], round: Int, output: inout [Byte]) {
-        output[0] = self.sbox[Int(word[1])] ^ self.rcon[round]
-        output[1] = self.sbox[Int(word[2])]
-        output[2] = self.sbox[Int(word[3])]
-        output[3] = self.sbox[Int(word[0])]
+    fileprivate func rightRotate(word: Word, shift: Word) -> Word {
+        return (word >> shift) | (word << (32 - shift))
     }
     
-    private func hFunction(word: [Byte], output: inout [Byte]) {
-        output[0] = self.sbox[Int(word[0])]
-        output[1] = self.sbox[Int(word[1])]
-        output[2] = self.sbox[Int(word[2])]
-        output[3] = self.sbox[Int(word[3])]
+    private func substitute(word: Word) -> Word {
+        return Word(self.sbox[Int(word & 0xff)]) |
+            (Word(self.sbox[Int((word >> 8) & 0xff)]) << 8) |
+            (Word(self.sbox[Int((word >> 16) & 0xff)]) << 16) |
+            (Word(self.sbox[Int((word >> 24) & 0xff)]) << 24)
+    }
+    
+    private func invMixColumn(x: Word) -> Word {
+        var t0 = x
+        var t1 = t0 ^ rightRotate(word: t0, shift: 8)
+        t0 ^= self.ffmulx(x: t1)
+        t1 ^= self.ffmulx2(x: t0)
+        t0 ^= t1 ^ rightRotate(word: t1, shift: 16)
+        return t0
+    }
+    
+    private func ffmulx(x: Word) -> Word {
+        return ((x & self.m2) << 1) ^ (((x & self.m1) >> 7) * self.m3)
+    }
+    
+    private func ffmulx2(x: Word) -> Word {
+        let t0 = (x & self.m5) << 2
+        var t1 = x & self.m4
+        t1 ^= t1 >> 1
+        return t0 ^ (t1 >> 2) ^ (t1 >> 5)
+    }
+    
+    private func keySchedule128(key: [Byte]) -> [[Word]] {
+        var subkeys = [[Word]](repeating: [Word](repeating: 0, count: 4), count: self.rounds + 1)
+        let keyWords = key.withUnsafeBytes({ $0 }).baseAddress!.assumingMemoryBound(to: Word.self)
+        
+        var w0: Word = keyWords[0]
+        var w1: Word = keyWords[1]
+        var w2: Word = keyWords[2]
+        var w3: Word = keyWords[3]
+        subkeys[0][0] = w0
+        subkeys[0][1] = w1
+        subkeys[0][2] = w2
+        subkeys[0][3] = w3
+        
+        for i in 1...10 {
+            let tmp = self.substitute(word: rightRotate(word: w3, shift: 8)) ^ Word(self.rcon[i])
+            w0 ^= tmp
+            w1 ^= w0
+            w2 ^= w1
+            w3 ^= w2
+            subkeys[i][0] = w0
+            subkeys[i][1] = w1
+            subkeys[i][2] = w2
+            subkeys[i][3] = w3
+        }
+        
+        return subkeys
+    }
+    
+    private func keySchedule192(key: [Byte]) -> [[Word]] {
+        var subkeys = [[Word]](repeating: [Word](repeating: 0, count: 4), count: self.rounds + 1)
+        let keyWords = key.withUnsafeBytes({ $0 }).baseAddress!.assumingMemoryBound(to: Word.self)
+        
+        var w0: Word = keyWords[0]
+        var w1: Word = keyWords[1]
+        var w2: Word = keyWords[2]
+        var w3: Word = keyWords[3]
+        var w4: Word = keyWords[4]
+        var w5: Word = keyWords[5]
+        subkeys[0][0] = w0
+        subkeys[0][1] = w1
+        subkeys[0][2] = w2
+        subkeys[0][3] = w3
+        subkeys[1][0] = w4
+        subkeys[1][1] = w5
+        
+        var rcon: Word = 1
+        var tmp = self.substitute(word: rightRotate(word: w5, shift: 8)) ^ rcon
+        rcon <<= 1
+        w0 ^= tmp
+        w1 ^= w0
+        w2 ^= w1
+        w3 ^= w2
+        w4 ^= w3
+        w5 ^= w4
+        subkeys[1][2] = w0
+        subkeys[1][3] = w1
+        subkeys[2][0] = w2
+        subkeys[2][1] = w3
+        subkeys[2][2] = w4
+        subkeys[2][3] = w5
+        
+        var i = 3
+        while i < 12 {
+            tmp = self.substitute(word: rightRotate(word: w5, shift: 8)) ^ rcon
+            rcon <<= 1
+            w0 ^= tmp
+            w1 ^= w0
+            w2 ^= w1
+            w3 ^= w2
+            w4 ^= w3
+            w5 ^= w4
+            subkeys[i][0] = w0
+            subkeys[i][1] = w1
+            subkeys[i][2] = w2
+            subkeys[i][3] = w3
+            i += 1
+            subkeys[i][0] = w4
+            subkeys[i][1] = w5
+            
+            tmp = self.substitute(word: rightRotate(word: w5, shift: 8)) ^ rcon
+            rcon <<= 1
+            w0 ^= tmp
+            w1 ^= w0
+            w2 ^= w1
+            w3 ^= w2
+            w4 ^= w3
+            w5 ^= w4
+            subkeys[i][2] = w0
+            subkeys[i][3] = w1
+            i += 1
+            subkeys[i][0] = w2
+            subkeys[i][1] = w3
+            subkeys[i][2] = w4
+            subkeys[i][3] = w5
+
+            i += 1
+        }
+        
+        tmp = self.substitute(word: rightRotate(word: w5, shift: 8)) ^ rcon
+        w0 ^= tmp
+        w1 ^= w0
+        w2 ^= w1
+        w3 ^= w2
+        subkeys[12][0] = w0
+        subkeys[12][1] = w1
+        subkeys[12][2] = w2
+        subkeys[12][3] = w3
+        
+        return subkeys
+    }
+    
+    private func keySchedule256(key: [Byte]) -> [[Word]] {
+        var subkeys = [[Word]](repeating: [Word](repeating: 0, count: 4), count: self.rounds + 1)
+        let keyWords = key.withUnsafeBytes({ $0 }).baseAddress!.assumingMemoryBound(to: Word.self)
+        
+        var w0: Word = keyWords[0]
+        var w1: Word = keyWords[1]
+        var w2: Word = keyWords[2]
+        var w3: Word = keyWords[3]
+        var w4: Word = keyWords[4]
+        var w5: Word = keyWords[5]
+        var w6: Word = keyWords[6]
+        var w7: Word = keyWords[7]
+        subkeys[0][0] = w0
+        subkeys[0][1] = w1
+        subkeys[0][2] = w2
+        subkeys[0][3] = w3
+        subkeys[1][0] = w4
+        subkeys[1][1] = w5
+        subkeys[1][2] = w6
+        subkeys[1][3] = w7
+        
+        var rcon: Word = 1
+        var i = 2
+        while i < 14 {
+            var tmp = substitute(word: rightRotate(word: w7, shift: 8)) ^ rcon
+            rcon <<= 1
+            w0 ^= tmp
+            w1 ^= w0
+            w2 ^= w1
+            w3 ^= w2
+            tmp = substitute(word: w3)
+            w4 ^= tmp
+            w5 ^= w4
+            w6 ^= w5
+            w7 ^= w6
+            
+            subkeys[i][0] = w0
+            subkeys[i][1] = w1
+            subkeys[i][2] = w2
+            subkeys[i][3] = w3
+            i += 1
+            subkeys[i][0] = w4
+            subkeys[i][1] = w5
+            subkeys[i][2] = w6
+            subkeys[i][3] = w7
+            i += 1
+        }
+        
+        let tmp = substitute(word: rightRotate(word: w7, shift: 8)) ^ rcon
+        w0 ^= tmp
+        w1 ^= w0
+        w2 ^= w1
+        w3 ^= w2
+        subkeys[14][0] = w0
+        subkeys[14][1] = w1
+        subkeys[14][2] = w2
+        subkeys[14][3] = w3
+        
+        return subkeys
     }
 }

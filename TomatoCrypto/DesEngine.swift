@@ -1,5 +1,11 @@
 import Foundation
 
+/**
+ * An implementation of DES.
+ * 
+ * This implementation is based on a book called Understanding Cryptography,
+ * so the code is easy to read, but the performance is slow.
+ */
 public class DesEngine: BlockCipherEngine {
     fileprivate let keyLength = 8
     fileprivate let blockLength = 8
