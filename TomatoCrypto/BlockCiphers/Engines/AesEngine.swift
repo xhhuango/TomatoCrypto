@@ -1,15 +1,15 @@
 import Foundation
 
 /**
- * An AES implementation ported from BouncyCastle's AESEngine (http://www.bouncycastle.org/)
- * and Java code (https://github.com/bcgit/bc-java/blob/master/core/src/main/java/org/bouncycastle/crypto/engines/AESEngine.java)
- * which is based on optimizations from Dr. Brian Gladman's paper.
+ * An AES implementation is ported from BouncyCastle's AESEngine (http://www.bouncycastle.org/),
+ * which is based on optimizations from Dr. Brian Gladman's paper (http://www.gladman.me.uk/AES)
  */
+
 public class AesEngine: BlockCipherEngine {
     fileprivate let blockLength = 16
     
     fileprivate let rcon: [Byte] = [
-        0x00, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36,
+        0x00, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36
     ]
     
     fileprivate let sbox: [Byte] = [
