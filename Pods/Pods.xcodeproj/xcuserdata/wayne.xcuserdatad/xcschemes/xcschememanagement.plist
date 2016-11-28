@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>BigInt.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-TomatoCrypto.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-TomatoCryptoTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SipHash.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>43FEBDCB2B657077BCF2906919B4267D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6CA28E5940E09F6CFD9BEC3BB70E8CFB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A9217BDB0DA319ACEEE5DEFB7524BCC1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EFCC82E3A2141C948652BEEDB1AAC8C7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

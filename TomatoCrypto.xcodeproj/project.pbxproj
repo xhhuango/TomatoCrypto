@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15F9E13262D04C5530998FB2 /* Pods_TomatoCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5468AB9116995485E8F1523 /* Pods_TomatoCrypto.framework */; };
+		3E1034B2B11B54DB4ED46F21 /* Pods_TomatoCryptoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC1AB8397185B6E988F379B /* Pods_TomatoCryptoTests.framework */; };
 		B02D6A081DE6F6F300878809 /* BlockCipherEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A071DE6F6F300878809 /* BlockCipherEngine.swift */; };
 		B02D6A0C1DE6F7F400878809 /* EcbMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A0B1DE6F7F400878809 /* EcbMode.swift */; };
 		B02D6A0E1DE6FC2300878809 /* BlockCipherMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A0D1DE6FC2300878809 /* BlockCipherMode.swift */; };
@@ -53,6 +55,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		01C523649BAB450BA7E6F415 /* Pods-TomatoCryptoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomatoCryptoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TomatoCryptoTests/Pods-TomatoCryptoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7EC1AB8397185B6E988F379B /* Pods_TomatoCryptoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TomatoCryptoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F47383294C6EC608D58C907 /* Pods-TomatoCrypto.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomatoCrypto.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TomatoCrypto/Pods-TomatoCrypto.debug.xcconfig"; sourceTree = "<group>"; };
 		B02D6A071DE6F6F300878809 /* BlockCipherEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockCipherEngine.swift; sourceTree = "<group>"; };
 		B02D6A0B1DE6F7F400878809 /* EcbMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EcbMode.swift; sourceTree = "<group>"; };
 		B02D6A0D1DE6FC2300878809 /* BlockCipherMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockCipherMode.swift; sourceTree = "<group>"; };
@@ -89,6 +94,9 @@
 		B09192371DE599DF00B5A760 /* StringTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
 		B09192391DE59C1100B5A760 /* Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
 		B0A1A6E61DEAE496008BEE5F /* AesEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AesEngineTests.swift; sourceTree = "<group>"; };
+		B5468AB9116995485E8F1523 /* Pods_TomatoCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TomatoCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCAAAF4B0FB6804B7AE1D784 /* Pods-TomatoCrypto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomatoCrypto.release.xcconfig"; path = "Pods/Target Support Files/Pods-TomatoCrypto/Pods-TomatoCrypto.release.xcconfig"; sourceTree = "<group>"; };
+		E68DF89913A2B70A65AF3EFB /* Pods-TomatoCryptoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomatoCryptoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TomatoCryptoTests/Pods-TomatoCryptoTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15F9E13262D04C5530998FB2 /* Pods_TomatoCrypto.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,12 +113,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				B09192171DE598A600B5A760 /* TomatoCrypto.framework in Frameworks */,
+				3E1034B2B11B54DB4ED46F21 /* Pods_TomatoCryptoTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E1DF2C23DE982757DFFE6A0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9F47383294C6EC608D58C907 /* Pods-TomatoCrypto.debug.xcconfig */,
+				BCAAAF4B0FB6804B7AE1D784 /* Pods-TomatoCrypto.release.xcconfig */,
+				01C523649BAB450BA7E6F415 /* Pods-TomatoCryptoTests.debug.xcconfig */,
+				E68DF89913A2B70A65AF3EFB /* Pods-TomatoCryptoTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		53963A179B2FFBD287E9CD11 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B5468AB9116995485E8F1523 /* Pods_TomatoCrypto.framework */,
+				7EC1AB8397185B6E988F379B /* Pods_TomatoCryptoTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B02D6A061DE6F6CC00878809 /* BlockCiphers */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,6 +228,8 @@
 				B091920F1DE598A500B5A760 /* TomatoCrypto */,
 				B091921A1DE598A600B5A760 /* TomatoCryptoTests */,
 				B091920E1DE598A500B5A760 /* Products */,
+				3E1DF2C23DE982757DFFE6A0 /* Pods */,
+				53963A179B2FFBD287E9CD11 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -292,10 +324,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B09192211DE598A600B5A760 /* Build configuration list for PBXNativeTarget "TomatoCrypto" */;
 			buildPhases = (
+				A85B32F2E6D40E0162671FAC /* [CP] Check Pods Manifest.lock */,
 				B09192081DE598A300B5A760 /* Sources */,
 				B09192091DE598A300B5A760 /* Frameworks */,
 				B091920A1DE598A300B5A760 /* Headers */,
 				B091920B1DE598A300B5A760 /* Resources */,
+				A9C9EC867F5116E6EEA41D4E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -310,9 +344,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B09192241DE598A600B5A760 /* Build configuration list for PBXNativeTarget "TomatoCryptoTests" */;
 			buildPhases = (
+				03956A225CD18DF70951CEAD /* [CP] Check Pods Manifest.lock */,
 				B09192121DE598A600B5A760 /* Sources */,
 				B09192131DE598A600B5A760 /* Frameworks */,
 				B09192141DE598A600B5A760 /* Resources */,
+				5ABB6172190936DAEFCEADF6 /* [CP] Embed Pods Frameworks */,
+				7F42740CAF75B044DC1E46FF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -379,6 +416,84 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		03956A225CD18DF70951CEAD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5ABB6172190936DAEFCEADF6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TomatoCryptoTests/Pods-TomatoCryptoTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7F42740CAF75B044DC1E46FF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TomatoCryptoTests/Pods-TomatoCryptoTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A85B32F2E6D40E0162671FAC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A9C9EC867F5116E6EEA41D4E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TomatoCrypto/Pods-TomatoCrypto-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B09192081DE598A300B5A760 /* Sources */ = {
@@ -538,6 +653,7 @@
 		};
 		B09192221DE598A600B5A760 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F47383294C6EC608D58C907 /* Pods-TomatoCrypto.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -558,6 +674,7 @@
 		};
 		B09192231DE598A600B5A760 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BCAAAF4B0FB6804B7AE1D784 /* Pods-TomatoCrypto.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -577,6 +694,7 @@
 		};
 		B09192251DE598A600B5A760 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 01C523649BAB450BA7E6F415 /* Pods-TomatoCryptoTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = TomatoCryptoTests/Info.plist;
@@ -589,6 +707,7 @@
 		};
 		B09192261DE598A600B5A760 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E68DF89913A2B70A65AF3EFB /* Pods-TomatoCryptoTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = TomatoCryptoTests/Info.plist;
