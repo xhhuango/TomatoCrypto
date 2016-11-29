@@ -1,9 +1,3 @@
-import Foundation
-
-public struct SecretKey {
-    public let bytes: [Byte]
-    
-    public init(bytes: [Byte]) {
-        self.bytes = bytes
-    }
+public protocol SecretKey {
+    var bytes: [Byte] { get }
 }

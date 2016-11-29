@@ -1,5 +1,3 @@
-import Foundation
-
 public enum CryptoError: Error {
     case illegalKeyLength(String)
     case illegalBlockSize(String)

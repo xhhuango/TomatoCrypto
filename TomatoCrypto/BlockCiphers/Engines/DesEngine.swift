@@ -1,5 +1,3 @@
-import Foundation
-
 /**
  * An implementation of DES.
  * 

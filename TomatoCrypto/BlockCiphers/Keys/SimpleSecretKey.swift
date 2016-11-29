@@ -1,4 +1,4 @@
-public struct IvParameter: BlockCipherParameter {
+public struct SimpleSecretKey: SecretKey {
     public let bytes: [Byte]
     
     public init(bytes: [Byte]) {

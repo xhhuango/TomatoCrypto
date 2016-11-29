@@ -128,7 +128,7 @@ class DesEngineTests: XCTestCase {
     }
     
     func testEncryptBlock() {
-        let key = SecretKey(bytes: hexToBytes(hex: "123456789ABCDEF0"))
+        let key = SimpleSecretKey(bytes: hexToBytes(hex: "123456789ABCDEF0"))
         let plain = "0000000000000000"
         let cipher = "948A43F98A834F7E"
         
@@ -144,7 +144,7 @@ class DesEngineTests: XCTestCase {
     }
     
     func testDecryptBlock() {
-        let key = SecretKey(bytes: hexToBytes(hex: "123456789ABCDEF0"))
+        let key = SimpleSecretKey(bytes: hexToBytes(hex: "123456789ABCDEF0"))
         let plain = "0000000000000000"
         let cipher = "948A43F98A834F7E"
         

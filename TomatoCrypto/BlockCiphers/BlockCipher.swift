@@ -1,5 +1,3 @@
-import Foundation
-
 public class BlockCipher {
     public enum ProcessMode {
         case encryption

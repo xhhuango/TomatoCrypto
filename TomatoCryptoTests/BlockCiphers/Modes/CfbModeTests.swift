@@ -11,7 +11,7 @@ class CfbModeTests: XCTestCase {
     }
     
     func testAes128() {
-        let key = SecretKey(bytes: hexToBytes(hex: "2b7e151628aed2a6abf7158809cf4f3c"))
+        let key = SimpleSecretKey(bytes: hexToBytes(hex: "2b7e151628aed2a6abf7158809cf4f3c"))
         let iv = IvParameter(bytes: hexToBytes(hex: "000102030405060708090a0b0c0d0e0f"))
         let plaintext = hexToBytes(hex: "6bc1bee22e409f96e93d7e117393172a" + "ae2d8a571e03ac9c9eb76fac45af8e51" +
                                         "30c81c46a35ce411e5fbc1191a0a52ef" + "f69f2445df4f9b17ad2b417be66c3710")

@@ -28,7 +28,7 @@ class AesEngineTests: XCTestCase {
         
         do {
             let engine = AesEngine()
-            try engine.initialize(processMode: .encryption, key: SecretKey(bytes: stringToBytes(string: key)))
+            try engine.initialize(processMode: .encryption, key: SimpleSecretKey(bytes: stringToBytes(string: key)))
             
             var engineSubkeyStrngs: [String] = []
             for engineSubkey in engine.subkeys {
@@ -62,7 +62,7 @@ class AesEngineTests: XCTestCase {
         
         do {
             let engine = AesEngine()
-            try engine.initialize(processMode: .encryption, key: SecretKey(bytes: stringToBytes(string: key)))
+            try engine.initialize(processMode: .encryption, key: SimpleSecretKey(bytes: stringToBytes(string: key)))
             
             var engineSubkeyStrngs: [String] = []
             for engineSubkey in engine.subkeys {
@@ -98,7 +98,7 @@ class AesEngineTests: XCTestCase {
         
         do {
             let engine = AesEngine()
-            try engine.initialize(processMode: .encryption, key: SecretKey(bytes: stringToBytes(string: key)))
+            try engine.initialize(processMode: .encryption, key: SimpleSecretKey(bytes: stringToBytes(string: key)))
             
             var engineSubkeyStrngs: [String] = []
             for engineSubkey in engine.subkeys {
@@ -119,7 +119,7 @@ class AesEngineTests: XCTestCase {
         
         do {
             let aes = AesEngine()
-            try aes.initialize(processMode: .encryption, key: SecretKey(bytes: stringToBytes(string: key)))
+            try aes.initialize(processMode: .encryption, key: SimpleSecretKey(bytes: stringToBytes(string: key)))
             var encrypted = [Byte](repeating: 0, count: aes.blockSize)
             try aes.processBlock(input: hexToBytes(hex: plaintext), inputOffset: 0, output: &encrypted, outputOffset: 0)
             XCTAssertEqual(encrypted, hexToBytes(hex: ciphertext))
@@ -136,7 +136,7 @@ class AesEngineTests: XCTestCase {
         
         do {
             let aes = AesEngine()
-            try aes.initialize(processMode: .encryption, key: SecretKey(bytes: stringToBytes(string: key)))
+            try aes.initialize(processMode: .encryption, key: SimpleSecretKey(bytes: stringToBytes(string: key)))
             var encrypted = [Byte](repeating: 0, count: aes.blockSize)
             try aes.processBlock(input: hexToBytes(hex: plaintext), inputOffset: 0, output: &encrypted, outputOffset: 0)
             XCTAssertEqual(encrypted, hexToBytes(hex: ciphertext))
@@ -152,7 +152,7 @@ class AesEngineTests: XCTestCase {
         
         do {
             let aes = AesEngine()
-            try aes.initialize(processMode: .encryption, key: SecretKey(bytes: stringToBytes(string: key)))
+            try aes.initialize(processMode: .encryption, key: SimpleSecretKey(bytes: stringToBytes(string: key)))
             var encrypted = [Byte](repeating: 0, count: aes.blockSize)
             try aes.processBlock(input: hexToBytes(hex: plaintext), inputOffset: 0, output: &encrypted, outputOffset: 0)
             XCTAssertEqual(encrypted, hexToBytes(hex: ciphertext))
@@ -162,7 +162,7 @@ class AesEngineTests: XCTestCase {
     }
     
     func testDecryptBlock128() {
-        let key = SecretKey(bytes: stringToBytes(string: "kWmHe8xIsDpfzK4d"))
+        let key = SimpleSecretKey(bytes: stringToBytes(string: "kWmHe8xIsDpfzK4d"))
         let plaintext = "Hey, Hello world"
         
         let plaintextBytes = stringToBytes(string: plaintext)
@@ -184,7 +184,7 @@ class AesEngineTests: XCTestCase {
     }
     
     func testDecryptBlock192() {
-        let key = SecretKey(bytes: stringToBytes(string: "kWmHe8xIsDpfzK4dqwertyui"))
+        let key = SimpleSecretKey(bytes: stringToBytes(string: "kWmHe8xIsDpfzK4dqwertyui"))
         let plaintext = "Hey, Hello world"
         
         let plaintextBytes = stringToBytes(string: plaintext)
@@ -206,7 +206,7 @@ class AesEngineTests: XCTestCase {
     }
     
     func testDecryptBlock256() {
-        let key = SecretKey(bytes: stringToBytes(string: "kWmHe8xIsDpfzK4dqwertyuiasdfghjk"))
+        let key = SimpleSecretKey(bytes: stringToBytes(string: "kWmHe8xIsDpfzK4dqwertyuiasdfghjk"))
         let plaintext = "Hey, Hello world"
         
         let plaintextBytes = stringToBytes(string: plaintext)
@@ -235,7 +235,7 @@ class AesEngineTests: XCTestCase {
             
             do {
                 let aes = AesEngine()
-                try aes.initialize(processMode: .encryption, key: SecretKey(bytes: stringToBytes(string: key)))
+                try aes.initialize(processMode: .encryption, key: SimpleSecretKey(bytes: stringToBytes(string: key)))
                 var encrypted = [Byte](repeating: 0, count: aes.blockSize)
                 try aes.processBlock(input: hexToBytes(hex: plaintext), inputOffset: 0, output: &encrypted, outputOffset: 0)
                 XCTAssertEqual(encrypted, hexToBytes(hex: ciphertext))

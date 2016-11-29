@@ -1,5 +1,3 @@
-import Foundation
-
 import BigInt
 
 public class RsaEngine {

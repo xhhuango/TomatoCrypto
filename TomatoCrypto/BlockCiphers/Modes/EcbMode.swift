@@ -1,5 +1,3 @@
-import Foundation
-
 public class EcbMode: BlockCipherMode {
     private var engine: BlockCipherEngine!
     

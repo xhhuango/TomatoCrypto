@@ -1,5 +1,3 @@
-import Foundation
-
 func xor(input1: UnsafePointer<Byte>,
          offset1: Int,
          input2: UnsafePointer<Byte>,

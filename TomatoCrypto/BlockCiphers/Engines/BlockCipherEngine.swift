@@ -1,5 +1,3 @@
-import Foundation
-
 public protocol BlockCipherEngine {
     var blockSize: Int { get }
     

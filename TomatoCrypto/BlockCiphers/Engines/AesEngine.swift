@@ -1,5 +1,3 @@
-import Foundation
-
 /**
  * An AES implementation is ported from BouncyCastle's AESEngine (http://www.bouncycastle.org/),
  * which is based on optimizations from Dr. Brian Gladman's paper (http://www.gladman.me.uk/AES)

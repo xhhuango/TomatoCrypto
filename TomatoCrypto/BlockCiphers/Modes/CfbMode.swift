@@ -1,5 +1,3 @@
-import Foundation
-
 public class CfbMode: BlockCipherMode {
     private var processMode: BlockCipher.ProcessMode!
     private var engine: BlockCipherEngine!

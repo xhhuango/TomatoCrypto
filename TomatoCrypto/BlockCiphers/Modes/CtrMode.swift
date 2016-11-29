@@ -1,5 +1,3 @@
-import Foundation
-
 public class CtrMode: BlockCipherMode {
     private var engine: BlockCipherEngine!
     private var iv: [Byte]!

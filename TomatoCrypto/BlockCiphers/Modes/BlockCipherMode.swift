@@ -1,5 +1,3 @@
-import Foundation
-
 public protocol BlockCipherMode {
     func initialize(processMode: BlockCipher.ProcessMode,
                     engine: BlockCipherEngine,

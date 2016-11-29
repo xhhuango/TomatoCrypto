@@ -1,5 +1,3 @@
-import Foundation
-
 func bytesToHex(bytes: UnsafePointer<Byte>, count: Int) -> String {
     let table = [Character]("0123456789ABCDEF".characters)
     var string = String()
