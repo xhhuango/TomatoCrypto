@@ -30,6 +30,8 @@
 		B02D6A341DE78B6A00878809 /* OfbModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A331DE78B6A00878809 /* OfbModeTests.swift */; };
 		B02D6A361DE794AC00878809 /* CfbMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A351DE794AC00878809 /* CfbMode.swift */; };
 		B02D6A381DE7970C00878809 /* CfbModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A371DE7970C00878809 /* CfbModeTests.swift */; };
+		B0302FA01DECD95400E402CE /* RsaEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0302F9F1DECD95400E402CE /* RsaEngine.swift */; };
+		B0302FA41DECDC2500E402CE /* RsaEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0302FA31DECDC2500E402CE /* RsaEngineTests.swift */; };
 		B03C051C1DE82E4C00DB05AC /* CtrMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03C051B1DE82E4C00DB05AC /* CtrMode.swift */; };
 		B03C051E1DE835EC00DB05AC /* CtrModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03C051D1DE835EC00DB05AC /* CtrModeTests.swift */; };
 		B077F2ED1DE9DD2A00EA89B6 /* AesSlowEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B077F2EC1DE9DD2A00EA89B6 /* AesSlowEngine.swift */; };
@@ -79,6 +81,8 @@
 		B02D6A331DE78B6A00878809 /* OfbModeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfbModeTests.swift; sourceTree = "<group>"; };
 		B02D6A351DE794AC00878809 /* CfbMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CfbMode.swift; sourceTree = "<group>"; };
 		B02D6A371DE7970C00878809 /* CfbModeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CfbModeTests.swift; sourceTree = "<group>"; };
+		B0302F9F1DECD95400E402CE /* RsaEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RsaEngine.swift; sourceTree = "<group>"; };
+		B0302FA31DECDC2500E402CE /* RsaEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RsaEngineTests.swift; sourceTree = "<group>"; };
 		B03C051B1DE82E4C00DB05AC /* CtrMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CtrMode.swift; sourceTree = "<group>"; };
 		B03C051D1DE835EC00DB05AC /* CtrModeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CtrModeTests.swift; sourceTree = "<group>"; };
 		B077F2EC1DE9DD2A00EA89B6 /* AesSlowEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AesSlowEngine.swift; sourceTree = "<group>"; };
@@ -218,8 +222,34 @@
 		B0302F8F1DEC7CCC00E402CE /* AsymmetricBlockCipher */ = {
 			isa = PBXGroup;
 			children = (
+				B0302F9E1DECD93A00E402CE /* Engines */,
 			);
 			name = AsymmetricBlockCipher;
+			path = AsymmetricBlockCiphers;
+			sourceTree = "<group>";
+		};
+		B0302F9E1DECD93A00E402CE /* Engines */ = {
+			isa = PBXGroup;
+			children = (
+				B0302F9F1DECD95400E402CE /* RsaEngine.swift */,
+			);
+			path = Engines;
+			sourceTree = "<group>";
+		};
+		B0302FA11DECDBD300E402CE /* AsymmetricBlockCipher */ = {
+			isa = PBXGroup;
+			children = (
+				B0302FA21DECDBE200E402CE /* Engines */,
+			);
+			path = AsymmetricBlockCipher;
+			sourceTree = "<group>";
+		};
+		B0302FA21DECDBE200E402CE /* Engines */ = {
+			isa = PBXGroup;
+			children = (
+				B0302FA31DECDC2500E402CE /* RsaEngineTests.swift */,
+			);
+			path = Engines;
 			sourceTree = "<group>";
 		};
 		B09192031DE598A300B5A760 = {
@@ -259,6 +289,7 @@
 			children = (
 				B091922C1DE5999C00B5A760 /* Common */,
 				B091922A1DE5997E00B5A760 /* BlockCipher */,
+				B0302FA11DECDBD300E402CE /* AsymmetricBlockCipher */,
 				B091921D1DE598A600B5A760 /* Info.plist */,
 			);
 			path = TomatoCryptoTests;
@@ -502,6 +533,7 @@
 			files = (
 				B02D6A361DE794AC00878809 /* CfbMode.swift in Sources */,
 				B02D6A271DE750F500878809 /* IvParameter.swift in Sources */,
+				B0302FA01DECD95400E402CE /* RsaEngine.swift in Sources */,
 				B02D6A2E1DE76EB600878809 /* SecretKey.swift in Sources */,
 				B02D6A251DE7501A00878809 /* BlockCipherParameter.swift in Sources */,
 				B02D6A151DE72AC900878809 /* BlockCipher.swift in Sources */,
@@ -533,6 +565,7 @@
 				B02D6A221DE7469200878809 /* DesEngineTests.swift in Sources */,
 				B02D6A2B1DE76CD100878809 /* CbcModeTests.swift in Sources */,
 				B08256FF1DE8DEB9000BA1BD /* ArrayTests.swift in Sources */,
+				B0302FA41DECDC2500E402CE /* RsaEngineTests.swift in Sources */,
 				B0A1A6E71DEAE496008BEE5F /* AesEngineTests.swift in Sources */,
 				B02D6A1A1DE72C5F00878809 /* BlockCipherTests.swift in Sources */,
 				B03C051E1DE835EC00DB05AC /* CtrModeTests.swift in Sources */,
@@ -570,6 +603,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -623,6 +657,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

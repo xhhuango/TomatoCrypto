@@ -12,24 +12,6 @@ class ArrayTests: XCTestCase {
         super.tearDown()
     }
     
-    func testXorWords() {
-        let xoredBytes = xorBytes(input1: self.bytes, input2: self.bytes, count: self.bytes.count)
-        let xoredWords = xorWords(input1: self.bytes, input2: self.bytes, count: self.bytes.count / MemoryLayout<Word>.size)
-        XCTAssertEqual(xoredWords, xoredBytes)
-    }
-    
-    func testPerformanceXorWords() {
-        self.measure {
-            let _ = xorWords(input1: self.bytes, input2: self.bytes, count: self.bytes.count / MemoryLayout<Word>.size)
-        }
-    }
-    
-    func testPerformanceXorBytes() {
-        self.measure {
-            let _ = xorBytes(input1: self.bytes, input2: self.bytes, count: self.bytes.count)
-        }
-    }
-    
     func testCopyBytes() {
         let from = hexToBytes(hex: "0123456789abcdef")
         var to = [Byte](repeating: 0, count: from.count)

@@ -1,27 +1,19 @@
 import Foundation
 
-func bytesToHex(bytes: [Byte]) -> String {
+func bytesToHex(bytes: UnsafePointer<Byte>, count: Int) -> String {
     let table = [Character]("0123456789ABCDEF".characters)
     var string = String()
-    for byte in bytes {
-        let msb = (byte >> 4) & 0x0F
+    for i in 0..<count {
+        let msb = (bytes[i] >> 4) & 0x0f
         string.append(table[Int(msb)])
-        let lsb = byte & 0x0F
+        let lsb = bytes[i] & 0x0f
         string.append(table[Int(lsb)])
     }
     return string
 }
 
-func bytesToHex(bytes: UnsafePointer<Byte>, count: Int) -> String {
-    let table = [Character]("0123456789ABCDEF".characters)
-    var string = String()
-    for i in 0..<count {
-        let msb = (bytes[i] >> 4) & 0x0F
-        string.append(table[Int(msb)])
-        let lsb = bytes[i] & 0x0F
-        string.append(table[Int(lsb)])
-    }
-    return string
+func bytesToHex(bytes: [Byte]) -> String {
+    return bytesToHex(bytes: bytes, count: bytes.count)
 }
 
 func hexToBytes(hex: String) -> [Byte] {
@@ -35,18 +27,18 @@ func hexToBytes(hex: String) -> [Byte] {
         case 0x30...0x39:
             value = byte - 0x30
         case 0x41...0x46:
-            value = byte - 0x41 + 0x0A
+            value = byte - 0x41 + 0x0a
         case 0x61...0x66:
-            value = byte - 0x61 + 0x0A
+            value = byte - 0x61 + 0x0a
         default:
             preconditionFailure("\(byte) is not hex")
         }
         
         let indexBytes = index / 2
         if index % 2 == 0 {
-            bytes[indexBytes] |= (value << 4) & 0xF0
+            bytes[indexBytes] |= (value << 4) & 0xf0
         } else {
-            bytes[indexBytes] |= value & 0x0F
+            bytes[indexBytes] |= value & 0x0f
         }
         
         index += 1

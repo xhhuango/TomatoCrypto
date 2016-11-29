@@ -1,7 +1,7 @@
 import XCTest
 @testable import TomatoCrypto
 
-class BouncyEngineTests: XCTestCase {
+class AesEngineTests: XCTestCase {
     override func setUp() {
         super.setUp()
     }
