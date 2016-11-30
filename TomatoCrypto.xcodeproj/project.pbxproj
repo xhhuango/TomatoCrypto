@@ -7,482 +7,916 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		15F9E13262D04C5530998FB2 /* Pods_TomatoCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5468AB9116995485E8F1523 /* Pods_TomatoCrypto.framework */; };
-		3E1034B2B11B54DB4ED46F21 /* Pods_TomatoCryptoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC1AB8397185B6E988F379B /* Pods_TomatoCryptoTests.framework */; };
-		B02D6A081DE6F6F300878809 /* BlockCipherEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A071DE6F6F300878809 /* BlockCipherEngine.swift */; };
-		B02D6A0C1DE6F7F400878809 /* EcbMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A0B1DE6F7F400878809 /* EcbMode.swift */; };
-		B02D6A0E1DE6FC2300878809 /* BlockCipherMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A0D1DE6FC2300878809 /* BlockCipherMode.swift */; };
-		B02D6A111DE6FFE500878809 /* CryptoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A101DE6FFE500878809 /* CryptoError.swift */; };
-		B02D6A131DE7203B00878809 /* EcbModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A121DE7203B00878809 /* EcbModeTests.swift */; };
-		B02D6A151DE72AC900878809 /* BlockCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A141DE72AC900878809 /* BlockCipher.swift */; };
-		B02D6A1A1DE72C5F00878809 /* BlockCipherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A191DE72C5F00878809 /* BlockCipherTests.swift */; };
-		B02D6A1C1DE72DD900878809 /* BlockCipherPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A1B1DE72DD900878809 /* BlockCipherPadding.swift */; };
-		B02D6A1E1DE72FC700878809 /* NoPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A1D1DE72FC700878809 /* NoPadding.swift */; };
-		B02D6A201DE7468C00878809 /* DesEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A1F1DE7468C00878809 /* DesEngine.swift */; };
-		B02D6A221DE7469200878809 /* DesEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A211DE7469200878809 /* DesEngineTests.swift */; };
-		B02D6A251DE7501A00878809 /* BlockCipherParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A241DE7501A00878809 /* BlockCipherParameter.swift */; };
-		B02D6A271DE750F500878809 /* IvParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A261DE750F500878809 /* IvParameter.swift */; };
-		B02D6A291DE7515D00878809 /* CbcMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A281DE7515D00878809 /* CbcMode.swift */; };
-		B02D6A2B1DE76CD100878809 /* CbcModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A2A1DE76CD100878809 /* CbcModeTests.swift */; };
-		B02D6A2E1DE76EB600878809 /* SecretKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A2D1DE76EB600878809 /* SecretKey.swift */; };
-		B02D6A301DE7889400878809 /* OfbMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A2F1DE7889400878809 /* OfbMode.swift */; };
-		B02D6A341DE78B6A00878809 /* OfbModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A331DE78B6A00878809 /* OfbModeTests.swift */; };
-		B02D6A361DE794AC00878809 /* CfbMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A351DE794AC00878809 /* CfbMode.swift */; };
-		B02D6A381DE7970C00878809 /* CfbModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D6A371DE7970C00878809 /* CfbModeTests.swift */; };
-		B0302FA01DECD95400E402CE /* RsaEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0302F9F1DECD95400E402CE /* RsaEngine.swift */; };
-		B0302FA41DECDC2500E402CE /* RsaEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0302FA31DECDC2500E402CE /* RsaEngineTests.swift */; };
-		B03C051C1DE82E4C00DB05AC /* CtrMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03C051B1DE82E4C00DB05AC /* CtrMode.swift */; };
-		B03C051E1DE835EC00DB05AC /* CtrModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03C051D1DE835EC00DB05AC /* CtrModeTests.swift */; };
-		B06CA7721DEDDFF70085181C /* SimpleSecretKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06CA7711DEDDFF70085181C /* SimpleSecretKey.swift */; };
-		B06CA7771DEDE2C50085181C /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06CA7751DEDE2C50085181C /* Array.swift */; };
-		B06CA7781DEDE2C50085181C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06CA7761DEDE2C50085181C /* String.swift */; };
-		B077F2ED1DE9DD2A00EA89B6 /* AesSlowEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B077F2EC1DE9DD2A00EA89B6 /* AesSlowEngine.swift */; };
-		B08256FF1DE8DEB9000BA1BD /* ArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08256FE1DE8DEB9000BA1BD /* ArrayTests.swift */; };
-		B08F37E41DEA400100705482 /* AesEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08F37E31DEA400100705482 /* AesEngine.swift */; };
-		B09192171DE598A600B5A760 /* TomatoCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B091920D1DE598A500B5A760 /* TomatoCrypto.framework */; };
-		B091921E1DE598A600B5A760 /* TomatoCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = B09192101DE598A500B5A760 /* TomatoCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B09192341DE599D700B5A760 /* AesSlowEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09192331DE599D700B5A760 /* AesSlowEngineTests.swift */; };
-		B09192381DE599DF00B5A760 /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09192371DE599DF00B5A760 /* StringTests.swift */; };
-		B091923A1DE59C1100B5A760 /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09192391DE59C1100B5A760 /* Type.swift */; };
-		B0A1A6E71DEAE496008BEE5F /* AesEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A1A6E61DEAE496008BEE5F /* AesEngineTests.swift */; };
+		05F06EF2A1D5ED6047A65D6E /* Pods_TomatoCrypto_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE2E2D6432B0593C53C25FD2 /* Pods_TomatoCrypto_tvOS.framework */; };
+		2620DD267D17E582A49ABBE9 /* Pods_TomatoCrypto_tvOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71E51D3CAB858CC1C5421CC5 /* Pods_TomatoCrypto_tvOSTests.framework */; };
+		3E08EE48EE1D8414DDF3CDDE /* Pods_TomatoCrypto_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E733D882F9D4BCE945C25A5A /* Pods_TomatoCrypto_iOSTests.framework */; };
+		3FE8196DA8E03390E224C85D /* Pods_TomatoCrypto_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD22CED5C3FF39F8F739481B /* Pods_TomatoCrypto_iOS.framework */; };
+		4E1242294F279B66A9696C71 /* Pods_TomatoCrypto_watchOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9417F407523B31EAA6DA6C61 /* Pods_TomatoCrypto_watchOS.framework */; };
+		51EEFB4EE5CD8BB3743E1F7B /* Pods_TomatoCrypto_OSXTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C97679884984992E715BC073 /* Pods_TomatoCrypto_OSXTests.framework */; };
+		B014071B1DEEEEA900D7A5B9 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407191DEEEEA900D7A5B9 /* Array.swift */; };
+		B014071C1DEEEEA900D7A5B9 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014071A1DEEEEA900D7A5B9 /* String.swift */; };
+		B01407211DEEEECF00D7A5B9 /* CryptoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014071E1DEEEECF00D7A5B9 /* CryptoError.swift */; };
+		B01407221DEEEECF00D7A5B9 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014071F1DEEEECF00D7A5B9 /* Key.swift */; };
+		B01407231DEEEECF00D7A5B9 /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407201DEEEECF00D7A5B9 /* Type.swift */; };
+		B014072B1DEEEF3A00D7A5B9 /* BlockCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014072A1DEEEF3A00D7A5B9 /* BlockCipher.swift */; };
+		B01407301DEEEF4700D7A5B9 /* AesEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014072C1DEEEF4700D7A5B9 /* AesEngine.swift */; };
+		B01407311DEEEF4700D7A5B9 /* AesSlowEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014072D1DEEEF4700D7A5B9 /* AesSlowEngine.swift */; };
+		B01407321DEEEF4700D7A5B9 /* BlockCipherEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014072E1DEEEF4700D7A5B9 /* BlockCipherEngine.swift */; };
+		B01407331DEEEF4700D7A5B9 /* DesEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014072F1DEEEF4700D7A5B9 /* DesEngine.swift */; };
+		B01407361DEEEF5500D7A5B9 /* SecretKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407341DEEEF5500D7A5B9 /* SecretKey.swift */; };
+		B01407371DEEEF5500D7A5B9 /* SimpleSecretKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407351DEEEF5500D7A5B9 /* SimpleSecretKey.swift */; };
+		B014073E1DEEEF6100D7A5B9 /* BlockCipherMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407381DEEEF6100D7A5B9 /* BlockCipherMode.swift */; };
+		B014073F1DEEEF6100D7A5B9 /* CbcMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407391DEEEF6100D7A5B9 /* CbcMode.swift */; };
+		B01407401DEEEF6100D7A5B9 /* CfbMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014073A1DEEEF6100D7A5B9 /* CfbMode.swift */; };
+		B01407411DEEEF6100D7A5B9 /* CtrMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014073B1DEEEF6100D7A5B9 /* CtrMode.swift */; };
+		B01407421DEEEF6100D7A5B9 /* EcbMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014073C1DEEEF6100D7A5B9 /* EcbMode.swift */; };
+		B01407431DEEEF6100D7A5B9 /* OfbMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014073D1DEEEF6100D7A5B9 /* OfbMode.swift */; };
+		B01407471DEEEF7400D7A5B9 /* BlockCipherPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407451DEEEF7400D7A5B9 /* BlockCipherPadding.swift */; };
+		B01407481DEEEF7400D7A5B9 /* NoPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407461DEEEF7400D7A5B9 /* NoPadding.swift */; };
+		B014074B1DEEEF7F00D7A5B9 /* BlockCipherParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407491DEEEF7F00D7A5B9 /* BlockCipherParameter.swift */; };
+		B014074C1DEEEF7F00D7A5B9 /* IvParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014074A1DEEEF7F00D7A5B9 /* IvParameter.swift */; };
+		B014074D1DEEEFA100D7A5B9 /* BlockCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014072A1DEEEF3A00D7A5B9 /* BlockCipher.swift */; };
+		B014074E1DEEEFA200D7A5B9 /* BlockCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014072A1DEEEF3A00D7A5B9 /* BlockCipher.swift */; };
+		B014074F1DEEEFA200D7A5B9 /* BlockCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014072A1DEEEF3A00D7A5B9 /* BlockCipher.swift */; };
+		B01407501DEEEFB100D7A5B9 /* AesEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014072C1DEEEF4700D7A5B9 /* AesEngine.swift */; };
+		B01407511DEEEFB100D7A5B9 /* AesSlowEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014072D1DEEEF4700D7A5B9 /* AesSlowEngine.swift */; };
+		B01407521DEEEFB100D7A5B9 /* BlockCipherEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014072E1DEEEF4700D7A5B9 /* BlockCipherEngine.swift */; };
+		B01407531DEEEFB100D7A5B9 /* DesEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014072F1DEEEF4700D7A5B9 /* DesEngine.swift */; };
+		B01407541DEEEFB200D7A5B9 /* AesEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014072C1DEEEF4700D7A5B9 /* AesEngine.swift */; };
+		B01407551DEEEFB200D7A5B9 /* AesSlowEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014072D1DEEEF4700D7A5B9 /* AesSlowEngine.swift */; };
+		B01407561DEEEFB200D7A5B9 /* BlockCipherEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014072E1DEEEF4700D7A5B9 /* BlockCipherEngine.swift */; };
+		B01407571DEEEFB200D7A5B9 /* DesEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014072F1DEEEF4700D7A5B9 /* DesEngine.swift */; };
+		B01407581DEEEFB200D7A5B9 /* AesEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014072C1DEEEF4700D7A5B9 /* AesEngine.swift */; };
+		B01407591DEEEFB200D7A5B9 /* AesSlowEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014072D1DEEEF4700D7A5B9 /* AesSlowEngine.swift */; };
+		B014075A1DEEEFB200D7A5B9 /* BlockCipherEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014072E1DEEEF4700D7A5B9 /* BlockCipherEngine.swift */; };
+		B014075B1DEEEFB200D7A5B9 /* DesEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014072F1DEEEF4700D7A5B9 /* DesEngine.swift */; };
+		B014075C1DEEEFCC00D7A5B9 /* SecretKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407341DEEEF5500D7A5B9 /* SecretKey.swift */; };
+		B014075D1DEEEFCC00D7A5B9 /* SimpleSecretKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407351DEEEF5500D7A5B9 /* SimpleSecretKey.swift */; };
+		B014075E1DEEEFCC00D7A5B9 /* BlockCipherMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407381DEEEF6100D7A5B9 /* BlockCipherMode.swift */; };
+		B014075F1DEEEFCC00D7A5B9 /* CbcMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407391DEEEF6100D7A5B9 /* CbcMode.swift */; };
+		B01407601DEEEFCC00D7A5B9 /* CfbMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014073A1DEEEF6100D7A5B9 /* CfbMode.swift */; };
+		B01407611DEEEFCC00D7A5B9 /* CtrMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014073B1DEEEF6100D7A5B9 /* CtrMode.swift */; };
+		B01407621DEEEFCC00D7A5B9 /* EcbMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014073C1DEEEF6100D7A5B9 /* EcbMode.swift */; };
+		B01407631DEEEFCC00D7A5B9 /* OfbMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014073D1DEEEF6100D7A5B9 /* OfbMode.swift */; };
+		B01407641DEEEFCC00D7A5B9 /* BlockCipherPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407451DEEEF7400D7A5B9 /* BlockCipherPadding.swift */; };
+		B01407651DEEEFCC00D7A5B9 /* NoPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407461DEEEF7400D7A5B9 /* NoPadding.swift */; };
+		B01407661DEEEFCC00D7A5B9 /* BlockCipherParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407491DEEEF7F00D7A5B9 /* BlockCipherParameter.swift */; };
+		B01407671DEEEFCC00D7A5B9 /* IvParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014074A1DEEEF7F00D7A5B9 /* IvParameter.swift */; };
+		B01407681DEEEFCC00D7A5B9 /* SecretKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407341DEEEF5500D7A5B9 /* SecretKey.swift */; };
+		B01407691DEEEFCC00D7A5B9 /* SimpleSecretKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407351DEEEF5500D7A5B9 /* SimpleSecretKey.swift */; };
+		B014076A1DEEEFCC00D7A5B9 /* BlockCipherMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407381DEEEF6100D7A5B9 /* BlockCipherMode.swift */; };
+		B014076B1DEEEFCC00D7A5B9 /* CbcMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407391DEEEF6100D7A5B9 /* CbcMode.swift */; };
+		B014076C1DEEEFCC00D7A5B9 /* CfbMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014073A1DEEEF6100D7A5B9 /* CfbMode.swift */; };
+		B014076D1DEEEFCC00D7A5B9 /* CtrMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014073B1DEEEF6100D7A5B9 /* CtrMode.swift */; };
+		B014076E1DEEEFCC00D7A5B9 /* EcbMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014073C1DEEEF6100D7A5B9 /* EcbMode.swift */; };
+		B014076F1DEEEFCC00D7A5B9 /* OfbMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014073D1DEEEF6100D7A5B9 /* OfbMode.swift */; };
+		B01407701DEEEFCC00D7A5B9 /* BlockCipherPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407451DEEEF7400D7A5B9 /* BlockCipherPadding.swift */; };
+		B01407711DEEEFCC00D7A5B9 /* NoPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407461DEEEF7400D7A5B9 /* NoPadding.swift */; };
+		B01407721DEEEFCC00D7A5B9 /* BlockCipherParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407491DEEEF7F00D7A5B9 /* BlockCipherParameter.swift */; };
+		B01407731DEEEFCC00D7A5B9 /* IvParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014074A1DEEEF7F00D7A5B9 /* IvParameter.swift */; };
+		B01407741DEEEFCD00D7A5B9 /* SecretKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407341DEEEF5500D7A5B9 /* SecretKey.swift */; };
+		B01407751DEEEFCD00D7A5B9 /* SimpleSecretKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407351DEEEF5500D7A5B9 /* SimpleSecretKey.swift */; };
+		B01407761DEEEFCD00D7A5B9 /* BlockCipherMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407381DEEEF6100D7A5B9 /* BlockCipherMode.swift */; };
+		B01407771DEEEFCD00D7A5B9 /* CbcMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407391DEEEF6100D7A5B9 /* CbcMode.swift */; };
+		B01407781DEEEFCD00D7A5B9 /* CfbMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014073A1DEEEF6100D7A5B9 /* CfbMode.swift */; };
+		B01407791DEEEFCD00D7A5B9 /* CtrMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014073B1DEEEF6100D7A5B9 /* CtrMode.swift */; };
+		B014077A1DEEEFCD00D7A5B9 /* EcbMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014073C1DEEEF6100D7A5B9 /* EcbMode.swift */; };
+		B014077B1DEEEFCD00D7A5B9 /* OfbMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014073D1DEEEF6100D7A5B9 /* OfbMode.swift */; };
+		B014077C1DEEEFCD00D7A5B9 /* BlockCipherPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407451DEEEF7400D7A5B9 /* BlockCipherPadding.swift */; };
+		B014077D1DEEEFCD00D7A5B9 /* NoPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407461DEEEF7400D7A5B9 /* NoPadding.swift */; };
+		B014077E1DEEEFCD00D7A5B9 /* BlockCipherParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407491DEEEF7F00D7A5B9 /* BlockCipherParameter.swift */; };
+		B014077F1DEEEFCD00D7A5B9 /* IvParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014074A1DEEEF7F00D7A5B9 /* IvParameter.swift */; };
+		B01407801DEEEFD800D7A5B9 /* CryptoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014071E1DEEEECF00D7A5B9 /* CryptoError.swift */; };
+		B01407811DEEEFD800D7A5B9 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014071F1DEEEECF00D7A5B9 /* Key.swift */; };
+		B01407821DEEEFD800D7A5B9 /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407201DEEEECF00D7A5B9 /* Type.swift */; };
+		B01407831DEEEFD800D7A5B9 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407191DEEEEA900D7A5B9 /* Array.swift */; };
+		B01407841DEEEFD800D7A5B9 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014071A1DEEEEA900D7A5B9 /* String.swift */; };
+		B01407851DEEEFD900D7A5B9 /* CryptoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014071E1DEEEECF00D7A5B9 /* CryptoError.swift */; };
+		B01407861DEEEFD900D7A5B9 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014071F1DEEEECF00D7A5B9 /* Key.swift */; };
+		B01407871DEEEFD900D7A5B9 /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407201DEEEECF00D7A5B9 /* Type.swift */; };
+		B01407881DEEEFD900D7A5B9 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407191DEEEEA900D7A5B9 /* Array.swift */; };
+		B01407891DEEEFD900D7A5B9 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014071A1DEEEEA900D7A5B9 /* String.swift */; };
+		B014078A1DEEEFD900D7A5B9 /* CryptoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014071E1DEEEECF00D7A5B9 /* CryptoError.swift */; };
+		B014078B1DEEEFD900D7A5B9 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014071F1DEEEECF00D7A5B9 /* Key.swift */; };
+		B014078C1DEEEFD900D7A5B9 /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407201DEEEECF00D7A5B9 /* Type.swift */; };
+		B014078D1DEEEFD900D7A5B9 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407191DEEEEA900D7A5B9 /* Array.swift */; };
+		B014078E1DEEEFD900D7A5B9 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014071A1DEEEEA900D7A5B9 /* String.swift */; };
+		B01407AE1DEEF0D400D7A5B9 /* RsaEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407941DEEF04900D7A5B9 /* RsaEngineTests.swift */; };
+		B01407AF1DEEF0D400D7A5B9 /* BlockCipherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407981DEEF09C00D7A5B9 /* BlockCipherTests.swift */; };
+		B01407B01DEEF0D400D7A5B9 /* AesEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014079A1DEEF0A700D7A5B9 /* AesEngineTests.swift */; };
+		B01407B11DEEF0D400D7A5B9 /* AesSlowEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014079B1DEEF0A700D7A5B9 /* AesSlowEngineTests.swift */; };
+		B01407B21DEEF0D400D7A5B9 /* DesEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014079C1DEEF0A700D7A5B9 /* DesEngineTests.swift */; };
+		B01407B31DEEF0D400D7A5B9 /* CbcModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407A01DEEF0B300D7A5B9 /* CbcModeTests.swift */; };
+		B01407B41DEEF0D400D7A5B9 /* CfbModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407A11DEEF0B300D7A5B9 /* CfbModeTests.swift */; };
+		B01407B51DEEF0D400D7A5B9 /* CtrModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407A21DEEF0B300D7A5B9 /* CtrModeTests.swift */; };
+		B01407B61DEEF0D400D7A5B9 /* EcbModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407A31DEEF0B300D7A5B9 /* EcbModeTests.swift */; };
+		B01407B71DEEF0D400D7A5B9 /* OfbModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407A41DEEF0B300D7A5B9 /* OfbModeTests.swift */; };
+		B01407B81DEEF0D400D7A5B9 /* ArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407AA1DEEF0C400D7A5B9 /* ArrayTests.swift */; };
+		B01407B91DEEF0D400D7A5B9 /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407AB1DEEF0C400D7A5B9 /* StringTests.swift */; };
+		B01407BA1DEEF0D400D7A5B9 /* RsaEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407941DEEF04900D7A5B9 /* RsaEngineTests.swift */; };
+		B01407BB1DEEF0D400D7A5B9 /* BlockCipherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407981DEEF09C00D7A5B9 /* BlockCipherTests.swift */; };
+		B01407BC1DEEF0D400D7A5B9 /* AesEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014079A1DEEF0A700D7A5B9 /* AesEngineTests.swift */; };
+		B01407BD1DEEF0D400D7A5B9 /* AesSlowEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014079B1DEEF0A700D7A5B9 /* AesSlowEngineTests.swift */; };
+		B01407BE1DEEF0D400D7A5B9 /* DesEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014079C1DEEF0A700D7A5B9 /* DesEngineTests.swift */; };
+		B01407BF1DEEF0D400D7A5B9 /* CbcModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407A01DEEF0B300D7A5B9 /* CbcModeTests.swift */; };
+		B01407C01DEEF0D400D7A5B9 /* CfbModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407A11DEEF0B300D7A5B9 /* CfbModeTests.swift */; };
+		B01407C11DEEF0D400D7A5B9 /* CtrModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407A21DEEF0B300D7A5B9 /* CtrModeTests.swift */; };
+		B01407C21DEEF0D400D7A5B9 /* EcbModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407A31DEEF0B300D7A5B9 /* EcbModeTests.swift */; };
+		B01407C31DEEF0D400D7A5B9 /* OfbModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407A41DEEF0B300D7A5B9 /* OfbModeTests.swift */; };
+		B01407C41DEEF0D400D7A5B9 /* ArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407AA1DEEF0C400D7A5B9 /* ArrayTests.swift */; };
+		B01407C51DEEF0D400D7A5B9 /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407AB1DEEF0C400D7A5B9 /* StringTests.swift */; };
+		B01407C61DEEF0D500D7A5B9 /* RsaEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407941DEEF04900D7A5B9 /* RsaEngineTests.swift */; };
+		B01407C71DEEF0D500D7A5B9 /* BlockCipherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407981DEEF09C00D7A5B9 /* BlockCipherTests.swift */; };
+		B01407C81DEEF0D500D7A5B9 /* AesEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014079A1DEEF0A700D7A5B9 /* AesEngineTests.swift */; };
+		B01407C91DEEF0D500D7A5B9 /* AesSlowEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014079B1DEEF0A700D7A5B9 /* AesSlowEngineTests.swift */; };
+		B01407CA1DEEF0D500D7A5B9 /* DesEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014079C1DEEF0A700D7A5B9 /* DesEngineTests.swift */; };
+		B01407CB1DEEF0D500D7A5B9 /* CbcModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407A01DEEF0B300D7A5B9 /* CbcModeTests.swift */; };
+		B01407CC1DEEF0D500D7A5B9 /* CfbModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407A11DEEF0B300D7A5B9 /* CfbModeTests.swift */; };
+		B01407CD1DEEF0D500D7A5B9 /* CtrModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407A21DEEF0B300D7A5B9 /* CtrModeTests.swift */; };
+		B01407CE1DEEF0D500D7A5B9 /* EcbModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407A31DEEF0B300D7A5B9 /* EcbModeTests.swift */; };
+		B01407CF1DEEF0D500D7A5B9 /* OfbModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407A41DEEF0B300D7A5B9 /* OfbModeTests.swift */; };
+		B01407D01DEEF0D500D7A5B9 /* ArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407AA1DEEF0C400D7A5B9 /* ArrayTests.swift */; };
+		B01407D11DEEF0D500D7A5B9 /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407AB1DEEF0C400D7A5B9 /* StringTests.swift */; };
+		B01407D81DEEF15400D7A5B9 /* PrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407D41DEEF15400D7A5B9 /* PrivateKey.swift */; };
+		B01407D91DEEF15400D7A5B9 /* PublicKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407D51DEEF15400D7A5B9 /* PublicKey.swift */; };
+		B01407DA1DEEF15400D7A5B9 /* RsaPrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407D61DEEF15400D7A5B9 /* RsaPrivateKey.swift */; };
+		B01407DB1DEEF15400D7A5B9 /* RsaPublicKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407D71DEEF15400D7A5B9 /* RsaPublicKey.swift */; };
+		B01407DE1DEEF16600D7A5B9 /* RsaEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407DD1DEEF16600D7A5B9 /* RsaEngine.swift */; };
+		B01407DF1DEEF16C00D7A5B9 /* RsaEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407DD1DEEF16600D7A5B9 /* RsaEngine.swift */; };
+		B01407E01DEEF16C00D7A5B9 /* PrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407D41DEEF15400D7A5B9 /* PrivateKey.swift */; };
+		B01407E11DEEF16C00D7A5B9 /* PublicKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407D51DEEF15400D7A5B9 /* PublicKey.swift */; };
+		B01407E21DEEF16C00D7A5B9 /* RsaPrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407D61DEEF15400D7A5B9 /* RsaPrivateKey.swift */; };
+		B01407E31DEEF16C00D7A5B9 /* RsaPublicKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407D71DEEF15400D7A5B9 /* RsaPublicKey.swift */; };
+		B01407E41DEEF16D00D7A5B9 /* RsaEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407DD1DEEF16600D7A5B9 /* RsaEngine.swift */; };
+		B01407E51DEEF16D00D7A5B9 /* PrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407D41DEEF15400D7A5B9 /* PrivateKey.swift */; };
+		B01407E61DEEF16D00D7A5B9 /* PublicKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407D51DEEF15400D7A5B9 /* PublicKey.swift */; };
+		B01407E71DEEF16D00D7A5B9 /* RsaPrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407D61DEEF15400D7A5B9 /* RsaPrivateKey.swift */; };
+		B01407E81DEEF16D00D7A5B9 /* RsaPublicKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407D71DEEF15400D7A5B9 /* RsaPublicKey.swift */; };
+		B01407E91DEEF16D00D7A5B9 /* RsaEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407DD1DEEF16600D7A5B9 /* RsaEngine.swift */; };
+		B01407EA1DEEF16D00D7A5B9 /* PrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407D41DEEF15400D7A5B9 /* PrivateKey.swift */; };
+		B01407EB1DEEF16D00D7A5B9 /* PublicKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407D51DEEF15400D7A5B9 /* PublicKey.swift */; };
+		B01407EC1DEEF16D00D7A5B9 /* RsaPrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407D61DEEF15400D7A5B9 /* RsaPrivateKey.swift */; };
+		B01407ED1DEEF16D00D7A5B9 /* RsaPublicKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407D71DEEF15400D7A5B9 /* RsaPublicKey.swift */; };
+		B059B5021DEED9E60018C016 /* TomatoCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B059B4F81DEED9E60018C016 /* TomatoCrypto.framework */; };
+		B059B51E1DEED9FD0018C016 /* TomatoCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B059B5151DEED9FD0018C016 /* TomatoCrypto.framework */; };
+		B059B5471DEEDA250018C016 /* TomatoCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B059B53E1DEEDA240018C016 /* TomatoCrypto.framework */; };
+		B059B5581DEEDA940018C016 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B059B5561DEEDA940018C016 /* Info.plist */; };
+		B059B5591DEEDA940018C016 /* TomatoCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = B059B5571DEEDA940018C016 /* TomatoCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B059B55A1DEEDAB30018C016 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B059B5561DEEDA940018C016 /* Info.plist */; };
+		B059B55B1DEEDAB30018C016 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B059B5561DEEDA940018C016 /* Info.plist */; };
+		B059B55C1DEEDAB40018C016 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B059B5561DEEDA940018C016 /* Info.plist */; };
+		B059B55D1DEEDAB90018C016 /* TomatoCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = B059B5571DEEDA940018C016 /* TomatoCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B059B55E1DEEDABA0018C016 /* TomatoCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = B059B5571DEEDA940018C016 /* TomatoCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B059B55F1DEEDABA0018C016 /* TomatoCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = B059B5571DEEDA940018C016 /* TomatoCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B059B56A1DEEDE8C0018C016 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B059B5661DEEDE670018C016 /* Info.plist */; };
+		B059B56B1DEEDE8C0018C016 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B059B5661DEEDE670018C016 /* Info.plist */; };
+		B059B56C1DEEDE8E0018C016 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B059B5661DEEDE670018C016 /* Info.plist */; };
+		B7FC5C40AF27FE717581604A /* Pods_TomatoCrypto_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 988333DCDE43098FBE22026F /* Pods_TomatoCrypto_OSX.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		B09192181DE598A600B5A760 /* PBXContainerItemProxy */ = {
+		B059B5031DEED9E60018C016 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = B09192041DE598A300B5A760 /* Project object */;
+			containerPortal = B059B4ED1DEED9C50018C016 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = B091920C1DE598A300B5A760;
-			remoteInfo = TomatoCrypto;
+			remoteGlobalIDString = B059B4F71DEED9E60018C016;
+			remoteInfo = "TomatoCrypto-iOS";
+		};
+		B059B51F1DEED9FD0018C016 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B059B4ED1DEED9C50018C016 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B059B5141DEED9FD0018C016;
+			remoteInfo = "TomatoCrypto-OSX";
+		};
+		B059B5481DEEDA250018C016 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B059B4ED1DEED9C50018C016 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B059B53D1DEEDA240018C016;
+			remoteInfo = "TomatoCrypto-tvOS";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		01C523649BAB450BA7E6F415 /* Pods-TomatoCryptoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomatoCryptoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TomatoCryptoTests/Pods-TomatoCryptoTests.debug.xcconfig"; sourceTree = "<group>"; };
-		7EC1AB8397185B6E988F379B /* Pods_TomatoCryptoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TomatoCryptoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9F47383294C6EC608D58C907 /* Pods-TomatoCrypto.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomatoCrypto.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TomatoCrypto/Pods-TomatoCrypto.debug.xcconfig"; sourceTree = "<group>"; };
-		B02D6A071DE6F6F300878809 /* BlockCipherEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockCipherEngine.swift; sourceTree = "<group>"; };
-		B02D6A0B1DE6F7F400878809 /* EcbMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EcbMode.swift; sourceTree = "<group>"; };
-		B02D6A0D1DE6FC2300878809 /* BlockCipherMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockCipherMode.swift; sourceTree = "<group>"; };
-		B02D6A101DE6FFE500878809 /* CryptoError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoError.swift; sourceTree = "<group>"; };
-		B02D6A121DE7203B00878809 /* EcbModeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EcbModeTests.swift; sourceTree = "<group>"; };
-		B02D6A141DE72AC900878809 /* BlockCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockCipher.swift; sourceTree = "<group>"; };
-		B02D6A191DE72C5F00878809 /* BlockCipherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockCipherTests.swift; sourceTree = "<group>"; };
-		B02D6A1B1DE72DD900878809 /* BlockCipherPadding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockCipherPadding.swift; sourceTree = "<group>"; };
-		B02D6A1D1DE72FC700878809 /* NoPadding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoPadding.swift; sourceTree = "<group>"; };
-		B02D6A1F1DE7468C00878809 /* DesEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesEngine.swift; sourceTree = "<group>"; };
-		B02D6A211DE7469200878809 /* DesEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesEngineTests.swift; sourceTree = "<group>"; };
-		B02D6A241DE7501A00878809 /* BlockCipherParameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockCipherParameter.swift; sourceTree = "<group>"; };
-		B02D6A261DE750F500878809 /* IvParameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IvParameter.swift; sourceTree = "<group>"; };
-		B02D6A281DE7515D00878809 /* CbcMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CbcMode.swift; sourceTree = "<group>"; };
-		B02D6A2A1DE76CD100878809 /* CbcModeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CbcModeTests.swift; sourceTree = "<group>"; };
-		B02D6A2D1DE76EB600878809 /* SecretKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecretKey.swift; sourceTree = "<group>"; };
-		B02D6A2F1DE7889400878809 /* OfbMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfbMode.swift; sourceTree = "<group>"; };
-		B02D6A331DE78B6A00878809 /* OfbModeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfbModeTests.swift; sourceTree = "<group>"; };
-		B02D6A351DE794AC00878809 /* CfbMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CfbMode.swift; sourceTree = "<group>"; };
-		B02D6A371DE7970C00878809 /* CfbModeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CfbModeTests.swift; sourceTree = "<group>"; };
-		B0302F9F1DECD95400E402CE /* RsaEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RsaEngine.swift; sourceTree = "<group>"; };
-		B0302FA31DECDC2500E402CE /* RsaEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RsaEngineTests.swift; sourceTree = "<group>"; };
-		B03C051B1DE82E4C00DB05AC /* CtrMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CtrMode.swift; sourceTree = "<group>"; };
-		B03C051D1DE835EC00DB05AC /* CtrModeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CtrModeTests.swift; sourceTree = "<group>"; };
-		B06CA7711DEDDFF70085181C /* SimpleSecretKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleSecretKey.swift; sourceTree = "<group>"; };
-		B06CA7751DEDE2C50085181C /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
-		B06CA7761DEDE2C50085181C /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		B077F2EC1DE9DD2A00EA89B6 /* AesSlowEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AesSlowEngine.swift; sourceTree = "<group>"; };
-		B08256FE1DE8DEB9000BA1BD /* ArrayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayTests.swift; sourceTree = "<group>"; };
-		B08F37E31DEA400100705482 /* AesEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AesEngine.swift; sourceTree = "<group>"; };
-		B091920D1DE598A500B5A760 /* TomatoCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TomatoCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B09192101DE598A500B5A760 /* TomatoCrypto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TomatoCrypto.h; sourceTree = "<group>"; };
-		B09192111DE598A500B5A760 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B09192161DE598A600B5A760 /* TomatoCryptoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TomatoCryptoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B091921D1DE598A600B5A760 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B09192331DE599D700B5A760 /* AesSlowEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AesSlowEngineTests.swift; sourceTree = "<group>"; };
-		B09192371DE599DF00B5A760 /* StringTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
-		B09192391DE59C1100B5A760 /* Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
-		B0A1A6E61DEAE496008BEE5F /* AesEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AesEngineTests.swift; sourceTree = "<group>"; };
-		B5468AB9116995485E8F1523 /* Pods_TomatoCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TomatoCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BCAAAF4B0FB6804B7AE1D784 /* Pods-TomatoCrypto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomatoCrypto.release.xcconfig"; path = "Pods/Target Support Files/Pods-TomatoCrypto/Pods-TomatoCrypto.release.xcconfig"; sourceTree = "<group>"; };
-		E68DF89913A2B70A65AF3EFB /* Pods-TomatoCryptoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomatoCryptoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TomatoCryptoTests/Pods-TomatoCryptoTests.release.xcconfig"; sourceTree = "<group>"; };
+		01EF21C300A074FD4B2AFF45 /* Pods-TomatoCrypto-OSX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomatoCrypto-OSX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TomatoCrypto-OSX/Pods-TomatoCrypto-OSX.debug.xcconfig"; sourceTree = "<group>"; };
+		289C503B153DDCD75D906EDC /* Pods-TomatoCrypto-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomatoCrypto-iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TomatoCrypto-iOSTests/Pods-TomatoCrypto-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		41EBD43067305CE03D6420EA /* Pods-TomatoCrypto-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomatoCrypto-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TomatoCrypto-iOS/Pods-TomatoCrypto-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		43D1A3FBF9AB144DF4394A7B /* Pods-TomatoCrypto-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomatoCrypto-tvOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TomatoCrypto-tvOSTests/Pods-TomatoCrypto-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		562451FA84C179346EFB61F7 /* Pods-TomatoCrypto-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomatoCrypto-iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TomatoCrypto-iOSTests/Pods-TomatoCrypto-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		570B38DC6CDD03E658899848 /* Pods-TomatoCrypto-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomatoCrypto-tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TomatoCrypto-tvOS/Pods-TomatoCrypto-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		71E51D3CAB858CC1C5421CC5 /* Pods_TomatoCrypto_tvOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TomatoCrypto_tvOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A1EEA79CC8635A2C96F5BA6 /* Pods-TomatoCrypto-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomatoCrypto-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-TomatoCrypto-iOS/Pods-TomatoCrypto-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		8F96CE5EE964725BAF4BD2F6 /* Pods-TomatoCrypto-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomatoCrypto-tvOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-TomatoCrypto-tvOS/Pods-TomatoCrypto-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		9417F407523B31EAA6DA6C61 /* Pods_TomatoCrypto_watchOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TomatoCrypto_watchOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		95C1EE3A486F17D9C8E8DDC9 /* Pods-TomatoCrypto-watchOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomatoCrypto-watchOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-TomatoCrypto-watchOS/Pods-TomatoCrypto-watchOS.release.xcconfig"; sourceTree = "<group>"; };
+		988333DCDE43098FBE22026F /* Pods_TomatoCrypto_OSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TomatoCrypto_OSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9FAF40F7DD5B62BCC4035FE4 /* Pods-TomatoCrypto-OSXTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomatoCrypto-OSXTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TomatoCrypto-OSXTests/Pods-TomatoCrypto-OSXTests.debug.xcconfig"; sourceTree = "<group>"; };
+		AD22CED5C3FF39F8F739481B /* Pods_TomatoCrypto_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TomatoCrypto_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B01407191DEEEEA900D7A5B9 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		B014071A1DEEEEA900D7A5B9 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		B014071E1DEEEECF00D7A5B9 /* CryptoError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoError.swift; sourceTree = "<group>"; };
+		B014071F1DEEEECF00D7A5B9 /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
+		B01407201DEEEECF00D7A5B9 /* Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
+		B014072A1DEEEF3A00D7A5B9 /* BlockCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockCipher.swift; sourceTree = "<group>"; };
+		B014072C1DEEEF4700D7A5B9 /* AesEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AesEngine.swift; sourceTree = "<group>"; };
+		B014072D1DEEEF4700D7A5B9 /* AesSlowEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AesSlowEngine.swift; sourceTree = "<group>"; };
+		B014072E1DEEEF4700D7A5B9 /* BlockCipherEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockCipherEngine.swift; sourceTree = "<group>"; };
+		B014072F1DEEEF4700D7A5B9 /* DesEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesEngine.swift; sourceTree = "<group>"; };
+		B01407341DEEEF5500D7A5B9 /* SecretKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecretKey.swift; sourceTree = "<group>"; };
+		B01407351DEEEF5500D7A5B9 /* SimpleSecretKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleSecretKey.swift; sourceTree = "<group>"; };
+		B01407381DEEEF6100D7A5B9 /* BlockCipherMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockCipherMode.swift; sourceTree = "<group>"; };
+		B01407391DEEEF6100D7A5B9 /* CbcMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CbcMode.swift; sourceTree = "<group>"; };
+		B014073A1DEEEF6100D7A5B9 /* CfbMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CfbMode.swift; sourceTree = "<group>"; };
+		B014073B1DEEEF6100D7A5B9 /* CtrMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CtrMode.swift; sourceTree = "<group>"; };
+		B014073C1DEEEF6100D7A5B9 /* EcbMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EcbMode.swift; sourceTree = "<group>"; };
+		B014073D1DEEEF6100D7A5B9 /* OfbMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfbMode.swift; sourceTree = "<group>"; };
+		B01407451DEEEF7400D7A5B9 /* BlockCipherPadding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockCipherPadding.swift; sourceTree = "<group>"; };
+		B01407461DEEEF7400D7A5B9 /* NoPadding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoPadding.swift; sourceTree = "<group>"; };
+		B01407491DEEEF7F00D7A5B9 /* BlockCipherParameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockCipherParameter.swift; sourceTree = "<group>"; };
+		B014074A1DEEEF7F00D7A5B9 /* IvParameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IvParameter.swift; sourceTree = "<group>"; };
+		B01407941DEEF04900D7A5B9 /* RsaEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RsaEngineTests.swift; sourceTree = "<group>"; };
+		B01407981DEEF09C00D7A5B9 /* BlockCipherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockCipherTests.swift; sourceTree = "<group>"; };
+		B014079A1DEEF0A700D7A5B9 /* AesEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AesEngineTests.swift; sourceTree = "<group>"; };
+		B014079B1DEEF0A700D7A5B9 /* AesSlowEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AesSlowEngineTests.swift; sourceTree = "<group>"; };
+		B014079C1DEEF0A700D7A5B9 /* DesEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesEngineTests.swift; sourceTree = "<group>"; };
+		B01407A01DEEF0B300D7A5B9 /* CbcModeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CbcModeTests.swift; sourceTree = "<group>"; };
+		B01407A11DEEF0B300D7A5B9 /* CfbModeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CfbModeTests.swift; sourceTree = "<group>"; };
+		B01407A21DEEF0B300D7A5B9 /* CtrModeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CtrModeTests.swift; sourceTree = "<group>"; };
+		B01407A31DEEF0B300D7A5B9 /* EcbModeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EcbModeTests.swift; sourceTree = "<group>"; };
+		B01407A41DEEF0B300D7A5B9 /* OfbModeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfbModeTests.swift; sourceTree = "<group>"; };
+		B01407AA1DEEF0C400D7A5B9 /* ArrayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayTests.swift; sourceTree = "<group>"; };
+		B01407AB1DEEF0C400D7A5B9 /* StringTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
+		B01407D41DEEF15400D7A5B9 /* PrivateKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivateKey.swift; sourceTree = "<group>"; };
+		B01407D51DEEF15400D7A5B9 /* PublicKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicKey.swift; sourceTree = "<group>"; };
+		B01407D61DEEF15400D7A5B9 /* RsaPrivateKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RsaPrivateKey.swift; sourceTree = "<group>"; };
+		B01407D71DEEF15400D7A5B9 /* RsaPublicKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RsaPublicKey.swift; sourceTree = "<group>"; };
+		B01407DD1DEEF16600D7A5B9 /* RsaEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RsaEngine.swift; sourceTree = "<group>"; };
+		B059B4F81DEED9E60018C016 /* TomatoCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TomatoCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B059B5011DEED9E60018C016 /* TomatoCryptoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TomatoCryptoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B059B5151DEED9FD0018C016 /* TomatoCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TomatoCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B059B51D1DEED9FD0018C016 /* TomatoCryptoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TomatoCryptoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B059B5311DEEDA140018C016 /* TomatoCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TomatoCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B059B53E1DEEDA240018C016 /* TomatoCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TomatoCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B059B5461DEEDA250018C016 /* TomatoCryptoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TomatoCryptoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B059B5561DEEDA940018C016 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B059B5571DEEDA940018C016 /* TomatoCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TomatoCrypto.h; sourceTree = "<group>"; };
+		B059B5661DEEDE670018C016 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C97679884984992E715BC073 /* Pods_TomatoCrypto_OSXTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TomatoCrypto_OSXTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA917B1D79CDCD5FDB376C17 /* Pods-TomatoCrypto-watchOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomatoCrypto-watchOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TomatoCrypto-watchOS/Pods-TomatoCrypto-watchOS.debug.xcconfig"; sourceTree = "<group>"; };
+		D851CD41F7C5C61A7F47777A /* Pods-TomatoCrypto-OSXTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomatoCrypto-OSXTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TomatoCrypto-OSXTests/Pods-TomatoCrypto-OSXTests.release.xcconfig"; sourceTree = "<group>"; };
+		E733D882F9D4BCE945C25A5A /* Pods_TomatoCrypto_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TomatoCrypto_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC16958453CD59C30BB55028 /* Pods-TomatoCrypto-OSX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomatoCrypto-OSX.release.xcconfig"; path = "Pods/Target Support Files/Pods-TomatoCrypto-OSX/Pods-TomatoCrypto-OSX.release.xcconfig"; sourceTree = "<group>"; };
+		EE2E2D6432B0593C53C25FD2 /* Pods_TomatoCrypto_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TomatoCrypto_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAF4F492AFD58C02FAAB2EF1 /* Pods-TomatoCrypto-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomatoCrypto-tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TomatoCrypto-tvOSTests/Pods-TomatoCrypto-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		B09192091DE598A300B5A760 /* Frameworks */ = {
+		B059B4F41DEED9E60018C016 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				15F9E13262D04C5530998FB2 /* Pods_TomatoCrypto.framework in Frameworks */,
+				3FE8196DA8E03390E224C85D /* Pods_TomatoCrypto_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B09192131DE598A600B5A760 /* Frameworks */ = {
+		B059B4FE1DEED9E60018C016 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B09192171DE598A600B5A760 /* TomatoCrypto.framework in Frameworks */,
-				3E1034B2B11B54DB4ED46F21 /* Pods_TomatoCryptoTests.framework in Frameworks */,
+				B059B5021DEED9E60018C016 /* TomatoCrypto.framework in Frameworks */,
+				3E08EE48EE1D8414DDF3CDDE /* Pods_TomatoCrypto_iOSTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B059B5111DEED9FD0018C016 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B7FC5C40AF27FE717581604A /* Pods_TomatoCrypto_OSX.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B059B51A1DEED9FD0018C016 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B059B51E1DEED9FD0018C016 /* TomatoCrypto.framework in Frameworks */,
+				51EEFB4EE5CD8BB3743E1F7B /* Pods_TomatoCrypto_OSXTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B059B52D1DEEDA130018C016 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E1242294F279B66A9696C71 /* Pods_TomatoCrypto_watchOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B059B53A1DEEDA240018C016 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05F06EF2A1D5ED6047A65D6E /* Pods_TomatoCrypto_tvOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B059B5431DEEDA250018C016 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B059B5471DEEDA250018C016 /* TomatoCrypto.framework in Frameworks */,
+				2620DD267D17E582A49ABBE9 /* Pods_TomatoCrypto_tvOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3E1DF2C23DE982757DFFE6A0 /* Pods */ = {
+		697424C8C4D8243ADC204824 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9F47383294C6EC608D58C907 /* Pods-TomatoCrypto.debug.xcconfig */,
-				BCAAAF4B0FB6804B7AE1D784 /* Pods-TomatoCrypto.release.xcconfig */,
-				01C523649BAB450BA7E6F415 /* Pods-TomatoCryptoTests.debug.xcconfig */,
-				E68DF89913A2B70A65AF3EFB /* Pods-TomatoCryptoTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		53963A179B2FFBD287E9CD11 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				B5468AB9116995485E8F1523 /* Pods_TomatoCrypto.framework */,
-				7EC1AB8397185B6E988F379B /* Pods_TomatoCryptoTests.framework */,
+				988333DCDE43098FBE22026F /* Pods_TomatoCrypto_OSX.framework */,
+				C97679884984992E715BC073 /* Pods_TomatoCrypto_OSXTests.framework */,
+				AD22CED5C3FF39F8F739481B /* Pods_TomatoCrypto_iOS.framework */,
+				E733D882F9D4BCE945C25A5A /* Pods_TomatoCrypto_iOSTests.framework */,
+				EE2E2D6432B0593C53C25FD2 /* Pods_TomatoCrypto_tvOS.framework */,
+				71E51D3CAB858CC1C5421CC5 /* Pods_TomatoCrypto_tvOSTests.framework */,
+				9417F407523B31EAA6DA6C61 /* Pods_TomatoCrypto_watchOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B02D6A061DE6F6CC00878809 /* BlockCiphers */ = {
+		B01407181DEEEE7900D7A5B9 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				B02D6A141DE72AC900878809 /* BlockCipher.swift */,
-				B02D6A091DE6F73800878809 /* Engines */,
-				B02D6A0A1DE6F79400878809 /* Modes */,
-				B02D6A161DE72B1A00878809 /* Paddings */,
-				B02D6A231DE74FC600878809 /* Parameters */,
-				B02D6A2C1DE76E5E00878809 /* Keys */,
-			);
-			path = BlockCiphers;
-			sourceTree = "<group>";
-		};
-		B02D6A091DE6F73800878809 /* Engines */ = {
-			isa = PBXGroup;
-			children = (
-				B02D6A071DE6F6F300878809 /* BlockCipherEngine.swift */,
-				B08F37E31DEA400100705482 /* AesEngine.swift */,
-				B077F2EC1DE9DD2A00EA89B6 /* AesSlowEngine.swift */,
-				B02D6A1F1DE7468C00878809 /* DesEngine.swift */,
-			);
-			path = Engines;
-			sourceTree = "<group>";
-		};
-		B02D6A0A1DE6F79400878809 /* Modes */ = {
-			isa = PBXGroup;
-			children = (
-				B02D6A0D1DE6FC2300878809 /* BlockCipherMode.swift */,
-				B02D6A0B1DE6F7F400878809 /* EcbMode.swift */,
-				B02D6A281DE7515D00878809 /* CbcMode.swift */,
-				B02D6A2F1DE7889400878809 /* OfbMode.swift */,
-				B02D6A351DE794AC00878809 /* CfbMode.swift */,
-				B03C051B1DE82E4C00DB05AC /* CtrMode.swift */,
-			);
-			path = Modes;
-			sourceTree = "<group>";
-		};
-		B02D6A0F1DE6FD7800878809 /* Modes */ = {
-			isa = PBXGroup;
-			children = (
-				B02D6A121DE7203B00878809 /* EcbModeTests.swift */,
-				B02D6A2A1DE76CD100878809 /* CbcModeTests.swift */,
-				B02D6A331DE78B6A00878809 /* OfbModeTests.swift */,
-				B02D6A371DE7970C00878809 /* CfbModeTests.swift */,
-				B03C051D1DE835EC00DB05AC /* CtrModeTests.swift */,
-			);
-			path = Modes;
-			sourceTree = "<group>";
-		};
-		B02D6A161DE72B1A00878809 /* Paddings */ = {
-			isa = PBXGroup;
-			children = (
-				B02D6A1B1DE72DD900878809 /* BlockCipherPadding.swift */,
-				B02D6A1D1DE72FC700878809 /* NoPadding.swift */,
-			);
-			path = Paddings;
-			sourceTree = "<group>";
-		};
-		B02D6A231DE74FC600878809 /* Parameters */ = {
-			isa = PBXGroup;
-			children = (
-				B02D6A241DE7501A00878809 /* BlockCipherParameter.swift */,
-				B02D6A261DE750F500878809 /* IvParameter.swift */,
-			);
-			path = Parameters;
-			sourceTree = "<group>";
-		};
-		B02D6A2C1DE76E5E00878809 /* Keys */ = {
-			isa = PBXGroup;
-			children = (
-				B02D6A2D1DE76EB600878809 /* SecretKey.swift */,
-				B06CA7711DEDDFF70085181C /* SimpleSecretKey.swift */,
-			);
-			path = Keys;
-			sourceTree = "<group>";
-		};
-		B0302F8F1DEC7CCC00E402CE /* AsymmetricBlockCipher */ = {
-			isa = PBXGroup;
-			children = (
-				B0302F9E1DECD93A00E402CE /* Engines */,
-			);
-			name = AsymmetricBlockCipher;
-			path = AsymmetricBlockCiphers;
-			sourceTree = "<group>";
-		};
-		B0302F9E1DECD93A00E402CE /* Engines */ = {
-			isa = PBXGroup;
-			children = (
-				B0302F9F1DECD95400E402CE /* RsaEngine.swift */,
-			);
-			path = Engines;
-			sourceTree = "<group>";
-		};
-		B0302FA11DECDBD300E402CE /* AsymmetricBlockCipher */ = {
-			isa = PBXGroup;
-			children = (
-				B0302FA21DECDBE200E402CE /* Engines */,
-				B06CA7731DEDE1890085181C /* Keys */,
-			);
-			path = AsymmetricBlockCipher;
-			sourceTree = "<group>";
-		};
-		B0302FA21DECDBE200E402CE /* Engines */ = {
-			isa = PBXGroup;
-			children = (
-				B0302FA31DECDC2500E402CE /* RsaEngineTests.swift */,
-			);
-			path = Engines;
-			sourceTree = "<group>";
-		};
-		B06CA7731DEDE1890085181C /* Keys */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Keys;
-			sourceTree = "<group>";
-		};
-		B06CA7741DEDE2730085181C /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				B06CA7751DEDE2C50085181C /* Array.swift */,
-				B06CA7761DEDE2C50085181C /* String.swift */,
+				B01407191DEEEEA900D7A5B9 /* Array.swift */,
+				B014071A1DEEEEA900D7A5B9 /* String.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		B09192031DE598A300B5A760 = {
+		B014071D1DEEEEB400D7A5B9 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				B091920F1DE598A500B5A760 /* TomatoCrypto */,
-				B091921A1DE598A600B5A760 /* TomatoCryptoTests */,
-				B091920E1DE598A500B5A760 /* Products */,
-				3E1DF2C23DE982757DFFE6A0 /* Pods */,
-				53963A179B2FFBD287E9CD11 /* Frameworks */,
-			);
-			sourceTree = "<group>";
-		};
-		B091920E1DE598A500B5A760 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				B091920D1DE598A500B5A760 /* TomatoCrypto.framework */,
-				B09192161DE598A600B5A760 /* TomatoCryptoTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		B091920F1DE598A500B5A760 /* TomatoCrypto */ = {
-			isa = PBXGroup;
-			children = (
-				B091922B1DE5998C00B5A760 /* Common */,
-				B06CA7741DEDE2730085181C /* Utilities */,
-				B02D6A061DE6F6CC00878809 /* BlockCiphers */,
-				B0302F8F1DEC7CCC00E402CE /* AsymmetricBlockCipher */,
-				B09192101DE598A500B5A760 /* TomatoCrypto.h */,
-				B09192111DE598A500B5A760 /* Info.plist */,
-			);
-			path = TomatoCrypto;
-			sourceTree = "<group>";
-		};
-		B091921A1DE598A600B5A760 /* TomatoCryptoTests */ = {
-			isa = PBXGroup;
-			children = (
-				B091922C1DE5999C00B5A760 /* Utilities */,
-				B091922A1DE5997E00B5A760 /* BlockCipher */,
-				B0302FA11DECDBD300E402CE /* AsymmetricBlockCipher */,
-				B091921D1DE598A600B5A760 /* Info.plist */,
-			);
-			path = TomatoCryptoTests;
-			sourceTree = "<group>";
-		};
-		B09192291DE5997700B5A760 /* Engines */ = {
-			isa = PBXGroup;
-			children = (
-				B0A1A6E61DEAE496008BEE5F /* AesEngineTests.swift */,
-				B09192331DE599D700B5A760 /* AesSlowEngineTests.swift */,
-				B02D6A211DE7469200878809 /* DesEngineTests.swift */,
-			);
-			path = Engines;
-			sourceTree = "<group>";
-		};
-		B091922A1DE5997E00B5A760 /* BlockCipher */ = {
-			isa = PBXGroup;
-			children = (
-				B02D6A191DE72C5F00878809 /* BlockCipherTests.swift */,
-				B09192291DE5997700B5A760 /* Engines */,
-				B02D6A0F1DE6FD7800878809 /* Modes */,
-			);
-			name = BlockCipher;
-			path = BlockCiphers;
-			sourceTree = "<group>";
-		};
-		B091922B1DE5998C00B5A760 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				B09192391DE59C1100B5A760 /* Type.swift */,
-				B02D6A101DE6FFE500878809 /* CryptoError.swift */,
+				B014071E1DEEEECF00D7A5B9 /* CryptoError.swift */,
+				B014071F1DEEEECF00D7A5B9 /* Key.swift */,
+				B01407201DEEEECF00D7A5B9 /* Type.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
 		};
-		B091922C1DE5999C00B5A760 /* Utilities */ = {
+		B01407241DEEEEDA00D7A5B9 /* BlockCiphers */ = {
 			isa = PBXGroup;
 			children = (
-				B09192371DE599DF00B5A760 /* StringTests.swift */,
-				B08256FE1DE8DEB9000BA1BD /* ArrayTests.swift */,
+				B014072A1DEEEF3A00D7A5B9 /* BlockCipher.swift */,
+				B01407291DEEEF1800D7A5B9 /* Engines */,
+				B01407281DEEEF1100D7A5B9 /* Keys */,
+				B01407271DEEEF0800D7A5B9 /* Modes */,
+				B01407261DEEEEFF00D7A5B9 /* Paddings */,
+				B01407251DEEEEF200D7A5B9 /* Parameters */,
+			);
+			path = BlockCiphers;
+			sourceTree = "<group>";
+		};
+		B01407251DEEEEF200D7A5B9 /* Parameters */ = {
+			isa = PBXGroup;
+			children = (
+				B01407491DEEEF7F00D7A5B9 /* BlockCipherParameter.swift */,
+				B014074A1DEEEF7F00D7A5B9 /* IvParameter.swift */,
+			);
+			path = Parameters;
+			sourceTree = "<group>";
+		};
+		B01407261DEEEEFF00D7A5B9 /* Paddings */ = {
+			isa = PBXGroup;
+			children = (
+				B01407451DEEEF7400D7A5B9 /* BlockCipherPadding.swift */,
+				B01407461DEEEF7400D7A5B9 /* NoPadding.swift */,
+			);
+			path = Paddings;
+			sourceTree = "<group>";
+		};
+		B01407271DEEEF0800D7A5B9 /* Modes */ = {
+			isa = PBXGroup;
+			children = (
+				B01407381DEEEF6100D7A5B9 /* BlockCipherMode.swift */,
+				B01407391DEEEF6100D7A5B9 /* CbcMode.swift */,
+				B014073A1DEEEF6100D7A5B9 /* CfbMode.swift */,
+				B014073B1DEEEF6100D7A5B9 /* CtrMode.swift */,
+				B014073C1DEEEF6100D7A5B9 /* EcbMode.swift */,
+				B014073D1DEEEF6100D7A5B9 /* OfbMode.swift */,
+			);
+			path = Modes;
+			sourceTree = "<group>";
+		};
+		B01407281DEEEF1100D7A5B9 /* Keys */ = {
+			isa = PBXGroup;
+			children = (
+				B01407341DEEEF5500D7A5B9 /* SecretKey.swift */,
+				B01407351DEEEF5500D7A5B9 /* SimpleSecretKey.swift */,
+			);
+			path = Keys;
+			sourceTree = "<group>";
+		};
+		B01407291DEEEF1800D7A5B9 /* Engines */ = {
+			isa = PBXGroup;
+			children = (
+				B014072C1DEEEF4700D7A5B9 /* AesEngine.swift */,
+				B014072D1DEEEF4700D7A5B9 /* AesSlowEngine.swift */,
+				B014072E1DEEEF4700D7A5B9 /* BlockCipherEngine.swift */,
+				B014072F1DEEEF4700D7A5B9 /* DesEngine.swift */,
+			);
+			path = Engines;
+			sourceTree = "<group>";
+		};
+		B014078F1DEEF00500D7A5B9 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B01407AA1DEEF0C400D7A5B9 /* ArrayTests.swift */,
+				B01407AB1DEEF0C400D7A5B9 /* StringTests.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		B01407901DEEF00D00D7A5B9 /* BlockCiphers */ = {
+			isa = PBXGroup;
+			children = (
+				B01407981DEEF09C00D7A5B9 /* BlockCipherTests.swift */,
+				B01407971DEEF06900D7A5B9 /* Engines */,
+				B01407961DEEF06100D7A5B9 /* Modes */,
+			);
+			path = BlockCiphers;
+			sourceTree = "<group>";
+		};
+		B01407911DEEF01400D7A5B9 /* AsymmetricBlockCipher */ = {
+			isa = PBXGroup;
+			children = (
+				B01407921DEEF01F00D7A5B9 /* Engines */,
+				B01407931DEEF02700D7A5B9 /* Keys */,
+			);
+			path = AsymmetricBlockCipher;
+			sourceTree = "<group>";
+		};
+		B01407921DEEF01F00D7A5B9 /* Engines */ = {
+			isa = PBXGroup;
+			children = (
+				B01407941DEEF04900D7A5B9 /* RsaEngineTests.swift */,
+			);
+			path = Engines;
+			sourceTree = "<group>";
+		};
+		B01407931DEEF02700D7A5B9 /* Keys */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Keys;
+			sourceTree = "<group>";
+		};
+		B01407961DEEF06100D7A5B9 /* Modes */ = {
+			isa = PBXGroup;
+			children = (
+				B01407A01DEEF0B300D7A5B9 /* CbcModeTests.swift */,
+				B01407A11DEEF0B300D7A5B9 /* CfbModeTests.swift */,
+				B01407A21DEEF0B300D7A5B9 /* CtrModeTests.swift */,
+				B01407A31DEEF0B300D7A5B9 /* EcbModeTests.swift */,
+				B01407A41DEEF0B300D7A5B9 /* OfbModeTests.swift */,
+			);
+			path = Modes;
+			sourceTree = "<group>";
+		};
+		B01407971DEEF06900D7A5B9 /* Engines */ = {
+			isa = PBXGroup;
+			children = (
+				B014079A1DEEF0A700D7A5B9 /* AesEngineTests.swift */,
+				B014079B1DEEF0A700D7A5B9 /* AesSlowEngineTests.swift */,
+				B014079C1DEEF0A700D7A5B9 /* DesEngineTests.swift */,
+			);
+			path = Engines;
+			sourceTree = "<group>";
+		};
+		B01407D21DEEF13600D7A5B9 /* AsymmetricBlockCiphers */ = {
+			isa = PBXGroup;
+			children = (
+				B01407DC1DEEF15700D7A5B9 /* Engines */,
+				B01407D31DEEF14500D7A5B9 /* Keys */,
+			);
+			path = AsymmetricBlockCiphers;
+			sourceTree = "<group>";
+		};
+		B01407D31DEEF14500D7A5B9 /* Keys */ = {
+			isa = PBXGroup;
+			children = (
+				B01407D41DEEF15400D7A5B9 /* PrivateKey.swift */,
+				B01407D51DEEF15400D7A5B9 /* PublicKey.swift */,
+				B01407D61DEEF15400D7A5B9 /* RsaPrivateKey.swift */,
+				B01407D71DEEF15400D7A5B9 /* RsaPublicKey.swift */,
+			);
+			path = Keys;
+			sourceTree = "<group>";
+		};
+		B01407DC1DEEF15700D7A5B9 /* Engines */ = {
+			isa = PBXGroup;
+			children = (
+				B01407DD1DEEF16600D7A5B9 /* RsaEngine.swift */,
+			);
+			path = Engines;
+			sourceTree = "<group>";
+		};
+		B059B4EC1DEED9C50018C016 = {
+			isa = PBXGroup;
+			children = (
+				B059B5551DEEDA820018C016 /* Sources */,
+				B059B5651DEEDE520018C016 /* Tests */,
+				B059B4F91DEED9E60018C016 /* Products */,
+				D365370636BDAB0E36E18519 /* Pods */,
+				697424C8C4D8243ADC204824 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		B059B4F91DEED9E60018C016 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B059B4F81DEED9E60018C016 /* TomatoCrypto.framework */,
+				B059B5011DEED9E60018C016 /* TomatoCryptoTests.xctest */,
+				B059B5151DEED9FD0018C016 /* TomatoCrypto.framework */,
+				B059B51D1DEED9FD0018C016 /* TomatoCryptoTests.xctest */,
+				B059B5311DEEDA140018C016 /* TomatoCrypto.framework */,
+				B059B53E1DEEDA240018C016 /* TomatoCrypto.framework */,
+				B059B5461DEEDA250018C016 /* TomatoCryptoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B059B5551DEEDA820018C016 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				B01407D21DEEF13600D7A5B9 /* AsymmetricBlockCiphers */,
+				B01407241DEEEEDA00D7A5B9 /* BlockCiphers */,
+				B014071D1DEEEEB400D7A5B9 /* Common */,
+				B01407181DEEEE7900D7A5B9 /* Utilities */,
+				B059B5561DEEDA940018C016 /* Info.plist */,
+				B059B5571DEEDA940018C016 /* TomatoCrypto.h */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		B059B5651DEEDE520018C016 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				B01407911DEEF01400D7A5B9 /* AsymmetricBlockCipher */,
+				B01407901DEEF00D00D7A5B9 /* BlockCiphers */,
+				B014078F1DEEF00500D7A5B9 /* Utilities */,
+				B059B5661DEEDE670018C016 /* Info.plist */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		D365370636BDAB0E36E18519 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				01EF21C300A074FD4B2AFF45 /* Pods-TomatoCrypto-OSX.debug.xcconfig */,
+				EC16958453CD59C30BB55028 /* Pods-TomatoCrypto-OSX.release.xcconfig */,
+				9FAF40F7DD5B62BCC4035FE4 /* Pods-TomatoCrypto-OSXTests.debug.xcconfig */,
+				D851CD41F7C5C61A7F47777A /* Pods-TomatoCrypto-OSXTests.release.xcconfig */,
+				41EBD43067305CE03D6420EA /* Pods-TomatoCrypto-iOS.debug.xcconfig */,
+				7A1EEA79CC8635A2C96F5BA6 /* Pods-TomatoCrypto-iOS.release.xcconfig */,
+				562451FA84C179346EFB61F7 /* Pods-TomatoCrypto-iOSTests.debug.xcconfig */,
+				289C503B153DDCD75D906EDC /* Pods-TomatoCrypto-iOSTests.release.xcconfig */,
+				570B38DC6CDD03E658899848 /* Pods-TomatoCrypto-tvOS.debug.xcconfig */,
+				8F96CE5EE964725BAF4BD2F6 /* Pods-TomatoCrypto-tvOS.release.xcconfig */,
+				FAF4F492AFD58C02FAAB2EF1 /* Pods-TomatoCrypto-tvOSTests.debug.xcconfig */,
+				43D1A3FBF9AB144DF4394A7B /* Pods-TomatoCrypto-tvOSTests.release.xcconfig */,
+				CA917B1D79CDCD5FDB376C17 /* Pods-TomatoCrypto-watchOS.debug.xcconfig */,
+				95C1EE3A486F17D9C8E8DDC9 /* Pods-TomatoCrypto-watchOS.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		B091920A1DE598A300B5A760 /* Headers */ = {
+		B059B4F51DEED9E60018C016 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B091921E1DE598A600B5A760 /* TomatoCrypto.h in Headers */,
+				B059B5591DEEDA940018C016 /* TomatoCrypto.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B059B5121DEED9FD0018C016 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B059B55D1DEEDAB90018C016 /* TomatoCrypto.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B059B52E1DEEDA130018C016 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B059B55E1DEEDABA0018C016 /* TomatoCrypto.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B059B53B1DEEDA240018C016 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B059B55F1DEEDABA0018C016 /* TomatoCrypto.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		B091920C1DE598A300B5A760 /* TomatoCrypto */ = {
+		B059B4F71DEED9E60018C016 /* TomatoCrypto-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B09192211DE598A600B5A760 /* Build configuration list for PBXNativeTarget "TomatoCrypto" */;
+			buildConfigurationList = B059B50A1DEED9E60018C016 /* Build configuration list for PBXNativeTarget "TomatoCrypto-iOS" */;
 			buildPhases = (
-				A85B32F2E6D40E0162671FAC /* [CP] Check Pods Manifest.lock */,
-				B09192081DE598A300B5A760 /* Sources */,
-				B09192091DE598A300B5A760 /* Frameworks */,
-				B091920A1DE598A300B5A760 /* Headers */,
-				B091920B1DE598A300B5A760 /* Resources */,
-				A9C9EC867F5116E6EEA41D4E /* [CP] Copy Pods Resources */,
+				A1AF5D211D95F6530DE40E9C /* [CP] Check Pods Manifest.lock */,
+				B059B4F31DEED9E60018C016 /* Sources */,
+				B059B4F41DEED9E60018C016 /* Frameworks */,
+				B059B4F51DEED9E60018C016 /* Headers */,
+				B059B4F61DEED9E60018C016 /* Resources */,
+				2197724E1D255CAB4FB2AB68 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = TomatoCrypto;
-			productName = TomatoCrypto;
-			productReference = B091920D1DE598A500B5A760 /* TomatoCrypto.framework */;
+			name = "TomatoCrypto-iOS";
+			productName = "TomatoCrypto-iOS";
+			productReference = B059B4F81DEED9E60018C016 /* TomatoCrypto.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		B09192151DE598A600B5A760 /* TomatoCryptoTests */ = {
+		B059B5001DEED9E60018C016 /* TomatoCrypto-iOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B09192241DE598A600B5A760 /* Build configuration list for PBXNativeTarget "TomatoCryptoTests" */;
+			buildConfigurationList = B059B50D1DEED9E60018C016 /* Build configuration list for PBXNativeTarget "TomatoCrypto-iOSTests" */;
 			buildPhases = (
-				03956A225CD18DF70951CEAD /* [CP] Check Pods Manifest.lock */,
-				B09192121DE598A600B5A760 /* Sources */,
-				B09192131DE598A600B5A760 /* Frameworks */,
-				B09192141DE598A600B5A760 /* Resources */,
-				5ABB6172190936DAEFCEADF6 /* [CP] Embed Pods Frameworks */,
-				7F42740CAF75B044DC1E46FF /* [CP] Copy Pods Resources */,
+				875881227F1D2AEBE0DDE946 /* [CP] Check Pods Manifest.lock */,
+				B059B4FD1DEED9E60018C016 /* Sources */,
+				B059B4FE1DEED9E60018C016 /* Frameworks */,
+				B059B4FF1DEED9E60018C016 /* Resources */,
+				EC302B532118E5CCB00DC522 /* [CP] Embed Pods Frameworks */,
+				FF4152D4FC426F6D562520C8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				B09192191DE598A600B5A760 /* PBXTargetDependency */,
+				B059B5041DEED9E60018C016 /* PBXTargetDependency */,
 			);
-			name = TomatoCryptoTests;
-			productName = TomatoCryptoTests;
-			productReference = B09192161DE598A600B5A760 /* TomatoCryptoTests.xctest */;
+			name = "TomatoCrypto-iOSTests";
+			productName = "TomatoCrypto-iOSTests";
+			productReference = B059B5011DEED9E60018C016 /* TomatoCryptoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B059B5141DEED9FD0018C016 /* TomatoCrypto-OSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B059B5261DEED9FD0018C016 /* Build configuration list for PBXNativeTarget "TomatoCrypto-OSX" */;
+			buildPhases = (
+				3125FA77A47D90385AFE2A2E /* [CP] Check Pods Manifest.lock */,
+				B059B5101DEED9FD0018C016 /* Sources */,
+				B059B5111DEED9FD0018C016 /* Frameworks */,
+				B059B5121DEED9FD0018C016 /* Headers */,
+				B059B5131DEED9FD0018C016 /* Resources */,
+				83683B7B6F7364B281D28B4D /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "TomatoCrypto-OSX";
+			productName = "TomatoCrypto-OSX";
+			productReference = B059B5151DEED9FD0018C016 /* TomatoCrypto.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		B059B51C1DEED9FD0018C016 /* TomatoCrypto-OSXTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B059B5291DEED9FD0018C016 /* Build configuration list for PBXNativeTarget "TomatoCrypto-OSXTests" */;
+			buildPhases = (
+				A2509114BADF6DB569C66239 /* [CP] Check Pods Manifest.lock */,
+				B059B5191DEED9FD0018C016 /* Sources */,
+				B059B51A1DEED9FD0018C016 /* Frameworks */,
+				B059B51B1DEED9FD0018C016 /* Resources */,
+				1F87D835507ECEF451572CFE /* [CP] Embed Pods Frameworks */,
+				AB7E28D934453F28D12F4FDF /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B059B5201DEED9FD0018C016 /* PBXTargetDependency */,
+			);
+			name = "TomatoCrypto-OSXTests";
+			productName = "TomatoCrypto-OSXTests";
+			productReference = B059B51D1DEED9FD0018C016 /* TomatoCryptoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B059B5301DEEDA130018C016 /* TomatoCrypto-watchOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B059B5361DEEDA140018C016 /* Build configuration list for PBXNativeTarget "TomatoCrypto-watchOS" */;
+			buildPhases = (
+				31785B60FEE3E719D3C83603 /* [CP] Check Pods Manifest.lock */,
+				B059B52C1DEEDA130018C016 /* Sources */,
+				B059B52D1DEEDA130018C016 /* Frameworks */,
+				B059B52E1DEEDA130018C016 /* Headers */,
+				B059B52F1DEEDA130018C016 /* Resources */,
+				0E209C75476137CBA6570635 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "TomatoCrypto-watchOS";
+			productName = "TomatoCrypto-watchOS";
+			productReference = B059B5311DEEDA140018C016 /* TomatoCrypto.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		B059B53D1DEEDA240018C016 /* TomatoCrypto-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B059B54F1DEEDA250018C016 /* Build configuration list for PBXNativeTarget "TomatoCrypto-tvOS" */;
+			buildPhases = (
+				82EA1276C123CD736378DFE5 /* [CP] Check Pods Manifest.lock */,
+				B059B5391DEEDA240018C016 /* Sources */,
+				B059B53A1DEEDA240018C016 /* Frameworks */,
+				B059B53B1DEEDA240018C016 /* Headers */,
+				B059B53C1DEEDA240018C016 /* Resources */,
+				8F0D7AA5829344AEF0ED7558 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "TomatoCrypto-tvOS";
+			productName = "TomatoCrypto-tvOS";
+			productReference = B059B53E1DEEDA240018C016 /* TomatoCrypto.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		B059B5451DEEDA250018C016 /* TomatoCrypto-tvOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B059B5521DEEDA250018C016 /* Build configuration list for PBXNativeTarget "TomatoCrypto-tvOSTests" */;
+			buildPhases = (
+				9CAB48375C0465A44F040259 /* [CP] Check Pods Manifest.lock */,
+				B059B5421DEEDA250018C016 /* Sources */,
+				B059B5431DEEDA250018C016 /* Frameworks */,
+				B059B5441DEEDA250018C016 /* Resources */,
+				EB5A974F4DC7B34A21571E74 /* [CP] Embed Pods Frameworks */,
+				4E8C3EE17379FAA26A5A1D36 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B059B5491DEEDA250018C016 /* PBXTargetDependency */,
+			);
+			name = "TomatoCrypto-tvOSTests";
+			productName = "TomatoCrypto-tvOSTests";
+			productReference = B059B5461DEEDA250018C016 /* TomatoCryptoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		B09192041DE598A300B5A760 /* Project object */ = {
+		B059B4ED1DEED9C50018C016 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
 				LastUpgradeCheck = 0810;
-				ORGANIZATIONNAME = "Xuan Hau Huang";
 				TargetAttributes = {
-					B091920C1DE598A300B5A760 = {
+					B059B4F71DEED9E60018C016 = {
 						CreatedOnToolsVersion = 8.1;
 						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 					};
-					B09192151DE598A600B5A760 = {
+					B059B5001DEED9E60018C016 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+					};
+					B059B5141DEED9FD0018C016 = {
+						CreatedOnToolsVersion = 8.1;
+						LastSwiftMigration = 0810;
+						ProvisioningStyle = Automatic;
+					};
+					B059B51C1DEED9FD0018C016 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+					};
+					B059B5301DEEDA130018C016 = {
+						CreatedOnToolsVersion = 8.1;
+						LastSwiftMigration = 0810;
+						ProvisioningStyle = Automatic;
+					};
+					B059B53D1DEEDA240018C016 = {
+						CreatedOnToolsVersion = 8.1;
+						LastSwiftMigration = 0810;
+						ProvisioningStyle = Automatic;
+					};
+					B059B5451DEEDA250018C016 = {
 						CreatedOnToolsVersion = 8.1;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = B09192071DE598A300B5A760 /* Build configuration list for PBXProject "TomatoCrypto" */;
+			buildConfigurationList = B059B4F01DEED9C50018C016 /* Build configuration list for PBXProject "TomatoCrypto" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = B09192031DE598A300B5A760;
-			productRefGroup = B091920E1DE598A500B5A760 /* Products */;
+			mainGroup = B059B4EC1DEED9C50018C016;
+			productRefGroup = B059B4F91DEED9E60018C016 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B091920C1DE598A300B5A760 /* TomatoCrypto */,
-				B09192151DE598A600B5A760 /* TomatoCryptoTests */,
+				B059B4F71DEED9E60018C016 /* TomatoCrypto-iOS */,
+				B059B5001DEED9E60018C016 /* TomatoCrypto-iOSTests */,
+				B059B5141DEED9FD0018C016 /* TomatoCrypto-OSX */,
+				B059B51C1DEED9FD0018C016 /* TomatoCrypto-OSXTests */,
+				B059B5301DEEDA130018C016 /* TomatoCrypto-watchOS */,
+				B059B53D1DEEDA240018C016 /* TomatoCrypto-tvOS */,
+				B059B5451DEEDA250018C016 /* TomatoCrypto-tvOSTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		B091920B1DE598A300B5A760 /* Resources */ = {
+		B059B4F61DEED9E60018C016 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B059B5581DEEDA940018C016 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B09192141DE598A600B5A760 /* Resources */ = {
+		B059B4FF1DEED9E60018C016 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B059B56A1DEEDE8C0018C016 /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B059B5131DEED9FD0018C016 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B059B55A1DEEDAB30018C016 /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B059B51B1DEED9FD0018C016 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B059B56B1DEEDE8C0018C016 /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B059B52F1DEEDA130018C016 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B059B55B1DEEDAB30018C016 /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B059B53C1DEEDA240018C016 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B059B55C1DEEDAB40018C016 /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B059B5441DEEDA250018C016 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B059B56C1DEEDE8E0018C016 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		03956A225CD18DF70951CEAD /* [CP] Check Pods Manifest.lock */ = {
+		0E209C75476137CBA6570635 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TomatoCrypto-watchOS/Pods-TomatoCrypto-watchOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5ABB6172190936DAEFCEADF6 /* [CP] Embed Pods Frameworks */ = {
+		1F87D835507ECEF451572CFE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -494,10 +928,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TomatoCryptoTests/Pods-TomatoCryptoTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TomatoCrypto-OSXTests/Pods-TomatoCrypto-OSXTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7F42740CAF75B044DC1E46FF /* [CP] Copy Pods Resources */ = {
+		2197724E1D255CAB4FB2AB68 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -509,10 +943,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TomatoCryptoTests/Pods-TomatoCryptoTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TomatoCrypto-iOS/Pods-TomatoCrypto-iOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A85B32F2E6D40E0162671FAC /* [CP] Check Pods Manifest.lock */ = {
+		3125FA77A47D90385AFE2A2E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -527,7 +961,22 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		A9C9EC867F5116E6EEA41D4E /* [CP] Copy Pods Resources */ = {
+		31785B60FEE3E719D3C83603 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4E8C3EE17379FAA26A5A1D36 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -539,74 +988,535 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TomatoCrypto/Pods-TomatoCrypto-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TomatoCrypto-tvOSTests/Pods-TomatoCrypto-tvOSTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		82EA1276C123CD736378DFE5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		83683B7B6F7364B281D28B4D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TomatoCrypto-OSX/Pods-TomatoCrypto-OSX-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		875881227F1D2AEBE0DDE946 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8F0D7AA5829344AEF0ED7558 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TomatoCrypto-tvOS/Pods-TomatoCrypto-tvOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9CAB48375C0465A44F040259 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A1AF5D211D95F6530DE40E9C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A2509114BADF6DB569C66239 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		AB7E28D934453F28D12F4FDF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TomatoCrypto-OSXTests/Pods-TomatoCrypto-OSXTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EB5A974F4DC7B34A21571E74 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TomatoCrypto-tvOSTests/Pods-TomatoCrypto-tvOSTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EC302B532118E5CCB00DC522 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TomatoCrypto-iOSTests/Pods-TomatoCrypto-iOSTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FF4152D4FC426F6D562520C8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TomatoCrypto-iOSTests/Pods-TomatoCrypto-iOSTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		B09192081DE598A300B5A760 /* Sources */ = {
+		B059B4F31DEED9E60018C016 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B02D6A361DE794AC00878809 /* CfbMode.swift in Sources */,
-				B02D6A271DE750F500878809 /* IvParameter.swift in Sources */,
-				B0302FA01DECD95400E402CE /* RsaEngine.swift in Sources */,
-				B02D6A2E1DE76EB600878809 /* SecretKey.swift in Sources */,
-				B02D6A251DE7501A00878809 /* BlockCipherParameter.swift in Sources */,
-				B02D6A151DE72AC900878809 /* BlockCipher.swift in Sources */,
-				B02D6A301DE7889400878809 /* OfbMode.swift in Sources */,
-				B08F37E41DEA400100705482 /* AesEngine.swift in Sources */,
-				B02D6A1C1DE72DD900878809 /* BlockCipherPadding.swift in Sources */,
-				B06CA7771DEDE2C50085181C /* Array.swift in Sources */,
-				B02D6A1E1DE72FC700878809 /* NoPadding.swift in Sources */,
-				B02D6A111DE6FFE500878809 /* CryptoError.swift in Sources */,
-				B06CA7781DEDE2C50085181C /* String.swift in Sources */,
-				B077F2ED1DE9DD2A00EA89B6 /* AesSlowEngine.swift in Sources */,
-				B02D6A291DE7515D00878809 /* CbcMode.swift in Sources */,
-				B06CA7721DEDDFF70085181C /* SimpleSecretKey.swift in Sources */,
-				B02D6A0E1DE6FC2300878809 /* BlockCipherMode.swift in Sources */,
-				B03C051C1DE82E4C00DB05AC /* CtrMode.swift in Sources */,
-				B02D6A081DE6F6F300878809 /* BlockCipherEngine.swift in Sources */,
-				B091923A1DE59C1100B5A760 /* Type.swift in Sources */,
-				B02D6A0C1DE6F7F400878809 /* EcbMode.swift in Sources */,
-				B02D6A201DE7468C00878809 /* DesEngine.swift in Sources */,
+				B014072B1DEEEF3A00D7A5B9 /* BlockCipher.swift in Sources */,
+				B01407411DEEEF6100D7A5B9 /* CtrMode.swift in Sources */,
+				B014073E1DEEEF6100D7A5B9 /* BlockCipherMode.swift in Sources */,
+				B01407DA1DEEF15400D7A5B9 /* RsaPrivateKey.swift in Sources */,
+				B01407361DEEEF5500D7A5B9 /* SecretKey.swift in Sources */,
+				B01407311DEEEF4700D7A5B9 /* AesSlowEngine.swift in Sources */,
+				B01407421DEEEF6100D7A5B9 /* EcbMode.swift in Sources */,
+				B01407371DEEEF5500D7A5B9 /* SimpleSecretKey.swift in Sources */,
+				B01407301DEEEF4700D7A5B9 /* AesEngine.swift in Sources */,
+				B01407471DEEEF7400D7A5B9 /* BlockCipherPadding.swift in Sources */,
+				B014071C1DEEEEA900D7A5B9 /* String.swift in Sources */,
+				B01407D91DEEF15400D7A5B9 /* PublicKey.swift in Sources */,
+				B01407D81DEEF15400D7A5B9 /* PrivateKey.swift in Sources */,
+				B01407DB1DEEF15400D7A5B9 /* RsaPublicKey.swift in Sources */,
+				B01407221DEEEECF00D7A5B9 /* Key.swift in Sources */,
+				B01407401DEEEF6100D7A5B9 /* CfbMode.swift in Sources */,
+				B01407321DEEEF4700D7A5B9 /* BlockCipherEngine.swift in Sources */,
+				B014071B1DEEEEA900D7A5B9 /* Array.swift in Sources */,
+				B01407211DEEEECF00D7A5B9 /* CryptoError.swift in Sources */,
+				B014074C1DEEEF7F00D7A5B9 /* IvParameter.swift in Sources */,
+				B01407DE1DEEF16600D7A5B9 /* RsaEngine.swift in Sources */,
+				B014073F1DEEEF6100D7A5B9 /* CbcMode.swift in Sources */,
+				B01407231DEEEECF00D7A5B9 /* Type.swift in Sources */,
+				B014074B1DEEEF7F00D7A5B9 /* BlockCipherParameter.swift in Sources */,
+				B01407431DEEEF6100D7A5B9 /* OfbMode.swift in Sources */,
+				B01407481DEEEF7400D7A5B9 /* NoPadding.swift in Sources */,
+				B01407331DEEEF4700D7A5B9 /* DesEngine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B09192121DE598A600B5A760 /* Sources */ = {
+		B059B4FD1DEED9E60018C016 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B02D6A381DE7970C00878809 /* CfbModeTests.swift in Sources */,
-				B09192341DE599D700B5A760 /* AesSlowEngineTests.swift in Sources */,
-				B09192381DE599DF00B5A760 /* StringTests.swift in Sources */,
-				B02D6A221DE7469200878809 /* DesEngineTests.swift in Sources */,
-				B02D6A2B1DE76CD100878809 /* CbcModeTests.swift in Sources */,
-				B08256FF1DE8DEB9000BA1BD /* ArrayTests.swift in Sources */,
-				B0302FA41DECDC2500E402CE /* RsaEngineTests.swift in Sources */,
-				B0A1A6E71DEAE496008BEE5F /* AesEngineTests.swift in Sources */,
-				B02D6A1A1DE72C5F00878809 /* BlockCipherTests.swift in Sources */,
-				B03C051E1DE835EC00DB05AC /* CtrModeTests.swift in Sources */,
-				B02D6A131DE7203B00878809 /* EcbModeTests.swift in Sources */,
-				B02D6A341DE78B6A00878809 /* OfbModeTests.swift in Sources */,
+				B01407B41DEEF0D400D7A5B9 /* CfbModeTests.swift in Sources */,
+				B01407B71DEEF0D400D7A5B9 /* OfbModeTests.swift in Sources */,
+				B01407B91DEEF0D400D7A5B9 /* StringTests.swift in Sources */,
+				B01407B21DEEF0D400D7A5B9 /* DesEngineTests.swift in Sources */,
+				B01407B11DEEF0D400D7A5B9 /* AesSlowEngineTests.swift in Sources */,
+				B01407B61DEEF0D400D7A5B9 /* EcbModeTests.swift in Sources */,
+				B01407AF1DEEF0D400D7A5B9 /* BlockCipherTests.swift in Sources */,
+				B01407B01DEEF0D400D7A5B9 /* AesEngineTests.swift in Sources */,
+				B01407B31DEEF0D400D7A5B9 /* CbcModeTests.swift in Sources */,
+				B01407B51DEEF0D400D7A5B9 /* CtrModeTests.swift in Sources */,
+				B01407B81DEEF0D400D7A5B9 /* ArrayTests.swift in Sources */,
+				B01407AE1DEEF0D400D7A5B9 /* RsaEngineTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B059B5101DEED9FD0018C016 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B01407531DEEEFB100D7A5B9 /* DesEngine.swift in Sources */,
+				B01407811DEEEFD800D7A5B9 /* Key.swift in Sources */,
+				B01407841DEEEFD800D7A5B9 /* String.swift in Sources */,
+				B014075D1DEEEFCC00D7A5B9 /* SimpleSecretKey.swift in Sources */,
+				B01407611DEEEFCC00D7A5B9 /* CtrMode.swift in Sources */,
+				B01407641DEEEFCC00D7A5B9 /* BlockCipherPadding.swift in Sources */,
+				B01407671DEEEFCC00D7A5B9 /* IvParameter.swift in Sources */,
+				B01407601DEEEFCC00D7A5B9 /* CfbMode.swift in Sources */,
+				B01407661DEEEFCC00D7A5B9 /* BlockCipherParameter.swift in Sources */,
+				B01407501DEEEFB100D7A5B9 /* AesEngine.swift in Sources */,
+				B01407521DEEEFB100D7A5B9 /* BlockCipherEngine.swift in Sources */,
+				B014074D1DEEEFA100D7A5B9 /* BlockCipher.swift in Sources */,
+				B01407E21DEEF16C00D7A5B9 /* RsaPrivateKey.swift in Sources */,
+				B01407821DEEEFD800D7A5B9 /* Type.swift in Sources */,
+				B01407621DEEEFCC00D7A5B9 /* EcbMode.swift in Sources */,
+				B014075E1DEEEFCC00D7A5B9 /* BlockCipherMode.swift in Sources */,
+				B01407E11DEEF16C00D7A5B9 /* PublicKey.swift in Sources */,
+				B014075C1DEEEFCC00D7A5B9 /* SecretKey.swift in Sources */,
+				B01407631DEEEFCC00D7A5B9 /* OfbMode.swift in Sources */,
+				B014075F1DEEEFCC00D7A5B9 /* CbcMode.swift in Sources */,
+				B01407831DEEEFD800D7A5B9 /* Array.swift in Sources */,
+				B01407DF1DEEF16C00D7A5B9 /* RsaEngine.swift in Sources */,
+				B01407801DEEEFD800D7A5B9 /* CryptoError.swift in Sources */,
+				B01407511DEEEFB100D7A5B9 /* AesSlowEngine.swift in Sources */,
+				B01407651DEEEFCC00D7A5B9 /* NoPadding.swift in Sources */,
+				B01407E01DEEF16C00D7A5B9 /* PrivateKey.swift in Sources */,
+				B01407E31DEEF16C00D7A5B9 /* RsaPublicKey.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B059B5191DEED9FD0018C016 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B01407C01DEEF0D400D7A5B9 /* CfbModeTests.swift in Sources */,
+				B01407C31DEEF0D400D7A5B9 /* OfbModeTests.swift in Sources */,
+				B01407C51DEEF0D400D7A5B9 /* StringTests.swift in Sources */,
+				B01407BE1DEEF0D400D7A5B9 /* DesEngineTests.swift in Sources */,
+				B01407BD1DEEF0D400D7A5B9 /* AesSlowEngineTests.swift in Sources */,
+				B01407C21DEEF0D400D7A5B9 /* EcbModeTests.swift in Sources */,
+				B01407BB1DEEF0D400D7A5B9 /* BlockCipherTests.swift in Sources */,
+				B01407BC1DEEF0D400D7A5B9 /* AesEngineTests.swift in Sources */,
+				B01407BF1DEEF0D400D7A5B9 /* CbcModeTests.swift in Sources */,
+				B01407C11DEEF0D400D7A5B9 /* CtrModeTests.swift in Sources */,
+				B01407C41DEEF0D400D7A5B9 /* ArrayTests.swift in Sources */,
+				B01407BA1DEEF0D400D7A5B9 /* RsaEngineTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B059B52C1DEEDA130018C016 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B01407571DEEEFB200D7A5B9 /* DesEngine.swift in Sources */,
+				B01407861DEEEFD900D7A5B9 /* Key.swift in Sources */,
+				B01407891DEEEFD900D7A5B9 /* String.swift in Sources */,
+				B01407691DEEEFCC00D7A5B9 /* SimpleSecretKey.swift in Sources */,
+				B014076D1DEEEFCC00D7A5B9 /* CtrMode.swift in Sources */,
+				B01407701DEEEFCC00D7A5B9 /* BlockCipherPadding.swift in Sources */,
+				B01407731DEEEFCC00D7A5B9 /* IvParameter.swift in Sources */,
+				B014076C1DEEEFCC00D7A5B9 /* CfbMode.swift in Sources */,
+				B01407721DEEEFCC00D7A5B9 /* BlockCipherParameter.swift in Sources */,
+				B01407541DEEEFB200D7A5B9 /* AesEngine.swift in Sources */,
+				B01407561DEEEFB200D7A5B9 /* BlockCipherEngine.swift in Sources */,
+				B014074E1DEEEFA200D7A5B9 /* BlockCipher.swift in Sources */,
+				B01407E71DEEF16D00D7A5B9 /* RsaPrivateKey.swift in Sources */,
+				B01407871DEEEFD900D7A5B9 /* Type.swift in Sources */,
+				B014076E1DEEEFCC00D7A5B9 /* EcbMode.swift in Sources */,
+				B014076A1DEEEFCC00D7A5B9 /* BlockCipherMode.swift in Sources */,
+				B01407E61DEEF16D00D7A5B9 /* PublicKey.swift in Sources */,
+				B01407681DEEEFCC00D7A5B9 /* SecretKey.swift in Sources */,
+				B014076F1DEEEFCC00D7A5B9 /* OfbMode.swift in Sources */,
+				B014076B1DEEEFCC00D7A5B9 /* CbcMode.swift in Sources */,
+				B01407881DEEEFD900D7A5B9 /* Array.swift in Sources */,
+				B01407E41DEEF16D00D7A5B9 /* RsaEngine.swift in Sources */,
+				B01407851DEEEFD900D7A5B9 /* CryptoError.swift in Sources */,
+				B01407551DEEEFB200D7A5B9 /* AesSlowEngine.swift in Sources */,
+				B01407711DEEEFCC00D7A5B9 /* NoPadding.swift in Sources */,
+				B01407E51DEEF16D00D7A5B9 /* PrivateKey.swift in Sources */,
+				B01407E81DEEF16D00D7A5B9 /* RsaPublicKey.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B059B5391DEEDA240018C016 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B014075B1DEEEFB200D7A5B9 /* DesEngine.swift in Sources */,
+				B014078B1DEEEFD900D7A5B9 /* Key.swift in Sources */,
+				B014078E1DEEEFD900D7A5B9 /* String.swift in Sources */,
+				B01407751DEEEFCD00D7A5B9 /* SimpleSecretKey.swift in Sources */,
+				B01407791DEEEFCD00D7A5B9 /* CtrMode.swift in Sources */,
+				B014077C1DEEEFCD00D7A5B9 /* BlockCipherPadding.swift in Sources */,
+				B014077F1DEEEFCD00D7A5B9 /* IvParameter.swift in Sources */,
+				B01407781DEEEFCD00D7A5B9 /* CfbMode.swift in Sources */,
+				B014077E1DEEEFCD00D7A5B9 /* BlockCipherParameter.swift in Sources */,
+				B01407581DEEEFB200D7A5B9 /* AesEngine.swift in Sources */,
+				B014075A1DEEEFB200D7A5B9 /* BlockCipherEngine.swift in Sources */,
+				B014074F1DEEEFA200D7A5B9 /* BlockCipher.swift in Sources */,
+				B01407EC1DEEF16D00D7A5B9 /* RsaPrivateKey.swift in Sources */,
+				B014078C1DEEEFD900D7A5B9 /* Type.swift in Sources */,
+				B014077A1DEEEFCD00D7A5B9 /* EcbMode.swift in Sources */,
+				B01407761DEEEFCD00D7A5B9 /* BlockCipherMode.swift in Sources */,
+				B01407EB1DEEF16D00D7A5B9 /* PublicKey.swift in Sources */,
+				B01407741DEEEFCD00D7A5B9 /* SecretKey.swift in Sources */,
+				B014077B1DEEEFCD00D7A5B9 /* OfbMode.swift in Sources */,
+				B01407771DEEEFCD00D7A5B9 /* CbcMode.swift in Sources */,
+				B014078D1DEEEFD900D7A5B9 /* Array.swift in Sources */,
+				B01407E91DEEF16D00D7A5B9 /* RsaEngine.swift in Sources */,
+				B014078A1DEEEFD900D7A5B9 /* CryptoError.swift in Sources */,
+				B01407591DEEEFB200D7A5B9 /* AesSlowEngine.swift in Sources */,
+				B014077D1DEEEFCD00D7A5B9 /* NoPadding.swift in Sources */,
+				B01407EA1DEEF16D00D7A5B9 /* PrivateKey.swift in Sources */,
+				B01407ED1DEEF16D00D7A5B9 /* RsaPublicKey.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B059B5421DEEDA250018C016 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B01407CC1DEEF0D500D7A5B9 /* CfbModeTests.swift in Sources */,
+				B01407CF1DEEF0D500D7A5B9 /* OfbModeTests.swift in Sources */,
+				B01407D11DEEF0D500D7A5B9 /* StringTests.swift in Sources */,
+				B01407CA1DEEF0D500D7A5B9 /* DesEngineTests.swift in Sources */,
+				B01407C91DEEF0D500D7A5B9 /* AesSlowEngineTests.swift in Sources */,
+				B01407CE1DEEF0D500D7A5B9 /* EcbModeTests.swift in Sources */,
+				B01407C71DEEF0D500D7A5B9 /* BlockCipherTests.swift in Sources */,
+				B01407C81DEEF0D500D7A5B9 /* AesEngineTests.swift in Sources */,
+				B01407CB1DEEF0D500D7A5B9 /* CbcModeTests.swift in Sources */,
+				B01407CD1DEEF0D500D7A5B9 /* CtrModeTests.swift in Sources */,
+				B01407D01DEEF0D500D7A5B9 /* ArrayTests.swift in Sources */,
+				B01407C61DEEF0D500D7A5B9 /* RsaEngineTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		B09192191DE598A600B5A760 /* PBXTargetDependency */ = {
+		B059B5041DEED9E60018C016 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B091920C1DE598A300B5A760 /* TomatoCrypto */;
-			targetProxy = B09192181DE598A600B5A760 /* PBXContainerItemProxy */;
+			target = B059B4F71DEED9E60018C016 /* TomatoCrypto-iOS */;
+			targetProxy = B059B5031DEED9E60018C016 /* PBXContainerItemProxy */;
+		};
+		B059B5201DEED9FD0018C016 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B059B5141DEED9FD0018C016 /* TomatoCrypto-OSX */;
+			targetProxy = B059B51F1DEED9FD0018C016 /* PBXContainerItemProxy */;
+		};
+		B059B5491DEEDA250018C016 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B059B53D1DEEDA240018C016 /* TomatoCrypto-tvOS */;
+			targetProxy = B059B5481DEEDA250018C016 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		B091921F1DE598A600B5A760 /* Debug */ = {
+		B059B4F11DEED9C50018C016 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+			};
+			name = Debug;
+		};
+		B059B4F21DEED9C50018C016 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		B059B50B1DEED9E60018C016 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 41EBD43067305CE03D6420EA /* Pods-TomatoCrypto-iOS.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Sources/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xhhuang.TomatoCrypto;
+				PRODUCT_NAME = TomatoCrypto;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		B059B50C1DEED9E60018C016 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A1EEA79CC8635A2C96F5BA6 /* Pods-TomatoCrypto-iOS.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Sources/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xhhuang.TomatoCrypto;
+				PRODUCT_NAME = TomatoCrypto;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		B059B50E1DEED9E60018C016 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 562451FA84C179346EFB61F7 /* Pods-TomatoCrypto-iOSTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -622,13 +1532,11 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -646,21 +1554,25 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xhhuang.TomatoCrypto-iOSTests";
+				PRODUCT_NAME = TomatoCryptoTests;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
-		B09192201DE598A600B5A760 /* Release */ = {
+		B059B50F1DEED9E60018C016 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 289C503B153DDCD75D906EDC /* Pods-TomatoCrypto-iOSTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -676,13 +1588,11 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -694,115 +1604,680 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xhhuang.TomatoCrypto-iOSTests";
+				PRODUCT_NAME = TomatoCryptoTests;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_VERSION = 3.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B059B5271DEED9FD0018C016 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 01EF21C300A074FD4B2AFF45 /* Pods-TomatoCrypto-OSX.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Sources/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xhhuang.TomatoCrypto;
+				PRODUCT_NAME = TomatoCrypto;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		B059B5281DEED9FD0018C016 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EC16958453CD59C30BB55028 /* Pods-TomatoCrypto-OSX.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Sources/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xhhuang.TomatoCrypto;
+				PRODUCT_NAME = TomatoCrypto;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		B059B52A1DEED9FD0018C016 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9FAF40F7DD5B62BCC4035FE4 /* Pods-TomatoCrypto-OSXTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xhhuang.TomatoCrypto-OSXTests";
+				PRODUCT_NAME = TomatoCryptoTests;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		B059B52B1DEED9FD0018C016 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D851CD41F7C5C61A7F47777A /* Pods-TomatoCrypto-OSXTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xhhuang.TomatoCrypto-OSXTests";
+				PRODUCT_NAME = TomatoCryptoTests;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		B059B5371DEEDA140018C016 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CA917B1D79CDCD5FDB376C17 /* Pods-TomatoCrypto-watchOS.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Sources/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xhhuang.TomatoCrypto;
+				PRODUCT_NAME = TomatoCrypto;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 3.1;
+			};
+			name = Debug;
+		};
+		B059B5381DEEDA140018C016 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 95C1EE3A486F17D9C8E8DDC9 /* Pods-TomatoCrypto-watchOS.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Sources/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xhhuang.TomatoCrypto;
+				PRODUCT_NAME = TomatoCrypto;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 3.1;
+			};
+			name = Release;
+		};
+		B059B5501DEEDA250018C016 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 570B38DC6CDD03E658899848 /* Pods-TomatoCrypto-tvOS.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Sources/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xhhuang.TomatoCrypto;
+				PRODUCT_NAME = TomatoCrypto;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		B059B5511DEEDA250018C016 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F96CE5EE964725BAF4BD2F6 /* Pods-TomatoCrypto-tvOS.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Sources/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xhhuang.TomatoCrypto;
+				PRODUCT_NAME = TomatoCrypto;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		B09192221DE598A600B5A760 /* Debug */ = {
+		B059B5531DEEDA250018C016 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9F47383294C6EC608D58C907 /* Pods-TomatoCrypto.debug.xcconfig */;
+			baseConfigurationReference = FAF4F492AFD58C02FAAB2EF1 /* Pods-TomatoCrypto-tvOSTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = TomatoCrypto/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.xhhuang.TomatoCrypto;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xhhuang.TomatoCrypto-tvOSTests";
+				PRODUCT_NAME = TomatoCryptoTests;
+				SDKROOT = appletvos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Debug;
 		};
-		B09192231DE598A600B5A760 /* Release */ = {
+		B059B5541DEEDA250018C016 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BCAAAF4B0FB6804B7AE1D784 /* Pods-TomatoCrypto.release.xcconfig */;
+			baseConfigurationReference = 43D1A3FBF9AB144DF4394A7B /* Pods-TomatoCrypto-tvOSTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = TomatoCrypto/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.xhhuang.TomatoCrypto;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xhhuang.TomatoCrypto-tvOSTests";
+				PRODUCT_NAME = TomatoCryptoTests;
+				SDKROOT = appletvos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
-		};
-		B09192251DE598A600B5A760 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 01C523649BAB450BA7E6F415 /* Pods-TomatoCryptoTests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				INFOPLIST_FILE = TomatoCryptoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.xhhuang.TomatoCryptoTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Debug;
-		};
-		B09192261DE598A600B5A760 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E68DF89913A2B70A65AF3EFB /* Pods-TomatoCryptoTests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				INFOPLIST_FILE = TomatoCryptoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.xhhuang.TomatoCryptoTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B09192071DE598A300B5A760 /* Build configuration list for PBXProject "TomatoCrypto" */ = {
+		B059B4F01DEED9C50018C016 /* Build configuration list for PBXProject "TomatoCrypto" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B091921F1DE598A600B5A760 /* Debug */,
-				B09192201DE598A600B5A760 /* Release */,
+				B059B4F11DEED9C50018C016 /* Debug */,
+				B059B4F21DEED9C50018C016 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B09192211DE598A600B5A760 /* Build configuration list for PBXNativeTarget "TomatoCrypto" */ = {
+		B059B50A1DEED9E60018C016 /* Build configuration list for PBXNativeTarget "TomatoCrypto-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B09192221DE598A600B5A760 /* Debug */,
-				B09192231DE598A600B5A760 /* Release */,
+				B059B50B1DEED9E60018C016 /* Debug */,
+				B059B50C1DEED9E60018C016 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B09192241DE598A600B5A760 /* Build configuration list for PBXNativeTarget "TomatoCryptoTests" */ = {
+		B059B50D1DEED9E60018C016 /* Build configuration list for PBXNativeTarget "TomatoCrypto-iOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B09192251DE598A600B5A760 /* Debug */,
-				B09192261DE598A600B5A760 /* Release */,
+				B059B50E1DEED9E60018C016 /* Debug */,
+				B059B50F1DEED9E60018C016 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B059B5261DEED9FD0018C016 /* Build configuration list for PBXNativeTarget "TomatoCrypto-OSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B059B5271DEED9FD0018C016 /* Debug */,
+				B059B5281DEED9FD0018C016 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B059B5291DEED9FD0018C016 /* Build configuration list for PBXNativeTarget "TomatoCrypto-OSXTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B059B52A1DEED9FD0018C016 /* Debug */,
+				B059B52B1DEED9FD0018C016 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B059B5361DEEDA140018C016 /* Build configuration list for PBXNativeTarget "TomatoCrypto-watchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B059B5371DEEDA140018C016 /* Debug */,
+				B059B5381DEEDA140018C016 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B059B54F1DEEDA250018C016 /* Build configuration list for PBXNativeTarget "TomatoCrypto-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B059B5501DEEDA250018C016 /* Debug */,
+				B059B5511DEEDA250018C016 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B059B5521DEEDA250018C016 /* Build configuration list for PBXNativeTarget "TomatoCrypto-tvOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B059B5531DEEDA250018C016 /* Debug */,
+				B059B5541DEEDA250018C016 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = B09192041DE598A300B5A760 /* Project object */;
+	rootObject = B059B4ED1DEED9C50018C016 /* Project object */;
 }

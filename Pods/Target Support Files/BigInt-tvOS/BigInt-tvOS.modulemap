@@ -1,0 +1,6 @@
+framework module BigInt {
+  umbrella header "BigInt-tvOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

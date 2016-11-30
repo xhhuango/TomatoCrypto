@@ -1,0 +1,6 @@
+framework module Pods_TomatoCrypto_watchOS {
+  umbrella header "Pods-TomatoCrypto-watchOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

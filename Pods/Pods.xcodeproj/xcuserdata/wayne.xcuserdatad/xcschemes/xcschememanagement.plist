@@ -4,22 +4,77 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>BigInt.xcscheme</key>
+		<key>BigInt-OSX.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-TomatoCrypto.xcscheme</key>
+		<key>BigInt-iOS.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-TomatoCryptoTests.xcscheme</key>
+		<key>BigInt-tvOS.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SipHash.xcscheme</key>
+		<key>BigInt-watchOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-TomatoCrypto-OSX.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-TomatoCrypto-OSXTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-TomatoCrypto-iOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-TomatoCrypto-iOSTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-TomatoCrypto-tvOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-TomatoCrypto-tvOSTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-TomatoCrypto-watchOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SipHash-OSX.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SipHash-iOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SipHash-tvOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SipHash-watchOS.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -27,22 +82,77 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>43FEBDCB2B657077BCF2906919B4267D</key>
+		<key>0228C4273CADF4B9DC721C4E4E8B72DA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6CA28E5940E09F6CFD9BEC3BB70E8CFB</key>
+		<key>21447D42F171D29BD6360C790E9CC6A4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A9217BDB0DA319ACEEE5DEFB7524BCC1</key>
+		<key>268BC5199AC603382993883A5F34CF56</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EFCC82E3A2141C948652BEEDB1AAC8C7</key>
+		<key>34C1B3288EBBFD1B25E1D7E2209B2C0B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3B91212157E765401D1B892CD199EA7F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4067C43A1F31D0F4980FB2791EAB1673</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>41AFB48FF09A8843E6341034E9A29BA5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4BAFB989BE95BA67A3D160D32EA7B190</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>58F2EA337F69982FE4EB66128B326817</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>61994D6546CF9EB78C0CDA2E0093FE08</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6BFEC60B1B4F9FC425C3FB10EA37CD39</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7484A1DE14C809AAAC91CD1CDBA631BD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>93FE224E4685123298024E5273B5470B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B3C03D16A03C76C4A1AFD06D158EECA1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C14D88B8EF90E795BA1196B6AE5D7478</key>
 		<dict>
 			<key>primary</key>
 			<true/>
