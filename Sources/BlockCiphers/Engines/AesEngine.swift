@@ -4,7 +4,7 @@
  */
 
 public class AesEngine: BlockCipherEngine {
-    fileprivate let blockLength = 16
+    public let blockSize: Int = 16
     
     fileprivate let rcon: [Byte] = [
         0x00, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36
@@ -128,10 +128,6 @@ public class AesEngine: BlockCipherEngine {
     fileprivate var rounds: Int!
     var subkeys: [[Word]]!
     
-    public var blockSize: Int {
-        return self.blockLength
-    }
-    
     public func initialize(processMode: BlockCipher.ProcessMode, key: SecretKey) throws {
         self.processMode = processMode
         self.subkeys = try self.keySchedule(processMode: processMode, key: key.bytes)
@@ -141,8 +137,8 @@ public class AesEngine: BlockCipherEngine {
         guard let processMode = self.processMode else {
             throw CryptoError.cipherNotInitialize("\(self) is not initailized")
         }
-        guard (input.count - inputOffset) >= self.blockLength else {
-            throw CryptoError.illegalBlockSize("Block size must be \(self.blockLength * 8)-bits")
+        guard (input.count - inputOffset) >= self.blockSize else {
+            throw CryptoError.illegalBlockSize("Block size must be \(self.blockSize * 8)-bits")
         }
         
         switch processMode {

@@ -5,8 +5,9 @@
  * so the code is easy to read, but the performance is slow.
  */
 public class DesEngine: BlockCipherEngine {
+    public let blockSize: Int = 8
+    
     fileprivate let keyLength = 8
-    fileprivate let blockLength = 8
     
     fileprivate let smallHexMask: Byte = 0x0F
     fileprivate let bigHexMask: Byte = 0xF0
@@ -135,10 +136,6 @@ public class DesEngine: BlockCipherEngine {
     fileprivate var subkeys: [[Byte]]!
     fileprivate var processMode: BlockCipher.ProcessMode!
     
-    public var blockSize: Int {
-        return self.blockLength
-    }
-    
     public func initialize(processMode: BlockCipher.ProcessMode, key: SecretKey) throws {
         let keyBytes = key.bytes
         guard keyBytes.count == self.keyLength else {
@@ -159,8 +156,8 @@ public class DesEngine: BlockCipherEngine {
         guard let _ = self.processMode else {
             throw CryptoError.cipherNotInitialize("\(self) is not initailized")
         }
-        guard (input.count - inputOffset) >= self.blockLength else {
-            throw CryptoError.illegalBlockSize("Block size must be \(self.blockLength * 8)-bits")
+        guard (input.count - inputOffset) >= self.blockSize else {
+            throw CryptoError.illegalBlockSize("Block size must be \(self.blockSize * 8)-bits")
         }
         
         try self.encryptBlock(subkeys: self.subkeys,

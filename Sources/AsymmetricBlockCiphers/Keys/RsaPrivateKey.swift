@@ -1,14 +1,14 @@
 import BigInt
 
 public struct RsaPrivateKey: PrivateKey {
-    public let modulus: [Byte]
-    public let p: [Byte]
-    public let q: [Byte]
-    public let dP: [Byte]
-    public let dQ: [Byte]
-    public let qInv: [Byte]
+    public let modulus: BigUInt
+    public let p: BigUInt
+    public let q: BigUInt
+    public let dP: BigUInt
+    public let dQ: BigUInt
+    public let qInv: BigUInt
     
-    public init(modulus: [Byte], p: [Byte], q: [Byte], dP: [Byte], dQ: [Byte], qInv: [Byte]) {
+    public init(modulus: BigUInt, p: BigUInt, q: BigUInt, dP: BigUInt, dQ: BigUInt, qInv: BigUInt) {
         self.modulus = modulus
         self.p = p
         self.q = q

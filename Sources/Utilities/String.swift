@@ -1,6 +1,7 @@
-func bytesToHex(bytes: UnsafePointer<Byte>, count: Int) -> String {
+func bytesToHex(bytes: UnsafePointer<Byte>, offset: Int = 0, count: Int) -> String {
     let table = [Character]("0123456789ABCDEF".characters)
     var string = String()
+    let bytes = bytes.advanced(by: offset)
     for i in 0..<count {
         let msb = (bytes[i] >> 4) & 0x0f
         string.append(table[Int(msb)])

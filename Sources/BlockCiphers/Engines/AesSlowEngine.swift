@@ -5,8 +5,9 @@
  * so the code is easy to read, but the performance is slow.
  */
 public class AesSlowEngine: BlockCipherEngine {
+    public let blockSize: Int = 16
+    
     fileprivate let wordSize = MemoryLayout<Word>.size
-    fileprivate let blockLength = 16    // 128-bit
     fileprivate let blockWordCount = 4  // 128-bit / wordSize
     
     fileprivate enum KeyLength: Int {
@@ -176,10 +177,6 @@ public class AesSlowEngine: BlockCipherEngine {
     fileprivate var rounds: Int!
     var subkeys: [[Byte]]!
     
-    public var blockSize: Int {
-        return self.blockLength
-    }
-    
     public func initialize(processMode: BlockCipher.ProcessMode, key: SecretKey) throws {
         let keyBytes = key.bytes
         guard let keyLength = KeyLength(rawValue: keyBytes.count) else {
@@ -206,8 +203,8 @@ public class AesSlowEngine: BlockCipherEngine {
         guard let processMode = self.processMode else {
             throw CryptoError.cipherNotInitialize("\(self) is not initailized")
         }
-        guard (input.count - inputOffset) >= self.blockLength else {
-            throw CryptoError.illegalBlockSize("Block size must be \(self.blockLength * 8)-bits")
+        guard (input.count - inputOffset) >= self.blockSize else {
+            throw CryptoError.illegalBlockSize("Block size must be \(self.blockSize * 8)-bits")
         }
         
         switch processMode {

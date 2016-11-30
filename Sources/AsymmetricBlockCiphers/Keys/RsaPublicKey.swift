@@ -1,9 +1,11 @@
+import BigInt
+
 public struct RsaPublicKey: PublicKey {
-    public let modulus: [Byte]
-    public let publicExponent: [Byte]
+    public let modulus: BigUInt
+    public let e: BigUInt
     
-    public init(modulus: [Byte], publicExponent: [Byte]) {
+    public init(modulus: BigUInt, e: BigUInt) {
         self.modulus = modulus
-        self.publicExponent = publicExponent
+        self.e = e
     }
 }

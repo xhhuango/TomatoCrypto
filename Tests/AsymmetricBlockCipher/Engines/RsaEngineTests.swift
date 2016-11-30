@@ -24,10 +24,9 @@ class RsaEngineTests: XCTestCase {
         super.tearDown()
     }
     
-    func testEncrypt() {
+    func testEncryptAndDecrypt() {
         let m = BigUInt(self.mStr, radix: 16)!
         let e = BigUInt(self.eStr, radix: 16)!
-        let d = BigUInt(self.dStr, radix: 16)!
         let p = BigUInt(self.pStr, radix: 16)!
         let q = BigUInt(self.qStr, radix: 16)!
         let dP = BigUInt(self.dpStr, radix: 16)!
@@ -41,7 +40,36 @@ class RsaEngineTests: XCTestCase {
         let encrypted = engine.encryptBlock(e: e, m: m, input: plaintext)
         XCTAssertEqual(encrypted, ciphertext)
         
-        let decrypted = engine.decryptBlock(d: d, p: p, q: q, dP: dP, dQ: dQ, qInv: qInv, input: encrypted)
+        let decrypted = engine.decryptBlock(p: p, q: q, dP: dP, dQ: dQ, qInv: qInv, input: encrypted)
         XCTAssertEqual(decrypted, plaintext)
+    }
+    
+    func testRsaEngine() {
+        let m = BigUInt(self.mStr, radix: 16)!
+        let e = BigUInt(self.eStr, radix: 16)!
+        let p = BigUInt(self.pStr, radix: 16)!
+        let q = BigUInt(self.qStr, radix: 16)!
+        let dP = BigUInt(self.dpStr, radix: 16)!
+        let dQ = BigUInt(self.dqStr, radix: 16)!
+        let qInv = BigUInt(self.qInvStr, radix: 16)!
+        
+        let publicKey = RsaPublicKey(modulus: m, e: e)
+        let privateKey = RsaPrivateKey(modulus: m, p: p, q: q, dP: dP, dQ: dQ, qInv: qInv)
+        let engine = RsaEngine()
+        
+        let plaintextBytes = hexToBytes(hex: plaintextString)
+        let ciphertextBytes = hexToBytes(hex: ciphertextString)
+        
+        do {
+            try engine.initialize(key: publicKey)
+            let encrypted = try engine.processBlock(input: plaintextBytes, offset: 0, length: plaintextBytes.count)
+            XCTAssertEqual(encrypted, ciphertextBytes)
+            
+            try engine.initialize(key: privateKey)
+            let decrypted = try engine.processBlock(input: encrypted, offset: 0, length: encrypted.count)
+            XCTAssertEqual(decrypted, plaintextBytes)
+        } catch let error {
+            XCTFail("\(error)")
+        }
     }
 }

@@ -160,17 +160,14 @@
 		B059B5021DEED9E60018C016 /* TomatoCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B059B4F81DEED9E60018C016 /* TomatoCrypto.framework */; };
 		B059B51E1DEED9FD0018C016 /* TomatoCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B059B5151DEED9FD0018C016 /* TomatoCrypto.framework */; };
 		B059B5471DEEDA250018C016 /* TomatoCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B059B53E1DEEDA240018C016 /* TomatoCrypto.framework */; };
-		B059B5581DEEDA940018C016 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B059B5561DEEDA940018C016 /* Info.plist */; };
 		B059B5591DEEDA940018C016 /* TomatoCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = B059B5571DEEDA940018C016 /* TomatoCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B059B55A1DEEDAB30018C016 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B059B5561DEEDA940018C016 /* Info.plist */; };
-		B059B55B1DEEDAB30018C016 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B059B5561DEEDA940018C016 /* Info.plist */; };
-		B059B55C1DEEDAB40018C016 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B059B5561DEEDA940018C016 /* Info.plist */; };
 		B059B55D1DEEDAB90018C016 /* TomatoCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = B059B5571DEEDA940018C016 /* TomatoCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B059B55E1DEEDABA0018C016 /* TomatoCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = B059B5571DEEDA940018C016 /* TomatoCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B059B55F1DEEDABA0018C016 /* TomatoCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = B059B5571DEEDA940018C016 /* TomatoCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B059B56A1DEEDE8C0018C016 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B059B5661DEEDE670018C016 /* Info.plist */; };
-		B059B56B1DEEDE8C0018C016 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B059B5661DEEDE670018C016 /* Info.plist */; };
-		B059B56C1DEEDE8E0018C016 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B059B5661DEEDE670018C016 /* Info.plist */; };
+		B0EEE11A1DEF1815002EB7A5 /* AsymmetricBlockCipherEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EEE1191DEF1815002EB7A5 /* AsymmetricBlockCipherEngine.swift */; };
+		B0EEE11B1DEF1815002EB7A5 /* AsymmetricBlockCipherEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EEE1191DEF1815002EB7A5 /* AsymmetricBlockCipherEngine.swift */; };
+		B0EEE11C1DEF1815002EB7A5 /* AsymmetricBlockCipherEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EEE1191DEF1815002EB7A5 /* AsymmetricBlockCipherEngine.swift */; };
+		B0EEE11D1DEF1815002EB7A5 /* AsymmetricBlockCipherEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EEE1191DEF1815002EB7A5 /* AsymmetricBlockCipherEngine.swift */; };
 		B7FC5C40AF27FE717581604A /* Pods_TomatoCrypto_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 988333DCDE43098FBE22026F /* Pods_TomatoCrypto_OSX.framework */; };
 /* End PBXBuildFile section */
 
@@ -262,6 +259,7 @@
 		B059B5561DEEDA940018C016 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B059B5571DEEDA940018C016 /* TomatoCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TomatoCrypto.h; sourceTree = "<group>"; };
 		B059B5661DEEDE670018C016 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B0EEE1191DEF1815002EB7A5 /* AsymmetricBlockCipherEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsymmetricBlockCipherEngine.swift; sourceTree = "<group>"; };
 		C97679884984992E715BC073 /* Pods_TomatoCrypto_OSXTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TomatoCrypto_OSXTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA917B1D79CDCD5FDB376C17 /* Pods-TomatoCrypto-watchOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomatoCrypto-watchOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TomatoCrypto-watchOS/Pods-TomatoCrypto-watchOS.debug.xcconfig"; sourceTree = "<group>"; };
 		D851CD41F7C5C61A7F47777A /* Pods-TomatoCrypto-OSXTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomatoCrypto-OSXTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TomatoCrypto-OSXTests/Pods-TomatoCrypto-OSXTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -360,9 +358,9 @@
 		B014071D1DEEEEB400D7A5B9 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				B01407201DEEEECF00D7A5B9 /* Type.swift */,
 				B014071E1DEEEECF00D7A5B9 /* CryptoError.swift */,
 				B014071F1DEEEECF00D7A5B9 /* Key.swift */,
-				B01407201DEEEECF00D7A5B9 /* Type.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -423,9 +421,9 @@
 		B01407291DEEEF1800D7A5B9 /* Engines */ = {
 			isa = PBXGroup;
 			children = (
+				B014072E1DEEEF4700D7A5B9 /* BlockCipherEngine.swift */,
 				B014072C1DEEEF4700D7A5B9 /* AesEngine.swift */,
 				B014072D1DEEEF4700D7A5B9 /* AesSlowEngine.swift */,
-				B014072E1DEEEF4700D7A5B9 /* BlockCipherEngine.swift */,
 				B014072F1DEEEF4700D7A5B9 /* DesEngine.swift */,
 			);
 			path = Engines;
@@ -454,7 +452,6 @@
 			isa = PBXGroup;
 			children = (
 				B01407921DEEF01F00D7A5B9 /* Engines */,
-				B01407931DEEF02700D7A5B9 /* Keys */,
 			);
 			path = AsymmetricBlockCipher;
 			sourceTree = "<group>";
@@ -465,13 +462,6 @@
 				B01407941DEEF04900D7A5B9 /* RsaEngineTests.swift */,
 			);
 			path = Engines;
-			sourceTree = "<group>";
-		};
-		B01407931DEEF02700D7A5B9 /* Keys */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Keys;
 			sourceTree = "<group>";
 		};
 		B01407961DEEF06100D7A5B9 /* Modes */ = {
@@ -510,8 +500,8 @@
 			children = (
 				B01407D41DEEF15400D7A5B9 /* PrivateKey.swift */,
 				B01407D51DEEF15400D7A5B9 /* PublicKey.swift */,
-				B01407D61DEEF15400D7A5B9 /* RsaPrivateKey.swift */,
 				B01407D71DEEF15400D7A5B9 /* RsaPublicKey.swift */,
+				B01407D61DEEF15400D7A5B9 /* RsaPrivateKey.swift */,
 			);
 			path = Keys;
 			sourceTree = "<group>";
@@ -519,6 +509,7 @@
 		B01407DC1DEEF15700D7A5B9 /* Engines */ = {
 			isa = PBXGroup;
 			children = (
+				B0EEE1191DEF1815002EB7A5 /* AsymmetricBlockCipherEngine.swift */,
 				B01407DD1DEEF16600D7A5B9 /* RsaEngine.swift */,
 			);
 			path = Engines;
@@ -552,10 +543,10 @@
 		B059B5551DEEDA820018C016 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				B01407D21DEEF13600D7A5B9 /* AsymmetricBlockCiphers */,
-				B01407241DEEEEDA00D7A5B9 /* BlockCiphers */,
 				B014071D1DEEEEB400D7A5B9 /* Common */,
 				B01407181DEEEE7900D7A5B9 /* Utilities */,
+				B01407241DEEEEDA00D7A5B9 /* BlockCiphers */,
+				B01407D21DEEF13600D7A5B9 /* AsymmetricBlockCiphers */,
 				B059B5561DEEDA940018C016 /* Info.plist */,
 				B059B5571DEEDA940018C016 /* TomatoCrypto.h */,
 			);
@@ -565,9 +556,9 @@
 		B059B5651DEEDE520018C016 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				B01407911DEEF01400D7A5B9 /* AsymmetricBlockCipher */,
-				B01407901DEEF00D00D7A5B9 /* BlockCiphers */,
 				B014078F1DEEF00500D7A5B9 /* Utilities */,
+				B01407901DEEF00D00D7A5B9 /* BlockCiphers */,
+				B01407911DEEF01400D7A5B9 /* AsymmetricBlockCipher */,
 				B059B5661DEEDE670018C016 /* Info.plist */,
 			);
 			path = Tests;
@@ -846,7 +837,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B059B5581DEEDA940018C016 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -854,7 +844,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B059B56A1DEEDE8C0018C016 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -862,7 +851,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B059B55A1DEEDAB30018C016 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -870,7 +858,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B059B56B1DEEDE8C0018C016 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -878,7 +865,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B059B55B1DEEDAB30018C016 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -886,7 +872,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B059B55C1DEEDAB40018C016 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -894,7 +879,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B059B56C1DEEDE8E0018C016 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1169,6 +1153,7 @@
 				B01407DA1DEEF15400D7A5B9 /* RsaPrivateKey.swift in Sources */,
 				B01407361DEEEF5500D7A5B9 /* SecretKey.swift in Sources */,
 				B01407311DEEEF4700D7A5B9 /* AesSlowEngine.swift in Sources */,
+				B0EEE11A1DEF1815002EB7A5 /* AsymmetricBlockCipherEngine.swift in Sources */,
 				B01407421DEEEF6100D7A5B9 /* EcbMode.swift in Sources */,
 				B01407371DEEEF5500D7A5B9 /* SimpleSecretKey.swift in Sources */,
 				B01407301DEEEF4700D7A5B9 /* AesEngine.swift in Sources */,
@@ -1222,6 +1207,7 @@
 				B014075D1DEEEFCC00D7A5B9 /* SimpleSecretKey.swift in Sources */,
 				B01407611DEEEFCC00D7A5B9 /* CtrMode.swift in Sources */,
 				B01407641DEEEFCC00D7A5B9 /* BlockCipherPadding.swift in Sources */,
+				B0EEE11B1DEF1815002EB7A5 /* AsymmetricBlockCipherEngine.swift in Sources */,
 				B01407671DEEEFCC00D7A5B9 /* IvParameter.swift in Sources */,
 				B01407601DEEEFCC00D7A5B9 /* CfbMode.swift in Sources */,
 				B01407661DEEEFCC00D7A5B9 /* BlockCipherParameter.swift in Sources */,
@@ -1275,6 +1261,7 @@
 				B01407691DEEEFCC00D7A5B9 /* SimpleSecretKey.swift in Sources */,
 				B014076D1DEEEFCC00D7A5B9 /* CtrMode.swift in Sources */,
 				B01407701DEEEFCC00D7A5B9 /* BlockCipherPadding.swift in Sources */,
+				B0EEE11C1DEF1815002EB7A5 /* AsymmetricBlockCipherEngine.swift in Sources */,
 				B01407731DEEEFCC00D7A5B9 /* IvParameter.swift in Sources */,
 				B014076C1DEEEFCC00D7A5B9 /* CfbMode.swift in Sources */,
 				B01407721DEEEFCC00D7A5B9 /* BlockCipherParameter.swift in Sources */,
@@ -1309,6 +1296,7 @@
 				B01407751DEEEFCD00D7A5B9 /* SimpleSecretKey.swift in Sources */,
 				B01407791DEEEFCD00D7A5B9 /* CtrMode.swift in Sources */,
 				B014077C1DEEEFCD00D7A5B9 /* BlockCipherPadding.swift in Sources */,
+				B0EEE11D1DEF1815002EB7A5 /* AsymmetricBlockCipherEngine.swift in Sources */,
 				B014077F1DEEEFCD00D7A5B9 /* IvParameter.swift in Sources */,
 				B01407781DEEEFCD00D7A5B9 /* CfbMode.swift in Sources */,
 				B014077E1DEEEFCD00D7A5B9 /* BlockCipherParameter.swift in Sources */,
@@ -1376,12 +1364,48 @@
 		B059B4F11DEED9C50018C016 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
 		};
 		B059B4F21DEED9C50018C016 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 			};
 			name = Release;
 		};
@@ -1409,7 +1433,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -1476,7 +1500,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
