@@ -2,10 +2,10 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:TomatoCrypto.playground">
+      location = "group:TomatoCrypto.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:TomatoCrypto.xcodeproj">
+      location = "group:TomatoCrypto.playground">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

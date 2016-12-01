@@ -47,3 +47,8 @@ func copyBytes(from: UnsafePointer<Byte>, fromOffset: Int, to: UnsafeMutablePoin
     let t = to.advanced(by: toOffset).withMemoryRebound(to: Byte.self, capacity: count) { $0 }
     NSCopyMemoryPages(f, t, count)
 }
+
+func copyBytes(from: [Byte], to: inout [Byte]) {
+    assert(from.count == to.count)
+    copyBytes(from: from, fromOffset: 0, to: &to, toOffset: 0, count: from.count)
+}

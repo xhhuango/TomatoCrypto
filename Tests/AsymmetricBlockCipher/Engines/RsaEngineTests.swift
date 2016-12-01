@@ -53,19 +53,19 @@ class RsaEngineTests: XCTestCase {
         let dQ = BigUInt(self.dqStr, radix: 16)!
         let qInv = BigUInt(self.qInvStr, radix: 16)!
         
-        let publicKey = RsaPublicKey(modulus: m, e: e)
-        let privateKey = RsaPrivateKey(modulus: m, p: p, q: q, dP: dP, dQ: dQ, qInv: qInv)
+        let publicKey = RsaPublicKeyParameter(modulus: m, e: e)
+        let privateKey = RsaPrivateKeyParameter(modulus: m, p: p, q: q, dP: dP, dQ: dQ, qInv: qInv)
         let engine = RsaEngine()
         
         let plaintextBytes = hexToBytes(hex: plaintextString)
         let ciphertextBytes = hexToBytes(hex: ciphertextString)
         
         do {
-            try engine.initialize(key: publicKey)
+            try engine.initialize(isEncryption: true, parameters: [publicKey])
             let encrypted = try engine.processBlock(input: plaintextBytes, offset: 0, length: plaintextBytes.count)
             XCTAssertEqual(encrypted, ciphertextBytes)
             
-            try engine.initialize(key: privateKey)
+            try engine.initialize(isEncryption: false, parameters: [privateKey])
             let decrypted = try engine.processBlock(input: encrypted, offset: 0, length: encrypted.count)
             XCTAssertEqual(decrypted, plaintextBytes)
         } catch let error {

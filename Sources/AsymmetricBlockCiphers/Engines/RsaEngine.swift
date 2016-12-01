@@ -1,9 +1,10 @@
 import BigInt
 
 public class RsaEngine: AsymmetricBlockCipherEngine {
-    private var publicKey: RsaPublicKey!
-    private var privateKey: RsaPrivateKey!
-    
+    private var isEncryption = true
+    private var publicKey: RsaPublicKeyParameter!
+    private var privateKey: RsaPrivateKeyParameter!
+
     public var inputBlockSize: Int {
         if self.publicKey != nil {
             return self.publicKey.modulus.count
@@ -13,18 +14,24 @@ public class RsaEngine: AsymmetricBlockCipherEngine {
             return 0
         }
     }
-    
-    public func initialize(key: Key) throws {
+
+    public func initialize(isEncryption: Bool, parameters: [CryptoParameter]) throws {
         self.publicKey = nil
         self.privateKey = nil
-        
-        if key is RsaPublicKey {
-            self.publicKey = key as! RsaPublicKey
-        } else if key is RsaPrivateKey {
-            self.privateKey = key as! RsaPrivateKey
+
+        if isEncryption {
+            guard let key: RsaPublicKeyParameter = findParameter(within: parameters) else {
+                throw CryptoError.missingParameter("\(self) expects \(RsaPublicKeyParameter.self) for encryption")
+            }
+            self.publicKey = key
         } else {
-            throw CryptoError.invalidKeyType("\(self) only accepts \(RsaPublicKey.self) or \(RsaPrivateKey.self)")
+            guard let key: RsaPrivateKeyParameter = findParameter(within: parameters) else {
+                throw CryptoError.missingParameter("\(self) expects \(RsaPrivateKeyParameter.self) for decryption")
+            }
+            self.privateKey = key
         }
+
+        self.isEncryption = isEncryption
     }
     
     public func processBlock(input: [Byte], offset: Int, length: Int) throws -> [Byte] {
