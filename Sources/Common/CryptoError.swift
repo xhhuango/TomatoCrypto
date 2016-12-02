@@ -4,4 +4,5 @@ public enum CryptoError: Error {
     case cipherNotInitialize(String)
     case missingParameter(String)
     case invalidParameter(String)
+    case illegalDataLength(String)
 }
