@@ -25,11 +25,11 @@ class MessageDigestTests: XCTestCase {
         let expected6 = hexToBytes(hex: "3CC4A1CC99309A6512D22CF3CD62537F971893AB")
 
         let digest = MessageDigest(engine: Sha1Engine())
-        XCTAssertEqual(digest.finalize(input: input1), expected1)
-        XCTAssertEqual(digest.finalize(input: input2), expected2)
-        XCTAssertEqual(digest.finalize(input: input3), expected3)
-        XCTAssertEqual(digest.finalize(input: input4), expected4)
-        XCTAssertEqual(digest.finalize(input: input5), expected5)
-        XCTAssertEqual(digest.finalize(input: input6), expected6)
+        XCTAssertEqual(digest.digest(input: input1), expected1)
+        XCTAssertEqual(digest.digest(input: input2), expected2)
+        XCTAssertEqual(digest.digest(input: input3), expected3)
+        XCTAssertEqual(digest.digest(input: input4), expected4)
+        XCTAssertEqual(digest.digest(input: input5), expected5)
+        XCTAssertEqual(digest.digest(input: input6), expected6)
     }
 }

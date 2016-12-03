@@ -41,7 +41,7 @@ public class MessageDigest {
         self.digest(input: input, isFinal: false)
     }
 
-    public func finalize(input: [Byte]) -> [Byte] {
+    public func digest(input: [Byte]) -> [Byte] {
         self.digest(input: input, isFinal: true)
         var output = [Byte](repeating: 0, count: self.engine.outputSize)
         self.engine.output(output: &output)
