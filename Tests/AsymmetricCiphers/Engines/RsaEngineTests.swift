@@ -62,11 +62,11 @@ class RsaEngineTests: XCTestCase {
         
         do {
             try engine.initialize(isEncryption: true, parameters: [publicKey])
-            let encrypted = try engine.process(input: plaintextBytes, offset: 0, length: plaintextBytes.count)
+            let encrypted = try engine.process(input: plaintextBytes)
             XCTAssertEqual(encrypted, ciphertextBytes)
             
             try engine.initialize(isEncryption: false, parameters: [privateKey])
-            let decrypted = try engine.process(input: encrypted, offset: 0, length: encrypted.count)
+            let decrypted = try engine.process(input: encrypted)
             XCTAssertEqual(decrypted, plaintextBytes)
         } catch let error {
             XCTFail("\(error)")

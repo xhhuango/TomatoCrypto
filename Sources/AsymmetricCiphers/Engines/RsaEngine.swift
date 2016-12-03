@@ -40,11 +40,7 @@ public class RsaEngine: AsymmetricCipherEngine {
         self.isEncryption = isEncryption
     }
     
-    public func process(input: [Byte], offset: Int, length: Int) throws -> [Byte] {
-        guard input.count >= offset + length else {
-            throw CryptoError.illegalBlockSize("Input length is shorter than offset + length")
-        }
-        
+    public func process(input: [Byte]) throws -> [Byte] {
         if self.publicKey != nil {
             let i = BigUInt(Data(bytes: input))
             let encrypted = self.encrypt(e: self.publicKey.e, m: self.publicKey.modulus, input: i)

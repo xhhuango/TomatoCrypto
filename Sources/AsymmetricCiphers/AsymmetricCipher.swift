@@ -17,6 +17,6 @@ public class AsymmetricCipher {
         guard input.count <= inputSize else {
             throw CryptoError.illegalDataLength("Input length must be less than or equel to \(inputSize) bytes")
         }
-        return try self.engine.process(input: input, offset: 0, length: inputSize)
+        return try self.engine.process(input: input)
     }
 }

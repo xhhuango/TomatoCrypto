@@ -1,11 +1,7 @@
-func xor(input1: UnsafePointer<Byte>,
-         offset1: Int,
-         input2: UnsafePointer<Byte>,
-         offset2: Int,
-         output: UnsafeMutablePointer<Byte>,
-         offset: Int,
-         count: Int,
-         wordMode: Bool) {
+func xor(input1: UnsafePointer<Byte>, offset1: Int,
+         input2: UnsafePointer<Byte>, offset2: Int,
+         output: UnsafeMutablePointer<Byte>, offset: Int,
+         count: Int, wordMode: Bool) {
     if wordMode {
         let i1 = input1.advanced(by: offset1).withMemoryRebound(to: Word.self, capacity: count) { $0 }
         let i2 = input2.advanced(by: offset2).withMemoryRebound(to: Word.self, capacity: count) { $0 }
