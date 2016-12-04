@@ -19,14 +19,14 @@ class OfbModeTests: XCTestCase {
                                          "9740051e9c5fecf64344f7a82260edcc" + "304c6528f659c77866a510d9c1d6ae5e")
         
         do {
-            let cipher = BlockCipher(engine: OfbMode(engine: AesEngine()))
+            let cipher = BlockCipher(engine: OfbMode(engine: AesEngine()), padding: NoPadding())
 
             try cipher.initialize(isEncryption: true, parameters: [key, iv])
-            let encrypted = try cipher.process(input: plaintext)
+            let encrypted = try cipher.finalize(input: plaintext)
             XCTAssertEqual(encrypted, ciphertext)
 
             try cipher.initialize(isEncryption: false, parameters: [key, iv])
-            let decrypted = try cipher.process(input: encrypted)
+            let decrypted = try cipher.finalize(input: encrypted)
             XCTAssertEqual(decrypted, plaintext)
         } catch let error {
             XCTFail("\(error)")

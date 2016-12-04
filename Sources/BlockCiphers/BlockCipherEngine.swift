@@ -3,5 +3,5 @@ public protocol BlockCipherEngine {
 
     func initialize(isEncryption: Bool, parameters: [CryptoParameter]) throws
     func reset()
-    func processBlock(input: [Byte], inputOffset: Int, output: inout [Byte], outputOffset: Int) throws
+    func processBlock(input: UnsafePointer<Byte>, output: UnsafeMutablePointer<Byte>) throws
 }

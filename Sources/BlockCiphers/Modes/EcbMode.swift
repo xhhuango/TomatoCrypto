@@ -16,13 +16,8 @@ public class EcbMode: BlockCipherEngine {
     public func reset() {
         self.engine.reset()
     }
-    
-    public func processBlock(input: [Byte], inputOffset: Int, output: inout [Byte], outputOffset: Int) throws {
-        guard (input.count - inputOffset) >= self.blockSize else {
-            throw CryptoError.illegalBlockSize("Block size must be \(self.blockSize * 8)-bit")
-        }
-        
-        try self.engine.processBlock(input: input, inputOffset: inputOffset,
-                                     output: &output, outputOffset: outputOffset)
+
+    public func processBlock(input: UnsafePointer<Byte>, output: UnsafeMutablePointer<Byte>) throws {
+        try self.engine.processBlock(input: input, output: output)
     }
 }

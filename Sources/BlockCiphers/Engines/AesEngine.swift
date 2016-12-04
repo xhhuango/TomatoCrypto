@@ -139,34 +139,30 @@ public class AesEngine: BlockCipherEngine {
         self.isEncryption = isEncryption
         self.subkeys = try self.keySchedule(isEncryption: isEncryption, key: keyParameter.key)
     }
-    
-    public func processBlock(input: [Byte], inputOffset: Int, output: inout [Byte], outputOffset: Int) throws {
+
+    public func processBlock(input: UnsafePointer<Byte>, output: UnsafeMutablePointer<Byte>) throws {
+        let blockSizeInWords = self.blockSize / MemoryLayout<Word>.size
         if self.isEncryption {
             return try self.encryptBlock(subkeys: self.subkeys,
-                                         input: input,
-                                         inputOffset: inputOffset,
-                                         output: &output,
-                                         outputOffset: outputOffset)
+                                         input: input.withMemoryRebound(to: Word.self, capacity: blockSizeInWords) { $0 },
+                                         output: output.withMemoryRebound(to: Word.self, capacity: blockSizeInWords) { $0 })
         } else {
             return try self.decryptBlock(subkeys: self.subkeys,
-                                         input: input,
-                                         inputOffset: inputOffset,
-                                         output: &output,
-                                         outputOffset: outputOffset)
+                                         input: input.withMemoryRebound(to: Word.self, capacity: blockSizeInWords) { $0 },
+                                         output: output.withMemoryRebound(to: Word.self, capacity: blockSizeInWords) { $0 })
         }
     }
 }
 
 extension AesEngine {
-    func encryptBlock(subkeys: [[Word]], input: [Byte], inputOffset: Int, output: inout [Byte], outputOffset: Int) throws {
-        let inputWords = input.withUnsafeBytes({ $0 }).baseAddress!.advanced(by: inputOffset).assumingMemoryBound(to: Word.self)
-        var t0 = inputWords[0] ^ subkeys[0][0]
-        var t1 = inputWords[1] ^ subkeys[0][1]
-        var t2 = inputWords[2] ^ subkeys[0][2]
+    func encryptBlock(subkeys: [[Word]], input: UnsafePointer<Word>, output: UnsafeMutablePointer<Word>) throws {
+        var t0 = input[0] ^ subkeys[0][0]
+        var t1 = input[1] ^ subkeys[0][1]
+        var t2 = input[2] ^ subkeys[0][2]
         var r0: Word = 0
         var r1: Word = 0
         var r2: Word = 0
-        var r3 = inputWords[3] ^ subkeys[0][3]
+        var r3 = input[3] ^ subkeys[0][3]
         
         var round = 1
         let rounds = self.rounds - 1
@@ -237,34 +233,31 @@ extension AesEngine {
             subkeys[round][3]
         round += 1
         
-        let outputWords = output.withUnsafeMutableBytes({ $0 }).baseAddress!.advanced(by: outputOffset).assumingMemoryBound(to: Word.self)
-        
-        outputWords[0] = Word(self.sbox[Int(r0 & 0xff)]) ^ (Word(self.sbox[Int((r1 >> 8) & 0xff)]) << 8) ^
+        output[0] = Word(self.sbox[Int(r0 & 0xff)]) ^ (Word(self.sbox[Int((r1 >> 8) & 0xff)]) << 8) ^
             (Word(self.sbox[Int((r2 >> 16) & 0xff)]) << 16) ^ (Word(self.sbox[Int((r3 >> 24) & 0xff)]) << 24) ^
             subkeys[round][0]
-        outputWords[1] = Word(self.sbox[Int(r1 & 0xff)]) ^ (Word(self.sbox[Int((r2 >> 8) & 0xff)]) << 8) ^
+        output[1] = Word(self.sbox[Int(r1 & 0xff)]) ^ (Word(self.sbox[Int((r2 >> 8) & 0xff)]) << 8) ^
             (Word(self.sbox[Int((r3 >> 16) & 0xff)]) << 16) ^ (Word(self.sbox[Int((r0 >> 24) & 0xff)]) << 24) ^
             subkeys[round][1]
-        outputWords[2] = Word(self.sbox[Int(r2 & 0xff)]) ^ (Word(self.sbox[Int((r3 >> 8) & 0xff)]) << 8) ^
+        output[2] = Word(self.sbox[Int(r2 & 0xff)]) ^ (Word(self.sbox[Int((r3 >> 8) & 0xff)]) << 8) ^
             (Word(self.sbox[Int((r0 >> 16) & 0xff)]) << 16) ^ (Word(self.sbox[Int((r1 >> 24) & 0xff)]) << 24) ^
             subkeys[round][2]
-        outputWords[3] = Word(self.sbox[Int(r3 & 0xff)]) ^ (Word(self.sbox[Int((r0 >> 8) & 0xff)]) << 8) ^
+        output[3] = Word(self.sbox[Int(r3 & 0xff)]) ^ (Word(self.sbox[Int((r0 >> 8) & 0xff)]) << 8) ^
             (Word(self.sbox[Int((r1 >> 16) & 0xff)]) << 16) ^ (Word(self.sbox[Int((r2 >> 24) & 0xff)]) << 24) ^
             subkeys[round][3]
     }
 }
 
 extension AesEngine {
-    func decryptBlock(subkeys: [[Word]], input: [Byte], inputOffset: Int, output: inout [Byte], outputOffset: Int) throws {
-        let inputWords = input.withUnsafeBytes({ $0 }).baseAddress!.advanced(by: inputOffset).assumingMemoryBound(to: Word.self)
+    func decryptBlock(subkeys: [[Word]], input: UnsafePointer<Word>, output: UnsafeMutablePointer<Word>) throws {
         var round = self.rounds!
-        var t0 = inputWords[0] ^ subkeys[round][0]
-        var t1 = inputWords[1] ^ subkeys[round][1]
-        var t2 = inputWords[2] ^ subkeys[round][2]
+        var t0 = input[0] ^ subkeys[round][0]
+        var t1 = input[1] ^ subkeys[round][1]
+        var t2 = input[2] ^ subkeys[round][2]
         var r0: Word = 0
         var r1: Word = 0
         var r2: Word = 0
-        var r3 = inputWords[3] ^ subkeys[round][3]
+        var r3 = input[3] ^ subkeys[round][3]
         
         round -= 1
         while round > 1 {
@@ -333,18 +326,16 @@ extension AesEngine {
             self.rightRotate(word: self.tinv[Int((t0 >> 24) & 0xff)], shift: 8) ^
             subkeys[1][3]
         
-        let outputWords = output.withUnsafeMutableBytes({ $0 }).baseAddress!.advanced(by: outputOffset).assumingMemoryBound(to: Word.self)
-        
-        outputWords[0] = Word(self.invSbox[Int(r0 & 0xff)]) ^ (Word(self.invSbox[Int((r3 >> 8) & 0xff)]) << 8) ^
+        output[0] = Word(self.invSbox[Int(r0 & 0xff)]) ^ (Word(self.invSbox[Int((r3 >> 8) & 0xff)]) << 8) ^
             (Word(self.invSbox[Int((r2 >> 16) & 0xff)]) << 16) ^ (Word(self.invSbox[Int((r1 >> 24) & 0xff)]) << 24) ^
             subkeys[0][0]
-        outputWords[1] = Word(self.invSbox[Int(r1 & 0xff)]) ^ (Word(self.invSbox[Int((r0 >> 8) & 0xff)]) << 8) ^
+        output[1] = Word(self.invSbox[Int(r1 & 0xff)]) ^ (Word(self.invSbox[Int((r0 >> 8) & 0xff)]) << 8) ^
             (Word(self.invSbox[Int((r3 >> 16) & 0xff)]) << 16) ^ (Word(self.invSbox[Int((r2 >> 24) & 0xff)]) << 24) ^
             subkeys[0][1]
-        outputWords[2] = Word(self.invSbox[Int(r2 & 0xff)]) ^ (Word(self.invSbox[Int((r1 >> 8) & 0xff)]) << 8) ^
+        output[2] = Word(self.invSbox[Int(r2 & 0xff)]) ^ (Word(self.invSbox[Int((r1 >> 8) & 0xff)]) << 8) ^
             (Word(self.invSbox[Int((r0 >> 16) & 0xff)]) << 16) ^ (Word(self.invSbox[Int((r3 >> 24) & 0xff)]) << 24) ^
             subkeys[0][2]
-        outputWords[3] = Word(self.invSbox[Int(r3 & 0xff)]) ^ (Word(self.invSbox[Int((r2 >> 8) & 0xff)]) << 8) ^
+        output[3] = Word(self.invSbox[Int(r3 & 0xff)]) ^ (Word(self.invSbox[Int((r2 >> 8) & 0xff)]) << 8) ^
             (Word(self.invSbox[Int((r1 >> 16) & 0xff)]) << 16) ^ (Word(self.invSbox[Int((r0 >> 24) & 0xff)]) << 24) ^
             subkeys[0][3]
     }

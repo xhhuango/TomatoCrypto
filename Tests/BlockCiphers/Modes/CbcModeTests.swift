@@ -19,14 +19,14 @@ class CbcModeTests: XCTestCase {
                                          "73bed6b8e3c1743b7116e69e22229516" + "3ff1caa1681fac09120eca307586e1a7")
         
         do {
-            let cipher = BlockCipher(engine: CbcMode(engine: AesEngine()))
+            let cipher = BlockCipher(engine: CbcMode(engine: AesEngine()), padding: NoPadding())
 
             try cipher.initialize(isEncryption: true, parameters: [key, iv])
-            let encrypted = try cipher.process(input: plaintext)
+            let encrypted = try cipher.finalize(input: plaintext)
             XCTAssertEqual(encrypted, ciphertext)
 
             try cipher.initialize(isEncryption: false, parameters: [key, iv])
-            let decrypted = try cipher.process(input: encrypted)
+            let decrypted = try cipher.finalize(input: encrypted)
             XCTAssertEqual(decrypted, plaintext)
         } catch let error {
             XCTFail("\(error)")

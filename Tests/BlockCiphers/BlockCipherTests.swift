@@ -18,14 +18,14 @@ class BlockCipherTests: XCTestCase {
                                          "43b1cd7f598ece23881b00e3ed030688" + "7b0c785e27e8ad3f8223207104725dd4")
 
         do {
-            let cipher = BlockCipher(engine: EcbMode(engine: AesEngine()))
+            let cipher = BlockCipher(engine: EcbMode(engine: AesEngine()), padding: NoPadding())
 
             try cipher.initialize(isEncryption: true, parameters: [key])
-            let encrypted = try cipher.process(input: plaintext)
+            let encrypted = try cipher.finalize(input: plaintext)
             XCTAssertEqual(encrypted, ciphertext)
 
             try cipher.initialize(isEncryption: false, parameters: [key])
-            let decrypted = try cipher.process(input: encrypted)
+            let decrypted = try cipher.finalize(input: encrypted)
             XCTAssertEqual(decrypted, plaintext)
         } catch let error {
             XCTFail("\(error)")

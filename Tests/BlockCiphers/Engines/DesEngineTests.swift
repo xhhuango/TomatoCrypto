@@ -136,7 +136,7 @@ class DesEngineTests: XCTestCase {
             let des = DesEngine()
             try des.initialize(isEncryption: true, parameters: [key])
             var encrypted = [Byte](repeating: 0, count: des.blockSize)
-            try des.processBlock(input: hexToBytes(hex: plain), inputOffset: 0, output: &encrypted, outputOffset: 0)
+            try des.processBlock(input: hexToBytes(hex: plain), output: &encrypted)
             XCTAssertEqual(encrypted, hexToBytes(hex: cipher))
         } catch let error {
             XCTFail("\(error)")
@@ -156,12 +156,12 @@ class DesEngineTests: XCTestCase {
             try des.initialize(isEncryption: true, parameters: [key])
             
             var encrypted = [Byte](repeating: 0, count: des.blockSize)
-            try des.processBlock(input: plainBytes, inputOffset: 0, output: &encrypted, outputOffset: 0)
+            try des.processBlock(input: plainBytes, output: &encrypted)
             XCTAssertEqual(encrypted, hexToBytes(hex: cipher))
             
             try des.initialize(isEncryption: false, parameters: [key])
             var decrypted = [Byte](repeating: 0, count: des.blockSize)
-            try des.processBlock(input: encrypted, inputOffset: 0, output: &decrypted, outputOffset: 0)
+            try des.processBlock(input: encrypted, output: &decrypted)
             XCTAssertEqual(decrypted, plainBytes)
         } catch let error {
             XCTFail("\(error)")

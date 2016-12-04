@@ -1,6 +1,6 @@
-func xor(input1: UnsafePointer<Byte>, offset1: Int,
-         input2: UnsafePointer<Byte>, offset2: Int,
-         output: UnsafeMutablePointer<Byte>, offset: Int,
+func xor(input1: UnsafePointer<Byte>, offset1: Int = 0,
+         input2: UnsafePointer<Byte>, offset2: Int = 0,
+         output: UnsafeMutablePointer<Byte>, offset: Int = 0,
          count: Int, wordMode: Bool) {
     if wordMode {
         let i1 = input1.advanced(by: offset1).withMemoryRebound(to: Word.self, capacity: count) { $0 }
@@ -21,7 +21,7 @@ func xor(input1: UnsafePointer<Byte>, offset1: Int,
     }
 }
 
-func copyBytes(from: UnsafePointer<Byte>, fromOffset: Int, to: UnsafeMutablePointer<Byte>, toOffset: Int, count: Int) {
+func copyBytes(from: UnsafePointer<Byte>, fromOffset: Int = 0, to: UnsafeMutablePointer<Byte>, toOffset: Int = 0, count: Int) {
     memcpy(to.advanced(by: toOffset), from.advanced(by: fromOffset), count)
 }
 
@@ -30,6 +30,6 @@ func copyBytes(from: [Byte], to: inout [Byte]) {
     memcpy(&to, from, from.count)
 }
 
-func comparBytes(from: UnsafePointer<Byte>, fromOffset: Int, to: UnsafePointer<Byte>, toOffset: Int, count: Int) -> Bool {
+func comparBytes(from: UnsafePointer<Byte>, fromOffset: Int = 0, to: UnsafePointer<Byte>, toOffset: Int = 0, count: Int) -> Bool {
     return memcmp(from.advanced(by: fromOffset), to.advanced(by: toOffset), count) == 0
 }

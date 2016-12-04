@@ -40,17 +40,10 @@ public class CtrMode: BlockCipherEngine {
         self.engine.reset()
         copyBytes(from: self.iv!, to: &self.counter)
     }
-    
-    public func processBlock(input: [Byte], inputOffset: Int, output: inout [Byte], outputOffset: Int) throws {
-        guard (input.count - inputOffset) >= self.blockSize else {
-            throw CryptoError.illegalBlockSize("Block size must be \(self.blockSize * 8)-bit")
-        }
 
-        try self.engine.processBlock(input: self.counter, inputOffset: 0, output: &output, outputOffset: outputOffset)
-        xor(input1: output, offset1: outputOffset,
-            input2: input, offset2: inputOffset,
-            output: &output, offset: outputOffset,
-            count: xorSize, wordMode: xorWordMode)
+    public func processBlock(input: UnsafePointer<Byte>, output: UnsafeMutablePointer<Byte>) throws {
+        try self.engine.processBlock(input: self.counter, output: output)
+        xor(input1: output, input2: input, output: output, count: xorSize, wordMode: xorWordMode)
 
         let counterIndex = self.counter.count - 1
         if self.counter[counterIndex] == 0xFF {

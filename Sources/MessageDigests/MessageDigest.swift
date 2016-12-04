@@ -18,6 +18,11 @@ public class MessageDigest {
         self.buffer = [Byte](repeating: 0, count: engine.inputSize)
     }
 
+    public func reset() {
+        self.engine.reset()
+        self.bufferIndex = 0
+    }
+
     private func digest(input: UnsafePointer<Byte>, count: Int, isFinal: Bool) {
         var remaining = count
         while remaining > 0 {
@@ -52,7 +57,7 @@ public class MessageDigest {
     public func digest(input: UnsafePointer<Byte>, inputCount: Int, output: UnsafeMutablePointer<Byte>, outputOffset: Int) {
         self.digest(input: input, count: inputCount, isFinal: true)
         self.engine.output(output: output.advanced(by: outputOffset))
-        self.engine.reset()
+        self.reset()
     }
 
     public func digest(input: [Byte]) -> [Byte] {

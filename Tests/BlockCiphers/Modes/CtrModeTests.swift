@@ -19,14 +19,14 @@ class CtrModeTests: XCTestCase {
                                          "5ae4df3edbd5d35e5b4f09020db03eab" + "1e031dda2fbe03d1792170a0f3009cee")
         
         do {
-            let cipher = BlockCipher(engine: CtrMode(engine: AesEngine()))
+            let cipher = BlockCipher(engine: CtrMode(engine: AesEngine()), padding: NoPadding())
 
             try cipher.initialize(isEncryption: true, parameters: [key, iv])
-            let encrypted = try cipher.process(input: plaintext)
+            let encrypted = try cipher.finalize(input: plaintext)
             XCTAssertEqual(encrypted, ciphertext)
 
             try cipher.initialize(isEncryption: false, parameters: [key, iv])
-            let decrypted = try cipher.process(input: encrypted)
+            let decrypted = try cipher.finalize(input: encrypted)
             XCTAssertEqual(decrypted, plaintext)
         } catch let error {
             XCTFail("\(error)")

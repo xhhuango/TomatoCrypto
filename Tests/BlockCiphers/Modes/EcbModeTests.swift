@@ -18,14 +18,14 @@ class EcbModeTests: XCTestCase {
                                          "43b1cd7f598ece23881b00e3ed030688" + "7b0c785e27e8ad3f8223207104725dd4")
 
         do {
-            let cipher = BlockCipher(engine: EcbMode(engine: AesEngine()))
+            let cipher = BlockCipher(engine: EcbMode(engine: AesEngine()), padding: NoPadding())
 
             try cipher.initialize(isEncryption: true, parameters: [key])
-            let encrypted = try cipher.process(input: plaintext)
+            let encrypted = try cipher.finalize(input: plaintext)
             XCTAssertEqual(encrypted, ciphertext)
 
             try cipher.initialize(isEncryption: false, parameters: [key])
-            let decrypted = try cipher.process(input: encrypted)
+            let decrypted = try cipher.finalize(input: encrypted)
             XCTAssertEqual(decrypted, plaintext)
         } catch let error {
             XCTFail("\(error)")
@@ -40,14 +40,14 @@ class EcbModeTests: XCTestCase {
                                          "ef7afd2270e2e60adce0ba2face6444e" + "9a4b41ba738d6c72fb16691603c18e0e")
 
         do {
-            let cipher = BlockCipher(engine: EcbMode(engine: AesEngine()))
+            let cipher = BlockCipher(engine: EcbMode(engine: AesEngine()), padding: NoPadding())
 
             try cipher.initialize(isEncryption: true, parameters: [key])
-            let encrypted = try cipher.process(input: plaintext)
+            let encrypted = try cipher.finalize(input: plaintext)
             XCTAssertEqual(encrypted, ciphertext)
 
             try cipher.initialize(isEncryption: false, parameters: [key])
-            let decrypted = try cipher.process(input: encrypted)
+            let decrypted = try cipher.finalize(input: encrypted)
             XCTAssertEqual(decrypted, plaintext)
         } catch let error {
             XCTFail("\(error)")
@@ -62,14 +62,14 @@ class EcbModeTests: XCTestCase {
                                          "b6ed21b99ca6f4f9f153e7b1beafed1d" + "23304b7a39f9f3ff067d8d8f9e24ecc7")
 
         do {
-            let cipher = BlockCipher(engine: EcbMode(engine: AesEngine()))
+            let cipher = BlockCipher(engine: EcbMode(engine: AesEngine()), padding: NoPadding())
 
             try cipher.initialize(isEncryption: true, parameters: [key])
-            let encrypted = try cipher.process(input: plaintext)
+            let encrypted = try cipher.finalize(input: plaintext)
             XCTAssertEqual(encrypted, ciphertext)
 
             try cipher.initialize(isEncryption: false, parameters: [key])
-            let decrypted = try cipher.process(input: encrypted)
+            let decrypted = try cipher.finalize(input: encrypted)
             XCTAssertEqual(decrypted, plaintext)
         } catch let error {
             XCTFail("\(error)")
@@ -82,14 +82,14 @@ class EcbModeTests: XCTestCase {
         let ciphertext = hexToBytes(hex: "948A43F98A834F7E" + "948A43F98A834F7E" + "948A43F98A834F7E" + "948A43F98A834F7E")
 
         do {
-            let cipher = BlockCipher(engine: EcbMode(engine: DesEngine()))
+            let cipher = BlockCipher(engine: EcbMode(engine: DesEngine()), padding: NoPadding())
 
             try cipher.initialize(isEncryption: true, parameters: [key])
-            let encrypted = try cipher.process(input: plaintext)
+            let encrypted = try cipher.finalize(input: plaintext)
             XCTAssertEqual(encrypted, ciphertext)
 
             try cipher.initialize(isEncryption: false, parameters: [key])
-            let decrypted = try cipher.process(input: encrypted)
+            let decrypted = try cipher.finalize(input: encrypted)
             XCTAssertEqual(decrypted, plaintext)
         } catch let error {
             XCTFail("\(error)")

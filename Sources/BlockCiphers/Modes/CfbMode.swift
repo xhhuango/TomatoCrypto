@@ -43,33 +43,23 @@ public class CfbMode: BlockCipherEngine {
         copyBytes(from: self.iv!, to: &self.feedback)
     }
 
-    public func processBlock(input: [Byte], inputOffset: Int, output: inout [Byte], outputOffset: Int) throws {
-        guard (input.count - inputOffset) >= self.blockSize else {
-            throw CryptoError.illegalBlockSize("Block size must be \(self.blockSize * 8)-bit")
-        }
-
+    public func processBlock(input: UnsafePointer<Byte>, output: UnsafeMutablePointer<Byte>) throws {
         if self.isEncryption {
-            try self.encryptBlock(input: input, inputOffset: inputOffset, output: &output, outputOffset: outputOffset)
+            try self.encryptBlock(input: input, output: output)
         } else {
-            try self.decryptBlock(input: input, inputOffset: inputOffset, output: &output, outputOffset: outputOffset)
+            try self.decryptBlock(input: input, output: output)
         }
     }
 
-    public func encryptBlock(input: [Byte], inputOffset: Int, output: inout [Byte], outputOffset: Int) throws {
-        try self.engine.processBlock(input: self.feedback, inputOffset: 0, output: &output, outputOffset: outputOffset)
-        xor(input1: output, offset1: outputOffset,
-            input2: input, offset2: inputOffset,
-            output: &output, offset: outputOffset,
-            count: xorSize, wordMode: xorWordMode)
-        copyBytes(from: output, fromOffset: outputOffset, to: &self.feedback, toOffset: 0, count: self.feedback.count)
+    public func encryptBlock(input: UnsafePointer<Byte>, output: UnsafeMutablePointer<Byte>) throws {
+        try self.engine.processBlock(input: self.feedback, output: output)
+        xor(input1: output, input2: input, output: output, count: xorSize, wordMode: xorWordMode)
+        copyBytes(from: output, fromOffset: 0, to: &self.feedback, toOffset: 0, count: self.feedback.count)
     }
 
-    public func decryptBlock(input: [Byte], inputOffset: Int, output: inout [Byte], outputOffset: Int) throws {
-        try self.engine.processBlock(input: self.feedback, inputOffset: 0, output: &output, outputOffset: outputOffset)
-        copyBytes(from: input, fromOffset: inputOffset, to: &self.feedback, toOffset: 0, count: self.feedback.count)
-        xor(input1: output, offset1: outputOffset,
-            input2: feedback, offset2: 0,
-            output: &output, offset: outputOffset,
-            count: xorSize, wordMode: xorWordMode)
+    public func decryptBlock(input: UnsafePointer<Byte>, output: UnsafeMutablePointer<Byte>) throws {
+        try self.engine.processBlock(input: self.feedback, output: output)
+        copyBytes(from: input, to: &self.feedback, count: self.feedback.count)
+        xor(input1: output, input2: feedback, output: output, count: xorSize, wordMode: xorWordMode)
     }
 }

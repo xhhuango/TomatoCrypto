@@ -156,22 +156,16 @@ public class DesEngine: BlockCipherEngine {
         }
     }
 
-    public func processBlock(input: [Byte], inputOffset: Int, output: inout [Byte], outputOffset: Int) throws {
-        guard (input.count - inputOffset) >= self.blockSize else {
-            throw CryptoError.illegalBlockSize("Block size must be \(self.blockSize * 8)-bit")
-        }
-        
+    public func processBlock(input: UnsafePointer<Byte>, output: UnsafeMutablePointer<Byte>) throws {
         try self.encryptBlock(subkeys: self.subkeys,
                               input: input,
-                              inputOffset: inputOffset,
-                              output: &output,
-                              outputOffset: outputOffset)
+                              output: output)
     }
 }
 
 extension DesEngine {
-    func encryptBlock(subkeys: [[Byte]], input: [Byte], inputOffset: Int, output: inout [Byte], outputOffset: Int) throws {
-        let ipData = self.permute(bytes: [Byte](input[inputOffset..<(inputOffset + self.blockSize)]), table: self.ip)
+    func encryptBlock(subkeys: [[Byte]], input: UnsafePointer<Byte>, output: UnsafeMutablePointer<Byte>) throws {
+        let ipData = self.permute(bytes: input, table: self.ip)
         var (l, r) = self.split(data: ipData)
         for i in 0..<subkeys.count {
             let tmp = r
@@ -182,7 +176,7 @@ extension DesEngine {
         let encrypted = self.permute(bytes: joint, table: self.iip)
         
         for i in 0..<encrypted.count {
-            output[outputOffset + i] = encrypted[i]
+            output[i] = encrypted[i]
         }
     }
     
@@ -201,16 +195,14 @@ extension DesEngine {
 }
 
 extension DesEngine {
-    func getBit(bytes: [Byte], index: Int) -> Bool {
+    func getBit(bytes: UnsafePointer<Byte>, index: Int) -> Bool {
         let byteIndex = index / self.byteSize
-        assert(byteIndex < bytes.count)
         let bitIndex = 7 - Byte(index % self.byteSize)
         return ((bytes[byteIndex] >> bitIndex) & 0x01) == 0x01
     }
     
-    func setBit(bytes: inout [Byte], index: Int, bit: Bool) {
+    func setBit(bytes: UnsafeMutablePointer<Byte>, index: Int, bit: Bool) {
         let byteIndex = index / self.byteSize
-        assert(byteIndex < bytes.count)
         let bitIndex = 7 - Byte(index % self.byteSize)
         
         if bit {
@@ -221,11 +213,10 @@ extension DesEngine {
     }
     
     fileprivate func byteCount(bitCount: Int) -> Int {
-        assert(bitCount > 0)
         return (bitCount - 1) / self.byteSize + 1
     }
     
-    func permute(bytes: [Byte], table: [Int]) -> [Byte] {
+    func permute(bytes: UnsafePointer<Byte>, table: [Int]) -> [Byte] {
         let byteCount = self.byteCount(bitCount: table.count)
         var permuted = [Byte](repeating: 0, count: byteCount)
         for i in 0..<table.count {

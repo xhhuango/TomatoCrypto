@@ -41,15 +41,8 @@ public class OfbMode: BlockCipherEngine {
         copyBytes(from: self.iv!, to: &self.feedback)
     }
     
-    public func processBlock(input: [Byte], inputOffset: Int, output: inout [Byte], outputOffset: Int) throws {
-        guard (input.count - inputOffset) >= self.blockSize else {
-            throw CryptoError.illegalBlockSize("Block size must be \(self.blockSize * 8)-bit")
-        }
-
-        try self.engine.processBlock(input: self.feedback, inputOffset: 0, output: &self.feedback, outputOffset: 0)
-        xor(input1: self.feedback, offset1: 0,
-            input2: input, offset2: inputOffset,
-            output: &output, offset: outputOffset,
-            count: self.xorSize, wordMode: self.xorWordMode)
+    public func processBlock(input: UnsafePointer<Byte>, output: UnsafeMutablePointer<Byte>) throws {
+        try self.engine.processBlock(input: self.feedback, output: &self.feedback)
+        xor(input1: self.feedback, input2: input, output: output, count: self.xorSize, wordMode: self.xorWordMode)
     }
 }
