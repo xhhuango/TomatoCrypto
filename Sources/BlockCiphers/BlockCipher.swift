@@ -3,6 +3,10 @@ public class BlockCipher {
     private let padding: BlockCipherPadding
     
     private var isEncryption = true
+
+    public var blockSize: Int {
+        return self.engine.blockSize
+    }
     
     public init(engine: BlockCipherEngine, padding: BlockCipherPadding = NoPadding()) {
         self.engine = engine

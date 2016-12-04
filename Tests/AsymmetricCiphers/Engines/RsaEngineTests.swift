@@ -40,33 +40,39 @@ class RsaEngineTests: XCTestCase {
         let encrypted = engine.encrypt(e: e, m: m, input: plaintext)
         XCTAssertEqual(encrypted, ciphertext)
         
-        let decrypted = engine.decrypt(p: p, q: q, dP: dP, dQ: dQ, qInv: qInv, input: encrypted)
+        let decrypted = engine.crtDecrypt(p: p, q: q, dP: dP, dQ: dQ, qInv: qInv, input: encrypted)
         XCTAssertEqual(decrypted, plaintext)
     }
     
     func testRsaEngine() {
         let m = BigUInt(self.mStr, radix: 16)!
         let e = BigUInt(self.eStr, radix: 16)!
+        let d = BigUInt(self.dStr, radix: 16)!
         let p = BigUInt(self.pStr, radix: 16)!
         let q = BigUInt(self.qStr, radix: 16)!
         let dP = BigUInt(self.dpStr, radix: 16)!
         let dQ = BigUInt(self.dqStr, radix: 16)!
         let qInv = BigUInt(self.qInvStr, radix: 16)!
         
-        let publicKey = RsaPublicKeyParameter(modulus: m, e: e)
-        let privateKey = RsaPrivateCrtKeyParameter(modulus: m, p: p, q: q, dP: dP, dQ: dQ, qInv: qInv)
-        let engine = RsaEngine()
-        
         let plaintextBytes = hexToBytes(hex: plaintextString)
         let ciphertextBytes = hexToBytes(hex: ciphertextString)
         
         do {
+            let engine = RsaEngine()
+
+            let publicKey = RsaPublicKeyParameter(modulus: m, e: e)
             try engine.initialize(isEncryption: true, parameters: [publicKey])
-            let encrypted = try engine.process(input: plaintextBytes)
+            let encrypted = try engine.process(input: plaintextBytes, count: plaintextBytes.count)
             XCTAssertEqual(encrypted, ciphertextBytes)
-            
+
+            let privateCrtKey = RsaPrivateCrtKeyParameter(modulus: m, p: p, q: q, dP: dP, dQ: dQ, qInv: qInv)
+            try engine.initialize(isEncryption: false, parameters: [privateCrtKey])
+            let crtDecrypted = try engine.process(input: encrypted, count: encrypted.count)
+            XCTAssertEqual(crtDecrypted, plaintextBytes)
+
+            let privateKey = RsaPrivateKeyParameter(modulus: m, d: d)
             try engine.initialize(isEncryption: false, parameters: [privateKey])
-            let decrypted = try engine.process(input: encrypted)
+            let decrypted = try engine.process(input: encrypted, count: encrypted.count)
             XCTAssertEqual(decrypted, plaintextBytes)
         } catch let error {
             XCTFail("\(error)")

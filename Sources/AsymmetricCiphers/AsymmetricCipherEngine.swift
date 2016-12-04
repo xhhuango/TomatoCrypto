@@ -3,5 +3,5 @@ public protocol AsymmetricCipherEngine {
     var outputSize: Int { get }
     
     func initialize(isEncryption: Bool, parameters: [CryptoParameter]) throws
-    func process(input: [Byte]) throws -> [Byte]
+    func process(input: UnsafePointer<Byte>, count: Int) throws -> [Byte]
 }

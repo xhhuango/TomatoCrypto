@@ -16,4 +16,13 @@ public struct RsaPrivateCrtKeyParameter: AsymmetricKeyParameter {
         self.dQ = dQ
         self.qInv = qInv
     }
+
+    public init(modulusString: String, pString: String, qString: String, dpString: String, dqString: String, qInvString: String) {
+        self.modulus = BigUInt(modulusString, radix: 16)!
+        self.p = BigUInt(pString, radix: 16)!
+        self.q = BigUInt(qString, radix: 16)!
+        self.dP = BigUInt(dpString, radix: 16)!
+        self.dQ = BigUInt(dqString, radix: 16)!
+        self.qInv = BigUInt(qInvString, radix: 16)!
+    }
 }

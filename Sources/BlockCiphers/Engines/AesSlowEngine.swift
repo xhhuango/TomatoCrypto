@@ -405,3 +405,22 @@ extension AesSlowEngine {
         output[3] = self.sbox[Int(word[3])]
     }
 }
+
+extension AesSlowEngine {
+    fileprivate func xorWord(input1: [Byte], input2: [Byte], output: inout [Byte]) {
+        output[0] = input1[0] ^ input2[0]
+        output[1] = input1[1] ^ input2[1]
+        output[2] = input1[2] ^ input2[2]
+        output[3] = input1[3] ^ input2[3]
+    }
+
+    fileprivate func leftRotateWord(input: UnsafeMutablePointer<Byte>, shiftBits: Word) {
+        let word = input.withMemoryRebound(to: Word.self, capacity: 1) { $0 }
+        word[0] = ((word[0] >> shiftBits) & (0xFFFFFFFF >> shiftBits)) | ((word[0] << (32 - shiftBits)) & (0xFFFFFFFF << (32 - shiftBits)))
+    }
+
+    fileprivate func rightRotateWord(input: UnsafeMutablePointer<Byte>, shiftBits: Word) {
+        let word = input.withMemoryRebound(to: Word.self, capacity: 1) { $0 }
+        word[0] = ((word[0] << shiftBits) & (0xFFFFFFFF << shiftBits)) | ((word[0] >> (32 - shiftBits)) & (0xFFFFFFFF >> (32 - shiftBits)))
+    }
+}

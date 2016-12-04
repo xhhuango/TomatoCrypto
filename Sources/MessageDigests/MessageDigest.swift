@@ -3,6 +3,14 @@ public class MessageDigest {
 
     private var buffer: [Byte]
     private var bufferIndex = 0
+    
+    public var inputSize: Int {
+        return self.engine.inputSize
+    }
+    
+    public var outputSize: Int {
+        return self.engine.outputSize
+    }
 
     public init(engine: MessageDigestEngine) {
         self.engine = engine
@@ -10,42 +18,46 @@ public class MessageDigest {
         self.buffer = [Byte](repeating: 0, count: engine.inputSize)
     }
 
-    private func digest(input: [Byte], isFinal: Bool) {
-        var count = input.count
-        while count > 0 {
+    private func digest(input: UnsafePointer<Byte>, count: Int, isFinal: Bool) {
+        var remaining = count
+        while remaining > 0 {
             let countEmpty = buffer.count - bufferIndex
-            if count >= countEmpty {
-                copyBytes(from: input, fromOffset: input.count - count,
+            if remaining >= countEmpty {
+                copyBytes(from: input, fromOffset: count - remaining,
                           to: &self.buffer, toOffset: bufferIndex,
                           count: countEmpty)
-                count -= countEmpty
+                remaining -= countEmpty
                 bufferIndex = 0
                 self.engine.digestBlock(input: self.buffer)
             } else {
-                copyBytes(from: input, fromOffset: input.count - count,
+                copyBytes(from: input, fromOffset: count - remaining,
                           to: &self.buffer, toOffset: bufferIndex,
-                          count: count)
-                bufferIndex += count
-                count = 0
+                          count: remaining)
+                bufferIndex += remaining
+                remaining = 0
             }
         }
 
         if isFinal {
             let padded = self.engine.pad(input: self.buffer, count: bufferIndex)
             bufferIndex = 0
-            self.digest(input: padded, isFinal: false)
+            self.digest(input: padded, count: padded.count, isFinal: false)
         }
     }
 
-    public func update(input: [Byte]) {
-        self.digest(input: input, isFinal: false)
+    public func update(input: UnsafePointer<Byte>, count: Int) {
+        self.digest(input: input, count: count, isFinal: false)
+    }
+
+    public func digest(input: UnsafePointer<Byte>, inputCount: Int, output: UnsafeMutablePointer<Byte>, outputOffset: Int) {
+        self.digest(input: input, count: inputCount, isFinal: true)
+        self.engine.output(output: output.advanced(by: outputOffset))
+        self.engine.reset()
     }
 
     public func digest(input: [Byte]) -> [Byte] {
-        self.digest(input: input, isFinal: true)
         var output = [Byte](repeating: 0, count: self.engine.outputSize)
-        self.engine.output(output: &output)
-        self.engine.reset()
+        self.digest(input: input, inputCount: input.count, output: &output, outputOffset: 0)
         return output
     }
 }

@@ -8,4 +8,9 @@ public struct RsaPublicKeyParameter: AsymmetricKeyParameter {
         self.modulus = modulus
         self.e = e
     }
+
+    public init(modulusString: String, eString: String) {
+        self.modulus = BigUInt(modulusString, radix: 16)!
+        self.e = BigUInt(eString, radix: 16)!
+    }
 }

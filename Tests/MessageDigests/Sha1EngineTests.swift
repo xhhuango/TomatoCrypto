@@ -61,17 +61,4 @@ class Sha1EngineTests: XCTestCase {
         engine.output(output: &output)
         XCTAssertEqual(output, expected)
     }
-    
-    func testDigest5() {
-        let input = stringToBytes(string: "abcdefghijklmnopqrstuvwxyz")
-        let expected = hexToBytes(hex: "32d10c7b8cf96570ca04ce37f2a19d84240d3a89")
-
-        let engine = Sha1Engine()
-        engine.reset()
-        let padding = engine.pad(input: input, count: input.count)
-        engine.digestBlock(input: padding)
-        var output = [Byte](repeating: 0, count: engine.outputSize)
-        engine.output(output: &output)
-        XCTAssertEqual(output, expected)
-    }
 }
