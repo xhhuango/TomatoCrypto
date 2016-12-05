@@ -1,9 +1,6 @@
 public class CtrMode: BlockCipherEngine {
     private let engine: BlockCipherEngine
     
-    private let xorWordMode: Bool
-    private let xorSize: Int
-    
     public var blockSize: Int {
         return self.engine.blockSize
     }
@@ -14,10 +11,6 @@ public class CtrMode: BlockCipherEngine {
 
     public init(engine: BlockCipherEngine) {
         self.engine = engine
-
-        self.xorWordMode = (engine.blockSize % wordSize == 0)
-        self.xorSize = self.xorWordMode ? engine.blockSize / wordSize : engine.blockSize
-
         self.counter = [Byte](repeating: 0, count: engine.blockSize)
     }
     
@@ -43,7 +36,7 @@ public class CtrMode: BlockCipherEngine {
 
     public func processBlock(input: UnsafePointer<Byte>, output: UnsafeMutablePointer<Byte>) throws {
         try self.engine.processBlock(input: self.counter, output: output)
-        xor(input1: output, input2: input, output: output, count: xorSize, wordMode: xorWordMode)
+        xorBytes(input1: output, input2: input, output: output, count: self.blockSize)
 
         let counterIndex = self.counter.count - 1
         if self.counter[counterIndex] == 0xFF {

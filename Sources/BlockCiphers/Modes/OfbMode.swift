@@ -1,9 +1,6 @@
 public class OfbMode: BlockCipherEngine {
     private let engine: BlockCipherEngine
 
-    private let xorWordMode: Bool
-    private let xorSize: Int
-
     public var blockSize: Int {
         return self.engine.blockSize
     }
@@ -14,10 +11,6 @@ public class OfbMode: BlockCipherEngine {
 
     public init(engine: BlockCipherEngine) {
         self.engine = engine
-
-        self.xorWordMode = (engine.blockSize % wordSize == 0)
-        self.xorSize = self.xorWordMode ? engine.blockSize / wordSize : engine.blockSize
-
         self.feedback = [Byte](repeating: 0, count: engine.blockSize)
     }
     
@@ -43,6 +36,6 @@ public class OfbMode: BlockCipherEngine {
     
     public func processBlock(input: UnsafePointer<Byte>, output: UnsafeMutablePointer<Byte>) throws {
         try self.engine.processBlock(input: self.feedback, output: &self.feedback)
-        xor(input1: self.feedback, input2: input, output: output, count: self.xorSize, wordMode: self.xorWordMode)
+        xorBytes(input1: self.feedback, input2: input, output: output, count: self.blockSize)
     }
 }
