@@ -158,6 +158,17 @@
 		B059EF481DF0DC36006B3F35 /* AsymmetricCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B059EF461DF0DC36006B3F35 /* AsymmetricCipher.swift */; };
 		B059EF491DF0DC36006B3F35 /* AsymmetricCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B059EF461DF0DC36006B3F35 /* AsymmetricCipher.swift */; };
 		B059EF4A1DF0DC36006B3F35 /* AsymmetricCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B059EF461DF0DC36006B3F35 /* AsymmetricCipher.swift */; };
+		B09647581DF6005C00634663 /* RsaPssSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09647571DF6005C00634663 /* RsaPssSigner.swift */; };
+		B09647591DF6005C00634663 /* RsaPssSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09647571DF6005C00634663 /* RsaPssSigner.swift */; };
+		B096475A1DF6005C00634663 /* RsaPssSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09647571DF6005C00634663 /* RsaPssSigner.swift */; };
+		B096475B1DF6005C00634663 /* RsaPssSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09647571DF6005C00634663 /* RsaPssSigner.swift */; };
+		B096475E1DF60D2A00634663 /* RsaPssSignerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B096475D1DF60D2A00634663 /* RsaPssSignerTests.swift */; };
+		B096475F1DF60D2A00634663 /* RsaPssSignerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B096475D1DF60D2A00634663 /* RsaPssSignerTests.swift */; };
+		B09647601DF60D2A00634663 /* RsaPssSignerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B096475D1DF60D2A00634663 /* RsaPssSignerTests.swift */; };
+		B09647621DF61CE200634663 /* SaltParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09647611DF61CE200634663 /* SaltParameter.swift */; };
+		B09647631DF61CE200634663 /* SaltParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09647611DF61CE200634663 /* SaltParameter.swift */; };
+		B09647641DF61CE200634663 /* SaltParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09647611DF61CE200634663 /* SaltParameter.swift */; };
+		B09647651DF61CE200634663 /* SaltParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09647611DF61CE200634663 /* SaltParameter.swift */; };
 		B0A2FEB31DF47580004356E2 /* OaepPaddingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A2FEB21DF47580004356E2 /* OaepPaddingTests.swift */; };
 		B0A2FEB41DF47580004356E2 /* OaepPaddingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A2FEB21DF47580004356E2 /* OaepPaddingTests.swift */; };
 		B0A2FEB51DF47580004356E2 /* OaepPaddingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A2FEB21DF47580004356E2 /* OaepPaddingTests.swift */; };
@@ -272,6 +283,9 @@
 		B059EF381DF0D29A006B3F35 /* RsaPrivateCrtKeyParameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RsaPrivateCrtKeyParameter.swift; sourceTree = "<group>"; };
 		B059EF391DF0D29A006B3F35 /* RsaPublicKeyParameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RsaPublicKeyParameter.swift; sourceTree = "<group>"; };
 		B059EF461DF0DC36006B3F35 /* AsymmetricCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsymmetricCipher.swift; sourceTree = "<group>"; };
+		B09647571DF6005C00634663 /* RsaPssSigner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RsaPssSigner.swift; sourceTree = "<group>"; };
+		B096475D1DF60D2A00634663 /* RsaPssSignerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RsaPssSignerTests.swift; sourceTree = "<group>"; };
+		B09647611DF61CE200634663 /* SaltParameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaltParameter.swift; sourceTree = "<group>"; };
 		B0A2FEB21DF47580004356E2 /* OaepPaddingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OaepPaddingTests.swift; sourceTree = "<group>"; };
 		B0BE03AF1DF2DA77008F2537 /* Sha1EngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sha1EngineTests.swift; sourceTree = "<group>"; };
 		B0C169B11DF41B05001F9A0B /* OaepPadding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OaepPadding.swift; sourceTree = "<group>"; };
@@ -560,6 +574,7 @@
 				B01407241DEEEEDA00D7A5B9 /* Block Ciphers */,
 				B01407D21DEEF13600D7A5B9 /* Asymmetric Ciphers */,
 				B01E50591DF1FE0A0049ED39 /* Message Digests */,
+				B09647561DF5FFF000634663 /* Digital Signatures */,
 				B059B5561DEEDA940018C016 /* Info.plist */,
 				B059B5571DEEDA940018C016 /* TomatoCrypto.h */,
 			);
@@ -573,6 +588,7 @@
 				B01407901DEEF00D00D7A5B9 /* Block Ciphers */,
 				B01407911DEEF01400D7A5B9 /* Asymmetric Ciphers */,
 				B0BE03AE1DF2DA2F008F2537 /* Message Digests */,
+				B096475C1DF60D0A00634663 /* Digital Signatures */,
 				B059B5661DEEDE670018C016 /* Info.plist */,
 			);
 			path = Tests;
@@ -587,6 +603,23 @@
 				B059EF391DF0D29A006B3F35 /* RsaPublicKeyParameter.swift */,
 			);
 			name = RSA;
+			sourceTree = "<group>";
+		};
+		B09647561DF5FFF000634663 /* Digital Signatures */ = {
+			isa = PBXGroup;
+			children = (
+				B09647571DF6005C00634663 /* RsaPssSigner.swift */,
+				B09647611DF61CE200634663 /* SaltParameter.swift */,
+			);
+			name = "Digital Signatures";
+			sourceTree = "<group>";
+		};
+		B096475C1DF60D0A00634663 /* Digital Signatures */ = {
+			isa = PBXGroup;
+			children = (
+				B096475D1DF60D2A00634663 /* RsaPssSignerTests.swift */,
+			);
+			name = "Digital Signatures";
 			sourceTree = "<group>";
 		};
 		B0BE03AE1DF2DA2F008F2537 /* Message Digests */ = {
@@ -1209,10 +1242,12 @@
 				B01E505C1DF1FFD20049ED39 /* MessageDigest.swift in Sources */,
 				B01E50661DF200350049ED39 /* Sha1Engine.swift in Sources */,
 				B014071B1DEEEEA900D7A5B9 /* Array.swift in Sources */,
+				B09647581DF6005C00634663 /* RsaPssSigner.swift in Sources */,
 				B059EF3C1DF0D29A006B3F35 /* RsaPublicKeyParameter.swift in Sources */,
 				B01407211DEEEECF00D7A5B9 /* CryptoError.swift in Sources */,
 				B003D5431DEF6E9900ECAC3B /* SymmetricKeyParameter.swift in Sources */,
 				B014074C1DEEEF7F00D7A5B9 /* IvParameter.swift in Sources */,
+				B09647621DF61CE200634663 /* SaltParameter.swift in Sources */,
 				B003D54D1DEF8C6200ECAC3B /* AsymmetricKeyParameter.swift in Sources */,
 				B014073F1DEEEF6100D7A5B9 /* CbcMode.swift in Sources */,
 				B059EF471DF0DC36006B3F35 /* AsymmetricCipher.swift in Sources */,
@@ -1243,6 +1278,7 @@
 				B01407B51DEEF0D400D7A5B9 /* CtrModeTests.swift in Sources */,
 				B01407AE1DEEF0D400D7A5B9 /* RsaEngineTests.swift in Sources */,
 				B0BE03B01DF2DA77008F2537 /* Sha1EngineTests.swift in Sources */,
+				B096475E1DF60D2A00634663 /* RsaPssSignerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1267,10 +1303,12 @@
 				B014074D1DEEEFA100D7A5B9 /* BlockCipher.swift in Sources */,
 				B01E505D1DF1FFD20049ED39 /* MessageDigest.swift in Sources */,
 				B01E50671DF200350049ED39 /* Sha1Engine.swift in Sources */,
+				B09647591DF6005C00634663 /* RsaPssSigner.swift in Sources */,
 				B01407821DEEEFD800D7A5B9 /* Type.swift in Sources */,
 				B01407621DEEEFCC00D7A5B9 /* EcbMode.swift in Sources */,
 				B01407631DEEEFCC00D7A5B9 /* OfbMode.swift in Sources */,
 				B003D5441DEF6E9900ECAC3B /* SymmetricKeyParameter.swift in Sources */,
+				B09647631DF61CE200634663 /* SaltParameter.swift in Sources */,
 				B014075F1DEEEFCC00D7A5B9 /* CbcMode.swift in Sources */,
 				B003D54E1DEF8C6200ECAC3B /* AsymmetricKeyParameter.swift in Sources */,
 				B059EF3F1DF0D48A006B3F35 /* RsaPublicKeyParameter.swift in Sources */,
@@ -1301,6 +1339,7 @@
 				B01407C11DEEF0D400D7A5B9 /* CtrModeTests.swift in Sources */,
 				B01407BA1DEEF0D400D7A5B9 /* RsaEngineTests.swift in Sources */,
 				B0BE03B11DF2DA77008F2537 /* Sha1EngineTests.swift in Sources */,
+				B096475F1DF60D2A00634663 /* RsaPssSignerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1325,10 +1364,12 @@
 				B014074E1DEEEFA200D7A5B9 /* BlockCipher.swift in Sources */,
 				B01E505E1DF1FFD20049ED39 /* MessageDigest.swift in Sources */,
 				B01E50681DF200350049ED39 /* Sha1Engine.swift in Sources */,
+				B096475A1DF6005C00634663 /* RsaPssSigner.swift in Sources */,
 				B01407871DEEEFD900D7A5B9 /* Type.swift in Sources */,
 				B014076E1DEEEFCC00D7A5B9 /* EcbMode.swift in Sources */,
 				B014076F1DEEEFCC00D7A5B9 /* OfbMode.swift in Sources */,
 				B003D5451DEF6E9900ECAC3B /* SymmetricKeyParameter.swift in Sources */,
+				B09647641DF61CE200634663 /* SaltParameter.swift in Sources */,
 				B014076B1DEEEFCC00D7A5B9 /* CbcMode.swift in Sources */,
 				B003D54F1DEF8C6200ECAC3B /* AsymmetricKeyParameter.swift in Sources */,
 				B059EF421DF0D48A006B3F35 /* RsaPublicKeyParameter.swift in Sources */,
@@ -1363,10 +1404,12 @@
 				B014074F1DEEEFA200D7A5B9 /* BlockCipher.swift in Sources */,
 				B01E505F1DF1FFD20049ED39 /* MessageDigest.swift in Sources */,
 				B01E50691DF200350049ED39 /* Sha1Engine.swift in Sources */,
+				B096475B1DF6005C00634663 /* RsaPssSigner.swift in Sources */,
 				B014078C1DEEEFD900D7A5B9 /* Type.swift in Sources */,
 				B014077A1DEEEFCD00D7A5B9 /* EcbMode.swift in Sources */,
 				B014077B1DEEEFCD00D7A5B9 /* OfbMode.swift in Sources */,
 				B003D5461DEF6E9900ECAC3B /* SymmetricKeyParameter.swift in Sources */,
+				B09647651DF61CE200634663 /* SaltParameter.swift in Sources */,
 				B01407771DEEEFCD00D7A5B9 /* CbcMode.swift in Sources */,
 				B003D5501DEF8C6200ECAC3B /* AsymmetricKeyParameter.swift in Sources */,
 				B059EF451DF0D48B006B3F35 /* RsaPublicKeyParameter.swift in Sources */,
@@ -1397,6 +1440,7 @@
 				B01407CD1DEEF0D500D7A5B9 /* CtrModeTests.swift in Sources */,
 				B01407C61DEEF0D500D7A5B9 /* RsaEngineTests.swift in Sources */,
 				B0BE03B21DF2DA77008F2537 /* Sha1EngineTests.swift in Sources */,
+				B09647601DF60D2A00634663 /* RsaPssSignerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -87,9 +87,9 @@ public class OaepPadding: AsymmetricCipherEngine {
                  output: &padded, offset: dbIndex,
                  count: dbCount)
 
-        guard comparBytes(from: self.hashedLabel, fromOffset: 0,
-                          to: padded, toOffset: dbIndex,
-                          count: self.hash.outputSize) else {
+        guard compareBytes(from: self.hashedLabel, fromOffset: 0,
+                           to: padded, toOffset: dbIndex,
+                           count: self.hash.outputSize) else {
                             throw CryptoError.invalidCipherText("Data wrong")
         }
 

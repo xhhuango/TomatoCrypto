@@ -22,8 +22,8 @@ func copyBytes(from: [Byte], to: inout [Byte]) {
     memcpy(&to, from, from.count)
 }
 
-func comparBytes(from: UnsafePointer<Byte>, fromOffset: Int = 0,
-                 to: UnsafePointer<Byte>, toOffset: Int = 0,
-                 count: Int) -> Bool {
+func compareBytes(from: UnsafePointer<Byte>, fromOffset: Int = 0,
+                  to: UnsafePointer<Byte>, toOffset: Int = 0,
+                  count: Int) -> Bool {
     return memcmp(from.advanced(by: fromOffset), to.advanced(by: toOffset), count) == 0
 }

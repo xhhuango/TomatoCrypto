@@ -21,10 +21,6 @@ public class AsymmetricCipher {
     }
     
     public func process(input: UnsafePointer<Byte>, count: Int) throws -> [Byte] {
-        let inputSize = self.engine.inputSize
-        guard count <= inputSize else {
-            throw CryptoError.illegalDataLength("Input length must be less than or equel to \(inputSize) bytes")
-        }
         return try self.engine.process(input: input, count: count)
     }
 

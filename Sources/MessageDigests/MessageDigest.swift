@@ -59,10 +59,18 @@ public class MessageDigest {
         self.engine.output(output: output.advanced(by: outputOffset))
         self.reset()
     }
+    
+    public func digest(output: UnsafeMutablePointer<Byte>, outputOffset: Int) {
+        self.digest(input: [], inputCount: 0, output: output, outputOffset: outputOffset)
+    }
 
     public func digest(input: [Byte]) -> [Byte] {
         var output = [Byte](repeating: 0, count: self.engine.outputSize)
         self.digest(input: input, inputCount: input.count, output: &output, outputOffset: 0)
         return output
+    }
+
+    public func digest() -> [Byte] {
+        return self.digest(input: [])
     }
 }
