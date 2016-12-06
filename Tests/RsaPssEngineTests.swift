@@ -32,19 +32,19 @@ class RsaPssSignerTests: XCTestCase {
         let hash = MessageDigest(engine: Sha1Engine())
         let mgfHash = MessageDigest(engine: Sha1Engine())
         
-        let signer = RsaPssSigner(cipher: cipher, hash: hash, mgfHash: mgfHash)
+        let engine = RsaPssEngine(cipher: cipher, hash: hash, mgfHash: mgfHash)
 
         do {
-            try signer.initialize(isSigning: true, parameters: [privateKey, salt])
-            signer.update(input: msg, count: msg.count)
-            let signature = try signer.sign()
+            try engine.initialize(isSigning: true, parameters: [privateKey, salt])
+            engine.update(input: msg, count: msg.count)
+            let signature = try engine.sign()
             XCTAssertEqual(signature, sig)
 
-            signer.reset()
+            engine.reset()
 
-            try signer.initialize(isSigning: false, parameters: [publicKey, salt])
-            signer.update(input: msg, count: msg.count)
-            let verified = try signer.verify(signature: signature, count: signature.count)
+            try engine.initialize(isSigning: false, parameters: [publicKey, salt])
+            engine.update(input: msg, count: msg.count)
+            let verified = try engine.verify(signature: signature, count: signature.count)
             XCTAssertTrue(verified)
         } catch let error {
             XCTFail("\(error)")

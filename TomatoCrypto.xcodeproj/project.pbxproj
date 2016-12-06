@@ -158,17 +158,25 @@
 		B059EF481DF0DC36006B3F35 /* AsymmetricCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B059EF461DF0DC36006B3F35 /* AsymmetricCipher.swift */; };
 		B059EF491DF0DC36006B3F35 /* AsymmetricCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B059EF461DF0DC36006B3F35 /* AsymmetricCipher.swift */; };
 		B059EF4A1DF0DC36006B3F35 /* AsymmetricCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B059EF461DF0DC36006B3F35 /* AsymmetricCipher.swift */; };
-		B09647581DF6005C00634663 /* RsaPssSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09647571DF6005C00634663 /* RsaPssSigner.swift */; };
-		B09647591DF6005C00634663 /* RsaPssSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09647571DF6005C00634663 /* RsaPssSigner.swift */; };
-		B096475A1DF6005C00634663 /* RsaPssSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09647571DF6005C00634663 /* RsaPssSigner.swift */; };
-		B096475B1DF6005C00634663 /* RsaPssSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09647571DF6005C00634663 /* RsaPssSigner.swift */; };
-		B096475E1DF60D2A00634663 /* RsaPssSignerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B096475D1DF60D2A00634663 /* RsaPssSignerTests.swift */; };
-		B096475F1DF60D2A00634663 /* RsaPssSignerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B096475D1DF60D2A00634663 /* RsaPssSignerTests.swift */; };
-		B09647601DF60D2A00634663 /* RsaPssSignerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B096475D1DF60D2A00634663 /* RsaPssSignerTests.swift */; };
+		B09647581DF6005C00634663 /* RsaPssEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09647571DF6005C00634663 /* RsaPssEngine.swift */; };
+		B09647591DF6005C00634663 /* RsaPssEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09647571DF6005C00634663 /* RsaPssEngine.swift */; };
+		B096475A1DF6005C00634663 /* RsaPssEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09647571DF6005C00634663 /* RsaPssEngine.swift */; };
+		B096475B1DF6005C00634663 /* RsaPssEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09647571DF6005C00634663 /* RsaPssEngine.swift */; };
+		B096475E1DF60D2A00634663 /* RsaPssEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B096475D1DF60D2A00634663 /* RsaPssEngineTests.swift */; };
+		B096475F1DF60D2A00634663 /* RsaPssEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B096475D1DF60D2A00634663 /* RsaPssEngineTests.swift */; };
+		B09647601DF60D2A00634663 /* RsaPssEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B096475D1DF60D2A00634663 /* RsaPssEngineTests.swift */; };
 		B09647621DF61CE200634663 /* SaltParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09647611DF61CE200634663 /* SaltParameter.swift */; };
 		B09647631DF61CE200634663 /* SaltParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09647611DF61CE200634663 /* SaltParameter.swift */; };
 		B09647641DF61CE200634663 /* SaltParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09647611DF61CE200634663 /* SaltParameter.swift */; };
 		B09647651DF61CE200634663 /* SaltParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09647611DF61CE200634663 /* SaltParameter.swift */; };
+		B09647671DF6BD4800634663 /* SignatureEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09647661DF6BD4800634663 /* SignatureEngine.swift */; };
+		B09647681DF6BD4800634663 /* SignatureEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09647661DF6BD4800634663 /* SignatureEngine.swift */; };
+		B09647691DF6BD4800634663 /* SignatureEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09647661DF6BD4800634663 /* SignatureEngine.swift */; };
+		B096476A1DF6BD4800634663 /* SignatureEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09647661DF6BD4800634663 /* SignatureEngine.swift */; };
+		B096476C1DF6BF3600634663 /* Signature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B096476B1DF6BF3600634663 /* Signature.swift */; };
+		B096476D1DF6BF3600634663 /* Signature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B096476B1DF6BF3600634663 /* Signature.swift */; };
+		B096476E1DF6BF3600634663 /* Signature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B096476B1DF6BF3600634663 /* Signature.swift */; };
+		B096476F1DF6BF3600634663 /* Signature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B096476B1DF6BF3600634663 /* Signature.swift */; };
 		B0A2FEB31DF47580004356E2 /* OaepPaddingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A2FEB21DF47580004356E2 /* OaepPaddingTests.swift */; };
 		B0A2FEB41DF47580004356E2 /* OaepPaddingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A2FEB21DF47580004356E2 /* OaepPaddingTests.swift */; };
 		B0A2FEB51DF47580004356E2 /* OaepPaddingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A2FEB21DF47580004356E2 /* OaepPaddingTests.swift */; };
@@ -283,9 +291,11 @@
 		B059EF381DF0D29A006B3F35 /* RsaPrivateCrtKeyParameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RsaPrivateCrtKeyParameter.swift; sourceTree = "<group>"; };
 		B059EF391DF0D29A006B3F35 /* RsaPublicKeyParameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RsaPublicKeyParameter.swift; sourceTree = "<group>"; };
 		B059EF461DF0DC36006B3F35 /* AsymmetricCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsymmetricCipher.swift; sourceTree = "<group>"; };
-		B09647571DF6005C00634663 /* RsaPssSigner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RsaPssSigner.swift; sourceTree = "<group>"; };
-		B096475D1DF60D2A00634663 /* RsaPssSignerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RsaPssSignerTests.swift; sourceTree = "<group>"; };
+		B09647571DF6005C00634663 /* RsaPssEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RsaPssEngine.swift; sourceTree = "<group>"; };
+		B096475D1DF60D2A00634663 /* RsaPssEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RsaPssEngineTests.swift; sourceTree = "<group>"; };
 		B09647611DF61CE200634663 /* SaltParameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaltParameter.swift; sourceTree = "<group>"; };
+		B09647661DF6BD4800634663 /* SignatureEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignatureEngine.swift; sourceTree = "<group>"; };
+		B096476B1DF6BF3600634663 /* Signature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Signature.swift; sourceTree = "<group>"; };
 		B0A2FEB21DF47580004356E2 /* OaepPaddingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OaepPaddingTests.swift; sourceTree = "<group>"; };
 		B0BE03AF1DF2DA77008F2537 /* Sha1EngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sha1EngineTests.swift; sourceTree = "<group>"; };
 		B0C169B11DF41B05001F9A0B /* OaepPadding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OaepPadding.swift; sourceTree = "<group>"; };
@@ -414,6 +424,9 @@
 			isa = PBXGroup;
 			children = (
 				B01407491DEEEF7F00D7A5B9 /* CryptoParameter.swift */,
+				B014074A1DEEEF7F00D7A5B9 /* IvParameter.swift */,
+				B0DCA1921DF4A7AE006727F6 /* RandomParameter.swift */,
+				B09647611DF61CE200634663 /* SaltParameter.swift */,
 			);
 			path = Parameters;
 			sourceTree = "<group>";
@@ -430,7 +443,6 @@
 		B01407271DEEEF0800D7A5B9 /* Modes */ = {
 			isa = PBXGroup;
 			children = (
-				B014074A1DEEEF7F00D7A5B9 /* IvParameter.swift */,
 				B01407391DEEEF6100D7A5B9 /* CbcMode.swift */,
 				B014073A1DEEEF6100D7A5B9 /* CfbMode.swift */,
 				B014073B1DEEEF6100D7A5B9 /* CtrMode.swift */,
@@ -473,18 +485,10 @@
 		B01407911DEEF01400D7A5B9 /* Asymmetric Ciphers */ = {
 			isa = PBXGroup;
 			children = (
-				B01407921DEEF01F00D7A5B9 /* Engines */,
+				B01407941DEEF04900D7A5B9 /* RsaEngineTests.swift */,
 			);
 			name = "Asymmetric Ciphers";
 			path = AsymmetricCiphers;
-			sourceTree = "<group>";
-		};
-		B01407921DEEF01F00D7A5B9 /* Engines */ = {
-			isa = PBXGroup;
-			children = (
-				B01407941DEEF04900D7A5B9 /* RsaEngineTests.swift */,
-			);
-			path = Engines;
 			sourceTree = "<group>";
 		};
 		B01407961DEEF06100D7A5B9 /* Modes */ = {
@@ -534,7 +538,7 @@
 			children = (
 				B01E505B1DF1FFD20049ED39 /* MessageDigest.swift */,
 				B01E50601DF1FFF40049ED39 /* MessageDigestEngine.swift */,
-				B01E50651DF200350049ED39 /* Sha1Engine.swift */,
+				B09647711DF6CC4700634663 /* Engines */,
 			);
 			name = "Message Digests";
 			path = MessageDigests;
@@ -574,7 +578,7 @@
 				B01407241DEEEEDA00D7A5B9 /* Block Ciphers */,
 				B01407D21DEEF13600D7A5B9 /* Asymmetric Ciphers */,
 				B01E50591DF1FE0A0049ED39 /* Message Digests */,
-				B09647561DF5FFF000634663 /* Digital Signatures */,
+				B09647561DF5FFF000634663 /* Signatures */,
 				B059B5561DEEDA940018C016 /* Info.plist */,
 				B059B5571DEEDA940018C016 /* TomatoCrypto.h */,
 			);
@@ -605,21 +609,38 @@
 			name = RSA;
 			sourceTree = "<group>";
 		};
-		B09647561DF5FFF000634663 /* Digital Signatures */ = {
+		B09647561DF5FFF000634663 /* Signatures */ = {
 			isa = PBXGroup;
 			children = (
-				B09647571DF6005C00634663 /* RsaPssSigner.swift */,
-				B09647611DF61CE200634663 /* SaltParameter.swift */,
+				B096476B1DF6BF3600634663 /* Signature.swift */,
+				B09647661DF6BD4800634663 /* SignatureEngine.swift */,
+				B09647701DF6C2BA00634663 /* Engines */,
 			);
-			name = "Digital Signatures";
+			path = Signatures;
 			sourceTree = "<group>";
 		};
 		B096475C1DF60D0A00634663 /* Digital Signatures */ = {
 			isa = PBXGroup;
 			children = (
-				B096475D1DF60D2A00634663 /* RsaPssSignerTests.swift */,
+				B096475D1DF60D2A00634663 /* RsaPssEngineTests.swift */,
 			);
 			name = "Digital Signatures";
+			sourceTree = "<group>";
+		};
+		B09647701DF6C2BA00634663 /* Engines */ = {
+			isa = PBXGroup;
+			children = (
+				B09647571DF6005C00634663 /* RsaPssEngine.swift */,
+			);
+			path = Engines;
+			sourceTree = "<group>";
+		};
+		B09647711DF6CC4700634663 /* Engines */ = {
+			isa = PBXGroup;
+			children = (
+				B01E50651DF200350049ED39 /* Sha1Engine.swift */,
+			);
+			path = Engines;
 			sourceTree = "<group>";
 		};
 		B0BE03AE1DF2DA2F008F2537 /* Message Digests */ = {
@@ -637,9 +658,8 @@
 			isa = PBXGroup;
 			children = (
 				B0C169B11DF41B05001F9A0B /* OaepPadding.swift */,
-				B0DCA1921DF4A7AE006727F6 /* RandomParameter.swift */,
 			);
-			name = Paddings;
+			path = Paddings;
 			sourceTree = "<group>";
 		};
 		D365370636BDAB0E36E18519 /* Pods */ = {
@@ -1230,6 +1250,7 @@
 				B0DCA1981DF4B0EA006727F6 /* RsaPrivateKeyParameter.swift in Sources */,
 				B01E50611DF1FFF40049ED39 /* MessageDigestEngine.swift in Sources */,
 				B0EEE11A1DEF1815002EB7A5 /* AsymmetricCipherEngine.swift in Sources */,
+				B09647671DF6BD4800634663 /* SignatureEngine.swift in Sources */,
 				B01407421DEEEF6100D7A5B9 /* EcbMode.swift in Sources */,
 				B01407301DEEEF4700D7A5B9 /* AesEngine.swift in Sources */,
 				B01407471DEEEF7400D7A5B9 /* BlockCipherPadding.swift in Sources */,
@@ -1242,11 +1263,12 @@
 				B01E505C1DF1FFD20049ED39 /* MessageDigest.swift in Sources */,
 				B01E50661DF200350049ED39 /* Sha1Engine.swift in Sources */,
 				B014071B1DEEEEA900D7A5B9 /* Array.swift in Sources */,
-				B09647581DF6005C00634663 /* RsaPssSigner.swift in Sources */,
+				B09647581DF6005C00634663 /* RsaPssEngine.swift in Sources */,
 				B059EF3C1DF0D29A006B3F35 /* RsaPublicKeyParameter.swift in Sources */,
 				B01407211DEEEECF00D7A5B9 /* CryptoError.swift in Sources */,
 				B003D5431DEF6E9900ECAC3B /* SymmetricKeyParameter.swift in Sources */,
 				B014074C1DEEEF7F00D7A5B9 /* IvParameter.swift in Sources */,
+				B096476C1DF6BF3600634663 /* Signature.swift in Sources */,
 				B09647621DF61CE200634663 /* SaltParameter.swift in Sources */,
 				B003D54D1DEF8C6200ECAC3B /* AsymmetricKeyParameter.swift in Sources */,
 				B014073F1DEEEF6100D7A5B9 /* CbcMode.swift in Sources */,
@@ -1278,7 +1300,7 @@
 				B01407B51DEEF0D400D7A5B9 /* CtrModeTests.swift in Sources */,
 				B01407AE1DEEF0D400D7A5B9 /* RsaEngineTests.swift in Sources */,
 				B0BE03B01DF2DA77008F2537 /* Sha1EngineTests.swift in Sources */,
-				B096475E1DF60D2A00634663 /* RsaPssSignerTests.swift in Sources */,
+				B096475E1DF60D2A00634663 /* RsaPssEngineTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1291,6 +1313,7 @@
 				B0DCA1991DF4B0EA006727F6 /* RsaPrivateKeyParameter.swift in Sources */,
 				B01407611DEEEFCC00D7A5B9 /* CtrMode.swift in Sources */,
 				B01E50621DF1FFF40049ED39 /* MessageDigestEngine.swift in Sources */,
+				B09647681DF6BD4800634663 /* SignatureEngine.swift in Sources */,
 				B01407641DEEEFCC00D7A5B9 /* BlockCipherPadding.swift in Sources */,
 				B0EEE11B1DEF1815002EB7A5 /* AsymmetricCipherEngine.swift in Sources */,
 				B01407671DEEEFCC00D7A5B9 /* IvParameter.swift in Sources */,
@@ -1303,11 +1326,12 @@
 				B014074D1DEEEFA100D7A5B9 /* BlockCipher.swift in Sources */,
 				B01E505D1DF1FFD20049ED39 /* MessageDigest.swift in Sources */,
 				B01E50671DF200350049ED39 /* Sha1Engine.swift in Sources */,
-				B09647591DF6005C00634663 /* RsaPssSigner.swift in Sources */,
+				B09647591DF6005C00634663 /* RsaPssEngine.swift in Sources */,
 				B01407821DEEEFD800D7A5B9 /* Type.swift in Sources */,
 				B01407621DEEEFCC00D7A5B9 /* EcbMode.swift in Sources */,
 				B01407631DEEEFCC00D7A5B9 /* OfbMode.swift in Sources */,
 				B003D5441DEF6E9900ECAC3B /* SymmetricKeyParameter.swift in Sources */,
+				B096476D1DF6BF3600634663 /* Signature.swift in Sources */,
 				B09647631DF61CE200634663 /* SaltParameter.swift in Sources */,
 				B014075F1DEEEFCC00D7A5B9 /* CbcMode.swift in Sources */,
 				B003D54E1DEF8C6200ECAC3B /* AsymmetricKeyParameter.swift in Sources */,
@@ -1339,7 +1363,7 @@
 				B01407C11DEEF0D400D7A5B9 /* CtrModeTests.swift in Sources */,
 				B01407BA1DEEF0D400D7A5B9 /* RsaEngineTests.swift in Sources */,
 				B0BE03B11DF2DA77008F2537 /* Sha1EngineTests.swift in Sources */,
-				B096475F1DF60D2A00634663 /* RsaPssSignerTests.swift in Sources */,
+				B096475F1DF60D2A00634663 /* RsaPssEngineTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1352,6 +1376,7 @@
 				B0DCA19A1DF4B0EA006727F6 /* RsaPrivateKeyParameter.swift in Sources */,
 				B014076D1DEEEFCC00D7A5B9 /* CtrMode.swift in Sources */,
 				B01E50631DF1FFF40049ED39 /* MessageDigestEngine.swift in Sources */,
+				B09647691DF6BD4800634663 /* SignatureEngine.swift in Sources */,
 				B01407701DEEEFCC00D7A5B9 /* BlockCipherPadding.swift in Sources */,
 				B0EEE11C1DEF1815002EB7A5 /* AsymmetricCipherEngine.swift in Sources */,
 				B01407731DEEEFCC00D7A5B9 /* IvParameter.swift in Sources */,
@@ -1364,11 +1389,12 @@
 				B014074E1DEEEFA200D7A5B9 /* BlockCipher.swift in Sources */,
 				B01E505E1DF1FFD20049ED39 /* MessageDigest.swift in Sources */,
 				B01E50681DF200350049ED39 /* Sha1Engine.swift in Sources */,
-				B096475A1DF6005C00634663 /* RsaPssSigner.swift in Sources */,
+				B096475A1DF6005C00634663 /* RsaPssEngine.swift in Sources */,
 				B01407871DEEEFD900D7A5B9 /* Type.swift in Sources */,
 				B014076E1DEEEFCC00D7A5B9 /* EcbMode.swift in Sources */,
 				B014076F1DEEEFCC00D7A5B9 /* OfbMode.swift in Sources */,
 				B003D5451DEF6E9900ECAC3B /* SymmetricKeyParameter.swift in Sources */,
+				B096476E1DF6BF3600634663 /* Signature.swift in Sources */,
 				B09647641DF61CE200634663 /* SaltParameter.swift in Sources */,
 				B014076B1DEEEFCC00D7A5B9 /* CbcMode.swift in Sources */,
 				B003D54F1DEF8C6200ECAC3B /* AsymmetricKeyParameter.swift in Sources */,
@@ -1392,6 +1418,7 @@
 				B0DCA19B1DF4B0EA006727F6 /* RsaPrivateKeyParameter.swift in Sources */,
 				B01407791DEEEFCD00D7A5B9 /* CtrMode.swift in Sources */,
 				B01E50641DF1FFF40049ED39 /* MessageDigestEngine.swift in Sources */,
+				B096476A1DF6BD4800634663 /* SignatureEngine.swift in Sources */,
 				B014077C1DEEEFCD00D7A5B9 /* BlockCipherPadding.swift in Sources */,
 				B0EEE11D1DEF1815002EB7A5 /* AsymmetricCipherEngine.swift in Sources */,
 				B014077F1DEEEFCD00D7A5B9 /* IvParameter.swift in Sources */,
@@ -1404,11 +1431,12 @@
 				B014074F1DEEEFA200D7A5B9 /* BlockCipher.swift in Sources */,
 				B01E505F1DF1FFD20049ED39 /* MessageDigest.swift in Sources */,
 				B01E50691DF200350049ED39 /* Sha1Engine.swift in Sources */,
-				B096475B1DF6005C00634663 /* RsaPssSigner.swift in Sources */,
+				B096475B1DF6005C00634663 /* RsaPssEngine.swift in Sources */,
 				B014078C1DEEEFD900D7A5B9 /* Type.swift in Sources */,
 				B014077A1DEEEFCD00D7A5B9 /* EcbMode.swift in Sources */,
 				B014077B1DEEEFCD00D7A5B9 /* OfbMode.swift in Sources */,
 				B003D5461DEF6E9900ECAC3B /* SymmetricKeyParameter.swift in Sources */,
+				B096476F1DF6BF3600634663 /* Signature.swift in Sources */,
 				B09647651DF61CE200634663 /* SaltParameter.swift in Sources */,
 				B01407771DEEEFCD00D7A5B9 /* CbcMode.swift in Sources */,
 				B003D5501DEF8C6200ECAC3B /* AsymmetricKeyParameter.swift in Sources */,
@@ -1440,7 +1468,7 @@
 				B01407CD1DEEF0D500D7A5B9 /* CtrModeTests.swift in Sources */,
 				B01407C61DEEF0D500D7A5B9 /* RsaEngineTests.swift in Sources */,
 				B0BE03B21DF2DA77008F2537 /* Sha1EngineTests.swift in Sources */,
-				B09647601DF60D2A00634663 /* RsaPssSignerTests.swift in Sources */,
+				B09647601DF60D2A00634663 /* RsaPssEngineTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

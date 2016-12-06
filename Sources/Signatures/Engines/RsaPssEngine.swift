@@ -1,4 +1,4 @@
-public class RsaPssSigner {
+public class RsaPssEngine: SignatureEngine {
     private let cipher: AsymmetricCipher
     private let hash: MessageDigest
     private let mgfHash: MessageDigest
