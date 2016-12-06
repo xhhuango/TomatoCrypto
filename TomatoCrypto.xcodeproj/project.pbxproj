@@ -13,18 +13,18 @@
 		3FE8196DA8E03390E224C85D /* Pods_TomatoCrypto_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD22CED5C3FF39F8F739481B /* Pods_TomatoCrypto_iOS.framework */; };
 		4E1242294F279B66A9696C71 /* Pods_TomatoCrypto_watchOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9417F407523B31EAA6DA6C61 /* Pods_TomatoCrypto_watchOS.framework */; };
 		51EEFB4EE5CD8BB3743E1F7B /* Pods_TomatoCrypto_OSXTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C97679884984992E715BC073 /* Pods_TomatoCrypto_OSXTests.framework */; };
-		B003D5431DEF6E9900ECAC3B /* SymmetricKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003D5421DEF6E9900ECAC3B /* SymmetricKeyParameter.swift */; };
-		B003D5441DEF6E9900ECAC3B /* SymmetricKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003D5421DEF6E9900ECAC3B /* SymmetricKeyParameter.swift */; };
-		B003D5451DEF6E9900ECAC3B /* SymmetricKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003D5421DEF6E9900ECAC3B /* SymmetricKeyParameter.swift */; };
-		B003D5461DEF6E9900ECAC3B /* SymmetricKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003D5421DEF6E9900ECAC3B /* SymmetricKeyParameter.swift */; };
-		B003D5481DEF6F1200ECAC3B /* SimpleSymmetricKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003D5471DEF6F1200ECAC3B /* SimpleSymmetricKeyParameter.swift */; };
-		B003D5491DEF6F1200ECAC3B /* SimpleSymmetricKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003D5471DEF6F1200ECAC3B /* SimpleSymmetricKeyParameter.swift */; };
-		B003D54A1DEF6F1200ECAC3B /* SimpleSymmetricKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003D5471DEF6F1200ECAC3B /* SimpleSymmetricKeyParameter.swift */; };
-		B003D54B1DEF6F1200ECAC3B /* SimpleSymmetricKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003D5471DEF6F1200ECAC3B /* SimpleSymmetricKeyParameter.swift */; };
-		B003D54D1DEF8C6200ECAC3B /* AsymmetricKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003D54C1DEF8C6200ECAC3B /* AsymmetricKeyParameter.swift */; };
-		B003D54E1DEF8C6200ECAC3B /* AsymmetricKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003D54C1DEF8C6200ECAC3B /* AsymmetricKeyParameter.swift */; };
-		B003D54F1DEF8C6200ECAC3B /* AsymmetricKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003D54C1DEF8C6200ECAC3B /* AsymmetricKeyParameter.swift */; };
-		B003D5501DEF8C6200ECAC3B /* AsymmetricKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003D54C1DEF8C6200ECAC3B /* AsymmetricKeyParameter.swift */; };
+		B003D5431DEF6E9900ECAC3B /* SecretKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003D5421DEF6E9900ECAC3B /* SecretKeyParameter.swift */; };
+		B003D5441DEF6E9900ECAC3B /* SecretKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003D5421DEF6E9900ECAC3B /* SecretKeyParameter.swift */; };
+		B003D5451DEF6E9900ECAC3B /* SecretKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003D5421DEF6E9900ECAC3B /* SecretKeyParameter.swift */; };
+		B003D5461DEF6E9900ECAC3B /* SecretKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003D5421DEF6E9900ECAC3B /* SecretKeyParameter.swift */; };
+		B003D5481DEF6F1200ECAC3B /* SimpleSecretKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003D5471DEF6F1200ECAC3B /* SimpleSecretKeyParameter.swift */; };
+		B003D5491DEF6F1200ECAC3B /* SimpleSecretKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003D5471DEF6F1200ECAC3B /* SimpleSecretKeyParameter.swift */; };
+		B003D54A1DEF6F1200ECAC3B /* SimpleSecretKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003D5471DEF6F1200ECAC3B /* SimpleSecretKeyParameter.swift */; };
+		B003D54B1DEF6F1200ECAC3B /* SimpleSecretKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003D5471DEF6F1200ECAC3B /* SimpleSecretKeyParameter.swift */; };
+		B003D54D1DEF8C6200ECAC3B /* PublicKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003D54C1DEF8C6200ECAC3B /* PublicKeyParameter.swift */; };
+		B003D54E1DEF8C6200ECAC3B /* PublicKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003D54C1DEF8C6200ECAC3B /* PublicKeyParameter.swift */; };
+		B003D54F1DEF8C6200ECAC3B /* PublicKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003D54C1DEF8C6200ECAC3B /* PublicKeyParameter.swift */; };
+		B003D5501DEF8C6200ECAC3B /* PublicKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003D54C1DEF8C6200ECAC3B /* PublicKeyParameter.swift */; };
 		B014071B1DEEEEA900D7A5B9 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01407191DEEEEA900D7A5B9 /* Array.swift */; };
 		B014071C1DEEEEA900D7A5B9 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014071A1DEEEEA900D7A5B9 /* String.swift */; };
 		B01407211DEEEECF00D7A5B9 /* CryptoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014071E1DEEEECF00D7A5B9 /* CryptoError.swift */; };
@@ -164,6 +164,14 @@
 		B07D40DD1DF75352009AA618 /* MacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07D40DC1DF75352009AA618 /* MacTests.swift */; };
 		B07D40DE1DF75352009AA618 /* MacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07D40DC1DF75352009AA618 /* MacTests.swift */; };
 		B07D40DF1DF75352009AA618 /* MacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07D40DC1DF75352009AA618 /* MacTests.swift */; };
+		B07D40E31DF76EA4009AA618 /* Providers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07D40E21DF76EA4009AA618 /* Providers.swift */; };
+		B07D40E41DF76EA4009AA618 /* Providers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07D40E21DF76EA4009AA618 /* Providers.swift */; };
+		B07D40E51DF76EA4009AA618 /* Providers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07D40E21DF76EA4009AA618 /* Providers.swift */; };
+		B07D40E61DF76EA4009AA618 /* Providers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07D40E21DF76EA4009AA618 /* Providers.swift */; };
+		B07D40E81DF770F5009AA618 /* PrivateKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07D40E71DF770F5009AA618 /* PrivateKeyParameter.swift */; };
+		B07D40E91DF770F5009AA618 /* PrivateKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07D40E71DF770F5009AA618 /* PrivateKeyParameter.swift */; };
+		B07D40EA1DF770F5009AA618 /* PrivateKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07D40E71DF770F5009AA618 /* PrivateKeyParameter.swift */; };
+		B07D40EB1DF770F5009AA618 /* PrivateKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07D40E71DF770F5009AA618 /* PrivateKeyParameter.swift */; };
 		B09647581DF6005C00634663 /* RsaPssEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09647571DF6005C00634663 /* RsaPssEngine.swift */; };
 		B09647591DF6005C00634663 /* RsaPssEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09647571DF6005C00634663 /* RsaPssEngine.swift */; };
 		B096475A1DF6005C00634663 /* RsaPssEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09647571DF6005C00634663 /* RsaPssEngine.swift */; };
@@ -265,9 +273,9 @@
 		988333DCDE43098FBE22026F /* Pods_TomatoCrypto_OSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TomatoCrypto_OSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FAF40F7DD5B62BCC4035FE4 /* Pods-TomatoCrypto-OSXTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomatoCrypto-OSXTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TomatoCrypto-OSXTests/Pods-TomatoCrypto-OSXTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AD22CED5C3FF39F8F739481B /* Pods_TomatoCrypto_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TomatoCrypto_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B003D5421DEF6E9900ECAC3B /* SymmetricKeyParameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SymmetricKeyParameter.swift; sourceTree = "<group>"; };
-		B003D5471DEF6F1200ECAC3B /* SimpleSymmetricKeyParameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleSymmetricKeyParameter.swift; sourceTree = "<group>"; };
-		B003D54C1DEF8C6200ECAC3B /* AsymmetricKeyParameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsymmetricKeyParameter.swift; sourceTree = "<group>"; };
+		B003D5421DEF6E9900ECAC3B /* SecretKeyParameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecretKeyParameter.swift; sourceTree = "<group>"; };
+		B003D5471DEF6F1200ECAC3B /* SimpleSecretKeyParameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleSecretKeyParameter.swift; sourceTree = "<group>"; };
+		B003D54C1DEF8C6200ECAC3B /* PublicKeyParameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicKeyParameter.swift; sourceTree = "<group>"; };
 		B01407191DEEEEA900D7A5B9 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		B014071A1DEEEEA900D7A5B9 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		B014071E1DEEEECF00D7A5B9 /* CryptoError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoError.swift; sourceTree = "<group>"; };
@@ -314,6 +322,8 @@
 		B059EF461DF0DC36006B3F35 /* AsymmetricCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsymmetricCipher.swift; sourceTree = "<group>"; };
 		B07D40D81DF75344009AA618 /* SignatureTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignatureTests.swift; sourceTree = "<group>"; };
 		B07D40DC1DF75352009AA618 /* MacTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacTests.swift; sourceTree = "<group>"; };
+		B07D40E21DF76EA4009AA618 /* Providers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Providers.swift; sourceTree = "<group>"; };
+		B07D40E71DF770F5009AA618 /* PrivateKeyParameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivateKeyParameter.swift; sourceTree = "<group>"; };
 		B09647571DF6005C00634663 /* RsaPssEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RsaPssEngine.swift; sourceTree = "<group>"; };
 		B096475D1DF60D2A00634663 /* RsaPssEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RsaPssEngineTests.swift; sourceTree = "<group>"; };
 		B09647611DF61CE200634663 /* SaltParameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaltParameter.swift; sourceTree = "<group>"; };
@@ -482,8 +492,8 @@
 		B01407291DEEEF1800D7A5B9 /* Engines */ = {
 			isa = PBXGroup;
 			children = (
-				B003D5421DEF6E9900ECAC3B /* SymmetricKeyParameter.swift */,
-				B003D5471DEF6F1200ECAC3B /* SimpleSymmetricKeyParameter.swift */,
+				B003D5421DEF6E9900ECAC3B /* SecretKeyParameter.swift */,
+				B003D5471DEF6F1200ECAC3B /* SimpleSecretKeyParameter.swift */,
 				B014072C1DEEEF4700D7A5B9 /* AesEngine.swift */,
 				B014072F1DEEEF4700D7A5B9 /* DesEngine.swift */,
 			);
@@ -544,7 +554,8 @@
 			children = (
 				B059EF461DF0DC36006B3F35 /* AsymmetricCipher.swift */,
 				B0EEE1191DEF1815002EB7A5 /* AsymmetricCipherEngine.swift */,
-				B003D54C1DEF8C6200ECAC3B /* AsymmetricKeyParameter.swift */,
+				B003D54C1DEF8C6200ECAC3B /* PublicKeyParameter.swift */,
+				B07D40E71DF770F5009AA618 /* PrivateKeyParameter.swift */,
 				B01407DC1DEEF15700D7A5B9 /* Engines */,
 				B0C169B01DF419FA001F9A0B /* Paddings */,
 			);
@@ -631,6 +642,7 @@
 		B07D40E01DF76D9F009AA618 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				B07D40E21DF76EA4009AA618 /* Providers.swift */,
 			);
 			path = Providers;
 			sourceTree = "<group>";
@@ -1313,12 +1325,14 @@
 			files = (
 				B014072B1DEEEF3A00D7A5B9 /* BlockCipher.swift in Sources */,
 				B01407411DEEEF6100D7A5B9 /* CtrMode.swift in Sources */,
+				B07D40E31DF76EA4009AA618 /* Providers.swift in Sources */,
 				B0DCA1981DF4B0EA006727F6 /* RsaPrivateKeyParameter.swift in Sources */,
 				B01E50611DF1FFF40049ED39 /* MessageDigestEngine.swift in Sources */,
 				B0EEE11A1DEF1815002EB7A5 /* AsymmetricCipherEngine.swift in Sources */,
 				B09647671DF6BD4800634663 /* SignatureEngine.swift in Sources */,
 				B01407421DEEEF6100D7A5B9 /* EcbMode.swift in Sources */,
 				B01407301DEEEF4700D7A5B9 /* AesEngine.swift in Sources */,
+				B07D40E81DF770F5009AA618 /* PrivateKeyParameter.swift in Sources */,
 				B01407471DEEEF7400D7A5B9 /* BlockCipherPadding.swift in Sources */,
 				B014071C1DEEEEA900D7A5B9 /* String.swift in Sources */,
 				B09EF58C1DF6D017008CDC27 /* HmacEngine.swift in Sources */,
@@ -1334,19 +1348,19 @@
 				B09647581DF6005C00634663 /* RsaPssEngine.swift in Sources */,
 				B059EF3C1DF0D29A006B3F35 /* RsaPublicKeyParameter.swift in Sources */,
 				B01407211DEEEECF00D7A5B9 /* CryptoError.swift in Sources */,
-				B003D5431DEF6E9900ECAC3B /* SymmetricKeyParameter.swift in Sources */,
+				B003D5431DEF6E9900ECAC3B /* SecretKeyParameter.swift in Sources */,
 				B014074C1DEEEF7F00D7A5B9 /* IvParameter.swift in Sources */,
 				B096476C1DF6BF3600634663 /* Signature.swift in Sources */,
 				B09647621DF61CE200634663 /* SaltParameter.swift in Sources */,
 				B09EF5961DF6D08A008CDC27 /* MacEngine.swift in Sources */,
-				B003D54D1DEF8C6200ECAC3B /* AsymmetricKeyParameter.swift in Sources */,
+				B003D54D1DEF8C6200ECAC3B /* PublicKeyParameter.swift in Sources */,
 				B014073F1DEEEF6100D7A5B9 /* CbcMode.swift in Sources */,
 				B059EF471DF0DC36006B3F35 /* AsymmetricCipher.swift in Sources */,
 				B01407231DEEEECF00D7A5B9 /* Type.swift in Sources */,
 				B014074B1DEEEF7F00D7A5B9 /* CryptoParameter.swift in Sources */,
 				B01407431DEEEF6100D7A5B9 /* OfbMode.swift in Sources */,
 				B01407481DEEEF7400D7A5B9 /* NoPadding.swift in Sources */,
-				B003D5481DEF6F1200ECAC3B /* SimpleSymmetricKeyParameter.swift in Sources */,
+				B003D5481DEF6F1200ECAC3B /* SimpleSecretKeyParameter.swift in Sources */,
 				B059EF3A1DF0D29A006B3F35 /* RsaEngine.swift in Sources */,
 				B01407331DEEEF4700D7A5B9 /* DesEngine.swift in Sources */,
 			);
@@ -1382,12 +1396,14 @@
 			files = (
 				B01407531DEEEFB100D7A5B9 /* DesEngine.swift in Sources */,
 				B01407841DEEEFD800D7A5B9 /* String.swift in Sources */,
+				B07D40E41DF76EA4009AA618 /* Providers.swift in Sources */,
 				B0DCA1991DF4B0EA006727F6 /* RsaPrivateKeyParameter.swift in Sources */,
 				B01407611DEEEFCC00D7A5B9 /* CtrMode.swift in Sources */,
 				B01E50621DF1FFF40049ED39 /* MessageDigestEngine.swift in Sources */,
 				B09647681DF6BD4800634663 /* SignatureEngine.swift in Sources */,
 				B01407641DEEEFCC00D7A5B9 /* BlockCipherPadding.swift in Sources */,
 				B0EEE11B1DEF1815002EB7A5 /* AsymmetricCipherEngine.swift in Sources */,
+				B07D40E91DF770F5009AA618 /* PrivateKeyParameter.swift in Sources */,
 				B01407671DEEEFCC00D7A5B9 /* IvParameter.swift in Sources */,
 				B01407601DEEEFCC00D7A5B9 /* CfbMode.swift in Sources */,
 				B09EF58D1DF6D017008CDC27 /* HmacEngine.swift in Sources */,
@@ -1404,12 +1420,12 @@
 				B01407821DEEEFD800D7A5B9 /* Type.swift in Sources */,
 				B01407621DEEEFCC00D7A5B9 /* EcbMode.swift in Sources */,
 				B01407631DEEEFCC00D7A5B9 /* OfbMode.swift in Sources */,
-				B003D5441DEF6E9900ECAC3B /* SymmetricKeyParameter.swift in Sources */,
+				B003D5441DEF6E9900ECAC3B /* SecretKeyParameter.swift in Sources */,
 				B096476D1DF6BF3600634663 /* Signature.swift in Sources */,
 				B09647631DF61CE200634663 /* SaltParameter.swift in Sources */,
 				B09EF5971DF6D08A008CDC27 /* MacEngine.swift in Sources */,
 				B014075F1DEEEFCC00D7A5B9 /* CbcMode.swift in Sources */,
-				B003D54E1DEF8C6200ECAC3B /* AsymmetricKeyParameter.swift in Sources */,
+				B003D54E1DEF8C6200ECAC3B /* PublicKeyParameter.swift in Sources */,
 				B059EF3F1DF0D48A006B3F35 /* RsaPublicKeyParameter.swift in Sources */,
 				B059EF481DF0DC36006B3F35 /* AsymmetricCipher.swift in Sources */,
 				B01407831DEEEFD800D7A5B9 /* Array.swift in Sources */,
@@ -1417,7 +1433,7 @@
 				B059EF3D1DF0D48A006B3F35 /* RsaEngine.swift in Sources */,
 				B01407651DEEEFCC00D7A5B9 /* NoPadding.swift in Sources */,
 				B059EF3E1DF0D48A006B3F35 /* RsaPrivateCrtKeyParameter.swift in Sources */,
-				B003D5491DEF6F1200ECAC3B /* SimpleSymmetricKeyParameter.swift in Sources */,
+				B003D5491DEF6F1200ECAC3B /* SimpleSecretKeyParameter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1451,12 +1467,14 @@
 			files = (
 				B01407571DEEEFB200D7A5B9 /* DesEngine.swift in Sources */,
 				B01407891DEEEFD900D7A5B9 /* String.swift in Sources */,
+				B07D40E51DF76EA4009AA618 /* Providers.swift in Sources */,
 				B0DCA19A1DF4B0EA006727F6 /* RsaPrivateKeyParameter.swift in Sources */,
 				B014076D1DEEEFCC00D7A5B9 /* CtrMode.swift in Sources */,
 				B01E50631DF1FFF40049ED39 /* MessageDigestEngine.swift in Sources */,
 				B09647691DF6BD4800634663 /* SignatureEngine.swift in Sources */,
 				B01407701DEEEFCC00D7A5B9 /* BlockCipherPadding.swift in Sources */,
 				B0EEE11C1DEF1815002EB7A5 /* AsymmetricCipherEngine.swift in Sources */,
+				B07D40EA1DF770F5009AA618 /* PrivateKeyParameter.swift in Sources */,
 				B01407731DEEEFCC00D7A5B9 /* IvParameter.swift in Sources */,
 				B014076C1DEEEFCC00D7A5B9 /* CfbMode.swift in Sources */,
 				B09EF58E1DF6D017008CDC27 /* HmacEngine.swift in Sources */,
@@ -1473,12 +1491,12 @@
 				B01407871DEEEFD900D7A5B9 /* Type.swift in Sources */,
 				B014076E1DEEEFCC00D7A5B9 /* EcbMode.swift in Sources */,
 				B014076F1DEEEFCC00D7A5B9 /* OfbMode.swift in Sources */,
-				B003D5451DEF6E9900ECAC3B /* SymmetricKeyParameter.swift in Sources */,
+				B003D5451DEF6E9900ECAC3B /* SecretKeyParameter.swift in Sources */,
 				B096476E1DF6BF3600634663 /* Signature.swift in Sources */,
 				B09647641DF61CE200634663 /* SaltParameter.swift in Sources */,
 				B09EF5981DF6D08A008CDC27 /* MacEngine.swift in Sources */,
 				B014076B1DEEEFCC00D7A5B9 /* CbcMode.swift in Sources */,
-				B003D54F1DEF8C6200ECAC3B /* AsymmetricKeyParameter.swift in Sources */,
+				B003D54F1DEF8C6200ECAC3B /* PublicKeyParameter.swift in Sources */,
 				B059EF421DF0D48A006B3F35 /* RsaPublicKeyParameter.swift in Sources */,
 				B059EF491DF0DC36006B3F35 /* AsymmetricCipher.swift in Sources */,
 				B01407881DEEEFD900D7A5B9 /* Array.swift in Sources */,
@@ -1486,7 +1504,7 @@
 				B059EF401DF0D48A006B3F35 /* RsaEngine.swift in Sources */,
 				B01407711DEEEFCC00D7A5B9 /* NoPadding.swift in Sources */,
 				B059EF411DF0D48A006B3F35 /* RsaPrivateCrtKeyParameter.swift in Sources */,
-				B003D54A1DEF6F1200ECAC3B /* SimpleSymmetricKeyParameter.swift in Sources */,
+				B003D54A1DEF6F1200ECAC3B /* SimpleSecretKeyParameter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1496,12 +1514,14 @@
 			files = (
 				B014075B1DEEEFB200D7A5B9 /* DesEngine.swift in Sources */,
 				B014078E1DEEEFD900D7A5B9 /* String.swift in Sources */,
+				B07D40E61DF76EA4009AA618 /* Providers.swift in Sources */,
 				B0DCA19B1DF4B0EA006727F6 /* RsaPrivateKeyParameter.swift in Sources */,
 				B01407791DEEEFCD00D7A5B9 /* CtrMode.swift in Sources */,
 				B01E50641DF1FFF40049ED39 /* MessageDigestEngine.swift in Sources */,
 				B096476A1DF6BD4800634663 /* SignatureEngine.swift in Sources */,
 				B014077C1DEEEFCD00D7A5B9 /* BlockCipherPadding.swift in Sources */,
 				B0EEE11D1DEF1815002EB7A5 /* AsymmetricCipherEngine.swift in Sources */,
+				B07D40EB1DF770F5009AA618 /* PrivateKeyParameter.swift in Sources */,
 				B014077F1DEEEFCD00D7A5B9 /* IvParameter.swift in Sources */,
 				B01407781DEEEFCD00D7A5B9 /* CfbMode.swift in Sources */,
 				B09EF58F1DF6D017008CDC27 /* HmacEngine.swift in Sources */,
@@ -1518,12 +1538,12 @@
 				B014078C1DEEEFD900D7A5B9 /* Type.swift in Sources */,
 				B014077A1DEEEFCD00D7A5B9 /* EcbMode.swift in Sources */,
 				B014077B1DEEEFCD00D7A5B9 /* OfbMode.swift in Sources */,
-				B003D5461DEF6E9900ECAC3B /* SymmetricKeyParameter.swift in Sources */,
+				B003D5461DEF6E9900ECAC3B /* SecretKeyParameter.swift in Sources */,
 				B096476F1DF6BF3600634663 /* Signature.swift in Sources */,
 				B09647651DF61CE200634663 /* SaltParameter.swift in Sources */,
 				B09EF5991DF6D08A008CDC27 /* MacEngine.swift in Sources */,
 				B01407771DEEEFCD00D7A5B9 /* CbcMode.swift in Sources */,
-				B003D5501DEF8C6200ECAC3B /* AsymmetricKeyParameter.swift in Sources */,
+				B003D5501DEF8C6200ECAC3B /* PublicKeyParameter.swift in Sources */,
 				B059EF451DF0D48B006B3F35 /* RsaPublicKeyParameter.swift in Sources */,
 				B059EF4A1DF0DC36006B3F35 /* AsymmetricCipher.swift in Sources */,
 				B014078D1DEEEFD900D7A5B9 /* Array.swift in Sources */,
@@ -1531,7 +1551,7 @@
 				B059EF431DF0D48B006B3F35 /* RsaEngine.swift in Sources */,
 				B014077D1DEEEFCD00D7A5B9 /* NoPadding.swift in Sources */,
 				B059EF441DF0D48B006B3F35 /* RsaPrivateCrtKeyParameter.swift in Sources */,
-				B003D54B1DEF6F1200ECAC3B /* SimpleSymmetricKeyParameter.swift in Sources */,
+				B003D54B1DEF6F1200ECAC3B /* SimpleSecretKeyParameter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

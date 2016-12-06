@@ -1,6 +1,6 @@
 import BigInt
 
-public struct RsaPublicKeyParameter: AsymmetricKeyParameter {
+public struct RsaPublicKeyParameter: PublicKeyParameter {
     public let modulus: BigUInt
     public let e: BigUInt
 

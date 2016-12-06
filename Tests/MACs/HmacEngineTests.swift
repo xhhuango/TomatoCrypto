@@ -17,7 +17,7 @@ class HmacEngineTests: XCTestCase {
 
         let hash = MessageDigest(engine: Sha1Engine())
         let engine = HmacEngine(hash: hash)
-        let keyParam = SimpleSymmetricKeyParameter(key: key)
+        let keyParam = SimpleSecretKeyParameter(key: key)
 
         do {
             try engine.initialize(parameters: [keyParam])

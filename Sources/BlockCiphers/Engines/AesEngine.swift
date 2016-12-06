@@ -132,8 +132,8 @@ public class AesEngine: BlockCipherEngine {
     }
     
     public func initialize(isEncryption: Bool, parameters: [CryptoParameter]) throws {
-        guard let keyParameter: SymmetricKeyParameter = findParameter(within: parameters) else {
-            throw CryptoError.missingParameter("Require \(SymmetricKeyParameter.self)")
+        guard let keyParameter: SecretKeyParameter = findParameter(within: parameters) else {
+            throw CryptoError.missingParameter("Require \(SecretKeyParameter.self)")
         }
 
         self.isEncryption = isEncryption

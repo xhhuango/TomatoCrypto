@@ -18,7 +18,7 @@ class MacTests: XCTestCase {
         let hash = MessageDigest(engine: Sha1Engine())
         let engine = HmacEngine(hash: hash)
         let mac = Mac(engine: engine)
-        let keyParam = SimpleSymmetricKeyParameter(key: key)
+        let keyParam = SimpleSecretKeyParameter(key: key)
 
         do {
             try mac.initialize(parameters: [keyParam])

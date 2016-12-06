@@ -21,8 +21,8 @@ public class HmacEngine: MacEngine {
     }
 
     public func initialize(parameters: [CryptoParameter]) throws {
-        guard let keyParam: SymmetricKeyParameter = findParameter(within: parameters) else {
-            throw CryptoError.missingParameter("Require \(SymmetricKeyParameter.self)")
+        guard let keyParam: SecretKeyParameter = findParameter(within: parameters) else {
+            throw CryptoError.missingParameter("Require \(SecretKeyParameter.self)")
         }
 
         if keyParam.key.count > self.hash.inputSize {

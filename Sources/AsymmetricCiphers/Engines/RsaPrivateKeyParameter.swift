@@ -1,6 +1,6 @@
 import BigInt
 
-public struct RsaPrivateKeyParameter: CryptoParameter {
+public struct RsaPrivateKeyParameter: PrivateKeyParameter {
     public let modulus: BigUInt
     public let d: BigUInt
 
