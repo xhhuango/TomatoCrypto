@@ -601,6 +601,7 @@
 			children = (
 				B014071D1DEEEEB400D7A5B9 /* Common */,
 				B01407181DEEEE7900D7A5B9 /* Utilities */,
+				B07D40E01DF76D9F009AA618 /* Providers */,
 				B01407251DEEEEF200D7A5B9 /* Parameters */,
 				B01407241DEEEEDA00D7A5B9 /* Block Ciphers */,
 				B01407D21DEEF13600D7A5B9 /* Asymmetric Ciphers */,
@@ -625,6 +626,21 @@
 				B059B5661DEEDE670018C016 /* Info.plist */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		B07D40E01DF76D9F009AA618 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
+		B07D40E11DF76E14009AA618 /* Engines */ = {
+			isa = PBXGroup;
+			children = (
+				B09EF5951DF6D08A008CDC27 /* MacEngine.swift */,
+			);
+			path = Engines;
 			sourceTree = "<group>";
 		};
 		B08431371DF16ECF003E8837 /* RSA */ = {
@@ -677,10 +693,11 @@
 			isa = PBXGroup;
 			children = (
 				B09EF5901DF6D07A008CDC27 /* Mac.swift */,
-				B09EF5951DF6D08A008CDC27 /* MacEngine.swift */,
 				B09EF58B1DF6D017008CDC27 /* HmacEngine.swift */,
+				B07D40E11DF76E14009AA618 /* Engines */,
 			);
 			name = MACs;
+			path = Macs;
 			sourceTree = "<group>";
 		};
 		B09EF59A1DF74919008CDC27 /* MACs */ = {
