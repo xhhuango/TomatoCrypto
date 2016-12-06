@@ -86,7 +86,7 @@ public class BlockCipher {
                 }
             } else {
                 if isFinal {
-                    throw CryptoError.invalidCipherText("Data wrong")
+                    throw CryptoError.illegalBlockSize("Block size must be multiple of \(self.blockSize) bytes")
                 } else {
                     copyBytes(from: input, fromOffset: inputCount - remaining,
                               to: &self.buffer, toOffset: bufferIndex,

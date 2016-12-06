@@ -28,7 +28,7 @@ class RsaPssSignerTests: XCTestCase {
         let publicKey = RsaPublicKeyParameter(modulus: m, e: e)
         let salt = SaltParameter(salt: hexToBytes(hex: saltStr))
 
-        let cipher = AsymmetricCipher(engine: RsaEngine())
+        let cipher = RsaEngine()
         let hash = MessageDigest(engine: Sha1Engine())
         let mgfHash = MessageDigest(engine: Sha1Engine())
         

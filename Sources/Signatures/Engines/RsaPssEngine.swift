@@ -1,10 +1,10 @@
 public class RsaPssEngine: SignatureEngine {
-    private let cipher: AsymmetricCipher
+    private let cipher: AsymmetricCipherEngine
     private let hash: MessageDigest
     private let mgfHash: MessageDigest
     private var salt: [Byte] = []
 
-    public init(cipher: AsymmetricCipher, hash: MessageDigest, mgfHash: MessageDigest) {
+    public init(cipher: AsymmetricCipherEngine, hash: MessageDigest, mgfHash: MessageDigest) {
         self.cipher = cipher
         self.hash = hash
         self.mgfHash = mgfHash
@@ -53,7 +53,7 @@ public class RsaPssEngine: SignatureEngine {
 
         em[em.count - 1] = 0xbc
 
-        return try self.cipher.process(input: em)
+        return try self.cipher.process(input: em, count: em.count)
     }
 
     public func verify(signature: UnsafePointer<Byte>, count: Int) throws -> Bool {

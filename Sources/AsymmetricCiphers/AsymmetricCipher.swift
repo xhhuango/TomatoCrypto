@@ -21,6 +21,10 @@ public class AsymmetricCipher {
     }
     
     public func process(input: UnsafePointer<Byte>, count: Int) throws -> [Byte] {
+        guard count <= self.inputSize else {
+            throw CryptoError.illegalBlockSize("Input size must be <= \(self.inputSize) bytes")
+        }
+        
         return try self.engine.process(input: input, count: count)
     }
 
@@ -30,6 +34,10 @@ public class AsymmetricCipher {
 
     @discardableResult
     public func process(input: UnsafePointer<Byte>, inputCount: Int, output: UnsafeMutablePointer<Byte>) throws -> Int {
+        guard inputCount <= self.inputSize else {
+            throw CryptoError.illegalBlockSize("Input size must be <= \(self.inputSize)")
+        }
+        
         let ciphertext = try self.process(input: input, count: inputCount)
         copyBytes(from: ciphertext, to: output, count: ciphertext.count)
         return ciphertext.count
