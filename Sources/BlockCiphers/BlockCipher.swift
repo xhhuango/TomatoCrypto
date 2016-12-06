@@ -112,11 +112,20 @@ public class BlockCipher {
         return try self.process(input: input, inputCount: count, output: output, isFinal: false)
     }
 
-    public func update(input: [Byte]) throws -> [Byte] {
-        let outputCount = ((input.count + self.bufferIndex - 1) / self.blockSize) * self.blockSize
+    @discardableResult
+    public func update(input: [Byte], output: UnsafeMutablePointer<Byte>) throws -> Int {
+        return try self.update(input: input, count: input.count, output: output)
+    }
+    
+    public func update(input: UnsafePointer<Byte>, count: Int) throws -> [Byte] {
+        let outputCount = ((count + self.bufferIndex - 1) / self.blockSize + 1) * self.blockSize
         var output = [Byte](repeating: 0, count: outputCount)
-        try self.update(input: input, count: input.count, output: &output)
+        try self.update(input: input, count: count, output: &output)
         return output
+    }
+
+    public func update(input: [Byte]) throws -> [Byte] {
+        return try self.update(input: input, count: input.count)
     }
 
     @discardableResult
@@ -125,11 +134,20 @@ public class BlockCipher {
         self.reset()
         return processed
     }
+    
+    @discardableResult
+    public func finalize(input: [Byte], output: UnsafeMutablePointer<Byte>) throws -> Int {
+        return try self.finalize(input: input, count: input.count, output: output)
+    }
+    
+    public func finalize(input: UnsafePointer<Byte>, count: Int) throws -> [Byte] {
+        let outputCount = ((count + self.bufferIndex - 1) / self.blockSize + 1) * self.blockSize
+        var output = [Byte](repeating: 0, count: outputCount)
+        try self.finalize(input: input, count: count, output: &output)
+        return output
+    }
 
     public func finalize(input: [Byte]) throws -> [Byte] {
-        let outputCount = ((input.count + self.bufferIndex - 1) / self.blockSize + 1) * self.blockSize
-        var output = [Byte](repeating: 0, count: outputCount)
-        try self.finalize(input: input, count: input.count, output: &output)
-        return output
+        return try self.finalize(input: input, count: input.count)
     }
 }

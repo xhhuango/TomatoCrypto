@@ -35,10 +35,10 @@ public class RsaPssEngine: SignatureEngine {
         if self.salt.count != 0 {
             copyBytes(from: salt, fromOffset: 0, to: &m, toOffset: m.count - self.salt.count, count: self.salt.count)
         }
-        self.hash.digest(output: &m, outputOffset: 8)
+        self.hash.finalize(output: &m[8])
 
         let dbCount = em.count - 1 - self.hash.outputSize
-        self.hash.digest(input: m, inputCount: m.count, output: &em, outputOffset: dbCount)
+        self.hash.finalize(input: m, inputCount: m.count, output: &em[dbCount])
 
         var db = [Byte](repeating: 0, count: dbCount)
         if self.salt.count != 0 {
@@ -66,9 +66,9 @@ public class RsaPssEngine: SignatureEngine {
         if self.salt.count != 0 {
             copyBytes(from: salt, fromOffset: 0, to: &m, toOffset: m.count - self.salt.count, count: self.salt.count)
         }
-        self.hash.digest(output: &m, outputOffset: 8)
+        self.hash.finalize(output: &m[8])
 
-        let h = self.hash.digest(input: m)
+        let h = self.hash.finalize(input: m)
 
         let dbCount = em.count - 1 - self.hash.outputSize
         let dbMask = self.mgf1(data: em, dataOffset: dbCount, dataCount: self.hash.outputSize, maskCount: dbCount)
@@ -98,8 +98,7 @@ public class RsaPssEngine: SignatureEngine {
             self.i2Osp(input: counter, output: &c)
 
             self.mgfHash.update(input: data, count: dataCount)
-            self.mgfHash.digest(input: c, inputCount: c.count,
-                                output: &mask, outputOffset: Int(counter) * self.mgfHash.outputSize)
+            self.mgfHash.finalize(input: c, inputCount: c.count, output: &mask[Int(counter) * self.mgfHash.outputSize])
 
             counter += 1
         }
@@ -110,16 +109,16 @@ public class RsaPssEngine: SignatureEngine {
             self.i2Osp(input: counter, output: &c)
 
             self.mgfHash.update(input: data, count: dataCount)
-            self.mgfHash.digest(input: c, inputCount: c.count, output: &output, outputOffset: 0)
+            self.mgfHash.finalize(input: c, inputCount: c.count, output: &output)
 
             copyBytes(from: output, fromOffset: 0,
                       to: &mask, toOffset: Int(counter) * self.mgfHash.outputSize,
                       count: mask.count - Int(counter) * self.mgfHash.outputSize)
         }
-        
+
         return mask
     }
-    
+
     private func i2Osp(input: UInt32, output: inout [Byte]) {
         output[0] = Byte(input >> 24)
         output[1] = Byte(input >> 16)

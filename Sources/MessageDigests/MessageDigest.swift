@@ -54,23 +54,30 @@ public class MessageDigest {
         self.digest(input: input, count: count, isFinal: false)
     }
 
-    public func digest(input: UnsafePointer<Byte>, inputCount: Int, output: UnsafeMutablePointer<Byte>, outputOffset: Int) {
-        self.digest(input: input, count: inputCount, isFinal: true)
-        self.engine.output(output: output.advanced(by: outputOffset))
-        self.reset()
-    }
-    
-    public func digest(output: UnsafeMutablePointer<Byte>, outputOffset: Int) {
-        self.digest(input: [], inputCount: 0, output: output, outputOffset: outputOffset)
+    public func update(input: [Byte]) {
+        self.update(input: input, count: input.count)
     }
 
-    public func digest(input: [Byte]) -> [Byte] {
+    @discardableResult
+    public func finalize(input: UnsafePointer<Byte>, inputCount: Int, output: UnsafeMutablePointer<Byte>) -> Int {
+        self.digest(input: input, count: inputCount, isFinal: true)
+        self.engine.output(output: output)
+        self.reset()
+        return self.outputSize
+    }
+    
+    @discardableResult
+    public func finalize(input: [Byte] = [], output: UnsafeMutablePointer<Byte>) -> Int {
+        return self.finalize(input: input, inputCount: input.count, output: output)
+    }
+
+    public func finalize(input: UnsafePointer<Byte>, count: Int) -> [Byte] {
         var output = [Byte](repeating: 0, count: self.engine.outputSize)
-        self.digest(input: input, inputCount: input.count, output: &output, outputOffset: 0)
+        self.finalize(input: input, inputCount: count, output: &output)
         return output
     }
 
-    public func digest() -> [Byte] {
-        return self.digest(input: [])
+    public func finalize(input: [Byte] = []) -> [Byte] {
+        return self.finalize(input: input, count: input.count)
     }
 }

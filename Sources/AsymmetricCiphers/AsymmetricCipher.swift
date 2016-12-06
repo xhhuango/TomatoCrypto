@@ -27,4 +27,16 @@ public class AsymmetricCipher {
     public func process(input: [Byte]) throws -> [Byte] {
         return try self.process(input: input, count: input.count)
     }
+
+    @discardableResult
+    public func process(input: UnsafePointer<Byte>, inputCount: Int, output: UnsafeMutablePointer<Byte>) throws -> Int {
+        let ciphertext = try self.process(input: input, count: inputCount)
+        copyBytes(from: ciphertext, to: output, count: ciphertext.count)
+        return ciphertext.count
+    }
+
+    @discardableResult
+    public func process(input: [Byte], output: UnsafeMutablePointer<Byte>) throws -> Int {
+        return try self.process(input: input, inputCount: input.count, output: output)
+    }
 }

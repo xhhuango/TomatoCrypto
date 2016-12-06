@@ -31,7 +31,7 @@ public class OaepPadding: AsymmetricCipherEngine {
             self.random = random
         }
 
-        self.hash.digest(input: [], inputCount: 0, output: &self.hashedLabel, outputOffset: 0)
+        self.hash.finalize(input: [], inputCount: 0, output: &self.hashedLabel)
         self.isEncryption = isEncryption
     }
 
@@ -122,8 +122,7 @@ public class OaepPadding: AsymmetricCipherEngine {
             self.i2Osp(input: counter, output: &c)
 
             self.mgfHash.update(input: data, count: dataCount)
-            self.mgfHash.digest(input: c, inputCount: c.count,
-                                output: &mask, outputOffset: Int(counter) * self.mgfHash.outputSize)
+            self.mgfHash.finalize(input: c, inputCount: c.count, output: &mask[Int(counter) * self.mgfHash.outputSize])
 
             counter += 1
         }
@@ -134,13 +133,13 @@ public class OaepPadding: AsymmetricCipherEngine {
             self.i2Osp(input: counter, output: &c)
 
             self.mgfHash.update(input: data, count: dataCount)
-            self.mgfHash.digest(input: c, inputCount: c.count, output: &output, outputOffset: 0)
+            self.mgfHash.finalize(input: c, inputCount: c.count, output: &output)
 
             copyBytes(from: output, fromOffset: 0,
                       to: &mask, toOffset: Int(counter) * self.mgfHash.outputSize,
                       count: mask.count - Int(counter) * self.mgfHash.outputSize)
         }
-        
+
         return mask
     }
     

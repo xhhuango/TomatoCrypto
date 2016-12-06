@@ -6,4 +6,5 @@ public enum CryptoError: Error {
     case invalidParameter(String)
     case illegalDataLength(String)
     case invalidCipherText(String)
+    case wrongMode(String)
 }
