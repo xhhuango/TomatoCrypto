@@ -13,64 +13,86 @@ I have only tested it in OSX and iOS, but it should work in all of them because 
 3.0.1
 
 ## Package Managers
-1. Cocoapods
+**Cocoapods**
+
+```
+pod 'TomatoCrypto'
+
+```
 
 ## Depedencies
 TomatoCrypto employs [BigInt](https://github.com/lorentey/BigInt) to compute big integers in RSA.
 
 ## Supporting Alogrithms
 
-### Symmetric Block Ciphers
-| Name | Required Parameters |
-| --------|---------------------|
+### Block Ciphers (BlockCipher)
+
+| Block Ciphers (BlockCipherEngine) | Required Parameters |
+|---|---|
 | AesEngine | SecretKeyParameter |
 
 
-| Name | Required Parameters |
-| --------|---------------------|
+| Modes of Operation (BlockCipherEngine) | Required Parameters |
+|---|---|
 | CbcMode | IvParameter |
 | CfbMode | IvParameter |
 | CtrMode | IvParameter |
 | EcbMode |  |
 | OfbMode | IvParameter |
 
-| Name |
-| --------|
+| Paddings (BlockCipherPadding) |
+|---|
 | NoPadding |
 | Pkcs7Padding |
 
-### Asymmetric Ciphers
-| Name | Required Parameters |
-| --------|---------------------|
+### Asymmetric Ciphers (AsymmetricCipher)
+| Ciphers (AsymmetricCipherEngine) | Required Parameters |
+|---|---|
 | RsaEngine | RsaPublicKeyParameter, [RsaPrivateCrtKeyParameter OR RsaPrivateKeyParameter] |
 
-| Name | Required Parameters |
-| --------|---------------------|
+| Paddings (AsymmetricCipherEngine) | Required Parameters |
+|---|---|
 | OaepPadding | RandomParameter |
 
-### Message Digests
-| Name |
-| --------|
+### Message Digests (MessageDigest)
+| Digests (MessageDigestEngine) |
+|---|
 | Sha1Engine |
 
-### Signatures
-| Name | Required Parameters |
-| --------|---------------------|
+### Signatures (Signature)
+| Signatures (SignatureEngine) | Required Parameters |
+|---|---|
 | RsaPssEngine | SaltParameter |
 
-### MACs
-| Name | Required Parameters |
-| --------|---------------------|
+### MACs (Mac)
+| MACs (MacEngine) | Required Parameters |
+|---|---|
 | HmacEngine | SecretKeyParameter |
 
-## Usage
-### Symmertic Block Ciphers
+### Parameters (CryptoParameter)
+| Parameters | Super Protocol | struct or protocol |
+|---|---|---|
+| IvParameter | CryptoParameter | struct |
+| RandomParameter | CryptoParameter | struct |
+| SaltParameter | CryptoParameter | struct |
+| SecretKeyParameter | CryptoParameter | protocol |
+| SimpleSecretKeyParameter | SecretKeyParameter | struct |
+| PublicKeyParameter | CryptoParameter | protocol |
+| PrivateKeyParameter | CryptoParameter | protocol |
+| RsaPublicKeyParameter | PublicKeyParameter | struct |
+| RsaPrivateCrtKeyParameter | PrivateKeyParameter | struct |
+| RsaPrivateKeyParameter | PrivateKeyParameter | struct |
+
+## Usages
+It is not recommended to access any engines directly. Instead, through providers which are TomatoCrypto.instance(xxx) to is encouraged.
+
+### Block Ciphers
 ```swift
 let key = SimpleSecretKeyParameter(key: hexToBytes(hex: "2b7e151628aed2a6abf7158809cf4f3c"))
 let plaintext = hexToBytes(hex: "6bc1bee22e409f96e93d7e117393172a" + "ae2d8a571e03ac9c9eb76fac45af8e51")
 let ciphertext = hexToBytes(hex: "3ad77bb40d7a3660a89ecaf32466ef97" + "f5d3d58503b9699de785895a96fdbaaf")
 
-let cipher = try instance(blockCipher: .aes, mode: .ecb, padding: .pkcs7, isEncryption: true, parameters: [key])
+let cipher = try TomatoCrypto.instance(blockCipher: .aes, mode: .ecb, padding: .pkcs7, isEncryption: true, parameters: [key])
 
 let encrypted = try cipher.finalize(input: plaintext)
 XCTAssertEqual(encrypted, ciphertext)
@@ -96,16 +118,15 @@ let plaintext = hexToBytes(hex: "d436e99569fd32a7c8a05bbc90d32c49")
 let ciphertext = hexToBytes(hex: "1253e04dc0a5397bb44a7ab87e9bf2a039a33d1e996fc82a94ccd30074c95df763722017069e5268da5d1c0b4f872cf653c11df82314a67968dfeae28def04bb6d84b1c31d654a1970e5783bd6eb96a024c2ca2f4a90fe9f2ef5c9c140e5bb48da9536ad8700c84fc9130adea74e558d51a74ddf85d8b50de96838d6063e0955")
 
 let publicKey = RsaPublicKeyParameter(modulusString: mStr, eString: eStr)
-let privateKey = RsaPrivateCrtKeyParameter(modulusString: mStr, pString: pStr, qString: qStr,
-                                       dpString: dpStr, dqString: dqStr, qInvString: qInvStr)
+let privateKey = RsaPrivateCrtKeyParameter(modulusString: mStr, pString: pStr, qString: qStr, dpString: dpStr, dqString: dqStr, qInvString: qInvStr)
 let random = RandomParameter() { _, output in
-copyBytes(from: seed, fromOffset: 0, to: output, toOffset: 0, count: seed.count)
+    copyBytes(from: seed, fromOffset: 0, to: output, toOffset: 0, count: seed.count)
 }
 
-let cipher = try instance(asymmetricCipher: .rsa,
-                          padding: .oaep(hash: .sha1, mgfHash: .sha1),
-                          isEncryption: true,
-                          parameters: [publicKey, random])
+let cipher = try TomatoCrypto.instance(asymmetricCipher: .rsa,
+                                       padding: .oaep(hash: .sha1, mgfHash: .sha1),
+                                       isEncryption: true,
+                                       parameters: [publicKey, random])
 let encrypted = try cipher.process(input: plaintext)
 XCTAssertEqual(encrypted, ciphertext)
 
@@ -119,7 +140,7 @@ XCTAssertEqual(decrypted, plaintext)
 let input = stringToBytes(string: "")
 let expected = hexToBytes(hex: "da39a3ee5e6b4b0d3255bfef95601890afd80709")
 
-let digest = instance(messageDigest: .sha1)
+let digest = TomatoCrypto.instance(messageDigest: .sha1)
 let output = digest.finalize(input: input)
 XCTAssertEqual(output, expected)
 ```
@@ -142,9 +163,9 @@ let privateKey = RsaPrivateKeyParameter(modulus: m, d: d)
 let publicKey = RsaPublicKeyParameter(modulus: m, e: e)
 let salt = SaltParameter(salt: hexToBytes(hex: saltStr))
 
-let signer = try instance(signature: .rsaPss(hash: .sha1, mgfHash: .sha1),
-                          isSigning: true,
-                          parameters: [privateKey, salt])
+let signer = try TomatoCrypto.instance(signature: .rsaPss(hash: .sha1, mgfHash: .sha1),
+                                       isSigning: true,
+                                       parameters: [privateKey, salt])
 signer.update(input: msg)
 let sig = try signer.sign()
 XCTAssertEqual(sig, sigBytes)
@@ -163,7 +184,7 @@ let expected = hexToBytes(hex: "b617318655057264e28bc0b6fb378c8ef146be00")
 
 let keyParam = SimpleSecretKeyParameter(key: key)
 
-let mac = try instance(mac: .hmac(hash: .sha1), parameters: [keyParam])
+let mac = try TomatoCrypto.instance(mac: .hmac(hash: .sha1), parameters: [keyParam])
 try mac.update(input: msg)
 let code = try mac.finalize()
 XCTAssertEqual(code, expected)
@@ -173,4 +194,18 @@ XCTAssertEqual(code, expected)
 It is very very welcome for everyone to contribute other cryptographic algorithms.
 
 ## License
-Apache License, Version 2.0
+```
+Copyright 2016 Xaun Hau Huang
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
