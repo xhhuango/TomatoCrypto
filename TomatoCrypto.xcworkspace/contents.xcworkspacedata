@@ -5,9 +5,6 @@
       location = "group:TomatoCrypto.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:TomatoCrypto.playground">
-   </FileRef>
-   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>

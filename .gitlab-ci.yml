@@ -4,9 +4,8 @@ stages:
 build_project:
   stage: build
   script:
-    - xcodebuild clean -workspace TomatoCrypto.xcworkspace -scheme 'TomatoCrypto-iOS' | xcpretty
-    - xcodebuild test -workspace TomatoCrypto.xcworkspace -scheme 'TomatoCrypto-iOS' -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.0' | xcpretty -s
+    - xcodebuild clean -workspace TomatoCrypto.xcworkspace -scheme 'TomatoCrypto-OSX' | xcpretty
+    - xcodebuild test -workspace TomatoCrypto.xcworkspace -scheme 'TomatoCrypto-OSX' -destination 'platform=OS X,arch=x86_64' | xcpretty -s
   tags:
-    - ios_9-2
-    - xcode_7-2
-    - osx_10-11
+    - osx_10-12
+    - xcode_8-1
