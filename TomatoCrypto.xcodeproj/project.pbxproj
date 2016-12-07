@@ -1744,7 +1744,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xhhuang.TomatoCrypto;
+				PRODUCT_BUNDLE_IDENTIFIER = tw.xhhuang.TomatoCrypto;
 				PRODUCT_NAME = TomatoCrypto;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1804,7 +1804,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xhhuang.TomatoCrypto;
+				PRODUCT_BUNDLE_IDENTIFIER = tw.xhhuang.TomatoCrypto;
 				PRODUCT_NAME = TomatoCrypto;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1977,7 +1977,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xhhuang.TomatoCrypto;
+				PRODUCT_BUNDLE_IDENTIFIER = tw.xhhuang.TomatoCrypto;
 				PRODUCT_NAME = TomatoCrypto;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -2037,7 +2037,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xhhuang.TomatoCrypto;
+				PRODUCT_BUNDLE_IDENTIFIER = tw.xhhuang.TomatoCrypto;
 				PRODUCT_NAME = TomatoCrypto;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -2206,7 +2206,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xhhuang.TomatoCrypto;
+				PRODUCT_BUNDLE_IDENTIFIER = tw.xhhuang.TomatoCrypto;
 				PRODUCT_NAME = TomatoCrypto;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -2265,7 +2265,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xhhuang.TomatoCrypto;
+				PRODUCT_BUNDLE_IDENTIFIER = tw.xhhuang.TomatoCrypto;
 				PRODUCT_NAME = TomatoCrypto;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -2331,7 +2331,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xhhuang.TomatoCrypto;
+				PRODUCT_BUNDLE_IDENTIFIER = tw.xhhuang.TomatoCrypto;
 				PRODUCT_NAME = TomatoCrypto;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
@@ -2390,7 +2390,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xhhuang.TomatoCrypto;
+				PRODUCT_BUNDLE_IDENTIFIER = tw.xhhuang.TomatoCrypto;
 				PRODUCT_NAME = TomatoCrypto;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
