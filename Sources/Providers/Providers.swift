@@ -46,7 +46,6 @@ public func instance(blockCipher: BlockCiphers, mode: BlockCipherModes, padding:
         cipherEngine = DesEngine()
     }
 
-
     let modeEngine: BlockCipherEngine
     switch mode {
     case .ecb:
@@ -65,6 +64,8 @@ public func instance(blockCipher: BlockCiphers, mode: BlockCipherModes, padding:
     switch padding {
     case .no:
         paddingEngine = NoPadding()
+    case .pkcs7:
+        paddingEngine = Pkcs7Padding()
     }
 
     return try BlockCipher(engine: modeEngine, padding: paddingEngine)
