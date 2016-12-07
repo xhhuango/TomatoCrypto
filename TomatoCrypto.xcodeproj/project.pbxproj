@@ -172,6 +172,13 @@
 		B07D40E91DF770F5009AA618 /* PrivateKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07D40E71DF770F5009AA618 /* PrivateKeyParameter.swift */; };
 		B07D40EA1DF770F5009AA618 /* PrivateKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07D40E71DF770F5009AA618 /* PrivateKeyParameter.swift */; };
 		B07D40EB1DF770F5009AA618 /* PrivateKeyParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07D40E71DF770F5009AA618 /* PrivateKeyParameter.swift */; };
+		B09470C11DF8452C00A58722 /* Pkcs7Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09470C01DF8452C00A58722 /* Pkcs7Padding.swift */; };
+		B09470C21DF8452C00A58722 /* Pkcs7Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09470C01DF8452C00A58722 /* Pkcs7Padding.swift */; };
+		B09470C31DF8452C00A58722 /* Pkcs7Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09470C01DF8452C00A58722 /* Pkcs7Padding.swift */; };
+		B09470C41DF8452C00A58722 /* Pkcs7Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09470C01DF8452C00A58722 /* Pkcs7Padding.swift */; };
+		B09470C71DF846E100A58722 /* Pkcs7PaddingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09470C61DF846E100A58722 /* Pkcs7PaddingTests.swift */; };
+		B09470C81DF846E100A58722 /* Pkcs7PaddingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09470C61DF846E100A58722 /* Pkcs7PaddingTests.swift */; };
+		B09470C91DF846E100A58722 /* Pkcs7PaddingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09470C61DF846E100A58722 /* Pkcs7PaddingTests.swift */; };
 		B095204E1DF8136900EF083D /* ProvidersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B095204D1DF8136900EF083D /* ProvidersTests.swift */; };
 		B095204F1DF8136900EF083D /* ProvidersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B095204D1DF8136900EF083D /* ProvidersTests.swift */; };
 		B09520501DF8136900EF083D /* ProvidersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B095204D1DF8136900EF083D /* ProvidersTests.swift */; };
@@ -327,6 +334,8 @@
 		B07D40DC1DF75352009AA618 /* MacTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacTests.swift; sourceTree = "<group>"; };
 		B07D40E21DF76EA4009AA618 /* Providers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Providers.swift; sourceTree = "<group>"; };
 		B07D40E71DF770F5009AA618 /* PrivateKeyParameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivateKeyParameter.swift; sourceTree = "<group>"; };
+		B09470C01DF8452C00A58722 /* Pkcs7Padding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pkcs7Padding.swift; sourceTree = "<group>"; };
+		B09470C61DF846E100A58722 /* Pkcs7PaddingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pkcs7PaddingTests.swift; sourceTree = "<group>"; };
 		B095204D1DF8136900EF083D /* ProvidersTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProvidersTests.swift; sourceTree = "<group>"; };
 		B09647571DF6005C00634663 /* RsaPssEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RsaPssEngine.swift; sourceTree = "<group>"; };
 		B096475D1DF60D2A00634663 /* RsaPssEngineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RsaPssEngineTests.swift; sourceTree = "<group>"; };
@@ -477,6 +486,7 @@
 			children = (
 				B01407451DEEEF7400D7A5B9 /* BlockCipherPadding.swift */,
 				B01407461DEEEF7400D7A5B9 /* NoPadding.swift */,
+				B09470C01DF8452C00A58722 /* Pkcs7Padding.swift */,
 			);
 			path = Paddings;
 			sourceTree = "<group>";
@@ -518,6 +528,7 @@
 				B01407981DEEF09C00D7A5B9 /* BlockCipherTests.swift */,
 				B01407971DEEF06900D7A5B9 /* Engines */,
 				B01407961DEEF06100D7A5B9 /* Modes */,
+				B09470C51DF846B200A58722 /* Paddings */,
 			);
 			name = "Block Ciphers";
 			path = BlockCiphers;
@@ -670,6 +681,14 @@
 				B059EF391DF0D29A006B3F35 /* RsaPublicKeyParameter.swift */,
 			);
 			name = RSA;
+			sourceTree = "<group>";
+		};
+		B09470C51DF846B200A58722 /* Paddings */ = {
+			isa = PBXGroup;
+			children = (
+				B09470C61DF846E100A58722 /* Pkcs7PaddingTests.swift */,
+			);
+			path = Paddings;
 			sourceTree = "<group>";
 		};
 		B095204C1DF8132400EF083D /* Providers */ = {
@@ -1338,6 +1357,7 @@
 			files = (
 				B014072B1DEEEF3A00D7A5B9 /* BlockCipher.swift in Sources */,
 				B01407411DEEEF6100D7A5B9 /* CtrMode.swift in Sources */,
+				B09470C11DF8452C00A58722 /* Pkcs7Padding.swift in Sources */,
 				B07D40E31DF76EA4009AA618 /* Providers.swift in Sources */,
 				B0DCA1981DF4B0EA006727F6 /* RsaPrivateKeyParameter.swift in Sources */,
 				B01E50611DF1FFF40049ED39 /* MessageDigestEngine.swift in Sources */,
@@ -1395,6 +1415,7 @@
 				B0E6621B1DF3220700FC55EF /* MessageDigestTests.swift in Sources */,
 				B095204E1DF8136900EF083D /* ProvidersTests.swift in Sources */,
 				B01407B01DEEF0D400D7A5B9 /* AesEngineTests.swift in Sources */,
+				B09470C71DF846E100A58722 /* Pkcs7PaddingTests.swift in Sources */,
 				B01407B31DEEF0D400D7A5B9 /* CbcModeTests.swift in Sources */,
 				B0A2FEB31DF47580004356E2 /* OaepPaddingTests.swift in Sources */,
 				B01407B51DEEF0D400D7A5B9 /* CtrModeTests.swift in Sources */,
@@ -1410,6 +1431,7 @@
 			files = (
 				B01407531DEEEFB100D7A5B9 /* DesEngine.swift in Sources */,
 				B01407841DEEEFD800D7A5B9 /* String.swift in Sources */,
+				B09470C21DF8452C00A58722 /* Pkcs7Padding.swift in Sources */,
 				B07D40E41DF76EA4009AA618 /* Providers.swift in Sources */,
 				B0DCA1991DF4B0EA006727F6 /* RsaPrivateKeyParameter.swift in Sources */,
 				B01407611DEEEFCC00D7A5B9 /* CtrMode.swift in Sources */,
@@ -1467,6 +1489,7 @@
 				B0E6621C1DF3220700FC55EF /* MessageDigestTests.swift in Sources */,
 				B095204F1DF8136900EF083D /* ProvidersTests.swift in Sources */,
 				B01407BC1DEEF0D400D7A5B9 /* AesEngineTests.swift in Sources */,
+				B09470C81DF846E100A58722 /* Pkcs7PaddingTests.swift in Sources */,
 				B01407BF1DEEF0D400D7A5B9 /* CbcModeTests.swift in Sources */,
 				B0A2FEB41DF47580004356E2 /* OaepPaddingTests.swift in Sources */,
 				B01407C11DEEF0D400D7A5B9 /* CtrModeTests.swift in Sources */,
@@ -1482,6 +1505,7 @@
 			files = (
 				B01407571DEEEFB200D7A5B9 /* DesEngine.swift in Sources */,
 				B01407891DEEEFD900D7A5B9 /* String.swift in Sources */,
+				B09470C31DF8452C00A58722 /* Pkcs7Padding.swift in Sources */,
 				B07D40E51DF76EA4009AA618 /* Providers.swift in Sources */,
 				B0DCA19A1DF4B0EA006727F6 /* RsaPrivateKeyParameter.swift in Sources */,
 				B014076D1DEEEFCC00D7A5B9 /* CtrMode.swift in Sources */,
@@ -1529,6 +1553,7 @@
 			files = (
 				B014075B1DEEEFB200D7A5B9 /* DesEngine.swift in Sources */,
 				B014078E1DEEEFD900D7A5B9 /* String.swift in Sources */,
+				B09470C41DF8452C00A58722 /* Pkcs7Padding.swift in Sources */,
 				B07D40E61DF76EA4009AA618 /* Providers.swift in Sources */,
 				B0DCA19B1DF4B0EA006727F6 /* RsaPrivateKeyParameter.swift in Sources */,
 				B01407791DEEEFCD00D7A5B9 /* CtrMode.swift in Sources */,
@@ -1586,6 +1611,7 @@
 				B0E6621D1DF3220700FC55EF /* MessageDigestTests.swift in Sources */,
 				B09520501DF8136900EF083D /* ProvidersTests.swift in Sources */,
 				B01407C81DEEF0D500D7A5B9 /* AesEngineTests.swift in Sources */,
+				B09470C91DF846E100A58722 /* Pkcs7PaddingTests.swift in Sources */,
 				B01407CB1DEEF0D500D7A5B9 /* CbcModeTests.swift in Sources */,
 				B0A2FEB51DF47580004356E2 /* OaepPaddingTests.swift in Sources */,
 				B01407CD1DEEF0D500D7A5B9 /* CtrModeTests.swift in Sources */,

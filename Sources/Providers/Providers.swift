@@ -13,6 +13,7 @@ public enum BlockCipherModes {
 
 public enum BlockCipherPaddings {
     case no
+    case pkcs7
 }
 
 public enum AsymmetricCiphers {

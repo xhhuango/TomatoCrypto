@@ -53,11 +53,13 @@ public class BlockCipher {
             }
         }
 
-        if isFinal && self.bufferIndex != 0 {
-            let padded = self.padding.add(input: self.buffer, count: self.bufferIndex)
-            self.bufferIndex = 0
-            outputOffset += try self.encrypt(input: padded, inputCount: padded.count,
-                                             output: output.advanced(by: outputOffset), isFinal: false)
+        if isFinal {
+            let padCount = self.padding.add(input: &self.buffer, offset: self.bufferIndex)
+            if padCount != 0 {
+                self.bufferIndex = 0
+                try self.engine.processBlock(input: self.buffer, output: output.advanced(by: outputOffset))
+                outputOffset += self.buffer.count
+            }
         }
 
         return outputOffset
@@ -79,9 +81,12 @@ public class BlockCipher {
                 if remaining == 0 && isFinal {
                     var padded = [Byte](repeating: 0, count: self.buffer.count)
                     try self.engine.processBlock(input: self.buffer, output: &padded)
-                    let unpadded = self.padding.remove(input: padded)
-                    copyBytes(from: unpadded, fromOffset: 0, to: output, toOffset: outputOffset, count: unpadded.count)
-                    outputOffset += unpadded.count
+                    let padCount = self.padding.padCount(input: padded)
+                    let padOffset = padded.count - padCount
+                    if padOffset != 0 {
+                        copyBytes(from: padded, fromOffset: 0, to: output, toOffset: outputOffset, count: padOffset)
+                        outputOffset += padOffset
+                    }
                 } else {
                     try self.engine.processBlock(input: self.buffer, output: output.advanced(by: outputOffset))
                     outputOffset += self.buffer.count
@@ -145,8 +150,8 @@ public class BlockCipher {
     public func finalize(input: UnsafePointer<Byte>, count: Int) throws -> [Byte] {
         let outputCount = ((count + self.bufferIndex - 1) / self.blockSize + 1) * self.blockSize
         var output = [Byte](repeating: 0, count: outputCount)
-        try self.finalize(input: input, count: count, output: &output)
-        return output
+        let resultCount = try self.finalize(input: input, count: count, output: &output)
+        return resultCount == outputCount ? output : [Byte](output[0 ..< resultCount])
     }
 
     public func finalize(input: [Byte]) throws -> [Byte] {

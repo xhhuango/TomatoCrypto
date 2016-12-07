@@ -1,4 +1,4 @@
 public protocol BlockCipherPadding {
-    func add(input: [Byte], count: Int) -> [Byte]
-    func remove(input: [Byte]) -> [Byte]
+    func add(input: inout [Byte], offset: Int) -> Int
+    func padCount(input: [Byte]) -> Int
 }

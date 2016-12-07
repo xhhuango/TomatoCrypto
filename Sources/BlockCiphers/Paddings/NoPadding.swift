@@ -1,9 +1,9 @@
 public class NoPadding: BlockCipherPadding {
-    public func add(input: [Byte], count: Int) -> [Byte] {
-        return input
+    public func add(input: inout [Byte], offset: Int) -> Int {
+        return 0
     }
     
-    public func remove(input: [Byte]) -> [Byte] {
-        return input
+    public func padCount(input: [Byte]) -> Int {
+        return 0
     }
 }
