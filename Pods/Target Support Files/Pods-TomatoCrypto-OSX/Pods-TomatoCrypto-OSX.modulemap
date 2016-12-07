@@ -1,6 +1,0 @@
-framework module Pods_TomatoCrypto_OSX {
-  umbrella header "Pods-TomatoCrypto-OSX-umbrella.h"
-
-  export *
-  module * { export * }
-}
