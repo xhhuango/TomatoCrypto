@@ -4,6 +4,7 @@ stages:
 build_project:
   stage: build
   script:
+    - pod install
     - xcodebuild clean -workspace TomatoCrypto.xcworkspace -scheme 'TomatoCrypto-OSX' | xcpretty
     - xcodebuild test -workspace TomatoCrypto.xcworkspace -scheme 'TomatoCrypto-OSX' -destination 'platform=OS X,arch=x86_64' | xcpretty -s
   tags:
