@@ -1,4 +1,4 @@
-func bytesToHex(bytes: UnsafePointer<Byte>, offset: Int = 0, count: Int) -> String {
+public func bytesToHex(bytes: UnsafePointer<Byte>, offset: Int = 0, count: Int) -> String {
     let table = [Character]("0123456789ABCDEF".characters)
     var string = String()
     let bytes = bytes.advanced(by: offset)
@@ -11,11 +11,11 @@ func bytesToHex(bytes: UnsafePointer<Byte>, offset: Int = 0, count: Int) -> Stri
     return string
 }
 
-func bytesToHex(bytes: [Byte]) -> String {
+public func bytesToHex(bytes: [Byte]) -> String {
     return bytesToHex(bytes: bytes, count: bytes.count)
 }
 
-func hexToBytes(hex: String) -> [Byte] {
+public func hexToBytes(hex: String) -> [Byte] {
     let hexBytes = stringToBytes(string: hex)
     var bytes = [Byte](repeating: 0, count: (hexBytes.count - 1) / 2 + 1)
     
@@ -46,6 +46,6 @@ func hexToBytes(hex: String) -> [Byte] {
     return bytes
 }
 
-func stringToBytes(string: String) -> [Byte] {
+public func stringToBytes(string: String) -> [Byte] {
     return [Byte](string.utf8)
 }

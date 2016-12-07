@@ -5,10 +5,12 @@ public class Signature {
     public init(engine: SignatureEngine) {
         self.engine = engine
     }
-    
-    public func initialize(isSigning: Bool, parameters: [CryptoParameter]) throws {
+
+    @discardableResult
+    public func initialize(isSigning: Bool, parameters: [CryptoParameter]) throws -> Signature {
         try self.engine.initialize(isSigning: isSigning, parameters: parameters)
         self.isSigning = isSigning
+        return self
     }
     
     public func reset() {

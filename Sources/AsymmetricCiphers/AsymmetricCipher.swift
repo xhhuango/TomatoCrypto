@@ -15,9 +15,11 @@ public class AsymmetricCipher {
         self.engine = engine
     }
 
-    public func initialize(isEncryption: Bool, parameters: [CryptoParameter]) throws {
+    @discardableResult
+    public func initialize(isEncryption: Bool, parameters: [CryptoParameter]) throws -> AsymmetricCipher {
         try self.engine.initialize(isEncryption: isEncryption, parameters: parameters)
         self.isEncryption = isEncryption
+        return self
     }
     
     public func process(input: UnsafePointer<Byte>, count: Int) throws -> [Byte] {

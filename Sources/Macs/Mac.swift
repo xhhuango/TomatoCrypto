@@ -13,8 +13,10 @@ public class Mac {
         self.engine.reset()
     }
 
-    public func initialize(parameters: [CryptoParameter]) throws {
+    @discardableResult
+    public func initialize(parameters: [CryptoParameter]) throws -> Mac {
         try self.engine.initialize(parameters: parameters)
+        return self
     }
     
     public func update(input: UnsafePointer<Byte>, count: Int) throws {

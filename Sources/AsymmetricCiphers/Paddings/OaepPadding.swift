@@ -8,18 +8,13 @@ public class OaepPadding: AsymmetricCipherEngine {
     private var isEncryption = true
     private var random: RandomParameter = RandomParameter()
 
-    public var inputSize: Int {
-        return self.engine.inputSize - 2 - self.hash.outputSize * 2
-    }
+    public private(set) var inputSize = 0
+    public private(set) var outputSize = 0
 
-    public var outputSize: Int {
-        return self.engine.outputSize
-    }
-
-    public init(engine: AsymmetricCipherEngine, mgfHash: MessageDigest, hash: MessageDigest) {
+    public init(engine: AsymmetricCipherEngine, hash: MessageDigest, mgfHash: MessageDigest) {
         self.engine = engine
-        self.mgfHash = mgfHash
         self.hash = hash
+        self.mgfHash = mgfHash
 
         self.hashedLabel = [Byte](repeating: 0, count: hash.outputSize)
     }
@@ -33,6 +28,14 @@ public class OaepPadding: AsymmetricCipherEngine {
 
         self.hash.finalize(input: [], inputCount: 0, output: &self.hashedLabel)
         self.isEncryption = isEncryption
+
+        if isEncryption {
+            self.inputSize = self.engine.inputSize - 2 - self.hash.outputSize * 2
+            self.outputSize = self.engine.outputSize
+        } else {
+            self.inputSize = self.engine.inputSize
+            self.outputSize = self.engine.outputSize
+        }
     }
 
     public func process(input: UnsafePointer<Byte>, count: Int) throws -> [Byte] {

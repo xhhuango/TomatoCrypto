@@ -16,11 +16,13 @@ public class BlockCipher {
         self.padding = padding
         self.buffer = [Byte](repeating: 0, count: engine.blockSize)
     }
-    
-    public func initialize(isEncryption: Bool, parameters: [CryptoParameter]) throws {
+
+    @discardableResult
+    public func initialize(isEncryption: Bool, parameters: [CryptoParameter]) throws -> BlockCipher {
         try self.engine.initialize(isEncryption: isEncryption, parameters: parameters)
         self.isEncryption = isEncryption
         self.reset()
+        return self
     }
 
     public func reset() {

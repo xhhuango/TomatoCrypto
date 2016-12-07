@@ -26,7 +26,7 @@ class OaepPaddingTests: XCTestCase {
         
         let mgfHash = MessageDigest(engine: Sha1Engine())
         let hash = MessageDigest(engine: Sha1Engine())
-        let oaep = OaepPadding(engine: RsaEngine(), mgfHash: mgfHash, hash: hash)
+        let oaep = OaepPadding(engine: RsaEngine(), hash: hash, mgfHash: mgfHash)
 
         do {
             let publicKey = RsaPublicKeyParameter(modulusString: mStr, eString: eStr)
