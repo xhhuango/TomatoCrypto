@@ -27,3 +27,7 @@ func compareBytes(from: UnsafePointer<Byte>, fromOffset: Int = 0,
                   count: Int) -> Bool {
     return memcmp(from.advanced(by: fromOffset), to.advanced(by: toOffset), count) == 0
 }
+
+func fillBytes(byte: Byte, to: UnsafeMutablePointer<Byte>, offset: Int = 0, count: Int) {
+    memset(to.advanced(by: offset), Int32(byte), count)
+}

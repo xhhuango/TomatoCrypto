@@ -1,377 +1,366 @@
-/**
- * An implementation of DES.
- * 
- * This implementation is based on a book called Understanding Cryptography,
- * so the code is easy to read, but the performance is slow.
- */
 public class DesEngine: BlockCipherEngine {
-    public let blockSize: Int = 8
-    
-    fileprivate let keyLength = 8
-    
-    fileprivate let smallHexMask: Byte = 0x0F
-    fileprivate let bigHexMask: Byte = 0xF0
-    fileprivate let shiftHex: Byte = 4
-    fileprivate let byteSize = 8
-    
-    // PC-1 stands for permutation choice one
-    let pc1 = [
-        57, 49, 41, 33, 25, 17,  9,  1,
-        58, 50, 42, 34, 26, 18, 10,  2,
-        59, 51, 43, 35, 27, 19, 11,  3,
-        60, 52, 44, 36, 63, 55, 47, 39,
-        31, 23, 15,  7, 62, 54, 46, 38,
-        30, 22, 14,  6, 61, 53, 45, 37,
-        29, 21, 13,  5, 28, 20, 12,  4
-    ]
-    
-    // PC-2 stands for permutation choice two
-    fileprivate let pc2 = [
-        14, 17, 11, 24,  1,  5,  3, 28,
-        15,  6, 21, 10, 23, 19, 12,  4,
-        26,  8, 16,  7, 27, 20, 13,  2,
-        41, 52, 31, 37, 47, 55, 30, 40,
-        51, 45, 33, 48, 44, 49, 39, 56,
-        34, 53, 46, 42, 50, 36, 29, 32
-    ]
-    
-    let shift = [
-        1, 1, 2, 2, 2, 2, 2, 2,
-        1, 2, 2, 2, 2, 2, 2, 1
-    ]
-    
-    // IP stands for initial permutation
-    fileprivate let ip = [
-        58, 50, 42, 34, 26, 18, 10,  2,
-        60, 52, 44, 36, 28, 20, 12,  4,
-        62, 54, 46, 38, 30, 22, 14,  6,
-        64, 56, 48, 40, 32, 24, 16,  8,
-        57, 49, 41, 33, 25, 17,  9,  1,
-        59, 51, 43, 35, 27, 19, 11,  3,
-        61, 53, 45, 37, 29, 21, 13,  5,
-        63, 55, 47, 39, 31, 23, 15,  7
-    ]
-    
-    // IIP stands for final (inversed) permutation
-    fileprivate let iip = [
-        40,  8, 48, 16, 56, 24, 64, 32,
-        39,  7, 47, 15, 55, 23, 63, 31,
-        38,  6, 46, 14, 54, 22, 62, 30,
-        37,  5, 45, 13, 53, 21, 61, 29,
-        36,  4, 44, 12, 52, 20, 60, 28,
-        35,  3, 43, 11, 51, 19, 59, 27,
-        34,  2, 42, 10, 50, 18, 58, 26,
-        33,  1, 41,  9, 49, 17, 57, 25
-    ]
-    
-    // E stands for expansion permutation
-    fileprivate let e = [
-        32,  1,  2,  3,  4,  5,  4,  5,
-         6,  7,  8,  9,  8,  9, 10, 11,
-        12, 13, 12, 13, 14, 15, 16, 17,
-        16, 17, 18, 19, 20, 21, 20, 21,
-        22, 23, 24, 25, 24, 25, 26, 27,
-        28, 29, 28, 29, 30, 31, 32,  1
-    ]
-    
-    // P stands for permutation which f-Function
-    fileprivate let p = [
-        16,  7, 20, 21, 29, 12, 28, 17,
-         1, 15, 23, 26,  5, 18, 31, 10,
-         2,  8, 24, 14, 32, 27,  3,  9,
-        19, 13, 30,  6, 22, 11,  4, 25
-    ]
-    
-    fileprivate let sboxes: [[[Byte]]] = [
-        [
-            [14,  4, 13,  1,  2, 15, 11,  8,  3, 10,  6, 12,  5,  9,  0,  7],
-            [ 0, 15,  7,  4, 14,  2, 13,  1, 10,  6, 12, 11,  9,  5,  3,  8],
-            [ 4,  1, 14,  8, 13,  6,  2, 11, 15, 12,  9,  7,  3, 10,  5,  0],
-            [15, 12,  8,  2,  4,  9,  1,  7,  5, 11,  3, 14, 10,  0,  6, 13]
-        ],
-        [
-            [15,  1,  8, 14,  6, 11,  3,  2,  9,  7,  2, 13, 12,  0,  5, 10],
-            [ 3, 13,  4,  7, 15,  2,  8, 14, 12,  0,  1, 10,  6,  9, 11,  5],
-            [ 0, 14,  7, 11, 10,  4, 13,  1,  5,  8, 12,  6,  9,  3,  2, 15],
-            [13,  8, 10,  1,  3, 15,  4,  2, 11,  6,  7, 12,  0,  5, 14,  9]
-        ],
-        [
-            [10,  0,  9, 14,  6,  3, 15,  5,  1, 13, 12,  7, 11,  4,  2,  8],
-            [13,  7,  0,  9,  3,  4,  6, 10,  2,  8,  5, 14, 12, 11, 15,  1],
-            [13,  6,  4,  9,  8, 15,  3,  0, 11,  1,  2, 12,  5, 10, 14,  7],
-            [ 1, 10, 13,  0,  6,  9,  8,  7,  4, 15, 14,  3, 11,  5,  2, 12]
-        ],
-        [
-            [ 7, 13, 14,  3,  0,  6,  9, 10,  1,  2,  8,  5, 11, 12,  4, 15],
-            [13,  8, 11,  5,  6, 15,  0,  3,  4,  7,  2, 12,  1, 10, 14,  9],
-            [10,  6,  9,  0, 12, 11,  7, 13, 15,  1,  3, 14,  5,  2,  8,  4],
-            [ 3, 15,  0,  6, 10,  1, 13,  8,  9,  4,  5, 11, 12,  7,  2, 14]
-        ],
-        [
-            [ 2, 12,  4,  1,  7, 10, 11,  6,  8,  5,  3, 15, 13,  0, 14,  9],
-            [14, 11,  2, 12,  4,  7, 13,  1,  5,  0, 15, 10,  3,  9,  8,  6],
-            [ 4,  2,  1, 11, 10, 13,  7,  8, 15,  9, 12,  5,  6,  3,  0, 14],
-            [11,  8, 12,  7,  1, 14,  2, 12,  6, 15,  0,  9, 10,  4,  5,  3]
-        ],
-        [
-            [12,  1, 10, 15,  9,  2,  6,  8,  0, 13,  3,  4, 14,  7,  5, 11],
-            [10, 15,  4,  2,  7, 12,  9,  5,  6,  1, 13, 14,  0, 11,  3,  8],
-            [ 9, 14, 15,  5,  2,  8, 12,  3,  7,  0,  4, 10,  1, 13, 11,  6],
-            [ 4,  3,  2, 12,  9,  5, 15, 10, 11, 14,  1,  7,  6,  0,  8, 13]
-        ],
-        [
-            [ 4, 11,  2, 14, 15,  0,  8, 13,  3, 12,  9,  7,  5, 10,  6,  1],
-            [13,  0, 11,  7,  4,  9,  1, 10, 14,  3,  5, 12,  2, 15,  8,  6],
-            [ 1,  4, 11, 13, 12,  3,  7, 14, 10, 15,  6,  8,  0,  5,  9,  2],
-            [ 6, 11, 13,  8,  1,  4, 10,  7,  9,  5,  0, 15, 14,  2,  3, 12]
-        ],
-        [
-            [13,  2,  8,  4,  6, 15, 11,  1, 10,  9,  3, 14,  5,  0, 12,  7],
-            [ 1, 15, 13,  8, 10,  3,  7,  4, 12,  5,  6, 11,  0, 14,  9,  2],
-            [ 7, 11,  4,  1,  9, 12, 14,  2,  0,  6, 10, 13, 15,  3,  5,  8],
-            [ 2,  1, 14,  7,  4, 10,  8, 13, 15, 12,  9,  0,  3,  5,  6, 11]
-        ]
+    fileprivate let byteBit: [Byte] = [
+        0o200, 0o100, 0o40, 0o20, 0o10, 0o4, 0o2, 0o1
     ]
 
-    fileprivate var subkeys: [[Byte]]!
+    fileprivate let bigByte: [Word] = [
+        0x800000, 0x400000, 0x200000, 0x100000,
+        0x80000,  0x40000,  0x20000,  0x10000,
+        0x8000,   0x4000,   0x2000,   0x1000,
+        0x800,    0x400,    0x200,    0x100,
+        0x80,     0x40,     0x20,     0x10,
+        0x8,      0x4,      0x2,      0x1
+    ]
+
+    fileprivate let pc1 = [
+        56, 48, 40, 32, 24, 16,  8,
+        00, 57, 49, 41, 33, 25, 17,
+        09,  1, 58, 50, 42, 34, 26,
+        18, 10,  2, 59, 51, 43, 35,
+        62, 54, 46, 38, 30, 22, 14,
+        06, 61, 53, 45, 37, 29, 21,
+        13,  5, 60, 52, 44, 36, 28,
+        20, 12,  4, 27, 19, 11,  3
+    ]
+
+    fileprivate let totrot = [
+        1, 2, 4, 6, 8, 10, 12, 14, 15, 17, 19, 21, 23, 25, 27, 28
+    ]
+
+    fileprivate let pc2 = [
+        13, 16, 10, 23,  0,  4,  2, 27,
+        14,  5, 20,  9, 22, 18, 11,  3,
+        25,  7, 15,  6, 26, 19, 12,  1,
+        40, 51, 30, 36, 46, 54, 29, 39,
+        50, 44, 32, 47, 43, 48, 38, 55,
+        33, 52, 45, 41, 49, 35, 28, 31
+    ]
+
+    fileprivate let sp1: [Word] = [
+        0x01010400, 0x00000000, 0x00010000, 0x01010404,
+        0x01010004, 0x00010404, 0x00000004, 0x00010000,
+        0x00000400, 0x01010400, 0x01010404, 0x00000400,
+        0x01000404, 0x01010004, 0x01000000, 0x00000004,
+        0x00000404, 0x01000400, 0x01000400, 0x00010400,
+        0x00010400, 0x01010000, 0x01010000, 0x01000404,
+        0x00010004, 0x01000004, 0x01000004, 0x00010004,
+        0x00000000, 0x00000404, 0x00010404, 0x01000000,
+        0x00010000, 0x01010404, 0x00000004, 0x01010000,
+        0x01010400, 0x01000000, 0x01000000, 0x00000400,
+        0x01010004, 0x00010000, 0x00010400, 0x01000004,
+        0x00000400, 0x00000004, 0x01000404, 0x00010404,
+        0x01010404, 0x00010004, 0x01010000, 0x01000404,
+        0x01000004, 0x00000404, 0x00010404, 0x01010400,
+        0x00000404, 0x01000400, 0x01000400, 0x00000000,
+        0x00010004, 0x00010400, 0x00000000, 0x01010004
+    ]
+
+    fileprivate let sp2: [Word] = [
+        0x80108020, 0x80008000, 0x00008000, 0x00108020,
+        0x00100000, 0x00000020, 0x80100020, 0x80008020,
+        0x80000020, 0x80108020, 0x80108000, 0x80000000,
+        0x80008000, 0x00100000, 0x00000020, 0x80100020,
+        0x00108000, 0x00100020, 0x80008020, 0x00000000,
+        0x80000000, 0x00008000, 0x00108020, 0x80100000,
+        0x00100020, 0x80000020, 0x00000000, 0x00108000,
+        0x00008020, 0x80108000, 0x80100000, 0x00008020,
+        0x00000000, 0x00108020, 0x80100020, 0x00100000,
+        0x80008020, 0x80100000, 0x80108000, 0x00008000,
+        0x80100000, 0x80008000, 0x00000020, 0x80108020,
+        0x00108020, 0x00000020, 0x00008000, 0x80000000,
+        0x00008020, 0x80108000, 0x00100000, 0x80000020,
+        0x00100020, 0x80008020, 0x80000020, 0x00100020,
+        0x00108000, 0x00000000, 0x80008000, 0x00008020,
+        0x80000000, 0x80100020, 0x80108020, 0x00108000
+    ]
+
+    fileprivate let sp3: [Word] = [
+        0x00000208, 0x08020200, 0x00000000, 0x08020008,
+        0x08000200, 0x00000000, 0x00020208, 0x08000200,
+        0x00020008, 0x08000008, 0x08000008, 0x00020000,
+        0x08020208, 0x00020008, 0x08020000, 0x00000208,
+        0x08000000, 0x00000008, 0x08020200, 0x00000200,
+        0x00020200, 0x08020000, 0x08020008, 0x00020208,
+        0x08000208, 0x00020200, 0x00020000, 0x08000208,
+        0x00000008, 0x08020208, 0x00000200, 0x08000000,
+        0x08020200, 0x08000000, 0x00020008, 0x00000208,
+        0x00020000, 0x08020200, 0x08000200, 0x00000000,
+        0x00000200, 0x00020008, 0x08020208, 0x08000200,
+        0x08000008, 0x00000200, 0x00000000, 0x08020008,
+        0x08000208, 0x00020000, 0x08000000, 0x08020208,
+        0x00000008, 0x00020208, 0x00020200, 0x08000008,
+        0x08020000, 0x08000208, 0x00000208, 0x08020000,
+        0x00020208, 0x00000008, 0x08020008, 0x00020200
+    ]
+
+    fileprivate let sp4: [Word] = [
+        0x00802001, 0x00002081, 0x00002081, 0x00000080,
+        0x00802080, 0x00800081, 0x00800001, 0x00002001,
+        0x00000000, 0x00802000, 0x00802000, 0x00802081,
+        0x00000081, 0x00000000, 0x00800080, 0x00800001,
+        0x00000001, 0x00002000, 0x00800000, 0x00802001,
+        0x00000080, 0x00800000, 0x00002001, 0x00002080,
+        0x00800081, 0x00000001, 0x00002080, 0x00800080,
+        0x00002000, 0x00802080, 0x00802081, 0x00000081,
+        0x00800080, 0x00800001, 0x00802000, 0x00802081,
+        0x00000081, 0x00000000, 0x00000000, 0x00802000,
+        0x00002080, 0x00800080, 0x00800081, 0x00000001,
+        0x00802001, 0x00002081, 0x00002081, 0x00000080,
+        0x00802081, 0x00000081, 0x00000001, 0x00002000,
+        0x00800001, 0x00002001, 0x00802080, 0x00800081,
+        0x00002001, 0x00002080, 0x00800000, 0x00802001,
+        0x00000080, 0x00800000, 0x00002000, 0x00802080
+    ]
+
+    fileprivate let sp5: [Word] = [
+        0x00000100, 0x02080100, 0x02080000, 0x42000100,
+        0x00080000, 0x00000100, 0x40000000, 0x02080000,
+        0x40080100, 0x00080000, 0x02000100, 0x40080100,
+        0x42000100, 0x42080000, 0x00080100, 0x40000000,
+        0x02000000, 0x40080000, 0x40080000, 0x00000000,
+        0x40000100, 0x42080100, 0x42080100, 0x02000100,
+        0x42080000, 0x40000100, 0x00000000, 0x42000000,
+        0x02080100, 0x02000000, 0x42000000, 0x00080100,
+        0x00080000, 0x42000100, 0x00000100, 0x02000000,
+        0x40000000, 0x02080000, 0x42000100, 0x40080100,
+        0x02000100, 0x40000000, 0x42080000, 0x02080100,
+        0x40080100, 0x00000100, 0x02000000, 0x42080000,
+        0x42080100, 0x00080100, 0x42000000, 0x42080100,
+        0x02080000, 0x00000000, 0x40080000, 0x42000000,
+        0x00080100, 0x02000100, 0x40000100, 0x00080000,
+        0x00000000, 0x40080000, 0x02080100, 0x40000100
+    ]
+
+    fileprivate let sp6: [Word] = [
+        0x20000010, 0x20400000, 0x00004000, 0x20404010,
+        0x20400000, 0x00000010, 0x20404010, 0x00400000,
+        0x20004000, 0x00404010, 0x00400000, 0x20000010,
+        0x00400010, 0x20004000, 0x20000000, 0x00004010,
+        0x00000000, 0x00400010, 0x20004010, 0x00004000,
+        0x00404000, 0x20004010, 0x00000010, 0x20400010,
+        0x20400010, 0x00000000, 0x00404010, 0x20404000,
+        0x00004010, 0x00404000, 0x20404000, 0x20000000,
+        0x20004000, 0x00000010, 0x20400010, 0x00404000,
+        0x20404010, 0x00400000, 0x00004010, 0x20000010,
+        0x00400000, 0x20004000, 0x20000000, 0x00004010,
+        0x20000010, 0x20404010, 0x00404000, 0x20400000,
+        0x00404010, 0x20404000, 0x00000000, 0x20400010,
+        0x00000010, 0x00004000, 0x20400000, 0x00404010,
+        0x00004000, 0x00400010, 0x20004010, 0x00000000,
+        0x20404000, 0x20000000, 0x00400010, 0x20004010
+    ]
+
+    fileprivate let sp7: [Word] = [
+        0x00200000, 0x04200002, 0x04000802, 0x00000000,
+        0x00000800, 0x04000802, 0x00200802, 0x04200800,
+        0x04200802, 0x00200000, 0x00000000, 0x04000002,
+        0x00000002, 0x04000000, 0x04200002, 0x00000802,
+        0x04000800, 0x00200802, 0x00200002, 0x04000800,
+        0x04000002, 0x04200000, 0x04200800, 0x00200002,
+        0x04200000, 0x00000800, 0x00000802, 0x04200802,
+        0x00200800, 0x00000002, 0x04000000, 0x00200800,
+        0x04000000, 0x00200800, 0x00200000, 0x04000802,
+        0x04000802, 0x04200002, 0x04200002, 0x00000002,
+        0x00200002, 0x04000000, 0x04000800, 0x00200000,
+        0x04200800, 0x00000802, 0x00200802, 0x04200800,
+        0x00000802, 0x04000002, 0x04200802, 0x04200000,
+        0x00200800, 0x00000000, 0x00000002, 0x04200802,
+        0x00000000, 0x00200802, 0x04200000, 0x00000800,
+        0x04000002, 0x04000800, 0x00000800, 0x00200002
+    ]
+
+    fileprivate let sp8: [Word] = [
+        0x10001040, 0x00001000, 0x00040000, 0x10041040,
+        0x10000000, 0x10001040, 0x00000040, 0x10000000,
+        0x00040040, 0x10040000, 0x10041040, 0x00041000,
+        0x10041000, 0x00041040, 0x00001000, 0x00000040,
+        0x10040000, 0x10000040, 0x10001000, 0x00001040,
+        0x00041000, 0x00040040, 0x10040040, 0x10041000,
+        0x00001040, 0x00000000, 0x00000000, 0x10040040,
+        0x10000040, 0x10001000, 0x00041040, 0x00040000,
+        0x00041040, 0x00040000, 0x10041000, 0x00001000,
+        0x00000040, 0x10040040, 0x00001000, 0x00041040,
+        0x10001000, 0x00000040, 0x10000040, 0x10040000,
+        0x10040040, 0x10000000, 0x00040000, 0x10001040,
+        0x00000000, 0x10041040, 0x00040040, 0x10000040,
+        0x10040000, 0x10001000, 0x10001040, 0x00000000,
+        0x10041040, 0x00041000, 0x00041000, 0x00001040,
+        0x00001040, 0x00040040, 0x10000000, 0x10041000
+    ]
+
+    public let blockSize: Int = 8
+    private let keyLength = 8
+
+    fileprivate var subkeys: [Word]!
     fileprivate var isEncryption = true
 
     public func reset() {
     }
-    
+
     public func initialize(isEncryption: Bool, parameters: [CryptoParameter]) throws {
         guard let keyParameter: SecretKeyParameter = findParameter(within: parameters) else {
             throw CryptoError.missingParameter("Require \(SecretKeyParameter.self)")
         }
         let key = keyParameter.key
         guard key.count == self.keyLength else {
-            throw CryptoError.illegalKeyLength("Illegal key length. \(self) only supports 64-bits key length")
+            throw CryptoError.illegalKeyLength("Illegal key length. Key must be \(self.keyLength) bytes")
         }
-        
+
         self.isEncryption = isEncryption
 
-        self.subkeys = self.keySchedule(key: key)
-        if !isEncryption {
-            self.subkeys = self.subkeys.reversed()
-        }
+        self.subkeys = self.keySchedule(isEncryption: isEncryption,key: key)
     }
 
     public func processBlock(input: UnsafePointer<Byte>, output: UnsafeMutablePointer<Byte>) throws {
-        try self.encryptBlock(subkeys: self.subkeys,
-                              input: input,
-                              output: output)
+        try self.processBlock(subkeys: self.subkeys, input: input, output: output)
     }
 }
 
 extension DesEngine {
-    func encryptBlock(subkeys: [[Byte]], input: UnsafePointer<Byte>, output: UnsafeMutablePointer<Byte>) throws {
-        let ipData = self.permute(bytes: input, table: self.ip)
-        var (l, r) = self.split(data: ipData)
-        for i in 0..<subkeys.count {
-            let tmp = r
-            r = self.round(left: l, right: r, key: subkeys[i])
-            l = tmp
+    func processBlock(subkeys: [Word], input: UnsafePointer<Byte>, output: UnsafeMutablePointer<Byte>) throws {
+        var work: Word
+        var right: Word
+        var left: Word
+
+        left  = Word(input[0]) << 24
+        left |= Word(input[1]) << 16
+        left |= Word(input[2]) <<  8
+        left |= Word(input[3])
+
+        right  = Word(input[4]) << 24
+        right |= Word(input[5]) << 16
+        right |= Word(input[6]) <<  8
+        right |= Word(input[7])
+
+        work   = ((left >> 4) ^ right) & 0x0f0f0f0f
+        right ^= work
+        left  ^= work << 4
+        work   = ((left >> 16) ^ right) & 0x0000ffff
+        right ^= work
+        left  ^= work << 16
+        work   = ((right >> 2) ^ left) & 0x33333333
+        left  ^= work
+        right ^= work << 2
+        work   = ((right >> 8) ^ left) & 0x00ff00ff
+        left  ^= work
+        right ^= work << 8
+        right  = ((right << 1) | ((right >> 31) & 0x01)) & 0xffffffff
+        work   = (left ^ right) & 0xaaaaaaaa
+        left  ^= work
+        right ^= work
+        left   = ((left << 1) | ((left >> 31) & 0x01)) & 0xffffffff
+
+        for round in 0 ..< 8 {
+            var fval: Word
+            work  = (right << 28) | (right >> 4)
+            work ^= self.subkeys[round * 4 + 0]
+            fval  = self.sp7[Int( work        & 0x3f)]
+            fval |= self.sp5[Int((work >>  8) & 0x3f)]
+            fval |= self.sp3[Int((work >> 16) & 0x3f)]
+            fval |= self.sp1[Int((work >> 24) & 0x3f)]
+            work  = right ^ self.subkeys[round * 4 + 1];
+            fval |= self.sp8[Int( work      & 0x3f)];
+            fval |= self.sp6[Int((work >>  8) & 0x3f)];
+            fval |= self.sp4[Int((work >> 16) & 0x3f)];
+            fval |= self.sp2[Int((work >> 24) & 0x3f)];
+            left ^= fval;
+            work  = (left << 28) | (left >> 4);
+            work ^= self.subkeys[round * 4 + 2];
+            fval  = self.sp7[Int( work        & 0x3f)];
+            fval |= self.sp5[Int((work >>  8) & 0x3f)];
+            fval |= self.sp3[Int((work >> 16) & 0x3f)];
+            fval |= self.sp1[Int((work >> 24) & 0x3f)];
+            work  = left ^ self.subkeys[round * 4 + 3];
+            fval |= self.sp8[Int( work        & 0x3f)];
+            fval |= self.sp6[Int((work >>  8) & 0x3f)];
+            fval |= self.sp4[Int((work >> 16) & 0x3f)];
+            fval |= self.sp2[Int((work >> 24) & 0x3f)];
+            right ^= fval;
         }
-        let joint = self.join(left: r, right: l)
-        let encrypted = self.permute(bytes: joint, table: self.iip)
-        
-        for i in 0..<encrypted.count {
-            output[i] = encrypted[i]
-        }
-    }
-    
-    private func split(data: [Byte]) -> ([Byte], [Byte]) {
-        assert(data.count == 8)
-        return ([data[0], data[1], data[2], data[3]],
-                [data[4], data[5], data[6], data[7]])
-    }
-    
-    private func join(left: [Byte], right: [Byte]) -> [Byte] {
-        assert(left.count == 4)
-        assert(right.count == 4)
-        return [left[0], left[1], left[2], left[3],
-                right[0], right[1], right[2], right[3]]
+
+        right  = (right << 31) | (right >> 1)
+        work   = (left ^ right) & 0xaaaaaaaa
+        left  ^= work
+        right ^= work
+        left   = (left << 31) | (left >> 1)
+        work   = ((left >> 8) ^ right) & 0x00ff00ff
+        right ^= work
+        left  ^= work << 8
+        work   = ((left >> 2) ^ right) & 0x33333333
+        right ^= work
+        left  ^= work << 2
+        work   = ((right >> 16) ^ left) & 0x0000ffff
+        left  ^= work
+        right ^= work << 16
+        work   = ((right >> 4) ^ left) & 0x0f0f0f0f
+        left  ^= work
+        right ^= work << 4
+
+        output[0] = Byte((right >> 24) & 0xff)
+        output[1] = Byte((right >> 16) & 0xff)
+        output[2] = Byte((right >>  8) & 0xff)
+        output[3] = Byte( right        & 0xff)
+        output[4] = Byte((left  >> 24) & 0xff)
+        output[5] = Byte((left  >> 16) & 0xff)
+        output[6] = Byte((left  >>  8) & 0xff)
+        output[7] = Byte( left         & 0xff)
     }
 }
 
 extension DesEngine {
-    func getBit(bytes: UnsafePointer<Byte>, index: Int) -> Bool {
-        let byteIndex = index / self.byteSize
-        let bitIndex = 7 - Byte(index % self.byteSize)
-        return ((bytes[byteIndex] >> bitIndex) & 0x01) == 0x01
-    }
-    
-    func setBit(bytes: UnsafeMutablePointer<Byte>, index: Int, bit: Bool) {
-        let byteIndex = index / self.byteSize
-        let bitIndex = 7 - Byte(index % self.byteSize)
-        
-        if bit {
-            bytes[byteIndex] |= 0x01 << bitIndex
-        } else {
-            bytes[byteIndex] &= ~(0x01 << bitIndex)
+    func keySchedule(isEncryption: Bool, key: [Byte]) -> [Word] {
+        var subkeys = [Word](repeating: 0, count: 32)
+        var pc1m = [Bool](repeating: false, count: 56)
+        var pcr = [Bool](repeating: false, count: 56)
+
+        for i in 0 ..< 56 {
+            let l = self.pc1[i]
+            pc1m[i] = ((key[l >> 3] & self.byteBit[l & 07]) != 0)
         }
-    }
-    
-    fileprivate func byteCount(bitCount: Int) -> Int {
-        return (bitCount - 1) / self.byteSize + 1
-    }
-    
-    func permute(bytes: UnsafePointer<Byte>, table: [Int]) -> [Byte] {
-        let byteCount = self.byteCount(bitCount: table.count)
-        var permuted = [Byte](repeating: 0, count: byteCount)
-        for i in 0..<table.count {
-            if self.getBit(bytes: bytes, index: table[i] - 1) {
-                self.setBit(bytes: &permuted, index: i, bit: true)
+
+        for i in 0 ..< 16 {
+            var l: Int
+            let m = (isEncryption) ? i << 1 : (15 - i) << 1
+            let n = m + 1
+
+            subkeys[m] = 0
+            subkeys[n] = 0
+
+            for j in 0 ..< 28 {
+                l = j + self.totrot[i]
+                pcr[j] = (l < 28) ? pc1m[l] : pc1m[l - 28]
+            }
+
+            for j in 28 ..< 56 {
+                l = j + self.totrot[i]
+                pcr[j] = (l < 56) ? pc1m[l] : pc1m[l - 28]
+            }
+
+            for j in 0 ..< 24 {
+                if pcr[self.pc2[j]] {
+                    subkeys[m] |= self.bigByte[j]
+                }
+
+                if pcr[self.pc2[j + 24]] {
+                    subkeys[n] |= self.bigByte[j]
+                }
             }
         }
-        return permuted
-    }
-}
 
-extension DesEngine {
-    func keySchedule(key: [Byte]) -> [[Byte]] {
-        let pc1Key = self.permute(bytes: key, table: self.pc1)
-        let pc1KeyHalfCount = self.pc1.count / 2
-        var (c, d) = self.split(key: pc1Key)
-        var subkeys = [[Byte]]()
-        for round in 0..<self.shift.count {
-            c = self.leftShift(bytes: c, bitCount: pc1KeyHalfCount, shiftCount: self.shift[round])
-            d = self.leftShift(bytes: d, bitCount: pc1KeyHalfCount, shiftCount: self.shift[round])
-            let joint = self.join(c: c, d: d)
-            let pc2Key = self.permute(bytes: joint, table: self.pc2)
-            subkeys.append(pc2Key)
+        var i = 0
+        while i != 32 {
+            let i1 = subkeys[i]
+            let i2 = subkeys[i + 1]
+
+            subkeys[i] = ((i1 & 0x00fc0000) << 6) | ((i1 & 0x00000fc0) << 10)
+                | ((i2 & 0x00fc0000) >> 10) | ((i2 & 0x00000fc0) >> 6)
+
+            subkeys[i + 1] = ((i1 & 0x0003f000) << 12) | ((i1 & 0x0000003f) << 16)
+                | ((i2 & 0x0003f000) >> 4) | (i2 & 0x0000003f)
+            
+            i += 2
         }
+        
         return subkeys
-    }
-    
-    private func split(key: [Byte]) -> ([Byte], [Byte]) {
-        assert(key.count == 7)
-        
-        let c = [key[0], key[1], key[2], key[3] & self.bigHexMask]
-        
-        let d = [((key[3] << self.shiftHex) & self.bigHexMask) | ((key[4] >> self.shiftHex) & self.smallHexMask),
-                 ((key[4] << self.shiftHex) & self.bigHexMask) | ((key[5] >> self.shiftHex) & self.smallHexMask),
-                 ((key[5] << self.shiftHex) & self.bigHexMask) | ((key[6] >> self.shiftHex) & self.smallHexMask),
-                 ((key[6] << self.shiftHex) & self.bigHexMask)]
-        
-        return (c, d)
-    }
-    
-    private func join(c: [Byte], d: [Byte]) -> [Byte] {
-        assert(c.count == 4)
-        assert(d.count == 4)
-        return [c[0],
-                c[1],
-                c[2],
-                (c[3] & self.bigHexMask) | ((d[0] >> self.shiftHex) & self.smallHexMask),
-                ((d[0] << self.shiftHex) & self.bigHexMask) | ((d[1] >> self.shiftHex) & self.smallHexMask),
-                ((d[1] << self.shiftHex) & self.bigHexMask) | ((d[2] >> self.shiftHex) & self.smallHexMask),
-                ((d[2] << self.shiftHex) & self.bigHexMask) | ((d[3] >> self.shiftHex) & self.smallHexMask)]
-    }
-    
-    func leftShift(bytes: [Byte], bitCount: Int, shiftCount: Int) -> [Byte] {
-        assert(shiftCount > 0)
-        
-        var bytes = bytes
-        let byteCount = self.byteCount(bitCount: bitCount)
-        
-        let firstCarry = (bytes[0] & 0x80) != 0
-        bytes[0] <<= 1
-        
-        var carry = false
-        for i in 1..<byteCount {
-            carry = (bytes[i] & 0x80) != 0
-            bytes[i] <<= 1
-            if carry {
-                bytes[i - 1] |= 0x01
-            } else {
-                bytes[i - 1] &= ~0x01
-            }
-        }
-        
-        self.setBit(bytes: &bytes, index: bitCount - 1, bit: firstCarry)
-        
-        if shiftCount > 1 {
-            return self.leftShift(bytes: bytes, bitCount: bitCount, shiftCount: shiftCount - 1)
-        } else {
-            return bytes
-        }
-    }
-}
-
-extension DesEngine {
-    func round(left: [Byte], right: [Byte], key: [Byte]) -> [Byte] {
-        assert(left.count == 4)
-        assert(right.count == 4)
-        let f = self.fFunction(right: right, key: key)
-        return self.xor(bytes1: left, bytes2: f)
-    }
-    
-    func fFunction(right: [Byte], key: [Byte]) -> [Byte] {
-        assert(right.count == 4)
-        assert(key.count == 6)
-        
-        var tmp = self.permute(bytes: right, table: self.e)
-        tmp = self.xor(bytes1: tmp, bytes2: key)
-        tmp = self.substitionBoxes(bytes: tmp)
-        tmp = self.permute(bytes: tmp, table: self.p)
-        return tmp
-    }
-    
-    private func xor(bytes1: [Byte], bytes2: [Byte]) -> [Byte] {
-        assert(bytes1.count == bytes2.count)
-        var xored = [Byte](repeating: 0, count: bytes1.count)
-        for i in 0..<xored.count {
-            xored[i] = bytes1[i] ^ bytes2[i]
-        }
-        return xored
-    }
-    
-    private func substitionBoxes(bytes: [Byte]) -> [Byte] {
-        var output = [Byte](repeating: 0, count: 4)
-        var row: Int
-        var column: Int
-        
-        // s-box1
-        row = Int(((bytes[0] >> 6) & 0x02) | ((bytes[0] >> 2) & 0x01))
-        column = Int((bytes[0] >> 3) & self.smallHexMask)
-        output[0] = (self.sboxes[0][row][column] << 4) & self.bigHexMask
-        
-        // s-box2
-        row = Int((bytes[0] & 0x02) | ((bytes[1] >> 4) & 0x01))
-        column = Int(((bytes[0] << 3) & 0x08) | ((bytes[1] >> 5) & 0x07))
-        output[0] |= self.sboxes[1][row][column] & self.smallHexMask
-        
-        // s-box3
-        row = Int(((bytes[1] >> 2) & 0x02) | ((bytes[2] >> 6) & 0x01))
-        column = Int(((bytes[1] << 1) & 0x0E) | ((bytes[2] >> 7) & 0x01))
-        output[1] = (self.sboxes[2][row][column] << 4) & self.bigHexMask
-        
-        // s-box4
-        row = Int(((bytes[2] >> 4) & 0x02) | (bytes[2] & 0x01))
-        column = Int((bytes[2] >> 1) & self.smallHexMask)
-        output[1] |= self.sboxes[3][row][column] & self.smallHexMask
-        
-        // s-box5
-        row = Int(((bytes[3] >> 6) & 0x02) | ((bytes[3] >> 2) & 0x01))
-        column = Int((bytes[3] >> 3) & self.smallHexMask)
-        output[2] = (self.sboxes[4][row][column] << 4) & self.bigHexMask
-        
-        // s-box6
-        row = Int((bytes[3] & 0x02) | ((bytes[4] >> 4) & 0x01))
-        column = Int(((bytes[3] << 3) & 0x08) | ((bytes[4] >> 5) & 0x07))
-        output[2] |= self.sboxes[5][row][column] & self.smallHexMask
-        
-        // s-box7
-        row = Int(((bytes[4] >> 2) & 0x02) | ((bytes[5] >> 6) & 0x01))
-        column = Int(((bytes[4] << 1) & 0x0E) | ((bytes[5] >> 7) & 0x01))
-        output[3] = (self.sboxes[6][row][column] << 4) & self.bigHexMask
-        
-        // s-box8
-        row = Int(((bytes[5] >> 4) & 0x02) | (bytes[5] & 0x01))
-        column = Int((bytes[5] >> 1) & self.smallHexMask)
-        output[3] |= self.sboxes[7][row][column] & self.smallHexMask
-        
-        return output
     }
 }

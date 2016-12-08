@@ -17,7 +17,6 @@ I have only tested it in OSX and iOS, but it should work in all of them because 
 
 ```
 pod 'TomatoCrypto'
-
 ```
 
 ## Depedencies
