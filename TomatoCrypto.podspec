@@ -14,5 +14,5 @@ Pod::Spec.new do |s|
   s.source        = { :git => "https://gitlab.com/xhhuango/TomatoCrypto.git", :tag => "#{s.version}" }
   s.source_files  = "Sources/**/*.swift"
   s.requires_arc  = true
-  s.dependency "BigInt", "~> 2.1"
+  s.dependency "BigInt", "~> 3.0"
 end
