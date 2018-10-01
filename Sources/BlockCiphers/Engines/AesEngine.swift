@@ -233,18 +233,18 @@ extension AesEngine {
             subkeys[round][3]
         round += 1
         
-        output[0] = Word(self.sbox[Int(r0 & 0xff)]) ^ (Word(self.sbox[Int((r1 >> 8) & 0xff)]) << 8) ^
-            (Word(self.sbox[Int((r2 >> 16) & 0xff)]) << 16) ^ (Word(self.sbox[Int((r3 >> 24) & 0xff)]) << 24) ^
-            subkeys[round][0]
-        output[1] = Word(self.sbox[Int(r1 & 0xff)]) ^ (Word(self.sbox[Int((r2 >> 8) & 0xff)]) << 8) ^
-            (Word(self.sbox[Int((r3 >> 16) & 0xff)]) << 16) ^ (Word(self.sbox[Int((r0 >> 24) & 0xff)]) << 24) ^
-            subkeys[round][1]
-        output[2] = Word(self.sbox[Int(r2 & 0xff)]) ^ (Word(self.sbox[Int((r3 >> 8) & 0xff)]) << 8) ^
-            (Word(self.sbox[Int((r0 >> 16) & 0xff)]) << 16) ^ (Word(self.sbox[Int((r1 >> 24) & 0xff)]) << 24) ^
-            subkeys[round][2]
-        output[3] = Word(self.sbox[Int(r3 & 0xff)]) ^ (Word(self.sbox[Int((r0 >> 8) & 0xff)]) << 8) ^
-            (Word(self.sbox[Int((r1 >> 16) & 0xff)]) << 16) ^ (Word(self.sbox[Int((r2 >> 24) & 0xff)]) << 24) ^
-            subkeys[round][3]
+        output[0] = Word(self.sbox[Int(r0 & 0xff)]) ^ (Word(self.sbox[Int((r1 >> 8) & 0xff)]) << 8)
+        output[0] ^= (Word(self.sbox[Int((r2 >> 16) & 0xff)]) << 16) ^ (Word(self.sbox[Int((r3 >> 24) & 0xff)]) << 24)
+        output[0] ^= subkeys[round][0]
+        output[1] = Word(self.sbox[Int(r1 & 0xff)]) ^ (Word(self.sbox[Int((r2 >> 8) & 0xff)]) << 8)
+        output[1] ^= (Word(self.sbox[Int((r3 >> 16) & 0xff)]) << 16) ^ (Word(self.sbox[Int((r0 >> 24) & 0xff)]) << 24)
+        output[1] ^= subkeys[round][1]
+        output[2] = Word(self.sbox[Int(r2 & 0xff)]) ^ (Word(self.sbox[Int((r3 >> 8) & 0xff)]) << 8)
+        output[2] ^= (Word(self.sbox[Int((r0 >> 16) & 0xff)]) << 16) ^ (Word(self.sbox[Int((r1 >> 24) & 0xff)]) << 24)
+        output[2] ^= subkeys[round][2]
+        output[3] = Word(self.sbox[Int(r3 & 0xff)]) ^ (Word(self.sbox[Int((r0 >> 8) & 0xff)]) << 8)
+        output[3] ^= (Word(self.sbox[Int((r1 >> 16) & 0xff)]) << 16) ^ (Word(self.sbox[Int((r2 >> 24) & 0xff)]) << 24)
+        output[3] ^= subkeys[round][3]
     }
 }
 
@@ -326,18 +326,18 @@ extension AesEngine {
             self.rightRotate(word: self.tinv[Int((t0 >> 24) & 0xff)], shift: 8) ^
             subkeys[1][3]
         
-        output[0] = Word(self.invSbox[Int(r0 & 0xff)]) ^ (Word(self.invSbox[Int((r3 >> 8) & 0xff)]) << 8) ^
-            (Word(self.invSbox[Int((r2 >> 16) & 0xff)]) << 16) ^ (Word(self.invSbox[Int((r1 >> 24) & 0xff)]) << 24) ^
-            subkeys[0][0]
-        output[1] = Word(self.invSbox[Int(r1 & 0xff)]) ^ (Word(self.invSbox[Int((r0 >> 8) & 0xff)]) << 8) ^
-            (Word(self.invSbox[Int((r3 >> 16) & 0xff)]) << 16) ^ (Word(self.invSbox[Int((r2 >> 24) & 0xff)]) << 24) ^
-            subkeys[0][1]
-        output[2] = Word(self.invSbox[Int(r2 & 0xff)]) ^ (Word(self.invSbox[Int((r1 >> 8) & 0xff)]) << 8) ^
-            (Word(self.invSbox[Int((r0 >> 16) & 0xff)]) << 16) ^ (Word(self.invSbox[Int((r3 >> 24) & 0xff)]) << 24) ^
-            subkeys[0][2]
-        output[3] = Word(self.invSbox[Int(r3 & 0xff)]) ^ (Word(self.invSbox[Int((r2 >> 8) & 0xff)]) << 8) ^
-            (Word(self.invSbox[Int((r1 >> 16) & 0xff)]) << 16) ^ (Word(self.invSbox[Int((r0 >> 24) & 0xff)]) << 24) ^
-            subkeys[0][3]
+        output[0] = Word(self.invSbox[Int(r0 & 0xff)]) ^ (Word(self.invSbox[Int((r3 >> 8) & 0xff)]) << 8)
+        output[0] ^= (Word(self.invSbox[Int((r2 >> 16) & 0xff)]) << 16) ^ (Word(self.invSbox[Int((r1 >> 24) & 0xff)]) << 24)
+        output[0] ^= subkeys[0][0]
+        output[1] = Word(self.invSbox[Int(r1 & 0xff)]) ^ (Word(self.invSbox[Int((r0 >> 8) & 0xff)]) << 8)
+        output[1] ^= (Word(self.invSbox[Int((r3 >> 16) & 0xff)]) << 16) ^ (Word(self.invSbox[Int((r2 >> 24) & 0xff)]) << 24)
+        output[1] ^= subkeys[0][1]
+        output[2] = Word(self.invSbox[Int(r2 & 0xff)]) ^ (Word(self.invSbox[Int((r1 >> 8) & 0xff)]) << 8)
+        output[2] ^= (Word(self.invSbox[Int((r0 >> 16) & 0xff)]) << 16) ^ (Word(self.invSbox[Int((r3 >> 24) & 0xff)]) << 24)
+        output[2] ^= subkeys[0][2]
+        output[3] = Word(self.invSbox[Int(r3 & 0xff)]) ^ (Word(self.invSbox[Int((r2 >> 8) & 0xff)]) << 8)
+        output[3] ^= (Word(self.invSbox[Int((r1 >> 16) & 0xff)]) << 16) ^ (Word(self.invSbox[Int((r0 >> 24) & 0xff)]) << 24)
+        output[3] ^= subkeys[0][3]
     }
 }
 
@@ -374,10 +374,11 @@ extension AesEngine {
     }
     
     private func substitute(word: Word) -> Word {
-        return Word(self.sbox[Int(word & 0xff)]) |
-            (Word(self.sbox[Int((word >> 8) & 0xff)]) << 8) |
-            (Word(self.sbox[Int((word >> 16) & 0xff)]) << 16) |
-            (Word(self.sbox[Int((word >> 24) & 0xff)]) << 24)
+        var w = Word(self.sbox[Int(word & 0xff)])
+        w |= (Word(self.sbox[Int((word >> 8) & 0xff)]) << 8)
+        w |= (Word(self.sbox[Int((word >> 16) & 0xff)]) << 16)
+        w |= (Word(self.sbox[Int((word >> 24) & 0xff)]) << 24)
+        return w
     }
     
     private func invMixColumn(x: Word) -> Word {

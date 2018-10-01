@@ -1,5 +1,5 @@
 def shared_pods
-  pod 'BigInt', '~> 2.1'
+  pod 'BigInt', '~> 3.0'
 end
 
 target 'TomatoCrypto-iOS' do

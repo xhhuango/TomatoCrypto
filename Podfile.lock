@@ -1,15 +1,15 @@
 PODS:
-  - BigInt (2.1.1):
-    - SipHash (~> 1.1)
-  - SipHash (1.1.0)
+  - BigInt (3.0.1):
+    - SipHash (~> 1.2)
+  - SipHash (1.2.0)
 
 DEPENDENCIES:
-  - BigInt (~> 2.1)
+  - BigInt (~> 3.0)
 
 SPEC CHECKSUMS:
-  BigInt: aa6df50dae2a96bcca329312f3007e8471f317bc
-  SipHash: df9d4ee67bff2b16c3cba0765b7cda052c35f6bc
+  BigInt: 8e8a52161c745cd3ab78e3dc346a9fbee51e6cf6
+  SipHash: c6e9e43e9c531b5bc6602545130c26194a6d31ce
 
-PODFILE CHECKSUM: ef0f834473438e4fc1e417d9640e207b1f7842bd
+PODFILE CHECKSUM: 1c30797798a0497310d5ce78152966886e3bf98f
 
 COCOAPODS: 1.1.1
